@@ -22,6 +22,8 @@
         pkgs.shellcheck
 
         pkgs.taplo
+
+        pkgs.knot-dns
       ];
     };
 

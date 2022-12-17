@@ -22,6 +22,11 @@
       url = "github:oxalica/nil/2023-01-01";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    dns = {
+      url = "github:kirelagin/dns.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ { flake-parts, ... }:
@@ -38,6 +43,9 @@
         ./flake/soldier.nix
         # ./flake/pyro.nix
         # ./flake/sniper.nix
+
+        ./flake/dns.nix
+        ./flake/dns-interface.nix
       ];
 
       flake.nixosModules = {
