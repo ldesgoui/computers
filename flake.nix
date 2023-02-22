@@ -9,6 +9,8 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+
     helix = {
       url = "github:helix-editor/helix/22.12";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,10 +31,17 @@
 
       imports = [
         ./flake/dev.nix
+
+        ./flake/scout.nix
+        ./flake/soldier.nix
+        # ./flake/pyro.nix
+        # ./flake/sniper.nix
       ];
 
       flake.nixosModules = {
         zfs = ./nixos/zfs.nix;
+
+        profiles-zfs-datasets = ./nixos/profiles/zfs-datasets.nix;
       };
     };
 }
