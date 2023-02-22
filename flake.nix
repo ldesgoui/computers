@@ -32,5 +32,9 @@
       imports = [
         ./flake/dev.nix
       ];
+
+      flake.nixosModules = {
+        zfs = ./nixos/zfs.nix;
+      };
     };
 }
