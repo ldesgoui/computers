@@ -1,0 +1,168 @@
+{ config, lib, pkgs, ... }:
+let
+  inherit (lib)
+    mkOption
+    types
+    mkIf
+    mkDefault
+    ;
+
+  cfg = config.boot.zfs;
+
+  module = {
+    options = {
+      boot.zfs = {
+        enableRecommended = lib.mkEnableOption "recommended options";
+
+        pools = mkOption {
+          type = with types; attrsOf (submodule poolModule);
+          default = { };
+        };
+
+        datasets = mkOption {
+          type = with types; attrsOf (submodule datasetModule);
+          default = { };
+        };
+      };
+    };
+
+    config = {
+      boot = mkIf cfg.enableRecommended {
+        kernelPackages = mkDefault cfg.package.latestCompatibleLinuxPackages;
+
+        supportedFilesystems = mkDefault [ "zfs" ];
+
+        zfs = {
+          enableUnstable = mkDefault true;
+          forceImportRoot = mkDefault false;
+        };
+      };
+
+      fileSystems = lib.mkMerge (
+        mapDatasets (path: dataset:
+          lib.mkIf (dataset.mountPoint != null) {
+            "${dataset.mountPoint}" = {
+              fsType = "zfs";
+              device = builtins.concatStringsSep "/" path;
+              inherit (dataset) options neededForBoot;
+            };
+          }
+        )
+      );
+
+      system.build = {
+        zfsCreatePools = pkgs.writeShellApplication {
+          name = "create-zpools";
+          text = lib.concatMapStringsSep "\n\n" zpoolCreate (builtins.attrValues cfg.pools);
+        };
+
+        zfsCreateDatasets = pkgs.writeShellApplication {
+          name = "create-datasets";
+          text = builtins.concatStringsSep "\n\n" (mapDatasets zfsCreate);
+        };
+      };
+    };
+  };
+
+  poolModule = { name, ... }: {
+    options = {
+      name = mkOption {
+        type = types.str;
+        default = name;
+      };
+
+      vdevs = mkOption {
+        type = types.nonEmptyListOf vdevType;
+      };
+
+      properties = mkOption {
+        type = with types; attrsOf str;
+      };
+    };
+  };
+
+  vdevType = with types; oneOf [
+    str
+
+    (submodule {
+      options = {
+        type = mkOption { type = str; };
+        devices = mkOption { type = nonEmptyListOf str; };
+      };
+    })
+  ];
+
+  datasetModule = { config, ... }: {
+    options = {
+      properties = mkOption {
+        type = with types; attrsOf str;
+        default = { };
+      };
+
+      mountPoint = mkOption {
+        type = with types; nullOr str;
+        default = null;
+      };
+
+      options = mkOption {
+        type = with types; listOf str;
+        default = [ ];
+      };
+
+      neededForBoot = mkOption {
+        type = types.bool;
+        default = false;
+      };
+
+      _ = mkOption {
+        description = "Children datasets";
+        type = with types; lazyAttrsOf (submodule datasetModule);
+        default = { };
+      };
+    };
+
+    config = lib.mkMerge [
+      (mkIf (config.mountPoint == null) {
+        properties.canmount = mkDefault "off";
+        properties.mountpoint = mkDefault "none";
+      })
+
+      (mkIf (config.mountPoint != null) {
+        properties.mountpoint = mkDefault "legacy";
+      })
+    ];
+  };
+
+  mapDatasets = f:
+    let
+      recurse = prevPath: ds:
+        builtins.concatMap
+          (name:
+            let
+              dataset = ds.${name};
+              path = prevPath ++ [ name ];
+            in
+            [ (f path dataset) ] ++ recurse path dataset._
+          )
+          (builtins.attrNames ds);
+    in
+    recurse [ ] cfg.datasets;
+
+  zpoolCreate = zpool:
+    let
+      pprops = lib.mapAttrsToList (k: v: "-o ${k}=${v}") zpool.properties;
+      zprops = lib.mapAttrsToList (k: v: "-O ${k}=${v}") cfg.datasets.${zpool.name}.properties;
+      vdevs = builtins.concatMap (v: if builtins.isString v then [ v ] else [ v.type ] ++ v.devices) zpool.vdevs;
+    in
+    "zpool create -u ${lib.escapeShellArgs ([zpool.name] ++ pprops ++ zprops ++ vdevs)}";
+
+  zfsCreate = path: ds:
+    let
+      name = builtins.concatStringsSep "/" path;
+      props = lib.mapAttrsToList (k: v: "-o ${k}=${v}") ds.properties;
+      # Root datasets are created when the zpool is created
+      comment = if builtins.length path == 1 then "# " else "";
+    in
+    "${comment}zfs create -u ${lib.escapeShellArgs ([name] ++ props)}";
+in
+module
