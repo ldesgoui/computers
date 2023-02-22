@@ -11,6 +11,10 @@
           profiles-soldier-hardware
           profiles-soldier-storage
 
+          profiles-defaults
+          profiles-nix
+          profiles-sound
+          profiles-user-ldesgoui
           profiles-zfs-datasets
           ;
 

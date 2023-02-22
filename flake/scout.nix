@@ -11,6 +11,10 @@
           profiles-scout-hardware
           profiles-scout-storage
 
+          profiles-defaults
+          profiles-nix
+          profiles-sound
+          profiles-user-ldesgoui
           profiles-zfs-datasets
           ;
 
