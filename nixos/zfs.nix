@@ -7,6 +7,8 @@ let
     mkDefault
     ;
 
+  mkMoreDefault = lib.mkOverride (1000 - 100);
+
   cfg = config.boot.zfs;
 
   module = {
@@ -28,13 +30,13 @@ let
 
     config = {
       boot = mkIf cfg.enableRecommended {
-        kernelPackages = mkDefault cfg.package.latestCompatibleLinuxPackages;
+        kernelPackages = mkMoreDefault cfg.package.latestCompatibleLinuxPackages;
 
-        supportedFilesystems = mkDefault [ "zfs" ];
+        supportedFilesystems = mkMoreDefault [ "zfs" ];
 
         zfs = {
-          enableUnstable = mkDefault true;
-          forceImportRoot = mkDefault false;
+          enableUnstable = mkMoreDefault true;
+          forceImportRoot = mkMoreDefault false;
         };
       };
 
