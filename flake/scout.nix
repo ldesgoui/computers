@@ -43,7 +43,14 @@
     };
 
     profiles-scout-storage = {
-      boot.initrd.availableKernelModules = [ "nvme" ];
+      boot.loader = {
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+      };
+
+      boot.initrd = {
+        availableKernelModules = [ "nvme" ];
+      };
 
       boot.zfs = {
         enableRecommended = true;
