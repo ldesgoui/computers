@@ -156,7 +156,7 @@ let
       zprops = lib.mapAttrsToList (k: v: "-O ${k}=${v}") cfg.datasets.${zpool.name}.properties;
       vdevs = builtins.concatMap (v: if builtins.isString v then [ v ] else [ v.type ] ++ v.devices) zpool.vdevs;
     in
-    "zpool create -u ${lib.escapeShellArgs ([zpool.name] ++ pprops ++ zprops ++ vdevs)}";
+    "zpool create ${lib.escapeShellArgs ([zpool.name] ++ pprops ++ zprops ++ vdevs)}";
 
   zfsCreate = path: ds:
     let
