@@ -150,10 +150,13 @@ let
     in
     recurse [ ] cfg.datasets;
 
+  attrsToProps = flag: attrs:
+    builtins.concatLists (lib.mapAttrsToList (k: v: [ flag "${k}=${v}" ]) attrs);
+
   zpoolCreate = zpool:
     let
-      pprops = lib.mapAttrsToList (k: v: "-o ${k}=${v}") zpool.properties;
-      zprops = lib.mapAttrsToList (k: v: "-O ${k}=${v}") cfg.datasets.${zpool.name}.properties;
+      pprops = attrsToProps "-o" zpool.properties;
+      zprops = attrsToProps "-O" cfg.datasets.${zpool.name}.properties;
       vdevs = builtins.concatMap (v: if builtins.isString v then [ v ] else [ v.type ] ++ v.devices) zpool.vdevs;
     in
     "zpool create ${lib.escapeShellArgs ([zpool.name] ++ pprops ++ zprops ++ vdevs)}";
@@ -161,7 +164,7 @@ let
   zfsCreate = path: ds:
     let
       name = builtins.concatStringsSep "/" path;
-      props = lib.mapAttrsToList (k: v: "-o ${k}=${v}") ds.properties;
+      props = attrsToProps "-o" ds.properties;
       # Root datasets are created when the zpool is created
       comment = if builtins.length path == 1 then "# " else "";
     in
