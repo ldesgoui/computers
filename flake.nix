@@ -39,6 +39,7 @@
       ];
 
       flake.nixosModules = {
+        flake-inputs = { _module.args.inputs = inputs; };
         zfs = ./nixos/zfs.nix;
 
         profiles-defaults = ./nixos/profiles/defaults.nix;

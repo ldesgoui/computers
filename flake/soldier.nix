@@ -5,6 +5,7 @@
 
       modules = builtins.attrValues {
         inherit (config.flake.nixosModules)
+          flake-inputs
           zfs
 
           profiles-soldier
