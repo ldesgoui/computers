@@ -27,6 +27,9 @@
   flake.nixosModules = {
     profiles-scout = {
       system.stateVersion = "22.11";
+
+      networking.networkmanager.enable = true;
+      users.users.ldesgoui.extraGroups = [ "networkmanager" ];
     };
 
     profiles-scout-hardware = {
