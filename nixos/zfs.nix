@@ -108,7 +108,7 @@ let
 
       options = mkOption {
         type = with types; listOf str;
-        default = [ ];
+        default = [ "defaults" ];
       };
 
       neededForBoot = mkOption {
