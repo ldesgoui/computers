@@ -1,7 +1,12 @@
-{
+{ pkgs, inputs, ... }: {
   users.users.ldesgoui = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
+
+    packages = [
+      pkgs.git
+      inputs.helix.packages.${pkgs.system}.helix
+    ];
   };
 
   nix.settings.trusted-users = [ "ldesgoui" ];
