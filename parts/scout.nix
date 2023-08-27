@@ -30,9 +30,7 @@
     profiles-scout = { pkgs, ... }: {
       networking.hostName = "scout";
 
-      # State versions
       system.stateVersion = "22.11";
-      home-manager.users.ldesgoui.home.stateVersion = "22.11";
 
       # NixOS config
       hardware.opengl = {
@@ -48,8 +46,190 @@
       programs.dconf.enable = true;
 
       # Home-manager config
-      home-manager.users.ldesgoui = {
+      home-manager.users.ldesgoui = { config, ... }: {
         programs.firefox = {
+          enable = true;
+        };
+
+        home.stateVersion = "22.11";
+
+        home.packages = (builtins.attrValues {
+          inherit (pkgs)
+            grim pavucontrol slurp wl-clipboard
+            fira paratype-pt-serif work-sans
+            ;
+        }) ++ [
+          # # Nix
+          inputs.nil.packages.${pkgs.system}.nil
+          pkgs.nixpkgs-fmt
+
+          # # Bash
+          pkgs.nodePackages.bash-language-server
+          pkgs.shellcheck
+        ];
+
+        home.sessionVariables = {
+          EDITOR = "hx";
+
+          # https://wiki.archlinux.org/title/XDG_Base_Directory#Partial
+          CARGO_HOME = "${config.xdg.dataHome}/cargo";
+          HTTPIE_CONFIG_DIR = "${config.xdg.configHome}/httpie";
+          LESSHISTFILE = "${config.xdg.cacheHome}/less/history";
+          LESSKEY = "${config.xdg.configHome}/less/lesskey";
+          SQLITE_HISTORY = "${config.xdg.cacheHome}/sqlite_history";
+        };
+
+        programs.alacritty = {
+          enable = true;
+          settings = {
+            font.normal.family = "FuraMono Nerd Font";
+            selection.save_to_clipboard = true;
+            window.padding = { x = 4; y = 4; };
+          };
+        };
+
+        programs.bash = {
+          enable = true;
+          enableCompletion = true;
+
+          shellAliases = {
+            # "," = "NIX_AUTO_RUN=yep command_not_found_handle";
+            exa = "exa --git --group-directories-first --icons";
+            ls = "exa";
+            tree = "exa --tree";
+
+            vi = "hx";
+            vim = "hx";
+            nvi = "hx";
+            nvim = "hx";
+          };
+
+          historyControl = [ "erasedups" "ignoredups" "ignorespace" ];
+          historyFile = "${config.xdg.cacheHome}/bash/history";
+
+          profileExtra = ''
+            if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+              exec sway
+            fi
+          '';
+
+          initExtra = ''
+            export PROMPT_COMMAND='history -a'
+            export PS1='\n\w \$ '
+          '';
+        };
+
+        programs.exa = {
+          enable = true;
+        };
+
+        programs.fzf = {
+          enable = true;
+        };
+
+        programs.git = {
+          enable = true;
+
+          aliases = {
+            a = "add";
+            ap = "add --patch";
+            c = "commit --verbose";
+            ca = "commit --amend --verbose";
+            p = "push";
+            pf = "push --force-with-lease";
+            root = "rev-parse --show-toplevel";
+            s = "status --short --branch";
+            sub = "restore --staged"; # The opposite of add
+          };
+        };
+
+        programs.helix = {
+          enable = true;
+          package = inputs.helix.packages.${pkgs.system}.helix;
+
+          settings = {
+            theme = "sonokai-no-bg";
+
+            editor = {
+              auto-pairs = false;
+              bufferline = "multiple";
+
+              file-picker = {
+                git-ignore = false;
+                hidden = false;
+                ignore = false;
+                max-depth = 3;
+              };
+
+              lsp.display-messages = true;
+            };
+          };
+
+          languages = [
+            {
+              name = "nix";
+              auto-format = true;
+              config.nil.formatting.command = [ "nixpkgs-fmt" ];
+            }
+
+            {
+              name = "toml";
+              auto-format = true;
+            }
+          ];
+
+          themes.sonokai-no-bg = {
+            inherits = "sonokai";
+            "ui.background" = { };
+          };
+        };
+
+        programs.htop = {
+          enable = true;
+          settings = {
+            delay = 2;
+            fields = with config.lib.htop.fields; [ PID USER PERCENT_CPU PERCENT_MEM TIME COMM ];
+            hide_kernel_threads = true;
+            hide_userland_threads = true;
+            highlight_base_name = true;
+            shadow_other_users = true;
+            show_cpu_frequency = true;
+            show_program_path = false;
+            tree_view = true;
+          };
+        };
+
+        programs.jq = {
+          enable = true;
+        };
+
+        programs.zoxide = {
+          enable = true;
+        };
+
+        services.fnott = {
+          enable = true;
+          settings.main = {
+            title-font = "FiraMono Nerd Font:size=7";
+            summary-font = "Work Sans:size=18:weight=Light";
+            body-font = "PT Serif:size=9";
+          };
+        };
+
+        wayland.windowManager.sway = {
+          config = rec {
+            modifier = "Mod4";
+            keybindings = lib.mkOptionDefault {
+              "${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy -t image/png";
+              "${modifier}+Shift+p" = "exec grim - | wl-copy -t image/png";
+            };
+            terminal = "alacritty";
+          };
+
+          wrapperFeatures.gtk = true;
+        };
+
+        xdg = {
           enable = true;
         };
       };
