@@ -48,6 +48,7 @@
         zfs = ./nixos/zfs.nix;
 
         profiles-defaults = ./nixos/profiles/defaults.nix;
+        profiles-graphical = ./nixos/profiles/graphical.nix;
         profiles-nix = ./nixos/profiles/nix.nix;
         profiles-sound = ./nixos/profiles/sound.nix;
         profiles-user-ldesgoui = ./nixos/profiles/user-ldesgoui.nix;
