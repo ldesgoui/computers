@@ -55,6 +55,7 @@
 
         home.packages = (builtins.attrValues {
           inherit (pkgs)
+            fd file httpie moreutils ripgrep
             grim pavucontrol slurp wl-clipboard
             fira paratype-pt-serif work-sans
             ;
