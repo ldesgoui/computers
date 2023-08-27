@@ -35,12 +35,12 @@
       ];
 
       imports = [
-        ./flake/dev.nix
+        ./parts/dev.nix
 
-        ./flake/scout.nix
-        ./flake/soldier.nix
-        # ./flake/pyro.nix
-        # ./flake/sniper.nix
+        ./parts/scout.nix
+        ./parts/soldier.nix
+        # ./parts/pyro.nix
+        # ./parts/sniper.nix
       ];
 
       flake.nixosModules = {
