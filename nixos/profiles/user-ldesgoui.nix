@@ -1,11 +1,11 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, ... }: {
   users.users.ldesgoui = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
 
     packages = [
       pkgs.git
-      inputs.helix.packages.${pkgs.system}.helix
+      # pkgs.helix
     ];
   };
 

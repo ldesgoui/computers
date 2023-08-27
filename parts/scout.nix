@@ -58,12 +58,14 @@
             grim pavucontrol slurp wl-clipboard
             fira paratype-pt-serif work-sans
             ;
+
+          fira-mono = pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; };
         }) ++ [
-          # # Nix
-          inputs.nil.packages.${pkgs.system}.nil
+          # Nix
+          pkgs.nil
           pkgs.nixpkgs-fmt
 
-          # # Bash
+          # Bash
           pkgs.nodePackages.bash-language-server
           pkgs.shellcheck
         ];
@@ -82,7 +84,7 @@
         programs.alacritty = {
           enable = true;
           settings = {
-            font.normal.family = "FuraMono Nerd Font";
+            font.normal.family = "FiraMono Nerd Font";
             selection.save_to_clipboard = true;
             window.padding = { x = 4; y = 4; };
           };
@@ -93,11 +95,6 @@
           enableCompletion = true;
 
           shellAliases = {
-            # "," = "NIX_AUTO_RUN=yep command_not_found_handle";
-            exa = "exa --git --group-directories-first --icons";
-            ls = "exa";
-            tree = "exa --tree";
-
             vi = "hx";
             vim = "hx";
             nvi = "hx";
@@ -121,6 +118,10 @@
 
         programs.exa = {
           enable = true;
+          enableAliases = true;
+          git = true;
+          icons = true;
+          extraOptions = [ "--group-directories-first" ];
         };
 
         programs.fzf = {
@@ -145,7 +146,6 @@
 
         programs.helix = {
           enable = true;
-          package = inputs.helix.packages.${pkgs.system}.helix;
 
           settings = {
             theme = "sonokai-no-bg";
@@ -165,7 +165,7 @@
             };
           };
 
-          languages = [
+          languages.language = [
             {
               name = "nix";
               auto-format = true;
@@ -240,7 +240,6 @@
       boot.kernelModules = [ "kvm-intel" ];
 
       hardware.enableRedistributableFirmware = true;
-      hardware.video.hidpi.enable = true;
 
       powerManagement.cpuFreqGovernor = "powersave";
 
