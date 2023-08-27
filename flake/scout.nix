@@ -13,23 +13,46 @@
           profiles-scout-storage
 
           profiles-defaults
+          profiles-graphical
           profiles-nix
           profiles-sound
           profiles-user-ldesgoui
           profiles-zfs-datasets
           ;
 
+        inherit (inputs.home-manager.nixosModules) home-manager;
         inherit (inputs.nixos-hardware.nixosModules) framework;
       };
     };
   };
 
   flake.nixosModules = {
-    profiles-scout = {
+    profiles-scout = { pkgs, ... }: {
+      networking.hostName = "scout";
+
+      # State versions
       system.stateVersion = "22.11";
+      home-manager.users.ldesgoui.home.stateVersion = "22.11";
+
+      # NixOS config
+      hardware.opengl = {
+        enable = true;
+      };
+
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
 
       networking.networkmanager.enable = true;
       users.users.ldesgoui.extraGroups = [ "networkmanager" ];
+
+      programs.dconf.enable = true;
+
+      # Home-manager config
+      home-manager.users.ldesgoui = {
+        programs.firefox = {
+          enable = true;
+        };
+      };
     };
 
     profiles-scout-hardware = {
