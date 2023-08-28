@@ -262,11 +262,16 @@ in
           enable = true;
 
           config = rec {
+            input."type:touchpad" = {
+              tap = "enabled";
+            };
+
             modifier = "Mod4";
             keybindings = lib.mkOptionDefault {
               "${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy -t image/png";
               "${modifier}+Shift+p" = "exec grim - | wl-copy -t image/png";
             };
+
             terminal = "alacritty";
           };
 
