@@ -58,6 +58,8 @@
             fd file httpie moreutils ripgrep
             grim pavucontrol slurp wl-clipboard
             fira paratype-pt-serif work-sans
+
+            wireguard-tools
             ;
 
           fira-mono = pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; };
