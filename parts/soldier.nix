@@ -6,6 +6,7 @@
       modules = builtins.attrValues {
         inherit (config.flake.nixosModules)
           flake-inputs
+          ldesgoui
           zfs
 
           profiles-soldier
@@ -14,8 +15,6 @@
 
           profiles-defaults
           profiles-nix
-          profiles-sound
-          profiles-user-ldesgoui
           profiles-zfs-datasets
           ;
 
@@ -26,6 +25,8 @@
           common-pc
           common-pc-ssd
           ;
+
+        inherit (inputs.home-manager.nixosModules) home-manager;
       };
     };
   };
@@ -33,6 +34,19 @@
   flake.nixosModules = {
     profiles-soldier = {
       system.stateVersion = "22.11";
+
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.users.ldesgoui = {
+        home.stateVersion = "22.11";
+      };
+
+      ldesgoui = {
+        enable = true;
+        graphical = true;
+        dev.nix = true;
+        dev.bash = true;
+      };
     };
 
     profiles-soldier-hardware = {

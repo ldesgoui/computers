@@ -36,12 +36,10 @@
       flake.nixosModules = {
         flake-inputs = { _module.args.inputs = inputs; };
         zfs = ./nixos/zfs.nix;
+        ldesgoui = ./nixos/ldesgoui.nix;
 
         profiles-defaults = ./nixos/profiles/defaults.nix;
-        profiles-graphical = ./nixos/profiles/graphical.nix;
         profiles-nix = ./nixos/profiles/nix.nix;
-        profiles-sound = ./nixos/profiles/sound.nix;
-        profiles-user-ldesgoui = ./nixos/profiles/user-ldesgoui.nix;
         profiles-zfs-datasets = ./nixos/profiles/zfs-datasets.nix;
       };
     };
