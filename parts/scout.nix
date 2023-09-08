@@ -62,6 +62,11 @@
         "steam-original"
         "steam-run"
       ];
+
+      networking.nameservers = [
+        "8.8.8.8"
+        "8.8.4.4"
+      ];
     };
 
     profiles-scout-hardware = {
