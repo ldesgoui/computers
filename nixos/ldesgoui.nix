@@ -264,6 +264,7 @@ in
           config = rec {
             input."type:touchpad" = {
               tap = "enabled";
+              scroll_method = "two_finger";
             };
 
             modifier = "Mod4";
