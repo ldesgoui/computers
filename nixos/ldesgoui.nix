@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  inherit (lib) mkOption mkEnableOption mkIf mkMerge;
+  inherit (lib) mkEnableOption mkIf mkMerge;
 
   cfg = config.ldesgoui;
 in
@@ -262,6 +262,8 @@ in
           enable = true;
 
           config = rec {
+            input."*".xkb_options = "compose:ralt";
+
             input."type:touchpad" = {
               tap = "enabled";
               scroll_method = "two_finger";
