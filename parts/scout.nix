@@ -56,7 +56,7 @@
           enable = true;
 
           profiles.roaming = {
-            outputs = [{ criteria = "eDP-1"; scale = 1.5; }];
+            outputs = [{ criteria = "eDP-1"; status = "enable"; scale = 1.5; }];
           };
 
           profiles.docked = {
