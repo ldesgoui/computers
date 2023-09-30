@@ -51,6 +51,21 @@
             wireguard-tools
             ;
         });
+
+        services.kanshi = {
+          enable = true;
+
+          profiles.roaming = {
+            outputs = [{ criteria = "eDP-1"; scale = 1.5; }];
+          };
+
+          profiles.docked = {
+            outputs = [
+              { criteria = "eDP-1"; status = "disable"; }
+              { criteria = "DP-1"; status = "enable"; }
+            ];
+          };
+        };
       };
 
       programs.steam = {
