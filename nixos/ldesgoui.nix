@@ -223,6 +223,8 @@ in
           inherit (pkgs)
             grim pavucontrol slurp wl-clipboard
             fira paratype-pt-serif work-sans
+
+            noto-fonts-emoji
             ;
 
           fira-mono = pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; };
