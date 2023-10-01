@@ -275,6 +275,7 @@ in
             keybindings = lib.mkOptionDefault {
               "${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy -t image/png";
               "${modifier}+Shift+p" = "exec grim - | wl-copy -t image/png";
+              "${modifier}+d" = "exec ${pkgs.bemenu}/bin/bemenu-run";
             };
 
             terminal = "alacritty";
