@@ -271,6 +271,8 @@ in
               scroll_method = "two_finger";
             };
 
+            input."1133:50509:Logitech_USB_Receiver".pointer_accel = "-0.75";
+
             modifier = "Mod4";
             keybindings = lib.mkOptionDefault {
               "${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy -t image/png";
