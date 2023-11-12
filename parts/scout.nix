@@ -49,6 +49,7 @@
         home.packages = (builtins.attrValues {
           inherit (pkgs)
             wireguard-tools
+            mumble
             ;
         });
 
