@@ -60,10 +60,17 @@
             outputs = [{ criteria = "eDP-1"; status = "enable"; scale = 1.5; }];
           };
 
-          profiles.docked = {
+          profiles.dp-extension = {
             outputs = [
               { criteria = "eDP-1"; status = "disable"; }
-              { criteria = "DP-1"; status = "enable"; }
+              { criteria = "DP-1"; status = "enable"; mode = "3440x1440@160Hz"; }
+            ];
+          };
+
+          profiles.usbc-docked = {
+            outputs = [
+              { criteria = "eDP-1"; status = "disable"; }
+              { criteria = "DP-4"; status = "enable"; mode = "3440x1440@99.99Hz"; }
             ];
           };
         };
