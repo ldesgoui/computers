@@ -19,7 +19,7 @@
           ;
 
         inherit (inputs.home-manager.nixosModules) home-manager;
-        inherit (inputs.nixos-hardware.nixosModules) framework;
+        inherit (inputs.nixos-hardware.nixosModules) framework-11th-gen-intel;
       };
     };
   };
