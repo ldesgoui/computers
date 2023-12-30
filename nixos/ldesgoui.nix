@@ -251,6 +251,10 @@ in
           enable = true;
         };
 
+        programs.mpv = {
+          enable = true;
+        };
+
         services.fnott = {
           enable = true;
           settings.main = {
