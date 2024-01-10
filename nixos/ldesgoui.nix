@@ -86,7 +86,7 @@ in
           '';
         };
 
-        programs.exa = {
+        programs.eza = {
           enable = true;
           enableAliases = true;
           git = true;
