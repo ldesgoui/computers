@@ -60,6 +60,12 @@ in
           LESSKEY = "${config.xdg.configHome}/less/lesskey";
         };
 
+        manual = {
+          html.enable = false;
+          manpages.enable = false;
+          json.enable = false;
+        };
+
         programs.bash = {
           enable = true;
           enableCompletion = true;
