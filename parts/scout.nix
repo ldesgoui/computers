@@ -63,7 +63,7 @@
           profiles.docked = {
             outputs = [
               { criteria = "eDP-1"; status = "disable"; }
-              { criteria = "LG Electronics LG ULTRAGEAR 103NTXREH162"; status = "enable"; }
+              { criteria = "LG Electronics LG ULTRAGEAR 103NTXREH162"; status = "enable"; mode = "3440x1440@99.99Hz"; }
             ];
           };
         };
