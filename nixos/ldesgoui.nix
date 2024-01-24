@@ -139,7 +139,7 @@ in
             {
               name = "nix";
               auto-format = true;
-              config.nil.formatting.command = [ "nixpkgs-fmt" ];
+              formatter.command = "nixpkgs-fmt";
             }
 
             {
