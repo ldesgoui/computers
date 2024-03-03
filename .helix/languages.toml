@@ -1,9 +1,0 @@
-[[language]]
-name = "nix"
-auto-format = true
-[language.config.nil.formatting]
-command = ["nixpkgs-fmt"]
-
-[[language]]
-name = "toml"
-auto-format = true
