@@ -191,6 +191,16 @@ in
         # pkgs.helvum # TODO: broken
       ];
 
+      fonts.packages = (builtins.attrValues {
+        inherit (pkgs)
+          fira paratype-pt-serif work-sans
+          ;
+
+        fira-mono = pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; };
+      });
+
+      fonts.enableDefaultPackages = true;
+
       programs.dconf.enable = true; # Needed for home-manager.users.<name>.gtk
 
       security.polkit.enable = true;
@@ -204,8 +214,6 @@ in
       };
 
       home-manager.users.ldesgoui = {
-        fonts.fontconfig.enable = true;
-
         gtk = {
           enable = true;
 
@@ -228,12 +236,7 @@ in
         home.packages = (builtins.attrValues {
           inherit (pkgs)
             grim pavucontrol slurp wl-clipboard
-            fira paratype-pt-serif work-sans
-
-            noto-fonts-emoji
             ;
-
-          fira-mono = pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; };
         });
 
         programs.alacritty = {
