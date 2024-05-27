@@ -65,6 +65,7 @@
               { criteria = "eDP-1"; status = "disable"; }
               { criteria = "LG Electronics LG ULTRAGEAR 103NTXREH162"; status = "enable"; mode = "3440x1440@99.99Hz"; }
             ];
+            exec = [ "swaymsg 'workspace 1, move workspace to current'" ];
           };
         };
       };
