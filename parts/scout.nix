@@ -92,6 +92,7 @@
 
       hardware.enableRedistributableFirmware = true;
       hardware.opengl.enable = true;
+      hardware.bluetooth.enable = true;
 
       powerManagement.cpuFreqGovernor = "powersave";
 
