@@ -67,6 +67,14 @@
             ];
             exec = [ "swaymsg 'workspace 1, move workspace to current'" ];
           };
+
+          profiles.docked-2 = {
+            outputs = [
+              { criteria = "eDP-1"; status = "disable"; }
+              { criteria = "LG Electronics 34GN850 007NTRL7G022"; status = "enable"; mode = "3440x1440@160Hz"; }
+            ];
+            exec = [ "swaymsg 'workspace 1, move workspace to current'" ];
+          };
         };
       };
 
