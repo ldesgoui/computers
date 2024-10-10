@@ -1,8 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkIf mkMerge;
 
   cfg = config.ldesgoui;
+
+  pkgs-unstable = import inputs.nixpkgs-unstable { inherit (pkgs) config system; };
 in
 {
   options.ldesgoui = {
@@ -88,7 +90,6 @@ in
 
         programs.eza = {
           enable = true;
-          enableAliases = true;
           git = true;
           icons = true;
           extraOptions = [ "--group-directories-first" ];
@@ -258,6 +259,7 @@ in
 
         programs.firefox = {
           enable = true;
+          package = pkgs-unstable.firefox;
         };
 
         programs.mpv = {

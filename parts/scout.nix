@@ -56,25 +56,42 @@
         services.kanshi = {
           enable = true;
 
-          profiles.roaming = {
-            outputs = [{ criteria = "eDP-1"; status = "enable"; scale = 1.5; }];
-          };
+          settings = [
+            {
+              profile = {
+                name = "roaming";
+                outputs = [{ criteria = "eDP-1"; status = "enable"; scale = 1.5; }];
+              };
+            }
 
-          profiles.docked = {
-            outputs = [
-              { criteria = "eDP-1"; status = "disable"; }
-              { criteria = "LG Electronics LG ULTRAGEAR 103NTXREH162"; status = "enable"; mode = "3440x1440@99.99Hz"; }
-            ];
-            exec = [ "swaymsg 'workspace 1, move workspace to current'" ];
-          };
+            {
+              profile = {
+                name = "docked-living-room";
+                outputs = [
+                  { criteria = "eDP-1"; status = "disable"; }
+                  {
+                    criteria = "LG Electronics LG ULTRAGEAR 103NTXREH162";
+                    status = "enable";
+                    mode = "3440x1440@99.99Hz";
+                  }
+                ];
+              };
+            }
 
-          profiles.docked-2 = {
-            outputs = [
-              { criteria = "eDP-1"; status = "disable"; }
-              { criteria = "LG Electronics 34GN850 007NTRL7G022"; status = "enable"; mode = "3440x1440@160Hz"; }
-            ];
-            exec = [ "swaymsg 'workspace 1, move workspace to current'" ];
-          };
+            {
+              profile = {
+                name = "docked-office";
+                outputs = [
+                  { criteria = "eDP-1"; status = "disable"; }
+                  {
+                    criteria = "LG Electronics 34GN850 007NTRL7G022";
+                    status = "enable";
+                    mode = "3440x1440@160Hz";
+                  }
+                ];
+              };
+            }
+          ];
         };
       };
 

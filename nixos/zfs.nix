@@ -35,8 +35,8 @@ let
         supportedFilesystems = mkMoreDefault [ "zfs" ];
 
         zfs = {
-          enableUnstable = mkMoreDefault true;
           forceImportRoot = mkMoreDefault false;
+          package = mkMoreDefault pkgs.zfs_unstable;
         };
       };
 
