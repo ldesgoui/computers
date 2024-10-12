@@ -20,28 +20,18 @@
 
   outputs = inputs @ { flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [
-        # "aarch64-linux"
-        "x86_64-linux"
-      ];
+      systems = [ "x86_64-linux" ];
 
       imports = [
-        ./parts/dev.nix
+        ./dev.nix
 
-        ./parts/scout.nix
-        ./parts/soldier.nix
-        # ./parts/pyro.nix
-        # ./parts/sniper.nix
+        ./computers/scout
+        ./computers/soldier
+        ./computers/sniper
       ];
 
       flake.nixosModules = {
         flake-inputs = { _module.args.inputs = inputs; };
-        zfs = ./nixos/zfs.nix;
-        ldesgoui = ./nixos/ldesgoui.nix;
-
-        profiles-defaults = ./nixos/profiles/defaults.nix;
-        profiles-nix = ./nixos/profiles/nix.nix;
-        profiles-zfs-datasets = ./nixos/profiles/zfs-datasets.nix;
       };
     };
 }
