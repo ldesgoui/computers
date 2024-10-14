@@ -1,5 +1,5 @@
 { self, ... }: {
-  perSystem = { lib, pkgs, ... }: {
+  perSystem = { config, lib, pkgs, ... }: {
     checks.nixpkgs-fmt = pkgs.runCommand "nixpkgs-fmt-check" { } ''
       ${lib.getExe pkgs.nixpkgs-fmt} --check ${lib.escapeShellArg self}
       touch $out
@@ -22,6 +22,8 @@
         pkgs.shellcheck
 
         pkgs.taplo
+
+        config.agenix-rekey.package
       ];
     };
 
