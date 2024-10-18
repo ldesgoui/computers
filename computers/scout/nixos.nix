@@ -23,6 +23,9 @@
       inherit (pkgs)
         wireguard-tools
         mumble
+
+        chatterino2
+        streamlink
         ;
     });
 
