@@ -26,6 +26,8 @@
 
         chatterino2
         streamlink
+
+        moonlight-qt
         ;
     });
 
