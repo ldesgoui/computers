@@ -30,13 +30,10 @@ let
 
     config = {
       boot = mkIf cfg.enableRecommended {
-        kernelPackages = mkMoreDefault cfg.package.latestCompatibleLinuxPackages;
-
         supportedFilesystems = mkMoreDefault [ "zfs" ];
 
         zfs = {
           forceImportRoot = mkMoreDefault false;
-          package = mkMoreDefault pkgs.zfs_unstable;
         };
       };
 
