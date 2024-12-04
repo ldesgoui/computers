@@ -13,4 +13,10 @@
     dev.nix = true;
     dev.bash = true;
   };
+
+  powerManagement.powertop.enable = true;
+
+  services.jellyfin = {
+    enable = true;
+  };
 }
