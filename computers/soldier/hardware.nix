@@ -6,5 +6,5 @@
   boot.kernelParams = [ "rcu_nocbs=0-15" "idle=nomwait" ];
 
   hardware.enableRedistributableFirmware = true;
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 }

@@ -3,7 +3,7 @@
   boot.kernelModules = [ "kvm-intel" ];
 
   hardware.enableRedistributableFirmware = true;
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
 
   powerManagement.cpuFreqGovernor = "powersave";
