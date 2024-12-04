@@ -186,10 +186,8 @@ in
     }
     (lib.mkIf cfg.graphical {
       environment.systemPackages = [
-        # TODO: Don't install these if we're not going to run a GUI
+        pkgs.helvum
         pkgs.pavucontrol
-
-        # pkgs.helvum # TODO: broken
       ];
 
       fonts.packages = (builtins.attrValues {
