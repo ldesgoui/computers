@@ -307,6 +307,13 @@ in
           ];
         };
 
+        systemd.user.services.kanshi = {
+          Service = {
+            RestartMaxDelaySec = "2s";
+            RestartSteps = 3;
+          };
+        };
+
         wayland.windowManager.sway = {
           enable = true;
 
