@@ -9,7 +9,7 @@
 
   ldesgoui = {
     enable = true;
-    graphical = true;
+    graphical = false;
     dev.nix = true;
     dev.bash = true;
   };
