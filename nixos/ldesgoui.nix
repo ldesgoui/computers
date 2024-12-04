@@ -257,6 +257,18 @@ in
           '';
         };
 
+        programs.bemenu = {
+          enable = true;
+          settings = {
+            center = true;
+            width-factor = 0.5;
+            line-height = 32;
+            border = 1;
+            hp = 4;
+            fn = "FiraMono Nerd Font";
+          };
+        };
+
         programs.firefox = {
           enable = true;
           package = pkgs-unstable.firefox;
@@ -315,7 +327,7 @@ in
             };
 
             terminal = "alacritty";
-            menu = "${pkgs.bemenu}/bin/bemenu-run -b -W 0.5 --hp 4 --fn 'FiraMono Nerd Font'";
+            menu = "bemenu-run";
           };
 
           wrapperFeatures.gtk = true;
