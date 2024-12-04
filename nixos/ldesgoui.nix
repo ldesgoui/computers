@@ -204,6 +204,8 @@ in
 
       programs.dconf.enable = true; # Needed for home-manager.users.<name>.gtk
 
+      security.pam.services.swaylock = { };
+
       security.polkit.enable = true;
 
       security.rtkit.enable = true; # XXX: IDK why this is useful, nixos.wiki suggests it
@@ -266,6 +268,14 @@ in
           enable = true;
         };
 
+        programs.swaylock = {
+          enable = true;
+          settings = {
+            color = "123456";
+            show-failed-attempts = true;
+          };
+        };
+
         services.fnott = {
           enable = true;
           settings.main = {
@@ -273,6 +283,18 @@ in
             summary-font = "Work Sans:size=18:weight=Light";
             body-font = "PT Serif:size=9";
           };
+        };
+
+        services.swayidle = {
+          enable = true;
+          events = [
+            { event = "before-sleep"; command = "swaylock --daemonize"; }
+          ];
+          timeouts = [
+            { timeout = 60; command = "swaymsg 'output * power off'"; resumeCommand = "swaymsg 'output * power on'"; }
+            { timeout = 120; command = "swaylock --daemonize"; }
+            { timeout = 600; command = "systemctl suspend"; }
+          ];
         };
 
         wayland.windowManager.sway = {
