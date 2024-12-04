@@ -298,12 +298,12 @@ in
         services.swayidle = {
           enable = true;
           events = [
-            { event = "before-sleep"; command = "swaylock --daemonize"; }
+            { event = "before-sleep"; command = "${lib.getExe pkgs.swaylock} --daemonize"; }
           ];
           timeouts = [
-            { timeout = 60; command = "swaymsg 'output * power off'"; resumeCommand = "swaymsg 'output * power on'"; }
-            { timeout = 120; command = "swaylock --daemonize"; }
-            { timeout = 600; command = "systemctl suspend"; }
+            { timeout = 60; command = "${pkgs.sway}/bin/swaymsg 'output * power off'"; resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * power on'"; }
+            { timeout = 120; command = "${lib.getExe pkgs.swaylock} --daemonize"; }
+            { timeout = 600; command = "${pkgs.systemd}/bin/systemctl suspend"; }
           ];
         };
 
