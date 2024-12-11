@@ -10,8 +10,6 @@
   ldesgoui = {
     enable = true;
     graphical = false;
-    dev.nix = true;
-    dev.bash = true;
   };
 
   powerManagement.powertop.enable = true;
