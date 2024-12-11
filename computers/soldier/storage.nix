@@ -8,11 +8,22 @@
     availableKernelModules = [ "nvme" ];
   };
 
-  boot.zfs = {
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNX0NA71896Y-part1";
+    fsType = "vfat";
+  };
+
+  networking.hostId = "26afaa70"; # For ZFS
+
+  swapDevices = [{
+    device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNX0NA71896Y-part2";
+  }];
+
+  zfs = {
     enableRecommended = true;
   };
 
-  boot.zfs.pools.main = {
+  zfs.pools.main = {
     vdevs = [
       {
         type = "mirror";
@@ -34,18 +45,7 @@
     properties = {
       ashift = "12";
       autotrim = "on";
-      compatibility = "openzfs-2.1-linux";
+      compatibility = "openzfs-2.2-linux";
     };
   };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNX0NA71896Y-part1";
-    fsType = "vfat";
-  };
-
-  networking.hostId = "26afaa70"; # For ZFS
-
-  swapDevices = [{
-    device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNX0NA71896Y-part2";
-  }];
 }

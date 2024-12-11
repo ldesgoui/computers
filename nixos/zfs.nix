@@ -9,11 +9,11 @@ let
 
   mkMoreDefault = lib.mkOverride (1000 - 100);
 
-  cfg = config.boot.zfs;
+  cfg = config.zfs;
 
   module = {
     options = {
-      boot.zfs = {
+      zfs = {
         enableRecommended = lib.mkEnableOption "recommended options";
 
         pools = mkOption {

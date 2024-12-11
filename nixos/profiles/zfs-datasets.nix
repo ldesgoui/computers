@@ -1,5 +1,5 @@
 {
-  boot.zfs.datasets = {
+  zfs.datasets = {
     main = {
       properties = {
         acltype = "posix";
