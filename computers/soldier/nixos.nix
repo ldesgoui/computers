@@ -13,4 +13,8 @@
   };
 
   powerManagement.powertop.enable = true;
+
+  services.openssh = {
+    enable = true;
+  };
 }
