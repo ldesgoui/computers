@@ -13,8 +13,4 @@
   };
 
   powerManagement.powertop.enable = true;
-
-  services.jellyfin = {
-    enable = true;
-  };
 }
