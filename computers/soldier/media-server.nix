@@ -77,7 +77,7 @@
       };
 
       _.jellyseerr = {
-        mountPoint = "/var/lib/jellyseerr"; # StateDirectory
+        mountPoint = "/var/lib/private/jellyseerr"; # StateDirectory
       };
 
       _.radarr = {
@@ -97,7 +97,7 @@
       };
 
       _.prowlarr = {
-        mountPoint = "/var/lib/prowlarr"; # StateDirectory
+        mountPoint = "/var/lib/private/prowlarr"; # StateDirectory
       };
     };
   };
