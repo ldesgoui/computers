@@ -1,4 +1,6 @@
 {
+  networking.hostName = "soldier";
+
   system.stateVersion = "24.11";
 
   home-manager.useGlobalPkgs = true;
