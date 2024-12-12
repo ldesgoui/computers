@@ -35,6 +35,14 @@
     enable = true;
   };
 
+  systemd.tmpfiles.rules = [
+    "z /srv/movies 0755 jellyfin jellyfin - -"
+    "z /srv/series 0755 jellyfin jellyfin - -"
+    "z /srv/music 0755 jellyfin jellyfin - -"
+    "z ${config.services.jellyfin.dataDir} 0755 jellyfin jellyfin - -"
+    "z ${config.services.jellyfin.cacheDir} 0755 jellyfin jellyfin - -"
+  ];
+
   zfs.datasets = {
     main._.enc._.media = {
       _.movies = {
