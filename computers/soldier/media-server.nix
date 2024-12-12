@@ -35,13 +35,22 @@
     enable = true;
   };
 
-  systemd.tmpfiles.rules = [
-    "z /srv/movies 0755 jellyfin jellyfin - -"
-    "z /srv/series 0755 jellyfin jellyfin - -"
-    "z /srv/music 0755 jellyfin jellyfin - -"
-    "z ${config.services.jellyfin.dataDir} 0755 jellyfin jellyfin - -"
-    "z ${config.services.jellyfin.cacheDir} 0755 jellyfin jellyfin - -"
-  ];
+  systemd.tmpfiles.settings."20-media-server" =
+    let
+      z = mode: user: group: { z = { inherit mode user group; }; };
+    in
+    {
+      "/srv/movies" = z "0755" "jellyfin" "jellyfin";
+      "/srv/series" = z "0755" "jellyfin" "jellyfin";
+      "/srv/music" = z "0755" "jellyfin" "jellyfin";
+
+      ${config.services.jellyfin.dataDir} = z "0755" "jellyfin" "jellyfin";
+      ${config.services.jellyfin.cacheDir} = z "0755" "jellyfin" "jellyfin";
+
+      "/var/lib/jellyseer" = z "0755" "jellyseer" "jellyseer";
+
+      "/var/lib/prowlarr" = z "0755" "prowlarr" "prowlarr";
+    };
 
   zfs.datasets = {
     main._.enc._.media = {
