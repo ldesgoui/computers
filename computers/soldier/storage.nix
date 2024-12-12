@@ -13,7 +13,7 @@
     fsType = "vfat";
   };
 
-  networking.hostId = "26afaa70"; # For ZFS
+  networking.hostId = "22222222"; # For ZFS
 
   swapDevices = [{
     device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNX0NA71896Y-part2";
