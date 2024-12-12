@@ -46,10 +46,6 @@
 
       ${config.services.jellyfin.dataDir} = z "0755" "jellyfin" "jellyfin";
       ${config.services.jellyfin.cacheDir} = z "0755" "jellyfin" "jellyfin";
-
-      "/var/lib/jellyseer" = z "0755" "jellyseer" "jellyseer";
-
-      "/var/lib/prowlarr" = z "0755" "prowlarr" "prowlarr";
     };
 
   zfs.datasets = {

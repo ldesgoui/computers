@@ -16,6 +16,8 @@
 
   powerManagement.powertop.enable = true;
 
+  networking.firewall.enable = false;
+
   services.openssh = {
     enable = true;
   };
