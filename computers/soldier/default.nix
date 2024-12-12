@@ -7,6 +7,7 @@
         ./nixos.nix
         ./hardware.nix
         ./storage.nix
+        ./media-server.nix
 
         ../../nixos/zfs.nix
         ../../nixos/ldesgoui.nix
