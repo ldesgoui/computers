@@ -15,9 +15,15 @@
         ../../nixos/profiles/defaults.nix
         ../../nixos/profiles/nix.nix
         ../../nixos/profiles/zfs-datasets.nix
-      ] ++ builtins.attrValues {
-        inherit (config.flake.nixosModules) flake-inputs;
 
+        config.flake.nixosModules.flake-inputs
+        config.flake.nixosModules.age-master-identity
+
+        inputs.home-manager.nixosModules.home-manager
+
+        inputs.agenix.nixosModules.default
+        inputs.agenix-rekey.nixosModules.default
+      ] ++ builtins.attrValues {
         inherit (inputs.nixos-hardware.nixosModules)
           common-cpu-amd
           common-cpu-amd-pstate
@@ -25,8 +31,6 @@
           common-pc
           common-pc-ssd
           ;
-
-        inherit (inputs.home-manager.nixosModules) home-manager;
       };
     };
   };

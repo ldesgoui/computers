@@ -50,6 +50,20 @@
 
       flake.nixosModules = {
         flake-inputs = { _module.args.inputs = inputs; };
+        age-master-identity = {
+          age.rekey.masterIdentities = [{
+            identity = "${./.}/master.age";
+            pubkey = "age1muncma6qvwmetka89lrtyeslkfg2ks8g8kp42gt299zraflrcpusa08eus";
+          }];
+        };
+      };
+
+      perSystem = { ... }: {
+        agenix-rekey.nixosConfigurations = {
+          inherit (inputs.self.nixosConfigurations)
+            soldier
+            ;
+        };
       };
     };
 }

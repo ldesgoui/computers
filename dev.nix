@@ -7,14 +7,6 @@
 
     devShells.default = pkgs.mkShellNoCC {
       packages = [
-        pkgs.helix
-        (pkgs.runCommand "helix-vi-aliases" { } ''
-          mkdir -p "$out/bin"
-          for exe in vi vim nvim; do
-            ln -s ${lib.getExe pkgs.helix} "$out/bin/$exe"
-          done
-        '')
-
         pkgs.nil
         pkgs.nixpkgs-fmt
 
@@ -23,8 +15,11 @@
 
         pkgs.taplo
 
+        pkgs.rage
         config.agenix-rekey.package
       ];
+
+      env.AGENIX_REKEY_ADD_TO_GIT = "true";
     };
 
     formatter = pkgs.nixpkgs-fmt;
