@@ -29,6 +29,7 @@
 
   networking.firewall.trustedInterfaces = [ "wg0" ];
   networking.wireguard.interfaces.wg0 = {
+    #  unCcOBXewoh78MG3E7o3cfaDgEE2A/2y1P684ppD4Ug=
     ips = [
       "10.77.67.2/24"
       "fc00:7767::2/128"
@@ -49,7 +50,7 @@
     }];
   };
   age.secrets.wireguard-privkey = {
-    rekeyPath = ./secrets/wireguard-privkey;
+    rekeyFile = ./secrets/wireguard-privkey.age;
   };
 
 }
