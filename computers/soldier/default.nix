@@ -17,7 +17,7 @@
         ../../nixos/profiles/zfs-datasets.nix
 
         config.flake.nixosModules.flake-inputs
-        config.flake.nixosModules.age-master-identity
+        config.flake.nixosModules.age-rekey-settings
 
         inputs.home-manager.nixosModules.home-manager
 

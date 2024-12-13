@@ -50,11 +50,15 @@
 
       flake.nixosModules = {
         flake-inputs = { _module.args.inputs = inputs; };
-        age-master-identity = {
-          age.rekey.masterIdentities = [{
-            identity = "${./.}/master.age";
-            pubkey = "age1muncma6qvwmetka89lrtyeslkfg2ks8g8kp42gt299zraflrcpusa08eus";
-          }];
+        age-rekey-settings = { config, ... }: {
+          age.rekey = {
+            masterIdentities = [{
+              identity = "${./.}/master.age";
+              pubkey = "age1muncma6qvwmetka89lrtyeslkfg2ks8g8kp42gt299zraflrcpusa08eus";
+            }];
+            storageMode = "local";
+            localStorageDir = "${inputs.self}/computers/${config.networking.hostName}/.secrets";
+          };
         };
       };
 
