@@ -18,8 +18,6 @@
         pkgs.rage
         config.agenix-rekey.package
       ];
-
-      env.AGENIX_REKEY_ADD_TO_GIT = "true";
     };
 
     formatter = pkgs.nixpkgs-fmt;
