@@ -50,9 +50,9 @@
       z = mode: user: group: { z = { inherit mode user group; }; };
     in
     {
-      "/srv/movies" = z "0775" "jellyfin" "media";
-      "/srv/series" = z "0775" "jellyfin" "media";
-      "/srv/music" = z "0775" "jellyfin" "media";
+      "/srv/movies" = z "0775" "root" "media";
+      "/srv/series" = z "0775" "root" "media";
+      "/srv/music" = z "0775" "root" "media";
 
       ${config.services.jellyfin.dataDir} = z "0755" "jellyfin" "jellyfin";
       ${config.services.jellyfin.cacheDir} = z "0755" "jellyfin" "jellyfin";
@@ -65,6 +65,13 @@
     "lidarr"
     "bazarr"
     "transmission"
+  ];
+
+  users.groups.transmission.members = [
+    "sonarr"
+    "radarr"
+    "lidarr"
+    "bazarr"
   ];
 
   zfs.datasets = {
