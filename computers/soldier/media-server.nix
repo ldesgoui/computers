@@ -45,6 +45,8 @@
     };
   };
 
+  systemd.services.transmission.serviceConfig.StateDirectoryMode = 770;
+
   systemd.tmpfiles.settings."20-media-server" =
     let
       z = mode: user: group: { z = { inherit mode user group; }; };
