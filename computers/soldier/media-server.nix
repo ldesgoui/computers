@@ -35,6 +35,11 @@
     enable = true;
   };
 
+  services.transmission = {
+    enable = true;
+    openPeerPorts = true;
+  };
+
   systemd.tmpfiles.settings."20-media-server" =
     let
       z = mode: user: group: { z = { inherit mode user group; }; };
