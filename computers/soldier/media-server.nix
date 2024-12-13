@@ -37,19 +37,12 @@
 
   services.transmission = {
     enable = true;
-    credentialsFile = config.age.secrets.transmission-credentials.path;
     openPeerPorts = true;
 
     settings = {
       rpc-bind-address = "0.0.0.0";
-      rpc-whitelist = "192.168.1.*";
+      rpc-whitelist-enabled = false;
     };
-  };
-
-  age.secrets.transmission-credentials = {
-    rekeyFile = ./secrets/transmission-credentials.age;
-    owner = "transmission";
-    group = "transmission";
   };
 
   systemd.tmpfiles.settings."20-media-server" =
