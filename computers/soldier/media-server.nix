@@ -46,7 +46,11 @@
     };
   };
 
-  age.secrets.transmission-credentials.rekeyFile = ./secrets/transmission-credentials.age;
+  age.secrets.transmission-credentials = {
+    rekeyFile = ./secrets/transmission-credentials.age;
+    owner = "transmission";
+    group = "transmission";
+  };
 
   systemd.tmpfiles.settings."20-media-server" =
     let
