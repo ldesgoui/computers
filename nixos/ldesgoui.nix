@@ -84,7 +84,12 @@ in
 
           initExtra = ''
             export PROMPT_COMMAND='history -a'
-            export PS1='\n\w \$ '
+
+            if [ -n "$SSH_TTY" ]; then
+              export PS1='\n\h: \w \$ '
+            else
+              export PS1='\n\w \$ '
+            fi
           '';
         };
 
