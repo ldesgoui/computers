@@ -38,6 +38,10 @@
   services.transmission = {
     enable = true;
     openPeerPorts = true;
+
+    settings = {
+      rpc-bind-address = "0.0.0.0";
+    };
   };
 
   systemd.tmpfiles.settings."20-media-server" =
