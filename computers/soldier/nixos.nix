@@ -1,10 +1,10 @@
-{
+{ inputs, ... }: {
   networking.hostName = "soldier";
 
   age.rekey = {
     hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH8Kg9mUIe8h3RMjVJtXkTYK1cHxu5ZX8KHL/+EXlLhO";
     storageMode = "local";
-    localStorageDir = "${./.}/secrets";
+    localStorageDir = "${inputs.self}/computers/soldier/secrets";
   };
 
   system.stateVersion = "24.11";
