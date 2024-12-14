@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   domain = "auth.lde.sg";
   certDir = config.security.acme.certs."${domain}".directory;
@@ -24,6 +24,7 @@ in
 
   services.kanidm = {
     enableServer = true;
+    package = pkgs.kanidm.withSecretProvisioning;
 
     serverSettings = {
       inherit domain;
