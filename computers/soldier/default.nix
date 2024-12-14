@@ -13,6 +13,7 @@
         ../../nixos/ldesgoui.nix
 
         ../../nixos/profiles/defaults.nix
+        ../../nixos/profiles/acme.nix
         ../../nixos/profiles/nix.nix
         ../../nixos/profiles/zfs-datasets.nix
 
