@@ -53,6 +53,7 @@ in
         originUrl = "https://jf.ldesgoui.xyz/sso/OID/redirect/kanidm";
         originLanding = "https://jf.ldesgoui.xyz";
         displayName = "Jellyfin";
+        preferShortUsername = true;
         scopeMaps.media_viewers = [ "openid" "profile" ];
       };
     };
