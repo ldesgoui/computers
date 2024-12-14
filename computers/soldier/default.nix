@@ -8,6 +8,7 @@
         ./hardware.nix
         ./storage.nix
         ./media-server.nix
+        ./kanidm.nix
 
         ../../nixos/zfs.nix
         ../../nixos/ldesgoui.nix
