@@ -9,7 +9,7 @@
     acceptTerms = true;
     defaults = {
       credentialFiles = {
-        GANDIV5_PERSONAL_ACCESS_TOKEN = config.age.secrets.gandi-pat;
+        GANDIV5_PERSONAL_ACCESS_TOKEN_FILE = config.age.secrets.gandi-pat.path;
       };
       dnsProvider = "gandiv5";
       email = "ldesgoui@gmail.com";
