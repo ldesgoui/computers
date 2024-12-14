@@ -44,6 +44,16 @@ in
       persons.ldesgoui = {
         displayName = "Lucas";
         mailAddresses = [ "ldesgoui@gmail.com" ];
+        groups = [ ];
+      };
+
+      groups.media_viewers.members = [ "ldesgoui" ];
+
+      systems.oauth2.jellyfin = {
+        originUrl = "https://jf.ldesgoui.xyz/sso/OID/redirect/kanidm";
+        originLanding = "https://jf.ldesgoui.xyz";
+        displayName = "Jellyfin";
+        scopeMaps.media_viewers = [ "openid" "profile" ];
       };
     };
   };
