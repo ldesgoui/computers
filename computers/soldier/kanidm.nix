@@ -27,8 +27,11 @@ in
     package = pkgs.kanidm.withSecretProvisioning;
 
     serverSettings = {
+      bindaddress = "0.0.0.0:8443";
+
       inherit domain;
       origin = "https://${domain}";
+
       tls_key = "${certDir}/key.pem";
       tls_chain = "${certDir}/full.pem";
     };
