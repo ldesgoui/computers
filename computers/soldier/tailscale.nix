@@ -42,7 +42,7 @@
           acls = [{
             action = "accept";
             src = [ "*" ];
-            dst = [ "*" ];
+            dst = [ "*:*" ];
           }];
         });
 
