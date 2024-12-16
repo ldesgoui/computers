@@ -8,7 +8,7 @@
   environment.systemPackages = [ config.services.headscale.package ];
 
   security.acme.certs = {
-    "ts.lde.sg" = {
+    "headscale.lde.sg" = {
       group = "headscale";
     };
   };
@@ -20,8 +20,7 @@
 
     settings =
       let
-        tld = "ts.lde.sg";
-        certDir = config.security.acme.certs.${tld}.directory;
+        certDir = config.security.acme.certs."headscale.lde.sg".directory;
       in
       {
         server_url = "https://headscale.lde.sg";
@@ -29,7 +28,7 @@
         prefixes.allocation = "random";
 
         dns = {
-          base_domain = tld;
+          base_domain = "ts.lde.sg";
         };
 
         oidc = {
