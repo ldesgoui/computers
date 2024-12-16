@@ -54,12 +54,12 @@ in
         groups = [ ];
       };
 
-      groups.vpn_users.members = [ "ldesgoui" ];
       groups.media_viewers.members = [ "ldesgoui" ];
+      groups.vpn_users.members = [ "ldesgoui" ];
 
       systems.oauth2.headscale = {
-        originUrl = "https://ts.lde.sg/oidc/callback";
-        originLanding = "https://ts.lde.sg";
+        originUrl = "https://headscale.lde.sg/oidc/callback";
+        originLanding = "https://headscale.lde.sg";
         displayName = "Headscale VPN";
         scopeMaps.vpn_users = [ "openid" "profile" "email" ];
         basicSecretFile = config.age.secrets.kanidm-headscale-oidc-secret.path;

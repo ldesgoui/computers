@@ -22,7 +22,7 @@
         certDir = config.security.acme.certs.${tld}.directory;
       in
       {
-        server_url = "https://ts.lde.sg";
+        server_url = "https://headscale.lde.sg";
 
         prefixes.allocation = "random";
 
