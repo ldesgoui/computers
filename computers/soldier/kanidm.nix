@@ -59,6 +59,8 @@ in
       groups.media_viewers.members = [ "ldesgoui" ];
       groups.vpn_users.members = [ "ldesgoui" ];
 
+      # TODO: re-enable PKCE
+      # https://github.com/juanfont/headscale/pull/1812
       systems.oauth2.headscale = {
         originUrl = "https://headscale.lde.sg/oidc/callback";
         originLanding = "https://headscale.lde.sg";

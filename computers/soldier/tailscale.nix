@@ -35,7 +35,6 @@
           issuer = "https://auth.lde.sg/oauth2/openid/headscale";
           client_id = "headscale";
           client_secret_path = config.age.secrets.headscale-oidc-secret.path;
-          allowed_domains = [ "auth.lde.sg" ];
         };
 
         policy.path = pkgs.writeText "policy.json" (builtins.toJSON {
