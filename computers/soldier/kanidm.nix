@@ -56,6 +56,14 @@ in
         preferShortUsername = true;
         scopeMaps.media_viewers = [ "openid" "profile" ];
       };
+
+      systems.oauth2.jellyseerr = {
+        originUrl = "https://js.ldesgoui.xyz";
+        originLanding = "https://js.ldesgoui.xyz";
+        displayName = "Jellyseerr";
+        preferShortUsername = true;
+        scopeMaps.media_viewers = [ "openid" "profile" ];
+      };
     };
   };
 }
