@@ -7,7 +7,6 @@
 
   security.acme.certs = {
     "ts.lde.sg" = {
-      owner = "headscale";
       group = "headscale";
     };
   };
