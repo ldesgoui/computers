@@ -63,6 +63,7 @@ in
         mac.displayName = "Mac";
         squirrel.displayName = "Squirrel";
 
+        mira.displayName = "Mira";
         smarmy.displayName = "Smarmy";
       };
 
