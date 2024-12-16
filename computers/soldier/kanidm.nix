@@ -62,17 +62,23 @@ in
         lux.displayName = "Lux";
         mac.displayName = "Mac";
         squirrel.displayName = "Squirrel";
+
+        smarmy.displayName = "Smarmy";
       };
 
       groups = {
         media_viewers.members = [
           "ldesgoui"
+
           "eepily"
           "gubbins"
           "lux"
           "mac"
           "squirrel"
+
+          "smarmy"
         ];
+
         vpn_users.members = [ "ldesgoui" ];
       };
 
