@@ -7,8 +7,10 @@
         ./nixos.nix
         ./hardware.nix
         ./storage.nix
-        ./media-server.nix
+
         ./kanidm.nix
+        ./media-server.nix
+        ./tailscale.nix
 
         ../../nixos/zfs.nix
         ../../nixos/ldesgoui.nix

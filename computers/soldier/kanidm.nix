@@ -10,8 +10,15 @@ in
       owner = "kanidm";
       group = "kanidm";
     };
+
     kanidm-idm-admin-password = {
       rekeyFile = ./kanidm-idm-admin-password.age;
+      owner = "kanidm";
+      group = "kanidm";
+    };
+
+    kanidm-headscale-oidc-secret = {
+      rekeyFile = ./headscale-oidc-secret.age;
       owner = "kanidm";
       group = "kanidm";
     };
@@ -47,7 +54,16 @@ in
         groups = [ ];
       };
 
+      groups.vpn_users.members = [ "ldesgoui" ];
       groups.media_viewers.members = [ "ldesgoui" ];
+
+      systems.oauth2.headscale = {
+        originUrl = "https://ts.lde.sg/oidc/callback";
+        originLanding = "https://ts.lde.sg";
+        displayName = "Headscale VPN";
+        scopeMaps.vpn_users = [ "openid" "profile" "email" ];
+        basicSecretFile = config.age.secrets.kanidm-headscale-oidc-secret.path;
+      };
 
       systems.oauth2.jellyfin = {
         originUrl = "https://jf.ldesgoui.xyz/sso/OID/redirect/kanidm";
