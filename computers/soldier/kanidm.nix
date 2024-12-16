@@ -77,6 +77,7 @@ in
           "mac"
           "squirrel"
 
+          "mira"
           "smarmy"
         ];
 
