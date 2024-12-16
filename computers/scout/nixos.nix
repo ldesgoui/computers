@@ -86,4 +86,8 @@
     "8.8.8.8"
     "8.8.4.4"
   ];
+
+  services.tailscale = {
+    enable = true;
+  };
 }
