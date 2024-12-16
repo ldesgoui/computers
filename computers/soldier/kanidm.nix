@@ -24,6 +24,8 @@ in
     };
   };
 
+  environment.systemPackages = [ config.services.kanidm.package ];
+
   security.acme.certs."${domain}" = {
     group = "kanidm";
     reloadServices = [ "kanidm" ];

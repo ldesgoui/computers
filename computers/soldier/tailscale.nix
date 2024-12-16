@@ -5,6 +5,8 @@
     group = "headscale";
   };
 
+  environment.systemPackages = [ config.services.headscale.package ];
+
   security.acme.certs = {
     "ts.lde.sg" = {
       group = "headscale";
