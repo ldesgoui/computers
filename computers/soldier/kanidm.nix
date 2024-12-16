@@ -50,39 +50,58 @@ in
       adminPasswordFile = config.age.secrets.kanidm-admin-password.path;
       idmAdminPasswordFile = config.age.secrets.kanidm-idm-admin-password.path;
 
-      persons.ldesgoui = {
-        displayName = "Lucas";
-        mailAddresses = [ "ldesgoui@gmail.com" ];
-        groups = [ ];
+      persons = {
+        ldesgoui = {
+          displayName = "Lucas";
+          mailAddresses = [ "ldesgoui@gmail.com" ];
+          groups = [ ];
+        };
+
+        eepily.displayName = "Eepily";
+        gubbins.displayName = "Gubbins";
+        lux.displayName = "Lux";
+        mac.displayName = "Mac";
+        squirrel.displayName = "Squirrel";
       };
 
-      groups.media_viewers = { };
-      groups.vpn_users.members = [ "ldesgoui" ];
-
-      # TODO: re-enable PKCE
-      # https://github.com/juanfont/headscale/pull/1812
-      systems.oauth2.headscale = {
-        originUrl = "https://headscale.lde.sg/oidc/callback";
-        originLanding = "https://headscale.lde.sg";
-        displayName = "Headscale VPN";
-        scopeMaps.vpn_users = [ "openid" "profile" "email" ];
-        basicSecretFile = config.age.secrets.kanidm-headscale-oidc-secret.path;
+      groups = {
+        media_viewers.members = [
+          "ldesgoui"
+          "eepily"
+          "gubbins"
+          "lux"
+          "mac"
+          "squirrel"
+        ];
+        vpn_users.members = [ "ldesgoui" ];
       };
 
-      systems.oauth2.jellyfin = {
-        originUrl = "https://jf.ldesgoui.xyz/sso/OID/redirect/kanidm";
-        originLanding = "https://jf.ldesgoui.xyz";
-        displayName = "Jellyfin";
-        preferShortUsername = true;
-        scopeMaps.media_viewers = [ "openid" "profile" ];
-      };
+      systems.oauth2 = {
+        # TODO: re-enable PKCE
+        # https://github.com/juanfont/headscale/pull/1812
+        headscale = {
+          originUrl = "https://headscale.lde.sg/oidc/callback";
+          originLanding = "https://headscale.lde.sg";
+          displayName = "Headscale VPN";
+          scopeMaps.vpn_users = [ "openid" "profile" "email" ];
+          basicSecretFile = config.age.secrets.kanidm-headscale-oidc-secret.path;
+        };
 
-      systems.oauth2.jellyseerr = {
-        originUrl = "https://js.ldesgoui.xyz";
-        originLanding = "https://js.ldesgoui.xyz";
-        displayName = "Jellyseerr";
-        preferShortUsername = true;
-        scopeMaps.media_viewers = [ "openid" "profile" ];
+        jellyfin = {
+          originUrl = "https://jf.ldesgoui.xyz/sso/OID/redirect/kanidm";
+          originLanding = "https://jf.ldesgoui.xyz";
+          displayName = "Jellyfin";
+          preferShortUsername = true;
+          scopeMaps.media_viewers = [ "openid" "profile" ];
+        };
+
+        jellyseerr = {
+          originUrl = "https://js.ldesgoui.xyz";
+          originLanding = "https://js.ldesgoui.xyz";
+          displayName = "Jellyseerr";
+          preferShortUsername = true;
+          scopeMaps.media_viewers = [ "openid" "profile" ];
+        };
       };
     };
   };
