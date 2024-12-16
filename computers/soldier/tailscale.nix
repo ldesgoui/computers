@@ -39,7 +39,11 @@
         };
 
         policy.path = pkgs.writeText "policy.json" (builtins.toJSON {
-          acls = [ ];
+          acls = [{
+            action = "accept";
+            src = [ "*" ];
+            dst = [ "*" ];
+          }];
         });
 
         tls_cert_path = "${certDir}/cert.pem";
