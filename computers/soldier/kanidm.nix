@@ -56,7 +56,7 @@ in
         groups = [ ];
       };
 
-      groups.media_viewers.members = [ "ldesgoui" ];
+      groups.media_viewers = { };
       groups.vpn_users.members = [ "ldesgoui" ];
 
       # TODO: re-enable PKCE
