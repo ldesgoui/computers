@@ -65,6 +65,7 @@ in
 
         mira.displayName = "Mira";
         smarmy.displayName = "Smarmy";
+        spacesloth.displayName = "Spacesloth";
       };
 
       groups = {
@@ -79,6 +80,7 @@ in
 
           "mira"
           "smarmy"
+          "spacesloth"
         ];
 
         vpn_users.members = [ "ldesgoui" ];
