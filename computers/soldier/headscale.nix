@@ -100,7 +100,7 @@
   };
 
   services.nginx.reversePreTls.names = {
-    "headscale.lde.sg" = "localhost:${toString config.services.headscale.port}";
+    "headscale.lde.sg" = "[::1]:${toString config.services.headscale.port}";
   };
 
   zfs.datasets = {
