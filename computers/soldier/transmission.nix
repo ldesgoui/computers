@@ -7,6 +7,12 @@
       rpc-bind-address = "::1";
       rpc-host-whitelist-enabled = false;
       rpc-whitelist-enabled = false;
+
+      ratio-limit-enabled = true;
+      ratio-limit = 0.5;
+
+      idle-seeding-limit-enabled = true;
+      idle-seeding-limit = 2;
     };
   };
 
