@@ -9,6 +9,12 @@
     };
   };
 
+  services.nginx.virtualHosts."transmission.int.lde.sg" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/". proxyPass = "http://localhost:9091";
+  };
+
   systemd.services.transmission.serviceConfig.StateDirectoryMode = 770;
 
   users.groups.transmission.members = [

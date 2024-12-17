@@ -12,6 +12,12 @@
     "dotnet-sdk-wrapped-6.0.428"
   ];
 
+  services.nginx.virtualHosts."sonarr.int.lde.sg" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/". proxyPass = "http://localhost:8989";
+  };
+
   zfs.datasets.main._.enc._.services._.sonarr = {
     mountPoint = "/var/lib/sonarr"; # Weird hardcode
   };
