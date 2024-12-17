@@ -8,12 +8,26 @@
         ./hardware.nix
         ./storage.nix
 
+        ./nginx.nix
+
         ./kanidm.nix
-        ./media-server.nix
+
+        ./headscale.nix
         ./tailscale.nix
+
+        ./media-server.nix
+        ./jellyfin.nix
+        ./jellyseerr.nix
+        ./radarr.nix
+        ./sonarr.nix
+        ./lidarr.nix
+        ./bazarr.nix
+        ./prowlarr.nix
+        ./transmission.nix
 
         ../../nixos/zfs.nix
         ../../nixos/ldesgoui.nix
+        ../../nixos/nginx-reverse-pre-tls.nix
 
         ../../nixos/profiles/defaults.nix
         ../../nixos/profiles/acme.nix

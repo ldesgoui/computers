@@ -16,12 +16,6 @@ in
       owner = "kanidm";
       group = "kanidm";
     };
-
-    kanidm-headscale-oidc-secret = {
-      rekeyFile = ./headscale-oidc-secret.age;
-      owner = "kanidm";
-      group = "kanidm";
-    };
   };
 
   environment.systemPackages = [ config.services.kanidm.package ];
@@ -85,34 +79,10 @@ in
 
         vpn_users.members = [ "ldesgoui" ];
       };
-
-      systems.oauth2 = {
-        # TODO: re-enable PKCE
-        # https://github.com/juanfont/headscale/pull/1812
-        headscale = {
-          originUrl = "https://headscale.lde.sg/oidc/callback";
-          originLanding = "https://headscale.lde.sg";
-          displayName = "Headscale VPN";
-          scopeMaps.vpn_users = [ "openid" "profile" "email" ];
-          basicSecretFile = config.age.secrets.kanidm-headscale-oidc-secret.path;
-        };
-
-        jellyfin = {
-          originUrl = "https://jf.ldesgoui.xyz/sso/OID/redirect/kanidm";
-          originLanding = "https://jf.ldesgoui.xyz";
-          displayName = "Jellyfin";
-          preferShortUsername = true;
-          scopeMaps.media_viewers = [ "openid" "profile" ];
-        };
-
-        jellyseerr = {
-          originUrl = "https://js.ldesgoui.xyz";
-          originLanding = "https://js.ldesgoui.xyz";
-          displayName = "Jellyseerr";
-          preferShortUsername = true;
-          scopeMaps.media_viewers = [ "openid" "profile" ];
-        };
-      };
     };
+  };
+
+  services.nginx.reversePreTls.names = {
+    "auth.lde.sg" = "${config.services.kanidm.serverSettings.bindaddress}";
   };
 }
