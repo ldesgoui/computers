@@ -18,6 +18,7 @@
   security.acme.certs = {
     "headscale.lde.sg" = {
       group = "headscale";
+      reloadServices = [ "headscale" ];
     };
   };
 
