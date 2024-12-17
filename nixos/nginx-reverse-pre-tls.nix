@@ -20,7 +20,7 @@ in
     streamConfig = ''
       map $ssl_preread_server_name $target {
         ${lib.concatLines (lib.mapAttrsToList (n: v: "${n} ${v};") cfg.names)}
-        default localhost:${toString config.services.nginx.defaultSSLListenPort};
+        default [::1]:${toString config.services.nginx.defaultSSLListenPort};
       }
 
       server {
