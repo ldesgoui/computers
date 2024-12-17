@@ -4,7 +4,7 @@
     openPeerPorts = true;
 
     settings = {
-      rpc-bind-address = "0.0.0.0";
+      rpc-bind-address = "::1";
       rpc-whitelist-enabled = false;
     };
   };

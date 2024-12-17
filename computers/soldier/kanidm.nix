@@ -30,7 +30,7 @@ in
     package = pkgs.kanidm.withSecretProvisioning;
 
     serverSettings = {
-      bindaddress = "0.0.0.0:8443";
+      bindaddress = "[::1]:8443";
 
       inherit domain;
       origin = "https://${domain}";
@@ -83,6 +83,6 @@ in
   };
 
   services.nginx.reversePreTls.names = {
-    "auth.lde.sg" = "${config.services.kanidm.serverSettings.bindaddress}";
+    "auth.lde.sg" = config.services.kanidm.serverSettings.bindaddress;
   };
 }
