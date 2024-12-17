@@ -37,6 +37,36 @@
 
         dns = {
           base_domain = "ts.lde.sg";
+          extra_records =
+            let
+              names =
+                [
+                  "auth.lde.sg"
+                  "headscale.lde.sg"
+                  "jellyfin.int.lde.sg"
+                  "jellyseerr.int.lde.sg"
+                  "radarr.int.lde.sg"
+                  "sonarr.int.lde.sg"
+                  "lidarr.int.lde.sg"
+                  "bazarr.int.lde.sg"
+                  "prowlarr.int.lde.sg"
+                  "transmission.int.lde.sg"
+                ];
+            in
+            map
+              (name: {
+                inherit name;
+                type = "A";
+                value = "100.66.64.80";
+              })
+              names
+            ++ map
+              (name: {
+                inherit name;
+                type = "AAAA";
+                value = "fd7a:115c:a1e0:35a3:dbd4:a204:2569:f4a0";
+              })
+              names;
         };
 
         oidc = {
