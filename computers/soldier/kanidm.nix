@@ -30,8 +30,6 @@ in
     package = pkgs.kanidm.withSecretProvisioning;
 
     serverSettings = {
-      bindaddress = "[::1]:8443";
-
       inherit domain;
       origin = "https://${domain}";
 
