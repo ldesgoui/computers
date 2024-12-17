@@ -14,12 +14,14 @@
   services.nginx.virtualHosts = {
     "jellyseerr.int.lde.sg" = {
       enableACME = true;
+      acmeRoot = null;
       forceSSL = true;
       locations."/".proxyPass = "http://localhost:${toString config.services.jellyseerr.port}";
     };
 
     "js.ldesgoui.xyz" = {
       enableACME = true;
+      acmeRoot = null;
       globalRedirect = "jellyfin.int.lde.sg";
     };
   };

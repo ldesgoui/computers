@@ -14,6 +14,7 @@
   services.nginx.virtualHosts = {
     "jellyfin.int.lde.sg" = {
       enableACME = true;
+      acmeRoot = null;
       forceSSL = true;
 
       locations."/" = {
@@ -29,6 +30,7 @@
 
     "jf.ldesgoui.xyz" = {
       enableACME = true;
+      acmeRoot = null;
       globalRedirect = "jellyfin.int.lde.sg";
     };
   };

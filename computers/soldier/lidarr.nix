@@ -5,6 +5,7 @@
 
   services.nginx.virtualHosts."lidarr.int.lde.sg" = {
     enableACME = true;
+    acmeRoot = null;
     forceSSL = true;
     locations."/". proxyPass = "http://localhost:8686";
   };

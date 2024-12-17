@@ -5,6 +5,7 @@
 
   services.nginx.virtualHosts."radarr.int.lde.sg" = {
     enableACME = true;
+    acmeRoot = null;
     forceSSL = true;
     locations."/". proxyPass = "http://localhost:7878";
   };
