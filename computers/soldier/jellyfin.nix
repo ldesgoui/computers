@@ -18,12 +18,12 @@
       forceSSL = true;
 
       locations."/" = {
-        proxyPass = "http://localhost:8096";
+        proxyPass = "http://[::1]:8096";
         extraConfig = "proxy_buffering off;";
       };
 
       locations."/socket" = {
-        proxyPass = "http://localhost:8096";
+        proxyPass = "http://[::1]:8096";
         proxyWebsockets = true;
       };
     };

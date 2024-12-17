@@ -16,7 +16,7 @@
       enableACME = true;
       acmeRoot = null;
       forceSSL = true;
-      locations."/".proxyPass = "http://localhost:${toString config.services.jellyseerr.port}";
+      locations."/".proxyPass = "http://[::1]:${toString config.services.jellyseerr.port}";
     };
 
     "js.ldesgoui.xyz" = {

@@ -16,7 +16,7 @@
     enableACME = true;
     acmeRoot = null;
     forceSSL = true;
-    locations."/". proxyPass = "http://localhost:8989";
+    locations."/".proxyPass = "http://[::1]:8989";
   };
 
   zfs.datasets.main._.enc._.services._.sonarr = {

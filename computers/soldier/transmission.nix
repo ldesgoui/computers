@@ -13,7 +13,7 @@
     enableACME = true;
     acmeRoot = null;
     forceSSL = true;
-    locations."/". proxyPass = "http://localhost:9091";
+    locations."/".proxyPass = "http://[::1]:9091";
   };
 
   systemd.services.transmission.serviceConfig.StateDirectoryMode = 770;
