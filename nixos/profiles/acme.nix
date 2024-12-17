@@ -8,11 +8,14 @@
   security.acme = {
     acceptTerms = true;
     defaults = {
+      email = "ldesgoui@gmail.com";
+
+      dnsProvider = "gandiv5";
       credentialFiles = {
         GANDIV5_PERSONAL_ACCESS_TOKEN_FILE = config.age.secrets.gandi-pat.path;
       };
-      dnsProvider = "gandiv5";
-      email = "ldesgoui@gmail.com";
+
+      dnsResolver = "1.1.1.1:53";
     };
   };
 }
