@@ -24,7 +24,8 @@ in
       }
 
       server {
-        listen 443;
+        listen 0.0.0.0:443;
+        listen [::0]:443;
         ssl_preread on;
         proxy_pass $target;
       }
