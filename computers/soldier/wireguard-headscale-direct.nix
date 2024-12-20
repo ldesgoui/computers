@@ -3,9 +3,9 @@
     rekeyFile = ./wireguard-privkey.age;
   };
 
-  networking.firewall.trustedInterfaces = [ "wg-headscale-direct" ];
+  networking.firewall.trustedInterfaces = [ "wg0" ];
 
-  networking.wireguard.interfaces.wg-headscale-direct = {
+  networking.wireguard.interfaces.wg0 = {
     # unCcOBXewoh78MG3E7o3cfaDgEE2A/2y1P684ppD4Ug=
     ips = [ "fc00:7767::2/128" ];
 
