@@ -14,6 +14,7 @@
 
         ./headscale.nix
         ./tailscale.nix
+        ./wireguard-headscale-direct.nix
 
         ./media-server.nix
         ./jellyfin.nix

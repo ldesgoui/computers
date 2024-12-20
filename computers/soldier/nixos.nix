@@ -1,4 +1,4 @@
-{ config, ... }: {
+{
   networking.hostName = "soldier";
 
   age.rekey = {
