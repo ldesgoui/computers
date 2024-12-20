@@ -281,21 +281,9 @@ in
 
         programs.mpv = {
           enable = true;
-          scripts = [
-            (
-              let name = "stop_screensaver.lua"; in
-              pkgs.writeTextFile {
-                inherit name;
-                passthru.scriptName = name;
-                destination = "/share/mpv/scripts/${name}";
-                text = ''
-                  mp.observe_property("pause", "bool", function(_, paused)
-                    mp.command("set", "stop-screensaver", paused and "no" or "always")
-                  end)
-                '';
-              }
-            )
-          ];
+          config = {
+            stop-screensaver = true;
+          };
         };
 
         programs.swaylock = {
