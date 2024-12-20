@@ -14,7 +14,7 @@
     peers = [{
       publicKey = "QDEuEy768a+sQ2w+jvAzx2OJmHHgcaPpKQlifVFgzF0=";
 
-      allowedIPs = [ "fc00:7767::/24" ];
+      allowedIPs = [ "fc00:7767::/64" ];
 
       endpoint = "ldesgoui.xyz:51820";
       persistentKeepalive = 25;
