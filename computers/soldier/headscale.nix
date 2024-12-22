@@ -42,7 +42,7 @@
               names =
                 [
                   "auth.lde.sg"
-                  "headscale.lde.sg"
+                  # "headscale.lde.sg"
                   "jellyfin.int.lde.sg"
                   "jellyseerr.int.lde.sg"
                   "radarr.int.lde.sg"
