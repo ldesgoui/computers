@@ -34,12 +34,14 @@
       folders.KeePass = {
         path = "/home/ldesgoui/.local/share/KeePass";
         devices = [ "spy" ];
+        copyOwnershipFromParent = true;
       };
 
       folders."Android Camera" = {
         id = "pixel_6_ukgq-photos";
         path = "/home/ldesgoui/Android Camera";
         devices = [ "spy" ];
+        copyOwnershipFromParent = true;
       };
     };
   };
