@@ -21,6 +21,8 @@
         urAccepted = -1;
       };
 
+      gui.insecureSkipHostcheck = true;
+
       devices.spy = {
         id = "7PDDZFT-KCE7IKN-RMWIINY-26Q6GKP-KSBCOKQ-MCQIIYP-6WCQI7L-O55PFAT";
         addresses = [
