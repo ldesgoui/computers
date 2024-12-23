@@ -45,7 +45,7 @@
   };
 
   systemd.user.tmpfiles.users.ldesgoui.rules =
-    map (path: "z ${path} 0770 ldesgoui syncthing - -") [
+    map (path: "z '${path}' 0770 ldesgoui syncthing - -") [
       config.services.syncthing.settings.folders.KeePass.path
       config.services.syncthing.settings.folders."Android Camera".path
     ];
