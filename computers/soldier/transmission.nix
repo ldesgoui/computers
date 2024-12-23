@@ -1,4 +1,6 @@
 {
+  # TODO: zfs
+
   services.transmission = {
     enable = true;
     openPeerPorts = true;
