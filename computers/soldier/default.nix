@@ -26,6 +26,8 @@
         ./prowlarr.nix
         ./transmission.nix
 
+        ./syncthing.nix
+
         ../../nixos/zfs.nix
         ../../nixos/ldesgoui.nix
         ../../nixos/nginx-reverse-pre-tls.nix
