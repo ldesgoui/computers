@@ -41,7 +41,7 @@
             let
               names =
                 [
-                  "auth.lde.sg"
+                  # "auth.lde.sg"
                   # "headscale.lde.sg"
                   "jellyfin.int.lde.sg"
                   "jellyseerr.int.lde.sg"
