@@ -52,6 +52,8 @@
       config.services.syncthing.settings.folders."Android Camera".path
     ];
 
+  systemd.services.syncthing.serviceConfig.CapabilityBoundingSet = [ "CAP_CHOWN" ];
+
   zfs.datasets.main._.enc._.users._.ldesgoui = {
     _.android-camera = {
       mountPoint = config.services.syncthing.settings.folders."Android Camera".path;
