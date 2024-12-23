@@ -18,7 +18,7 @@
     graphical = false;
   };
 
-  users.users.ldesgoui.homeMode = 711; # services need x
+  users.users.ldesgoui.homeMode = "711"; # services need x
 
   powerManagement.powertop.enable = true;
 
