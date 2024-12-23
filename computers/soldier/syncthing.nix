@@ -41,14 +41,11 @@
     };
   };
 
-  systemd.tmpfiles.settings."20-ldesgoui-syncthing" =
-    let
-      z = mode: user: group: { z = { inherit mode user group; }; };
-    in
-    {
-      ${config.services.syncthing.settings.folders.KeePass.path} = z "0770" "ldesgoui" "syncthing";
-      ${config.services.syncthing.settings.folders."Android Camera".path} = z "0770" "ldesgoui" "syncthing";
-    };
+  systemd.user.tmpfiles.users.ldesgoui.rules =
+    map (path: "z ${path} 0770 ldesgoui syncthing - -") [
+      config.services.syncthing.settings.folders.KeePass.path
+      config.services.syncthing.settings.folders."Android Camera".path
+    ];
 
   zfs.datasets.main._.enc._.users._.ldesgoui = {
     _.android-camera = {
