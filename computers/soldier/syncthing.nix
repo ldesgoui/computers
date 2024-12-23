@@ -37,6 +37,7 @@
       };
 
       folders."Android Camera" = {
+        id = "pixel_6_ukgq-photos";
         path = "/home/ldesgoui/Android Camera";
         devices = [ "spy" ];
       };
