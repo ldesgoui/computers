@@ -1,4 +1,6 @@
 {
+  networking.resolvconf.useLocalResolver = false;
+
   services.kresd = {
     enable = true;
     instances = 2;
