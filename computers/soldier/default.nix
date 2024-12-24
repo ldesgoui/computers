@@ -9,6 +9,7 @@
         ./storage.nix
 
         ./nginx.nix
+        ./kresd.nix
 
         ./kanidm.nix
 
