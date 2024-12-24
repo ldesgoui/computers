@@ -107,6 +107,9 @@ in
         programs.git = {
           enable = true;
 
+          userName = "ldesgoui";
+          userEmail = "ldesgoui@gmail.com";
+
           aliases = {
             a = "add";
             ap = "add --patch";
@@ -177,6 +180,14 @@ in
 
         programs.jq = {
           enable = true;
+        };
+
+        programs.jujutsu = {
+          enable = true;
+          settings = {
+            user.name = "ldesgoui";
+            user.email = "ldesgoui@gmail.com";
+          };
         };
 
         programs.zoxide = {
