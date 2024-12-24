@@ -25,7 +25,6 @@
         ./lidarr.nix
         ./bazarr.nix
         ./prowlarr.nix
-        ./flaresolverr.nix
         ./transmission.nix
 
         ./syncthing.nix
