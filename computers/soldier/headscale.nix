@@ -50,7 +50,6 @@
                   "lidarr.int.lde.sg"
                   "bazarr.int.lde.sg"
                   "prowlarr.int.lde.sg"
-                  "flaresolverr.int.lde.sg"
                   "transmission.int.lde.sg"
                   "syncthing-soldier.int.lde.sg"
                 ];
