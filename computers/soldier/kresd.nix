@@ -3,11 +3,7 @@
 
   services.kresd = {
     enable = true;
-    listenPlain = [
-      "lo:53"
-      "tailscale0:53"
-      "wg0:53"
-    ];
+    listenPlain = [ "53" ];
     extraConfig = ''
       cache.size = 100 * MB
     '';
