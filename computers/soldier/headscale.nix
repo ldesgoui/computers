@@ -52,6 +52,7 @@
                   "prowlarr.int.lde.sg"
                   "transmission.int.lde.sg"
                   "syncthing-soldier.int.lde.sg"
+                  "vikunja.int.lde.sg"
                 ];
             in
             map
