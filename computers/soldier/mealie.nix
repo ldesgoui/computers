@@ -29,6 +29,7 @@
     };
     claimMaps.groups.valuesByGroup = {
       mealie_admins = [ "mealie_admin" ];
+      mealie_users = [ "mealie_user" ];
     };
     basicSecretFile = config.age.secrets.kanidm-mealie-oidc-secret.path;
   };
@@ -48,6 +49,7 @@
       OIDC_AUTH_ENABLED = "True";
       OIDC_CONFIGURATION_URL = "https://auth.lde.sg/oauth2/openid/mealie/.well-known/openid-configuration";
       OIDC_CLIENT_ID = "mealie";
+      OIDC_USER_GROUP = "mealie_user";
       OIDC_ADMIN_GROUP = "mealie_admin";
       OIDC_AUTO_REDIRECT = "True";
       OIDC_PROVIDER_NAME = "Kanidm";
