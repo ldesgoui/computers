@@ -92,7 +92,7 @@
 
   # TODO: re-enable PKCE
   # https://github.com/juanfont/headscale/pull/1812
-  services.kanidm.provision.systems.oauth2. headscale = {
+  services.kanidm.provision.systems.oauth2.headscale = {
     originUrl = "https://headscale.lde.sg/oidc/callback";
     originLanding = "https://headscale.lde.sg";
     displayName = "Headscale VPN";

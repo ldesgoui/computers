@@ -76,6 +76,7 @@ in
         ];
 
         vpn_users.members = [ "ldesgoui" ];
+        vikunja_users.members = [ "ldesgoui" ];
       };
     };
   };
