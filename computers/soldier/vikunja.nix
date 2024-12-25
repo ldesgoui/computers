@@ -19,7 +19,7 @@ in
         dependencies = [ config.age.secrets.kanidm-vikunja-oidc-secret ];
         script = { lib, decrypt, deps, ... }: ''
           ${decrypt} ${lib.escapeShellArg (builtins.head deps).file} \
-            | xargs ${lib.getExe pkgs.jq} '.auth.openid.providers[0].clientsecret = $secret' ${configFile} --arg secret
+          | xargs ${lib.getExe pkgs.jq} '.auth.openid.providers[0].clientsecret = $secret' ${configFile} --arg secret
         '';
       };
     };
@@ -72,10 +72,12 @@ in
   };
 
   systemd.services.vikunja = {
-    serviceConfig.LoadCredential = [
-      ".config/vikunja/config.json:${config.age.secrets.vikunja-config.path}"
-    ];
-    environment.HOME = "%d";
+    environment.HOME = "/var/lib/vikunja";
+    serviceConfig.LoadCredential = [ "config:${config.age.secrets.vikunja-config.path}" ];
+    preStart = ''
+      mkdir -p "$HOME/.config/vikunja"
+      cp "$CREDENTIALS_DIRECTORY/config" "$HOME/.config/vikunja/config.json";
+    '';
   };
 
   zfs.datasets.main._.enc._.services._.vikunja = {
