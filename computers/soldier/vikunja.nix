@@ -37,6 +37,7 @@
   services.vikunja = {
     enable = true;
 
+    frontendScheme = "https"; # Outdated but necessary
     frontendHostname = ""; # Outdated but necessary
 
     settings = {
