@@ -8,7 +8,14 @@
     originLanding = "https://jf.ldesgoui.xyz";
     displayName = "Jellyfin";
     preferShortUsername = true;
-    scopeMaps.media_viewers = [ "openid" "profile" ];
+    scopeMaps = {
+      media_viewers = [ "openid" "profile" ];
+      media_listeners = [ "openid" "profile" ];
+    };
+    claimMaps.roles.valuesByGroup = {
+      media_viewers = [ "media_viewers" ];
+      media_listeners = [ "media_listeners" ];
+    };
   };
 
   services.nginx.virtualHosts = {

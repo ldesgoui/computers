@@ -33,6 +33,7 @@ in
     displayName = "Vikunja";
     scopeMaps.vikunja_users = [ "openid" "profile" "email" ];
     basicSecretFile = config.age.secrets.kanidm-vikunja-oidc-secret.path;
+    allowInsecureClientDisablePkce = true;
   };
 
   services.nginx.virtualHosts."vikunja.int.lde.sg" = {

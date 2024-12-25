@@ -90,14 +90,13 @@
       };
   };
 
-  # TODO: re-enable PKCE
-  # https://github.com/juanfont/headscale/pull/1812
   services.kanidm.provision.systems.oauth2.headscale = {
     originUrl = "https://headscale.lde.sg/oidc/callback";
     originLanding = "https://headscale.lde.sg";
     displayName = "Headscale VPN";
     scopeMaps.vpn_users = [ "openid" "profile" "email" ];
     basicSecretFile = config.age.secrets.kanidm-headscale-oidc-secret.path;
+    allowInsecureClientDisablePkce = true; # https://github.com/juanfont/headscale/pull/1812
   };
 
   services.nginx.reversePreTls.names = {

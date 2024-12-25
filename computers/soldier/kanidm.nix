@@ -74,6 +74,9 @@ in
           "smarmy"
           "spacesloth"
         ];
+        media_listeners.members = [
+          "ldesgoui"
+        ];
 
         vpn_users.members = [ "ldesgoui" ];
         vikunja_users.members = [ "ldesgoui" ];
