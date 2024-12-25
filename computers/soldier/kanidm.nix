@@ -61,6 +61,7 @@ in
       };
 
       groups = {
+        media_admins.members = [ "ldesgoui" ];
         media_viewers.members = [
           "ldesgoui"
 
@@ -74,9 +75,7 @@ in
           "smarmy"
           "spacesloth"
         ];
-        media_listeners.members = [
-          "ldesgoui"
-        ];
+        media_listeners.members = [ "ldesgoui" ];
 
         vpn_users.members = [ "ldesgoui" ];
         vikunja_users.members = [ "ldesgoui" ];
