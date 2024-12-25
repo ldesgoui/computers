@@ -1,4 +1,10 @@
-{ config, ... }: {
+{ config, pkgs, ... }:
+let
+  cfg = config.services.vikunja;
+  format = pkgs.formats.json { };
+  configFile = format.generate "config.json" cfg.settings;
+in
+{
   age.secrets = {
     kanidm-vikunja-oidc-secret = {
       rekeyFile = ./vikunja-oidc-secret.age;
@@ -7,17 +13,19 @@
       group = "kanidm";
     };
 
-    vikunja-oidc-secret = {
-      rekeyFile = ./vikunja-oidc-secret-env.age;
+    vikunja-config = {
+      rekeyFile = ./vikunja-config.age;
       generator = {
         dependencies = [ config.age.secrets.kanidm-vikunja-oidc-secret ];
         script = { lib, decrypt, deps, ... }: ''
           ${decrypt} ${lib.escapeShellArg (builtins.head deps).file} \
-            | xargs printf 'VIKUNJA_AUTH_OPENID_PROVIDERS_KANIDM_CLIENTSECRET=%s\n'
+            | xargs ${lib.getExe pkgs.jq} '.auth.openid.providers[0].clientsecret = $secret' ${configFile} --arg secret
         '';
       };
     };
   };
+
+  environment.etc."vikunja/config.json".enable = false;
 
   services.kanidm.provision.systems.oauth2.vikunja = {
     originUrl = "https://vikunja.int.lde.sg/auth/openid/";
@@ -38,7 +46,7 @@
     enable = true;
 
     frontendScheme = "https"; # Outdated but necessary
-    frontendHostname = ""; # Outdated but necessary
+    frontendHostname = "vikunja.int.lde.sg"; # Outdated but necessary
 
     settings = {
       service = {
@@ -55,16 +63,19 @@
       auth.openid = {
         enabled = true;
         providers = [{
-          kanidm = {
-            name = "Kanidm";
-            authurl = "https://auth.lde.sg/oauth2/openid/vikunja";
-            clientid = "vikunja";
-          };
+          name = "Kanidm";
+          authurl = "https://auth.lde.sg/oauth2/openid/vikunja";
+          clientid = "vikunja";
         }];
       };
     };
+  };
 
-    environmentFiles = [ config.age.secrets.vikunja-oidc-secret.path ];
+  systemd.services.vikunja = {
+    serviceConfig.LoadCredential = [
+      ".config/vikunja/config.json:${config.age.secrets.vikunja-config.path}"
+    ];
+    environment.HOME = "%d";
   };
 
   zfs.datasets.main._.enc._.services._.vikunja = {
