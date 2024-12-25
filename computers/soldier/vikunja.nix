@@ -54,11 +54,13 @@
 
       auth.openid = {
         enabled = true;
-        providers.kanidm = {
-          name = "Kanidm";
-          authurl = "https://auth.lde.sg/oauth2/openid/vikunja";
-          clientid = "vikunja";
-        };
+        providers = [{
+          kanidm = {
+            name = "Kanidm";
+            authurl = "https://auth.lde.sg/oauth2/openid/vikunja";
+            clientid = "vikunja";
+          };
+        }];
       };
     };
 
