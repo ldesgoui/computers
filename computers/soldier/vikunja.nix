@@ -3,10 +3,10 @@
     enableACME = true;
     acmeRoot = null;
     forceSSL = true;
-    locations."/".proxyPass = "http://[::1]:${config.services.vikunja.port}";
+    locations."/".proxyPass = "http://[::1]:${toString config.services.vikunja.port}";
   };
 
-  services.vinkunja = {
+  services.vikunja = {
     enable = true;
     frontendScheme = "https";
     frontendHostname = "vikunja.int.lde.sg";

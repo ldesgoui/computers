@@ -29,6 +29,7 @@
         ./transmission.nix
 
         ./syncthing.nix
+        ./vikunja.nix
 
         ../../nixos/zfs.nix
         ../../nixos/ldesgoui.nix
