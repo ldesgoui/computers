@@ -61,6 +61,8 @@ in
       };
 
       groups = {
+        vpn_users.members = [ "ldesgoui" ];
+
         media_admins.members = [ "ldesgoui" ];
         media_viewers.members = [
           "ldesgoui"
@@ -77,7 +79,9 @@ in
         ];
         media_listeners.members = [ "ldesgoui" ];
 
-        vpn_users.members = [ "ldesgoui" ];
+        mealie_admins.members = [ "ldesgoui" ];
+        mealie_users.members = [ "ldesgoui" ];
+
         vikunja_users.members = [ "ldesgoui" ];
       };
     };
