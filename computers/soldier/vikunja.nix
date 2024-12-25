@@ -76,7 +76,7 @@ in
     serviceConfig.LoadCredential = [ "config:${config.age.secrets.vikunja-config.path}" ];
     preStart = ''
       mkdir -p "$HOME/.config/vikunja"
-      cp "$CREDENTIALS_DIRECTORY/config" "$HOME/.config/vikunja/config.json";
+      cp -f "$CREDENTIALS_DIRECTORY/config" "$HOME/.config/vikunja/config.json";
     '';
   };
 
