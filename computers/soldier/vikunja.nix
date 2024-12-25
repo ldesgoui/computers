@@ -13,6 +13,6 @@
   };
 
   zfs.datasets.main._.enc._.services._.vikunja = {
-    mountPoint = "/var/lib/vikunja"; # StateDirectory
+    mountPoint = "/var/lib/private/vikunja"; # StateDirectory
   };
 }
