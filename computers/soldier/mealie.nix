@@ -24,11 +24,8 @@
     originLanding = "https://mealie.int.lde.sg";
     displayName = "Mealie";
     scopeMaps = {
-      mealie_admins = [ "openid" "profile" "email" ];
-      mealie_users = [ "openid" "profile" "email" ];
-    };
-    claimMaps.roles.valuesByGroup = {
-      mealie_admins = [ "mealie_admin" ];
+      mealie_admins = [ "openid" "profile" "email" "groups" ];
+      mealie_users = [ "openid" "profile" "email" "groups" ];
     };
     basicSecretFile = config.age.secrets.kanidm-mealie-oidc-secret.path;
   };
@@ -48,8 +45,7 @@
       OIDC_AUTH_ENABLED = "True";
       OIDC_CONFIGURATION_URL = "https://auth.lde.sg/oauth2/openid/mealie/.well-known/openid-configuration";
       OIDC_CLIENT_ID = "mealie";
-      OIDC_GROUPS_CLAIM = "roles";
-      OIDC_ADMIN_GROUP = "mealie_admin";
+      OIDC_ADMIN_GROUP = "mealie_admins";
       OIDC_AUTO_REDIRECT = "True";
       OIDC_PROVIDER_NAME = "Kanidm";
     };

@@ -9,14 +9,9 @@
     displayName = "Jellyfin";
     preferShortUsername = true;
     scopeMaps = {
-      media_admins = [ "openid" "profile" ];
-      media_viewers = [ "openid" "profile" ];
-      media_listeners = [ "openid" "profile" ];
-    };
-    claimMaps.roles.valuesByGroup = {
-      media_admins = [ "media_admin" ];
-      media_viewers = [ "media_viewer" ];
-      media_listeners = [ "media_listener" ];
+      media_admins = [ "openid" "profile" "groups" ];
+      media_viewers = [ "openid" "profile" "groups" ];
+      media_listeners = [ "openid" "profile" "groups" ];
     };
   };
 
