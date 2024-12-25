@@ -25,7 +25,7 @@ in
     };
   };
 
-  environment.etc."vikunja/config.json".enable = false;
+  environment.etc."vikunja/config.yaml".enable = false;
 
   services.kanidm.provision.systems.oauth2.vikunja = {
     originUrl = "https://vikunja.int.lde.sg/auth/openid/";
