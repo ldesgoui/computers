@@ -36,11 +36,12 @@
 
   services.vikunja = {
     enable = true;
-    frontendScheme = "https";
-    frontendHostname = "vikunja.int.lde.sg";
+
+    frontendHostname = ""; # Outdated but necessary
 
     settings = {
       service = {
+        publicurl = "https://vikunja.int.lde.sg";
         enablecaldav = false;
         enabletotp = false;
         enableemailreminders = false;
