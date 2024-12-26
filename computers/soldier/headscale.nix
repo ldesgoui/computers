@@ -87,6 +87,10 @@ in
     };
   };
 
+  systemd.services.headscale = {
+    after = [ "kanidm.service" ];
+  };
+
   zfs.datasets = {
     main._.enc._.services = {
       _.headscale = {
