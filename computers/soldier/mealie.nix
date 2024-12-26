@@ -1,4 +1,8 @@
-{ config, ... }: {
+{ config, pkgs, inputs, ... }:
+let
+  pkgs-unstable = import inputs.nixpkgs-unstable { inherit (pkgs) config system; };
+in
+{
   age.secrets = {
     kanidm-mealie-oidc-secret = {
       rekeyFile = ./mealie-oidc-secret.age;
@@ -39,6 +43,7 @@
 
   services.mealie = {
     enable = true;
+    package = pkgs-unstable.mealie;
 
     settings = {
       TZ = "Europe/Paris";
