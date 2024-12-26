@@ -27,6 +27,7 @@ in
     originUrl = "https://mealie.int.lde.sg/login";
     originLanding = "https://mealie.int.lde.sg";
     displayName = "Mealie";
+    preferShortUsername = true;
     scopeMaps = {
       mealie_admins = [ "openid" "profile" "email" "groups" ];
       mealie_users = [ "openid" "profile" "email" "groups" ];
@@ -50,7 +51,7 @@ in
       OIDC_AUTH_ENABLED = "True";
       OIDC_CONFIGURATION_URL = "https://auth.lde.sg/oauth2/openid/mealie/.well-known/openid-configuration";
       OIDC_CLIENT_ID = "mealie";
-      OIDC_ADMIN_GROUP = "mealie_admins";
+      OIDC_ADMIN_GROUP = "mealie_admins@auth.lde.sg";
       OIDC_AUTO_REDIRECT = "True";
       OIDC_PROVIDER_NAME = "Kanidm";
     };
