@@ -97,6 +97,7 @@ in
       proxyPass = "https://${config.services.kanidm.serverSettings.bindaddress}";
       extraConfig = ''
         proxy_ssl_verify on;
+        proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
         proxy_ssl_name ${domain};
       '';
     };
