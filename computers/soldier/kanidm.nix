@@ -96,7 +96,7 @@ in
     locations."/" = {
       proxyPass = "https://${config.services.kanidm.serverSettings.bindaddress}";
       extraConfig = ''
-        proxy_ssl_verify true;
+        proxy_ssl_verify on;
         proxy_ssl_name ${domain};
       '';
     };
