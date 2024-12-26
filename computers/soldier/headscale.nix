@@ -1,4 +1,27 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+let
+  extra_records =
+    builtins.concatMap
+      (name: [
+        { name = "${name}.int.lde.sg"; type = "A"; value = "100.66.64.80"; }
+        { name = "${name}.int.lde.sg"; type = "AAAA"; value = "fd7a:115c:a1e0:35a3:dbd4:a204:2569:f4a0"; }
+      ])
+      [
+        "jellyfin"
+        "jellyseerr"
+        "radarr"
+        "sonarr"
+        "lidarr"
+        "bazarr"
+        "prowlarr"
+        "transmission"
+
+        "mealie"
+        "syncthing-soldier"
+        "vikunja"
+      ];
+in
+{
   age.secrets = {
     headscale-oidc-secret = {
       rekeyFile = ./headscale-oidc-secret.age;
@@ -15,80 +38,34 @@
 
   environment.systemPackages = [ config.services.headscale.package ];
 
-  security.acme.certs = {
-    "headscale.lde.sg" = {
-      group = "headscale";
-      reloadServices = [ "headscale" ];
-    };
-  };
-
   services.headscale = {
     enable = true;
     port = 10443;
 
-    settings =
-      let
-        certDir = config.security.acme.certs."headscale.lde.sg".directory;
-      in
-      {
-        server_url = "https://headscale.lde.sg";
+    settings = {
+      server_url = "https://headscale.lde.sg";
 
-        prefixes.allocation = "random";
+      prefixes.allocation = "random";
 
-        dns = {
-          base_domain = "ts.lde.sg";
-          extra_records =
-            let
-              names =
-                [
-                  # "auth.lde.sg"
-                  # "headscale.lde.sg"
-                  "jellyfin.int.lde.sg"
-                  "jellyseerr.int.lde.sg"
-                  "radarr.int.lde.sg"
-                  "sonarr.int.lde.sg"
-                  "lidarr.int.lde.sg"
-                  "bazarr.int.lde.sg"
-                  "prowlarr.int.lde.sg"
-                  "transmission.int.lde.sg"
-                  "mealie.int.lde.sg"
-                  "syncthing-soldier.int.lde.sg"
-                  "vikunja.int.lde.sg"
-                ];
-            in
-            map
-              (name: {
-                inherit name;
-                type = "A";
-                value = "100.66.64.80";
-              })
-              names
-            ++ map
-              (name: {
-                inherit name;
-                type = "AAAA";
-                value = "fd7a:115c:a1e0:35a3:dbd4:a204:2569:f4a0";
-              })
-              names;
-        };
-
-        oidc = {
-          issuer = "https://auth.lde.sg/oauth2/openid/headscale";
-          client_id = "headscale";
-          client_secret_path = config.age.secrets.headscale-oidc-secret.path;
-        };
-
-        policy.path = pkgs.writeText "policy.json" (builtins.toJSON {
-          acls = [{
-            action = "accept";
-            src = [ "*" ];
-            dst = [ "*:*" ];
-          }];
-        });
-
-        tls_cert_path = "${certDir}/cert.pem";
-        tls_key_path = "${certDir}/key.pem";
+      dns = {
+        base_domain = "ts.lde.sg";
+        inherit extra_records;
       };
+
+      oidc = {
+        issuer = "https://auth.lde.sg/oauth2/openid/headscale";
+        client_id = "headscale";
+        client_secret_path = config.age.secrets.headscale-oidc-secret.path;
+      };
+
+      policy.path = pkgs.writeText "policy.json" (builtins.toJSON {
+        acls = [{
+          action = "accept";
+          src = [ "*" ];
+          dst = [ "*:*" ];
+        }];
+      });
+    };
   };
 
   services.kanidm.provision.systems.oauth2.headscale = {
@@ -100,8 +77,14 @@
     allowInsecureClientDisablePkce = true; # https://github.com/juanfont/headscale/pull/1812
   };
 
-  services.nginx.reversePreTls.names = {
-    "headscale.lde.sg" = "127.0.0.1:${toString config.services.headscale.port}";
+  services.nginx.virtualHosts."headscale.lde.sg" = {
+    enableACME = true;
+    acmeRoot = null;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${toString config.services.headscale.port}";
+      proxyWebsockets = true;
+    };
   };
 
   zfs.datasets = {

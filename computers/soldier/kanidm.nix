@@ -21,7 +21,7 @@ in
   environment.systemPackages = [ config.services.kanidm.package ];
 
   security.acme.certs."${domain}" = {
-    group = "kanidm";
+    group = "acme-cert-auth";
     reloadServices = [ "kanidm" ];
   };
 
@@ -32,6 +32,8 @@ in
     serverSettings = {
       inherit domain;
       origin = "https://${domain}";
+
+      trust_x_forward_for = true;
 
       tls_key = "${certDir}/key.pem";
       tls_chain = "${certDir}/full.pem";
@@ -87,7 +89,18 @@ in
     };
   };
 
-  services.nginx.reversePreTls.names = {
-    "auth.lde.sg" = config.services.kanidm.serverSettings.bindaddress;
+  services.nginx.virtualHosts."${domain}" = {
+    enableACME = true;
+    acmeRoot = null;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "https://${config.services.kanidm.serverSettings.bindaddress}";
+      extraConfig = ''
+        proxy_ssl_verify true;
+        proxy_ssl_name ${domain};
+      '';
+    };
   };
+
+  users.groups.acme-cert-auth.members = [ "nginx" "kanidm" ];
 }

@@ -34,7 +34,6 @@
 
         ../../nixos/zfs.nix
         ../../nixos/ldesgoui.nix
-        ../../nixos/nginx-reverse-pre-tls.nix
 
         ../../nixos/profiles/defaults.nix
         ../../nixos/profiles/acme.nix
