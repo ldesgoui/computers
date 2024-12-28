@@ -27,7 +27,6 @@
         ./flaresolverr.nix
         ./transmission.nix
 
-        ./kresd.nix
         ./mealie.nix
         ./syncthing.nix
         ./vikunja.nix
