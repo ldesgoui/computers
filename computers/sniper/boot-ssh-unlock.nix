@@ -19,7 +19,7 @@
     };
 
     postCommands = ''
-      echo 'echo "- zfs load-keys -a && killall zfs"' >> /root/.profile
+      echo 'echo "- zfs load-key -a && killall zfs"' >> /root/.profile
     '';
   };
 }
