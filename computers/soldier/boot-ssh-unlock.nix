@@ -10,6 +10,8 @@
     symlink = false;
   };
 
+  boot.initrd.kernelModules = [ "r8169" ];
+
   boot.initrd.network = {
     enable = true;
 
