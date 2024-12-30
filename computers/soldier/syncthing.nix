@@ -38,14 +38,12 @@
       folders.KeePass = {
         path = "/home/ldesgoui/.local/share/KeePass";
         devices = [ "spy" ];
-        copyOwnershipFromParent = true;
       };
 
       folders."Android Camera" = {
         id = "pixel_6_ukgq-photos";
         path = "/home/ldesgoui/Android Camera";
         devices = [ "spy" ];
-        copyOwnershipFromParent = true;
       };
     };
   };
@@ -56,7 +54,15 @@
       config.services.syncthing.settings.folders."Android Camera".path
     ];
 
-  systemd.services.syncthing.serviceConfig.CapabilityBoundingSet = [ "CAP_CHOWN" ];
+  systemd.services.syncthing.serviceConfig = {
+    UMask = "0002";
+  };
+
+  # It's embarrassing how syncthing cannot handle permissions and ownership
+  # Using `copyOwnershipFromParents` fails with a `invalid argument` because ??? zfs ???
+  # Configuration doesn't let you pick `chmod` arguments
+  # So we have to fucking become a member of its group and write with `g+w`
+  users.groups.syncthing.members = [ "ldesgoui" ];
 
   zfs.datasets.main._.enc._.users._.ldesgoui = {
     _.android-camera = {
