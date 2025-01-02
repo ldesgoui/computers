@@ -2,7 +2,6 @@
   services.nginx = {
     enable = true;
 
-    proxyTimeout = "5s";
     recommendedBrotliSettings = true;
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
