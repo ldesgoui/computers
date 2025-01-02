@@ -6,7 +6,9 @@ let
     }
     ''
       mkdir $out
-      jq '.menuLinks = [{ name: "Request movies and shows", url: "https://js.ldesgoui.xyz" }]' ${pkgs.jellyfin-web}/config.json > $out/config.json
+      jq '.menuLinks = [
+        { name: "Request movies and shows", url: "https://js.ldesgoui.xyz" }
+      ]' ${pkgs.jellyfin-web}/share/jellyfin-web/config.json > $out/config.json
     '';
 in
 {
