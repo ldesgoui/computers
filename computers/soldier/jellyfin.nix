@@ -1,4 +1,15 @@
-{ config, ... }: {
+{ config, pkgs, ... }:
+let
+  web-config = pkgs.runCommand "jellyfin-web-config-override"
+    {
+      nativeBuildInputs = [ pkgs.jq ];
+    }
+    ''
+      mkdir $out
+      jq '.menuLinks = [{ name: "Request movies and shows", url: "https://js.ldesgoui.xyz" }]' ${pkgs.jellyfin-web}/config.json > $out/config.json
+    '';
+in
+{
   services.jellyfin = {
     enable = true;
   };
@@ -30,6 +41,10 @@
       locations."/socket" = {
         proxyPass = "http://[::1]:8096";
         proxyWebsockets = true;
+      };
+
+      locations."= /web/config.json" = {
+        root = web-config;
       };
     };
 
