@@ -16,7 +16,8 @@
   };
 
   services.nginx.virtualHosts = {
-    "jellyfin.int.lde.sg" = {
+    # "jellyfin.int.lde.sg" = {
+    "jf.ldesgoui.xyz" = {
       enableACME = true;
       acmeRoot = null;
       forceSSL = true;
@@ -32,11 +33,11 @@
       };
     };
 
-    "jf.ldesgoui.xyz" = {
-      enableACME = true;
-      acmeRoot = null;
-      globalRedirect = "jellyfin.int.lde.sg";
-    };
+    # "jf.ldesgoui.xyz" = {
+    #   enableACME = true;
+    #   acmeRoot = null;
+    #   globalRedirect = "jellyfin.int.lde.sg";
+    # };
   };
 
   systemd.tmpfiles.settings."20-jellyfin" =
