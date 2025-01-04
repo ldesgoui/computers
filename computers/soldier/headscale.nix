@@ -3,8 +3,8 @@ let
   extra_records =
     builtins.concatMap
       (name: [
-        { name = "${name}.int.lde.sg"; type = "A"; value = "100.66.64.80"; }
-        { name = "${name}.int.lde.sg"; type = "AAAA"; value = "fd7a:115c:a1e0:35a3:dbd4:a204:2569:f4a0"; }
+        { name = "${name}.int.lde.sg"; type = "A"; value = "100.101.0.130"; }
+        { name = "${name}.int.lde.sg"; type = "AAAA"; value = "fd7a:115c:a1e0::678b"; }
       ])
       [
         "jellyfin"
