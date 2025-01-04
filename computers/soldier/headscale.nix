@@ -46,7 +46,7 @@ in
       server_url = "https://headscale.lde.sg";
 
       prefixes = {
-        v4 = "100.64.0.0/24";
+        v4 = "100.101.0.0/24";
         v6 = "fd7a:115c:a1e0::/112";
         allocation = "random";
       };
