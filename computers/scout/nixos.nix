@@ -90,4 +90,8 @@
   services.tailscale = {
     enable = true;
   };
+
+  services.pcscd = {
+    enable = true;
+  };
 }
