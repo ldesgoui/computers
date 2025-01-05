@@ -58,10 +58,16 @@
         flake-inputs = { _module.args.inputs = inputs; };
         age-rekey-settings = { config, ... }: {
           age.rekey = {
-            masterIdentities = [{
-              identity = "${./.}/master.age";
-              pubkey = "age1muncma6qvwmetka89lrtyeslkfg2ks8g8kp42gt299zraflrcpusa08eus";
-            }];
+            masterIdentities = [
+              {
+                identity = "${./.}/yubikey-id.txt";
+                pubkey = "age1yubikey1q2s7ye4w4t33arh2g6zkz79yekmed7sf8gc3kcdcyx3cgqlv8e66gmemh69";
+              }
+              {
+                identity = "${./.}/master.age";
+                pubkey = "age1muncma6qvwmetka89lrtyeslkfg2ks8g8kp42gt299zraflrcpusa08eus";
+              }
+            ];
             storageMode = "local";
             localStorageDir = "${inputs.self}/computers/${config.networking.hostName}/.secrets";
           };
