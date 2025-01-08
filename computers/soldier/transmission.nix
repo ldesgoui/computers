@@ -1,6 +1,4 @@
 {
-  # TODO: zfs
-
   services.transmission = {
     enable = true;
     openPeerPorts = true;
@@ -27,10 +25,27 @@
 
   systemd.services.transmission.serviceConfig.StateDirectoryMode = 770;
 
+  systemd.tmpfiles.settings."20-transmission" = {
+    "/var/lib/transmission/.config" = {
+      mode = "0700";
+      user = "transmission";
+      group = "transmission";
+    };
+  };
+
   users.groups.transmission.members = [
     "sonarr"
     "radarr"
     "lidarr"
-    "bazarr"
   ];
+
+  zfs.datasets.main._.enc._.services._.transmission = {
+    _.config = {
+      mountPoint = "/var/lib/transmission/.config";
+    };
+
+    _.state = {
+      mountPoint = "/var/lib/transmission"; # StateDirectory
+    };
+  };
 }
