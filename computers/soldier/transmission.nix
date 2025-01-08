@@ -27,11 +27,14 @@
 
   systemd.tmpfiles.settings."20-transmission" = {
     "/var/lib/transmission/.config" = {
-      mode = "0700";
-      user = "transmission";
-      group = "transmission";
+      z = {
+        mode = "0700";
+        user = "transmission";
+        group = "transmission";
+      };
     };
   };
+
 
   users.groups.transmission.members = [
     "sonarr"
