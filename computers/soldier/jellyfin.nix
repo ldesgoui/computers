@@ -31,6 +31,7 @@ in
   services.nginx.virtualHosts = {
     # "jellyfin.int.lde.sg" = {
     "jf.ldesgoui.xyz" = {
+      listenAddresses = [ "0.0.0.0" "[::0]" ];
       enableACME = true;
       acmeRoot = null;
       forceSSL = true;

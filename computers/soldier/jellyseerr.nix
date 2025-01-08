@@ -12,18 +12,20 @@
   };
 
   services.nginx.virtualHosts = {
-    "jellyseerr.int.lde.sg" = {
+    # "jellyseerr.int.lde.sg" = {
+    "js.ldesgoui.xyz" = {
+      listenAddresses = [ "0.0.0.0" "[::0]" ];
       enableACME = true;
       acmeRoot = null;
       forceSSL = true;
       locations."/".proxyPass = "http://[::1]:${toString config.services.jellyseerr.port}";
     };
 
-    "js.ldesgoui.xyz" = {
-      enableACME = true;
-      acmeRoot = null;
-      globalRedirect = "jellyfin.int.lde.sg";
-    };
+    # "js.ldesgoui.xyz" = {
+    #   enableACME = true;
+    #   acmeRoot = null;
+    #   globalRedirect = "jellyfin.int.lde.sg";
+    # };
   };
 
   zfs.datasets.main._.enc._.services._.jellyseerr = {
