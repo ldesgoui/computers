@@ -4,9 +4,9 @@
       z = mode: user: group: { z = { inherit mode user group; }; };
     in
     {
-      "/srv/movies" = z "0775" "root" "media";
-      "/srv/series" = z "0775" "root" "media";
-      "/srv/music" = z "0775" "root" "media";
+      "/srv/movies" = z "02775" "root" "media";
+      "/srv/series" = z "02775" "root" "media";
+      "/srv/music" = z "02775" "root" "media";
     };
 
   users.groups.media.members = [
