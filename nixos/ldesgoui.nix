@@ -97,7 +97,10 @@ in
           enable = true;
           git = true;
           icons = "auto";
-          extraOptions = [ "--group-directories-first" ];
+          extraOptions = [
+            "--group"
+            "--group-directories-first"
+          ];
         };
 
         programs.fzf = {
