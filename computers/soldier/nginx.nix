@@ -20,6 +20,7 @@
 
     virtualHosts = {
       "0.0.0.0" = {
+        listenAddresses = [ "0.0.0.0" "[::0]" ];
         default = true;
         rejectSSL = true;
         globalRedirect = "lde.sg";
