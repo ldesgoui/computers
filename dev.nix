@@ -16,6 +16,7 @@
         pkgs.taplo
 
         pkgs.rage
+        pkgs.age-plugin-yubikey
         config.agenix-rekey.package
       ];
     };
