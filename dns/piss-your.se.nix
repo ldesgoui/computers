@@ -1,0 +1,25 @@
+{ config, inputs, ... }:
+let
+  inherit (inputs) dns;
+  nodes = config.dns.zone."lde.sg".subdomains.nodes.subdomains;
+in
+{
+  dns.zone."piss-your.se" = {
+    TTL = 300; # TODO: remove when we're chill
+
+    SOA = {
+      nameServer = "ns1.lde.sg.";
+      adminEmail = "ldesgoui@gmail.com";
+      serial = 1;
+    };
+
+    NS = [
+      "ns1.lde.sg."
+      "ns2.lde.sg."
+    ];
+
+    CAA = dns.lib.letsEncrypt "ldesgoui@gmail.com";
+
+    inherit (nodes.sniper) A AAAA;
+  };
+}

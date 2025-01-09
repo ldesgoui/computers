@@ -38,6 +38,11 @@
       url = "github:xddxdd/nur-packages";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    dns = {
+      url = "github:nix-community/dns.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ { flake-parts, ... }:
@@ -46,6 +51,7 @@
 
       imports = [
         ./dev.nix
+        ./dns
 
         ./computers/scout
         ./computers/soldier
