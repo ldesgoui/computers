@@ -3,10 +3,10 @@ let
   inherit (inputs) dns;
   inherit (dns.lib) host;
 
-  nodes = config.dns.zone."lde.sg".subdomains.nodes.subdomains;
+  nodes = config.dns.zones."lde.sg".subdomains.nodes.subdomains;
 in
 {
-  dns.zone."ldesgoui.xyz" = {
+  dns.zones."ldesgoui.xyz" = {
     TTL = 300; # TODO: remove when we're chill
 
     SOA = {

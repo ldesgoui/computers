@@ -61,7 +61,7 @@
       ];
 
       flake.nixosModules = {
-        flake-inputs = { _module.args.inputs = inputs; };
+        flake-inputs = { _module.args = { inherit inputs; }; };
         age-rekey-settings = { config, ... }: {
           age.rekey = {
             masterIdentities = [

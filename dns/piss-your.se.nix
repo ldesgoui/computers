@@ -1,10 +1,10 @@
 { config, inputs, ... }:
 let
   inherit (inputs) dns;
-  nodes = config.dns.zone."lde.sg".subdomains.nodes.subdomains;
+  nodes = config.dns.zones."lde.sg".subdomains.nodes.subdomains;
 in
 {
-  dns.zone."piss-your.se" = {
+  dns.zones."piss-your.se" = {
     TTL = 300; # TODO: remove when we're chill
 
     SOA = {
