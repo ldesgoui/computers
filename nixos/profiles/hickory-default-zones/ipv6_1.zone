@@ -1,6 +1,6 @@
 $TTL 3D
 @ IN SOA ns1.lde.sg. ldesgoui.gmail.com. (1 86400 600 864000 60)
-NS ns1.lde.sg.
-NS ns2.lde.sg.
+@ IN NS ns1.lde.sg.
+@ IN NS ns2.lde.sg.
 
-1 PTR localhost.
+1 IN PTR localhost.
