@@ -29,7 +29,7 @@ in
     };
 
     perSystem = { pkgs, system, ... }: {
-      packages.dns-zones = lib.pipe config.dns.zone [
+      packages.dns-zones = lib.pipe config.dns.zones [
         (lib.mapAttrsToList (name: zone: pkgs.writeTextFile {
           name = "${name}.zone";
           text = toString zone;
