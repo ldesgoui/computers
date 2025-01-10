@@ -33,16 +33,14 @@ in
 
       template = [{
         id = "default";
-        semantic-checks = "on";
         acl = "update_txt_only";
+        dnssec-signing = "on";
+        dnssec-policy = "sign_ed25519";
+        semantic-checks = "on";
       }];
 
       zone = [
-        {
-          domain = "piss-your.se";
-          dnssec-signing = "on";
-          dnssec-policy = "sign_ed25519";
-        }
+        { domain = "piss-your.se"; }
         { domain = "lde.sg"; }
         { domain = "ldesgoui.xyz"; }
       ];
