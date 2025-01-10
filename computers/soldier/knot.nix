@@ -42,7 +42,7 @@ in
 
   systemd.services.knot = {
     preStart = ''
-      cp -f "${zones}/*.zones" /var/lib/knot/
+      cp -f ${zones}/*.zone /var/lib/knot/
     '';
   };
 }
