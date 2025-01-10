@@ -26,6 +26,11 @@ in
         update-type = [ "TXT" ];
       }];
 
+      policy = [{
+        id = "sign_ed25519";
+        algorithm = "ed25519";
+      }];
+
       template = [{
         id = "default";
         semantic-checks = "on";
@@ -33,7 +38,11 @@ in
       }];
 
       zone = [
-        { domain = "piss-your.se"; }
+        {
+          domain = "piss-your.se";
+          dnssec-signing = "on";
+          dnssec-policy = "sign_ed25519";
+        }
         { domain = "lde.sg"; }
         { domain = "ldesgoui.xyz"; }
       ];
