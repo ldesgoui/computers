@@ -8,18 +8,23 @@ in
     TTL = 300; # TODO: remove when we're chill
 
     SOA = {
-      nameServer = "ns1.lde.sg.";
+      nameServer = "ns1.piss-your.se.";
       adminEmail = "ldesgoui@gmail.com";
       serial = 1;
     };
 
     NS = [
-      "ns1.lde.sg."
-      "ns2.lde.sg."
+      "ns1.piss-your.se."
+      "ns2.piss-your.se."
     ];
 
     CAA = dns.lib.letsEncrypt "ldesgoui@gmail.com";
 
     inherit (nodes.soldier) A AAAA;
+
+    subdomains = {
+      ns1 = nodes."soldier"; # Must be glue
+      ns2 = nodes."sniper"; # Must be glue
+    };
   };
 }
