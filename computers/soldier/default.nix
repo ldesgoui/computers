@@ -10,6 +10,7 @@
         ./boot-ssh-unlock.nix
 
         ./nginx.nix
+        ./knot.nix
 
         ./kanidm.nix
 
