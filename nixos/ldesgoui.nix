@@ -38,7 +38,7 @@ in
           (builtins.attrValues {
             inherit (pkgs)
               fd file httpie moreutils ripgrep
-              hickory-dns
+              knot-dns hickory-dns
               ;
           })
 

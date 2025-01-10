@@ -10,7 +10,6 @@
         ./boot-ssh-unlock.nix
 
         ./nginx.nix
-        ./hickory.nix
 
         ./kanidm.nix
 
@@ -40,13 +39,11 @@
 
         ../../nixos/profiles/defaults.nix
         ../../nixos/profiles/acme.nix
-        ../../nixos/profiles/hickory-default-zones
         ../../nixos/profiles/nix.nix
         ../../nixos/profiles/zfs-datasets.nix
 
         config.flake.nixosModules.flake-inputs
         config.flake.nixosModules.age-rekey-settings
-        config.flake.nixosModules.hickory-zones
 
         inputs.home-manager.nixosModules.home-manager
 
