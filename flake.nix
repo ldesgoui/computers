@@ -66,7 +66,7 @@
           age.rekey = {
             masterIdentities = [
               {
-                identity = "${./.}/yubikey-id.txt";
+                identity = "${./.}/yubikey-id.pub";
                 pubkey = "age1yubikey1q2s7ye4w4t33arh2g6zkz79yekmed7sf8gc3kcdcyx3cgqlv8e66gmemh69";
               }
               {
