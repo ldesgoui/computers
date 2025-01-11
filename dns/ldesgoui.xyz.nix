@@ -33,7 +33,7 @@ in
 
     DMARC = [{ p = "none"; }];
 
-    inherit (nodes.sniper) A AAAA;
+    inherit (nodes.soldier) A AAAA;
 
     subdomains = {
       "bw.wg0" = nodes.sniper;
@@ -41,7 +41,6 @@ in
       js = nodes.soldier;
       mumble = nodes.sniper;
       mx = { inherit (nodes.sniper) A; };
-      www = nodes.sniper;
     };
   };
 }

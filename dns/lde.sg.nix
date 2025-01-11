@@ -25,11 +25,11 @@ in
 
     CAA = dns.lib.letsEncrypt "ldesgoui@gmail.com";
 
-    inherit (nodes.sniper) A AAAA;
+    inherit (nodes.soldier) A AAAA;
 
     subdomains = {
-      auth = nodes."soldier";
-      headscale = nodes."soldier";
+      auth = nodes.soldier;
+      headscale = nodes.soldier;
 
       nodes.subdomains = nodes;
 

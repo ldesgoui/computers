@@ -23,8 +23,8 @@ in
     inherit (nodes.soldier) A AAAA;
 
     subdomains = {
-      ns1 = nodes."soldier"; # Must be glue
-      ns2 = nodes."sniper"; # Must be glue
+      ns1 = nodes.soldier; # Must be glue
+      ns2 = nodes.sniper; # Must be glue
     };
   };
 }
