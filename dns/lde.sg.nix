@@ -20,7 +20,7 @@ in
 
     NS = [
       "ns1.piss-your.se."
-      "ns2.piss-your.se."
+      # "ns2.piss-your.se."
     ];
 
     CAA = dns.lib.letsEncrypt "ldesgoui@gmail.com";
