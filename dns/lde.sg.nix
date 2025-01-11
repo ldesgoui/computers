@@ -37,7 +37,7 @@ in
         service = "mumble";
         proto = "tcp";
         port = 64738;
-        target = "sniper.nodes";
+        target = "soldier.nodes";
       }];
     };
   };

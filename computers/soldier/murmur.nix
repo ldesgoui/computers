@@ -31,6 +31,7 @@
 
       welcometext = builtins.replaceStrings [ "\n" ] [ "<br />" ] ''
         Wow! It's you! Nice!
+        The server has moved hosts :)
       '';
 
       extraConfig = ''

@@ -36,11 +36,21 @@ in
     inherit (nodes.soldier) A AAAA;
 
     subdomains = {
+      mx = { inherit (nodes.sniper) A; };
+
       "bw.wg0" = nodes.sniper;
+
       jf = nodes.soldier;
       js = nodes.soldier;
-      mumble = nodes.sniper;
-      mx = { inherit (nodes.sniper) A; };
+
+      mumble = nodes.soldier // {
+        SRV = [{
+          service = "mumble";
+          proto = "tcp";
+          port = 64738;
+          target = "soldier.nodes.lde.sg.";
+        }];
+      };
     };
   };
 }
