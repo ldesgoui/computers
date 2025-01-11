@@ -52,4 +52,10 @@ in
       cp -f ${zones}/*.zone /var/lib/knot/
     '';
   };
+
+  zfs.datasets.main = {
+    _.enc._.services._.knot = {
+      mountPoint = "/var/lib/knot"; # StateDirectory
+    };
+  };
 }
