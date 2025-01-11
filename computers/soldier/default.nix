@@ -32,6 +32,7 @@
         ./syncthing.nix
         ./vikunja.nix
 
+        ./websites/lde.sg.nix
         ./websites/piss-your.se.nix
 
         ../../nixos/zfs.nix
