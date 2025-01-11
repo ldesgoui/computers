@@ -1,19 +1,13 @@
-{ config, ... }: {
-  age.secrets.gandi-pat = {
-    rekeyFile = ./gandi-pat.age;
-    owner = "acme";
-    group = "acme";
-  };
-
+{ pkgs, ... }: {
   security.acme = {
     acceptTerms = true;
     defaults = {
       email = "ldesgoui@gmail.com";
 
-      dnsProvider = "gandiv5";
-      credentialFiles = {
-        GANDIV5_PERSONAL_ACCESS_TOKEN_FILE = config.age.secrets.gandi-pat.path;
-      };
+      dnsProvider = "rfc2136";
+      environmentFile = pkgs.writeText "rfc2136-nameserver.txt" ''
+        RFC2136_NAMESERVER=127.0.0.1
+      '';
 
       dnsResolver = "1.1.1.1:53";
     };
