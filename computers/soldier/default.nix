@@ -32,6 +32,8 @@
         ./syncthing.nix
         ./vikunja.nix
 
+        ./murmur.nix
+
         ./websites/lde.sg.nix
         ./websites/piss-your.se.nix
 
