@@ -32,6 +32,8 @@
         ./syncthing.nix
         ./vikunja.nix
 
+        ./stalwart-mail.nix
+
         ./murmur.nix
 
         ./websites/lde.sg.nix

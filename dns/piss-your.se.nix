@@ -22,9 +22,13 @@ in
 
     inherit (nodes.soldier) A AAAA;
 
+    MX = [{ exchange = "mx.piss-your.se"; preference = 10; }];
+
     subdomains = {
       ns1 = nodes.soldier; # Must be glue
       ns2 = nodes.sniper; # Must be glue
+
+      mx = nodes.soldier;
     };
   };
 }

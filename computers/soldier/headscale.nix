@@ -23,6 +23,8 @@ let
         "mealie"
         "syncthing-soldier"
         "vikunja"
+
+        "stalwart"
       ];
 in
 {
