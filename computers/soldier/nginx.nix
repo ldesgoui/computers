@@ -1,4 +1,4 @@
-{
+{ config, ... }: {
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 
   services.nginx = {
@@ -20,7 +20,10 @@
 
     virtualHosts = {
       "0.0.0.0" = {
-        listenAddresses = [ "0.0.0.0" "[::0]" ];
+        # Whenever we add new cases, they need to end up here
+        # in order for `default` to work as intended.
+        listenAddresses = [ "0.0.0.0" "[::0]" ]
+          ++ config.services.nginx.defaultListenAddresses;
         default = true;
         rejectSSL = true;
         globalRedirect = "lde.sg";
