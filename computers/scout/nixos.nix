@@ -28,6 +28,8 @@
         streamlink
 
         moonlight-qt
+
+        keepassxc
         ;
     });
 

@@ -1,5 +1,5 @@
 { config, ... }: {
-  services.nginx.virtualHosts."syncthing-soldier.int.lde.sg" = {
+  services.nginx.virtualHosts."syncthing-scout.int.lde.sg" = {
     enableACME = true;
     acmeRoot = null;
     forceSSL = true;
@@ -27,6 +27,14 @@
 
       gui.insecureSkipHostcheck = true;
 
+      devices.soldier = {
+        id = "KOQVGTB-VDMTHL7-IV6EN45-2TGWPGW-NYYNMVF-YCLWRPD-CXEIM6C-6TWUKAL";
+        addresses = [
+          "tcp://soldier.ts.lde.sg"
+          "quic://soldier.ts.lde.sg"
+        ];
+      };
+
       devices.spy = {
         id = "7PDDZFT-KCE7IKN-RMWIINY-26Q6GKP-KSBCOKQ-MCQIIYP-6WCQI7L-O55PFAT";
         addresses = [
@@ -37,14 +45,7 @@
 
       folders.KeePass = {
         path = "/home/ldesgoui/.local/share/KeePass";
-        devices = [ "spy" ];
-        ignorePerms = true;
-      };
-
-      folders."Android Camera" = {
-        id = "pixel_6_ukgq-photos";
-        path = "/home/ldesgoui/Android Camera";
-        devices = [ "spy" ];
+        devices = [ "soldier" "spy" ];
         ignorePerms = true;
       };
     };
@@ -53,7 +54,6 @@
   systemd.user.tmpfiles.users.ldesgoui.rules =
     map (path: "z '${path}' 02770 ldesgoui ldesgoui-syncthing - -") [
       config.services.syncthing.settings.folders.KeePass.path
-      config.services.syncthing.settings.folders."Android Camera".path
     ];
 
   systemd.services.syncthing.serviceConfig = {
@@ -63,10 +63,6 @@
   users.groups.ldesgoui-syncthing.members = [ "ldesgoui" "syncthing" ];
 
   zfs.datasets.main._.enc._.users._.ldesgoui = {
-    _.android-camera = {
-      mountPoint = config.services.syncthing.settings.folders."Android Camera".path;
-    };
-
     _.keepass = {
       mountPoint = config.services.syncthing.settings.folders.KeePass.path;
     };
