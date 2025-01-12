@@ -7,7 +7,7 @@ in
     stalwart-admin-secret = {
       rekeyFile = ./stalwart-admin-secret.age;
       generator.script = "passphrase";
-      user = "stalwart-mail";
+      owner = "stalwart-mail";
       group = "stalwart-mail";
     };
   };
