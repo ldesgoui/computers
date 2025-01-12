@@ -29,18 +29,12 @@
 
       devices.soldier = {
         id = "KOQVGTB-VDMTHL7-IV6EN45-2TGWPGW-NYYNMVF-YCLWRPD-CXEIM6C-6TWUKAL";
-        addresses = [
-          "tcp://soldier.ts.lde.sg"
-          "quic://soldier.ts.lde.sg"
-        ];
+        addresses = [ "tcp://soldier.ts.lde.sg" "quic://soldier.ts.lde.sg" ];
       };
 
       devices.spy = {
         id = "7PDDZFT-KCE7IKN-RMWIINY-26Q6GKP-KSBCOKQ-MCQIIYP-6WCQI7L-O55PFAT";
-        addresses = [
-          "tcp://spy.ts.lde.sg"
-          "quic://spy.ts.lde.sg"
-        ];
+        addresses = [ "tcp://spy.ts.lde.sg" "quic://spy.ts.lde.sg" ];
       };
 
       folders.KeePass = {

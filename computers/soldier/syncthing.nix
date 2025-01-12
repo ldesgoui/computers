@@ -27,12 +27,14 @@
 
       gui.insecureSkipHostcheck = true;
 
+      devices.scout = {
+        id = "QZ6VFBQ-4QJLS2Y-R4IDJ7T-CKLYC7O-7GSTGO2-K2WBRWL-MGYZBV6-XZ6ZQQE";
+        addresses = [ "tcp://scout.ts.lde.sg" "quic://scout.ts.lde.sg" ];
+      };
+
       devices.spy = {
         id = "7PDDZFT-KCE7IKN-RMWIINY-26Q6GKP-KSBCOKQ-MCQIIYP-6WCQI7L-O55PFAT";
-        addresses = [
-          "tcp://spy.ts.lde.sg"
-          "quic://spy.ts.lde.sg"
-        ];
+        addresses = [ "tcp://spy.ts.lde.sg" "quic://spy.ts.lde.sg" ];
       };
 
       folders.KeePass = {
