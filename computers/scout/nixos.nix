@@ -12,6 +12,7 @@
     dev.nix = true;
     dev.bash = true;
   };
+  users.users.ldesgoui.homeMode = "711"; # services need x
 
   networking.networkmanager.enable = true;
   users.users.ldesgoui.extraGroups = [ "networkmanager" ];
