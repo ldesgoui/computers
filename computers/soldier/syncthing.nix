@@ -39,7 +39,7 @@
 
       folders.KeePass = {
         path = "/home/ldesgoui/.local/share/KeePass";
-        devices = [ "spy" ];
+        devices = [ "scout" "spy" ];
         ignorePerms = true;
       };
 
