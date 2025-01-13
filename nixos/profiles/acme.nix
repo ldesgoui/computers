@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
   nameserver =
-    if config.networking.hostname == "soldier" then
+    if config.networking.hostName == "soldier" then
       "127.0.0.1"
     else
       "soldier.ts.lde.sg";
