@@ -1,4 +1,13 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }:
+let
+  nameserver =
+    if config.networking.hostname == "soldier" then
+      "127.0.0.1"
+    else
+      "soldier.ts.lde.sg";
+in
+
+{
   security.acme = {
     acceptTerms = true;
     defaults = {
@@ -6,7 +15,7 @@
 
       dnsProvider = "rfc2136";
       environmentFile = pkgs.writeText "rfc2136-nameserver.txt" ''
-        RFC2136_NAMESERVER=127.0.0.1
+        RFC2136_NAMESERVER=${nameserver}
       '';
 
       dnsResolver = "1.1.1.1:53";
