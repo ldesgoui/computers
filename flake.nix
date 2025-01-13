@@ -55,7 +55,7 @@
 
         ./computers/scout
         ./computers/soldier
-        ./computers/sniper
+        # ./computers/sniper
 
         inputs.agenix-rekey.flakeModule
       ];
