@@ -42,18 +42,18 @@ in
         };
 
         smtp = {
-          bind = [ "0.0.0.0:25" "[::0]:25" ];
+          bind = [ "[::]:25" ];
           protocol = "smtp";
         };
 
         submissions = {
-          bind = [ "0.0.0.0:465" "[::0]:465" ];
+          bind = [ "[::]:465" ];
           protocol = "smtp";
           tls.implicit = true;
         };
 
         imaptls = {
-          bind = [ "0.0.0.0:993" "[::0]:993" ];
+          bind = [ "[::]:993" ];
           protocol = "imap";
           tls.implicit = true;
         };
