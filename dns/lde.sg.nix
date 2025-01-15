@@ -3,7 +3,7 @@ let
   inherit (inputs) dns;
   inherit (dns.lib) host;
 
-  nodes = {
+  wi = {
     soldier = host "109.190.105.250" "2001:41d0:fc14:ca00:aaa1:59ff:fe44:7806";
     sniper = host "212.47.233.201" "2001:bc8:710:7dfc:dc00:ff:fe74:3feb";
   };
@@ -25,19 +25,32 @@ in
 
     CAA = dns.lib.letsEncrypt "ldesgoui@gmail.com";
 
-    inherit (nodes.soldier) A AAAA;
+    inherit (wi.soldier) A AAAA;
+
+    MX = [{ exchange = "mx1"; preference = 10; }];
+
+    TXT = [ (dns.lib.spf.strict [ "mx a ra=postmaster" ]) ];
+
+    DMARC = [{
+      p = "reject";
+      rua = "mailto:postmaster@lde.sg";
+      ruf = [ "mailto:postmaster@lde.sg" ];
+    }];
 
     subdomains = {
-      auth = nodes.soldier;
-      headscale = nodes.soldier;
+      wi.subdomains = wi;
 
-      nodes.subdomains = nodes;
+      mx1 = wi.soldier;
+      mx2 = wi.sniper;
+
+      auth = wi.soldier;
+      headscale = wi.soldier;
 
       cool-zone.SRV = [{
         service = "mumble";
         proto = "tcp";
         port = 64738;
-        target = "soldier.nodes";
+        target = "soldier.wi";
       }];
     };
   };

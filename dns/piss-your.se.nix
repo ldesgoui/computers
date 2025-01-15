@@ -1,7 +1,7 @@
 { config, inputs, ... }:
 let
   inherit (inputs) dns;
-  nodes = config.dns.zones."lde.sg".subdomains.nodes.subdomains;
+  wi = config.dns.zones."lde.sg".subdomains.wi.subdomains;
 in
 {
   dns.zones."piss-your.se" = {
@@ -20,15 +20,21 @@ in
 
     CAA = dns.lib.letsEncrypt "ldesgoui@gmail.com";
 
-    inherit (nodes.soldier) A AAAA;
+    inherit (wi.soldier) A AAAA;
 
-    MX = [{ exchange = "mx.piss-your.se"; preference = 10; }];
+    MX = [{ exchange = "mx1.lde.sg."; preference = 10; }];
+
+    TXT = [ (dns.lib.spf.strict [ "mx a ra=postmaster" ]) ];
+
+    DMARC = [{
+      p = "reject";
+      rua = "mailto:postmaster@piss-your.se";
+      ruf = [ "mailto:postmaster@piss-your.se" ];
+    }];
 
     subdomains = {
-      ns1 = nodes.soldier; # Must be glue
-      ns2 = nodes.sniper; # Must be glue
-
-      mx = nodes.soldier;
+      ns1 = wi.soldier; # Must be glue
+      ns2 = wi.sniper; # Must be glue
     };
   };
 }

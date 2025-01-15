@@ -1,9 +1,8 @@
 { config, lib, inputs, ... }:
 let
   inherit (inputs) dns;
-  inherit (dns.lib) host;
 
-  nodes = config.dns.zones."lde.sg".subdomains.nodes.subdomains;
+  wi = config.dns.zones."lde.sg".subdomains.wi.subdomains;
 in
 {
   dns.zones."ldesgoui.xyz" = {
@@ -33,22 +32,22 @@ in
 
     DMARC = [{ p = "none"; }];
 
-    inherit (nodes.soldier) A AAAA;
+    inherit (wi.soldier) A AAAA;
 
     subdomains = {
-      mx = { inherit (nodes.sniper) A; };
+      mx = { inherit (wi.sniper) A; };
 
-      "bw.wg0" = nodes.sniper;
+      "bw.wg0" = wi.sniper;
 
-      jf = nodes.soldier;
-      js = nodes.soldier;
+      jf = wi.soldier;
+      js = wi.soldier;
 
-      mumble = nodes.soldier // {
+      mumble = wi.soldier // {
         SRV = [{
           service = "mumble";
           proto = "tcp";
           port = 64738;
-          target = "soldier.nodes.lde.sg.";
+          target = "soldier.wi.lde.sg.";
         }];
       };
     };

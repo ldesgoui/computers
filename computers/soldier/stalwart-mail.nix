@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  acmeDir = config.security.acme.certs."mx.piss-your.se".directory;
+  acmeDir = config.security.acme.certs."mx1.lde.sg".directory;
 in
 {
   age.secrets = {
@@ -12,8 +12,9 @@ in
     };
   };
 
-  security.acme.certs."mx.piss-your.se" = {
+  security.acme.certs."mx1.lde.sg" = {
     group = "stalwart-mail";
+    # TODO: reload
   };
 
   services.stalwart-mail = {
@@ -26,13 +27,17 @@ in
         secret = "{plain}%{file:${config.age.secrets.stalwart-admin-secret.path}}%";
       };
 
-      certificate."mx.piss-your.se" = {
+      certificate."mx1.lde.sg" = {
         cert = "%{file:${acmeDir}/full.pem}%";
         private-key = "%{file:${acmeDir}/key.pem}%";
       };
 
       lookup = {
-        default.hostname = "mx.piss-your.se";
+        default.hostname = "mx1.lde.sg";
+      };
+
+      queue.outbound = {
+        hostname = "'soldier.wi.lde.sg'";
       };
 
       server.listener = {
