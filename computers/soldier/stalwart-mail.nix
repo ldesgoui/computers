@@ -47,6 +47,10 @@ in
         hostname = "'soldier.wi.lde.sg'";
       };
 
+      session.connect = {
+        hostname = "'soldier.wi.lde.sg'";
+      };
+
       server.listener = {
         management = {
           bind = [ "[::1]:5080" ];
