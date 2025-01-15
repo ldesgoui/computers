@@ -22,9 +22,16 @@ in
     openFirewall = true;
 
     settings = {
-      authentication.fallback-admin = {
-        user = "admin";
-        secret = "{plain}%{file:${config.age.secrets.stalwart-admin-secret.path}}%";
+      authentication = {
+        fallback-admin = {
+          user = "admin";
+          secret = "{plain}%{file:${config.age.secrets.stalwart-admin-secret.path}}%";
+        };
+
+        master = {
+          user = "master";
+          secret = "{plain}%{file:${config.age.secrets.stalwart-admin-secret.path}}%";
+        };
       };
 
       certificate."mx1.lde.sg" = {
