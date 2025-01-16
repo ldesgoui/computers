@@ -9,10 +9,10 @@
       rpc-whitelist-enabled = false;
 
       ratio-limit-enabled = true;
-      ratio-limit = 0.5;
+      ratio-limit = 0;
 
       idle-seeding-limit-enabled = true;
-      idle-seeding-limit = 2;
+      idle-seeding-limit = 5;
     };
   };
 
