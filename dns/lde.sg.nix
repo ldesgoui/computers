@@ -43,6 +43,8 @@ in
       mx1 = wi.soldier;
       mx2 = wi.sniper;
 
+      autoconfig.CNAME = [ "mx1" ];
+
       auth = wi.soldier;
       headscale = wi.soldier;
 

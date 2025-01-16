@@ -87,4 +87,16 @@ in
     forceSSL = true;
     locations."/".proxyPass = "http://[::1]:5080";
   };
+
+  services.nginx.virtualHosts."autoconfig.lde.sg" = {
+    serverAliases = [
+      "autoconfig.ldesgoui.xyz"
+      "autoconfig.piss-your.se"
+    ];
+    listenAddresses = [ "0.0.0.0" "[::0]" ];
+    enableACME = true;
+    acmeRoot = null;
+    forceSSL = true;
+    locations."/mail".proxyPass = "http://[::1]:5080";
+  };
 }
