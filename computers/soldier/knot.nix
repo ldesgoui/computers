@@ -11,11 +11,14 @@ in
   services.knot = {
     enable = true;
     settings = {
-      server.listen = [ "0.0.0.0@53" "::0@53" ];
       log = [{ target = "syslog"; any = "info"; }];
 
+      server = {
+        listen = [ "0.0.0.0@53" "::0@53" ];
+      };
+
       acl = [{
-        id = "update_txt_only";
+        id = "update-txt-only";
         address = [
           "127.0.0.1"
           "::1"
@@ -27,30 +30,29 @@ in
       }];
 
       policy = [{
-        id = "sign_ed25519";
+        id = "sign-ed25519";
         algorithm = "ed25519";
+        ksk-shared = "on";
       }];
 
       template = [{
         id = "default";
-        acl = "update_txt_only";
+        acl = "update-txt-only";
         dnssec-signing = "on";
-        dnssec-policy = "sign_ed25519";
+        dnssec-policy = "sign-ed25519";
         semantic-checks = "on";
+        serial-policy = "dateserial";
       }];
 
       zone = [
-        { domain = "piss-your.se"; }
-        { domain = "lde.sg"; }
+        {
+          domain = "lde.sg";
+          dnssec-signing = "off"; # XXX: netim please
+        }
         { domain = "ldesgoui.xyz"; }
+        { domain = "piss-your.se"; }
       ];
     };
-  };
-
-  systemd.services.knot = {
-    preStart = ''
-      cp -f ${zones}/*.zone /var/lib/knot/
-    '';
   };
 
   zfs.datasets.main = {
