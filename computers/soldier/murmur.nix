@@ -3,8 +3,8 @@
     rekeyFile = ./murmur_password.age;
   };
 
-  security.acme.certs."mumble.ldesgoui.xyz" = {
-    # extraDomainNames = [ "cool-zone.lde.sg" ];
+  security.acme.certs."cool-zone.lde.sg" = {
+    extraDomainNames = [ "mumble.ldesgoui.xyz" ];
 
     reloadServices = [ "murmur" ];
     group = "murmur";
