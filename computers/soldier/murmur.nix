@@ -12,7 +12,7 @@
 
   services.murmur =
     let
-      certDir = config.security.acme.certs."mumble.ldesgoui.xyz".directory;
+      certDir = config.security.acme.certs."cool-zone.lde.sg".directory;
     in
     {
       enable = true;
