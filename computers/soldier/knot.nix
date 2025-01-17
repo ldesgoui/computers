@@ -1,6 +1,14 @@
-{ inputs, pkgs, ... }:
+{ lib, inputs, pkgs, ... }:
 let
-  zones = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.dns-zones;
+  install-knot-zones = pkgs.writeShellApplication {
+    name = "install-knot-zones";
+    text = builtins.readFile "install-knot-zones.sh";
+
+    runtimeEnv = {
+      KEEP_RECORDS_AWK = ./keep-records.awk;
+      ZONES = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.dns-zones;
+    };
+  };
 in
 {
   networking.firewall = {
@@ -42,6 +50,7 @@ in
         dnssec-policy = "sign-ed25519";
         semantic-checks = "on";
         serial-policy = "dateserial";
+        zonefile-load = "difference-no-serial";
       }];
 
       zone = [
@@ -54,6 +63,10 @@ in
       ];
     };
   };
+
+  system.activationScripts."install-knot-zones".text = ''
+    ${lib.getExe install-knot-zones}
+  '';
 
   zfs.datasets.main = {
     _.enc._.services._.knot = {
