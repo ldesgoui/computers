@@ -4,7 +4,7 @@ let
     name = "install-knot-zones";
     text = builtins.readFile ./install-knot-zones.sh;
 
-    runtimeInputs = [ pkgs.gawk ];
+    runtimeInputs = [ pkgs.gawk pkgs.knot-dns ];
     runtimeEnv = {
       KEEP_RECORDS_AWK = ./keep-records.awk;
       ZONES = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.dns-zones;
