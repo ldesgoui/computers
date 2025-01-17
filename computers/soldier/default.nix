@@ -32,7 +32,7 @@
         ./syncthing.nix
         ./vikunja.nix
 
-        ./stalwart-mail.nix
+        ./stalwart.nix
 
         ./murmur.nix
 
