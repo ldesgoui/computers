@@ -35,21 +35,9 @@ in
     inherit (wi.soldier) A AAAA;
 
     subdomains = {
-      mx = { inherit (wi.sniper) A; };
-
-      "bw.wg0" = wi.sniper;
-
       jf = wi.soldier;
       js = wi.soldier;
-
-      mumble = wi.soldier // {
-        SRV = [{
-          service = "mumble";
-          proto = "tcp";
-          port = 64738;
-          target = "soldier.wi.lde.sg.";
-        }];
-      };
+      mumble = wi.soldier;
     };
   };
 }

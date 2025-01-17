@@ -30,5 +30,6 @@ for src in "$ZONES"/*; do
   if [ "$running" = true ]; then
     knotc -b zone-reload "$zone"
     knotc zone-thaw "$zone"
+    knotc zone-flush "$zone"
   fi
 done
