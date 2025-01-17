@@ -5,8 +5,6 @@ let
 in
 {
   dns.zones."piss-your.se" = {
-    TTL = 300; # TODO: remove when we're chill
-
     SOA = {
       nameServer = "ns1.piss-your.se.";
       adminEmail = "ldesgoui@gmail.com";
