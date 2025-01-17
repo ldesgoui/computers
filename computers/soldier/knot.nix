@@ -2,7 +2,7 @@
 let
   install-knot-zones = pkgs.writeShellApplication {
     name = "install-knot-zones";
-    text = builtins.readFile "install-knot-zones.sh";
+    text = builtins.readFile ./install-knot-zones.sh;
 
     runtimeEnv = {
       KEEP_RECORDS_AWK = ./keep-records.awk;
