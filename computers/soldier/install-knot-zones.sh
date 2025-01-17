@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 if knotc status >/dev/null 2>&1; then
+  echo "[install-knot-zones]: knot is running, i will freeze and thaw"
   running=true
 else
   running=false
