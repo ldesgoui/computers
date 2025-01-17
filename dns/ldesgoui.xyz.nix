@@ -1,4 +1,4 @@
-{ config, lib, inputs, ... }:
+{ config, inputs, ... }:
 let
   inherit (inputs) dns;
 
@@ -21,22 +21,24 @@ in
 
     CAA = dns.lib.letsEncrypt "ldesgoui@gmail.com";
 
-    MX = [ (dns.lib.mx.mx 10 "mx.ldesgoui.xyz") ];
-
-    DKIM = [{
-      selector = "mail";
-      p = lib.removeSuffix "\n" (builtins.readFile ./dkim-ldesgoui.xyz.pub);
-    }];
-
-    TXT = [ (dns.lib.spf.strict [ "mx a" ]) ];
-
-    DMARC = [{ p = "none"; }];
-
     inherit (wi.soldier) A AAAA;
 
+    MX = [{ exchange = "mx1.lde.sg."; preference = 10; }];
+
+    TXT = [ (dns.lib.spf.strict [ "mx a ra=postmaster" ]) ];
+
+    DMARC = [{
+      p = "reject";
+      rua = "mailto:postmaster@ldesgoui.xyz";
+      ruf = [ "mailto:postmaster@ldesgoui.xyz" ];
+    }];
+
     subdomains = {
+      autoconfig.CNAME = [ "mx1.lde.sg." ];
+
       jf = wi.soldier;
       js = wi.soldier;
+
       mumble = wi.soldier;
     };
   };
