@@ -50,6 +50,7 @@ in
         dnssec-policy = "sign-ed25519";
         semantic-checks = "on";
         serial-policy = "dateserial";
+        journal-content = "all";
         zonefile-load = "difference-no-serial";
       }];
 
