@@ -53,7 +53,7 @@ in
         serial-policy = "dateserial";
         journal-content = "all";
         zonefile-load = "difference-no-serial";
-        global-module = "mod-cookies, mod-rrl, mod-stats/default";
+        global-module = [ "mod-cookies" "mod-rrl" "mod-stats/default" ];
       }];
 
       mod-stats = [{
