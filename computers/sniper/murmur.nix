@@ -1,7 +1,6 @@
 {
   services.murmur = {
     enable = true;
-    password = "jurassicpark";
     registerName = "SERVER HAS MOVED";
     welcometext = builtins.replaceStrings [ "\n" ] [ "<br />" ] ''
       Hello, the server has moved hosts.
@@ -10,7 +9,6 @@
       To connect to the new server, please click Server -> Connect -> Add New... and fill in:
       - Address: cool-zone.lde.sg
       - Port: 64738
-      - Password: jurassicpark
       Thank you
     '';
   };

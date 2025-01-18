@@ -11,30 +11,30 @@
 
         ./nginx.nix
         ./knot.nix
+        ./stalwart.nix
 
         ./kanidm.nix
 
         ./headscale.nix
         ./tailscale.nix
 
-        ./media-server.nix
-        ./jellyfin.nix
-        ./jellyseerr.nix
-        ./radarr.nix
-        ./sonarr.nix
-        ./lidarr.nix
-        ./bazarr.nix
-        ./prowlarr.nix
-        ./flaresolverr.nix
-        ./transmission.nix
-
-        ./mealie.nix
         ./syncthing.nix
-        ./vikunja.nix
-
-        ./stalwart.nix
 
         ./murmur.nix
+
+        ./media-server/storage.nix
+        ./media-server/jellyfin.nix
+        ./media-server/jellyseerr.nix
+        ./media-server/radarr.nix
+        ./media-server/sonarr.nix
+        ./media-server/lidarr.nix
+        ./media-server/bazarr.nix
+        ./media-server/prowlarr.nix
+        ./media-server/flaresolverr.nix
+        ./media-server/transmission.nix
+
+        ./mealie.nix
+        ./vikunja.nix
 
         ./websites/lde.sg.nix
         ./websites/piss-your.se.nix
