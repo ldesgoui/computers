@@ -7,8 +7,8 @@
     defaultListenAddresses = [
       "127.0.0.1"
       "[::1]"
-      "100.101.0.?"
-      "[fd7a:115c:a1e0::?]"
+      # "100.101.0.?"
+      # "[fd7a:115c:a1e0::?]"
     ];
 
     recommendedBrotliSettings = true;
