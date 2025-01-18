@@ -28,7 +28,7 @@
     properties = {
       ashift = "12";
       autotrim = "on";
-      compatibility = "openzfs-2.1-linux";
+      compatibility = "openzfs-2.2-linux";
     };
   };
 

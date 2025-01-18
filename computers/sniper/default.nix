@@ -7,7 +7,6 @@
         ./nixos.nix
         ./hardware.nix
         ./storage.nix
-        ./boot-ssh-unlock.nix
 
         ../../nixos/zfs.nix
 
