@@ -9,6 +9,8 @@
     "cryptd"
   ];
 
+  boot.kernelParams = [ "console=ttyS0" ];
+
   boot.kernelModules = [
     "kvm-amd"
   ];

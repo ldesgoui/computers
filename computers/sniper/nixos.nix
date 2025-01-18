@@ -3,8 +3,6 @@
 
   system.stateVersion = "24.11";
 
-  boot.kernelParams = [ "console=ttyS0" ];
-
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.ldesgoui = {
