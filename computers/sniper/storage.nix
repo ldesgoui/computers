@@ -12,8 +12,6 @@
     fsType = "vfat";
   };
 
-  networking.hostId = "88888888"; # For ZFS
-
   swapDevices = [{
     device = "/dev/disk/by-id/scsi-0SCW_sbs_volume-a45d3e8d-9b92-4a08-994f-8edeaf8d41ba";
   }];
