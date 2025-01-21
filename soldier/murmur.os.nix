@@ -20,7 +20,7 @@ _:
 
       openFirewall = true;
 
-      environmentFile = config.age.secrets.murmur_password.file;
+      environmentFile = config.age.secrets.murmur_password.path;
 
       sslCert = "${certDir}/full.pem";
       sslKey = "${certDir}/key.pem";
