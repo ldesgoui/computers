@@ -46,12 +46,7 @@ in
       auth = wi.soldier;
       headscale = wi.soldier;
 
-      cool-zone.SRV = [{
-        service = "mumble";
-        proto = "tcp";
-        port = 64738;
-        target = "soldier.wi";
-      }];
+      cool-zone = wi.soldier;
     };
   };
 }
