@@ -5,7 +5,10 @@ _:
   };
 
   security.acme.certs."cool-zone.lde.sg" = {
-    extraDomainNames = [ "mumble.ldesgoui.xyz" ];
+    extraDomainNames = [
+      "soldier.wi.lde.sg"
+      "mumble.ldesgoui.xyz"
+    ];
 
     reloadServices = [ "murmur" ];
     group = "murmur";
