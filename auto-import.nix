@@ -3,7 +3,7 @@ let
   inherit (builtins) concatStringsSep;
   recurse = segments:
     let
-      dir = concatStringsSep "/" ([ ./. ] ++ segments);
+      dir = concatStringsSep "/" ([ (toString ./.) ] ++ segments);
       f = modules: name: type:
         let
           file = "${dir}/${name}";
