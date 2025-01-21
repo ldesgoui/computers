@@ -50,42 +50,9 @@
       systems = import inputs.systems;
 
       imports = [
-        ./dev.nix
-        ./dns
-
-        ./computers/scout
-        ./computers/soldier
-        ./computers/sniper
-
+        flake-parts.flakeModules.modules
+        ./auto-import.nix
         inputs.agenix-rekey.flakeModule
       ];
-
-      flake.nixosModules = {
-        flake-inputs = { _module.args = { inherit inputs; }; };
-        age-rekey-settings = { config, ... }: {
-          age.rekey = {
-            masterIdentities = [
-              {
-                identity = "${./.}/yubikey-id.pub";
-                pubkey = "age1yubikey1q2s7ye4w4t33arh2g6zkz79yekmed7sf8gc3kcdcyx3cgqlv8e66gmemh69";
-              }
-              {
-                identity = "${./.}/master.age";
-                pubkey = "age1muncma6qvwmetka89lrtyeslkfg2ks8g8kp42gt299zraflrcpusa08eus";
-              }
-            ];
-            storageMode = "local";
-            localStorageDir = "${inputs.self}/computers/${config.networking.hostName}/.secrets";
-          };
-        };
-      };
-
-      perSystem = { ... }: {
-        agenix-rekey.nixosConfigurations = {
-          inherit (inputs.self.nixosConfigurations)
-            soldier
-            ;
-        };
-      };
     };
 }
