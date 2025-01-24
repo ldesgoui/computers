@@ -54,7 +54,7 @@ in
 
         eepily.displayName = "Eepily";
         gubbins.displayName = "Gubbins";
-        lux.displayName = "Lux";
+        Loopylazz.displayName = "Lux";
         mac.displayName = "Mac";
         squirrel.displayName = "Squirrel";
 
@@ -72,7 +72,7 @@ in
 
           "eepily"
           "gubbins"
-          "lux"
+          "Loopylazz"
           "mac"
           "squirrel"
 
