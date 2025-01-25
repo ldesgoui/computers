@@ -24,6 +24,8 @@ _:
     settings = {
       user.name = "ldesgoui";
       user.email = "ldesgoui@gmail.com";
+
+      ui.paginate = "never";
     };
   };
 }
