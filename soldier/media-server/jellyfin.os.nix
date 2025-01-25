@@ -4,12 +4,16 @@ let
   web-config = pkgs.runCommand "jellyfin-web-config-override"
     {
       nativeBuildInputs = [ pkgs.jq ];
+      env.MENU_LINKS = builtins.toJSON [
+        { name = "Request movies and shows"; url = "https://js.ldesgoui.xyz"; }
+      ];
     }
     ''
       mkdir -p $out/web
-      jq '.menuLinks = [
-        { name: "Request movies and shows", url: "https://js.ldesgoui.xyz" }
-      ]' ${pkgs.jellyfin-web}/share/jellyfin-web/config.json > $out/web/config.json
+      jq --argjson menuLinks "$MENU_LINKS" \
+        '.menuLinks = $menuLinks' \
+        '${pkgs.jellyfin-web}/share/jellyfin-web/config.json' \
+        > "$out/web/config.json"
     '';
 in
 {
