@@ -13,7 +13,7 @@
 
       folders."Android Camera" = {
         id = "pixel_6_ukgq-photos";
-        path = "/home/ldesgoui/Android Camera";
+        path = "/srv/home/Android Camera";
         devices = [ "spy" ];
         ignorePerms = true;
       };
@@ -23,7 +23,6 @@
   systemd.user.tmpfiles.users.ldesgoui.rules =
     map (path: "z '${path}' 02770 ldesgoui ldesgoui-syncthing - -") [
       config.services.syncthing.settings.folders.KeePass.path
-      config.services.syncthing.settings.folders."Android Camera".path
     ];
 
   systemd.services.syncthing.serviceConfig = {
@@ -34,7 +33,7 @@
 
   zfs.datasets.main._.enc._.users._.ldesgoui = {
     _.android-camera = {
-      mountPoint = config.services.syncthing.settings.folders."Android Camera".path;
+      mountPoint = "/home/ldesgoui/Android Camera";
     };
 
     _.keepass = {
