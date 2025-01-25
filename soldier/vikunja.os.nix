@@ -28,13 +28,19 @@ in
 
   environment.etc."vikunja/config.yaml".enable = false;
 
-  services.kanidm.provision.systems.oauth2.vikunja = {
-    originUrl = "https://vikunja.int.lde.sg/auth/openid/kanidm";
-    originLanding = "https://vikunja.int.lde.sg";
-    displayName = "Vikunja";
-    scopeMaps.vikunja_users = [ "openid" "profile" "email" ];
-    basicSecretFile = config.age.secrets.kanidm-vikunja-oidc-secret.path;
-    allowInsecureClientDisablePkce = true;
+  services.kanidm.provision = {
+    groups = {
+      vikunja_users.members = [ "ldesgoui" ];
+    };
+
+    systems.oauth2.vikunja = {
+      originUrl = "https://vikunja.int.lde.sg/auth/openid/kanidm";
+      originLanding = "https://vikunja.int.lde.sg";
+      displayName = "Vikunja";
+      scopeMaps.vikunja_users = [ "openid" "profile" "email" ];
+      basicSecretFile = config.age.secrets.kanidm-vikunja-oidc-secret.path;
+      allowInsecureClientDisablePkce = true;
+    };
   };
 
   services.nginx.virtualHosts."vikunja.int.lde.sg" = {

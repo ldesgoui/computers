@@ -24,16 +24,23 @@ in
     };
   };
 
-  services.kanidm.provision.systems.oauth2.mealie = {
-    originUrl = "https://mealie.int.lde.sg/login";
-    originLanding = "https://mealie.int.lde.sg";
-    displayName = "Mealie";
-    preferShortUsername = true;
-    scopeMaps = {
-      mealie_admins = [ "openid" "profile" "email" "groups" ];
-      mealie_users = [ "openid" "profile" "email" "groups" ];
+  services.kanidm.provision = {
+    groups = {
+      mealie_admins.members = [ "ldesgoui" ];
+      mealie_users.members = [ "ldesgoui" ];
     };
-    basicSecretFile = config.age.secrets.kanidm-mealie-oidc-secret.path;
+
+    systems.oauth2.mealie = {
+      originUrl = "https://mealie.int.lde.sg/login";
+      originLanding = "https://mealie.int.lde.sg";
+      displayName = "Mealie";
+      preferShortUsername = true;
+      scopeMaps = {
+        mealie_admins = [ "openid" "profile" "email" "groups" ];
+        mealie_users = [ "openid" "profile" "email" "groups" ];
+      };
+      basicSecretFile = config.age.secrets.kanidm-mealie-oidc-secret.path;
+    };
   };
 
   services.nginx.virtualHosts."mealie.int.lde.sg" = {

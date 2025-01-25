@@ -62,31 +62,6 @@ in
         smarmy.displayName = "Smarmy";
         spacesloth.displayName = "Spacesloth";
       };
-
-      groups = {
-        vpn_users.members = [ "ldesgoui" ];
-
-        media_admins.members = [ "ldesgoui" ];
-        media_viewers.members = [
-          "ldesgoui"
-
-          "eepily"
-          "gubbins"
-          "loopylazz"
-          "mac"
-          "squirrel"
-
-          "mira"
-          "smarmy"
-          "spacesloth"
-        ];
-        media_listeners.members = [ "ldesgoui" ];
-
-        mealie_admins.members = [ "ldesgoui" ];
-        mealie_users.members = [ "ldesgoui" ];
-
-        vikunja_users.members = [ "ldesgoui" ];
-      };
     };
   };
 

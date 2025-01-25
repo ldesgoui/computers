@@ -21,15 +21,35 @@ in
     enable = true;
   };
 
-  services.kanidm.provision.systems.oauth2.jellyfin = {
-    originUrl = "https://jf.ldesgoui.xyz/sso/OID/redirect/kanidm";
-    originLanding = "https://jf.ldesgoui.xyz";
-    displayName = "Jellyfin";
-    preferShortUsername = true;
-    scopeMaps = {
-      media_admins = [ "openid" "profile" "groups" ];
-      media_viewers = [ "openid" "profile" "groups" ];
-      media_listeners = [ "openid" "profile" "groups" ];
+  services.kanidm.provision = {
+    groups = {
+      media_admins.members = [ "ldesgoui" ];
+      media_viewers.members = [
+        "ldesgoui"
+
+        "eepily"
+        "gubbins"
+        "loopylazz"
+        "mac"
+        "squirrel"
+
+        "mira"
+        "smarmy"
+        "spacesloth"
+      ];
+      media_listeners.members = [ "ldesgoui" ];
+    };
+
+    systems.oauth2.jellyfin = {
+      originUrl = "https://jf.ldesgoui.xyz/sso/OID/redirect/kanidm";
+      originLanding = "https://jf.ldesgoui.xyz";
+      displayName = "Jellyfin";
+      preferShortUsername = true;
+      scopeMaps = {
+        media_admins = [ "openid" "profile" "groups" ];
+        media_viewers = [ "openid" "profile" "groups" ];
+        media_listeners = [ "openid" "profile" "groups" ];
+      };
     };
   };
 
