@@ -9,6 +9,8 @@ _:
 
     pkgs.nodePackages.bash-language-server
     pkgs.shellcheck
+
+    pkgs.devenv
   ];
 
   programs.direnv = {
