@@ -1,4 +1,4 @@
-{ lib, self, inputs, ... }:
+{ lib, self, inputs, withSystem, ... }:
 let
   inherit (builtins) concatStringsSep;
   recurse = segments:
@@ -9,7 +9,7 @@ let
           file = "${dir}/${name}";
           short-name = builtins.head (lib.splitString "." name);
           full-name = concatStringsSep "-" (segments ++ [ short-name ]);
-          applied = import file { inherit lib self inputs; };
+          applied = import file { inherit lib self inputs withSystem; };
         in
         modules ++ (
 
@@ -45,6 +45,13 @@ let
               flake.modules.homeManager.${full-name} = {
                 _file = file;
                 imports = [ applied ];
+              };
+            }]
+
+          else if lib.hasSuffix ".pkg.nix" name then
+            [{
+              perSystem = { pkgs, ... }: {
+                packages.${short-name} = pkgs.callPackage applied { };
               };
             }]
 
