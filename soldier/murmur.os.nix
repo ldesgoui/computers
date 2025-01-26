@@ -44,4 +44,8 @@ _:
         rememberchannelduration=3600
       '';
     };
+
+  systemd.services.murmur = {
+    restartIfChanged = false;
+  };
 }
