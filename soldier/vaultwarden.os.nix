@@ -99,7 +99,7 @@ in
     acmeRoot = null;
     forceSSL = true;
     locations."/" = {
-      proxyPass = "http://${cfg.ROCKET_ADDRESS}:${toString cfg.ROCKET_PORT}";
+      proxyPass = "http://[::1]:${toString cfg.ROCKET_PORT}";
       proxyWebsockets = true;
     };
   };
