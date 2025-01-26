@@ -59,7 +59,7 @@ in
       WEB_VAULT_ENABLED = true;
 
       SSO_ENABLED = true;
-      SSO_ONLY = true;
+      # SSO_ONLY = true;
       SSO_AUTHORITY = "https://auth.lde.sg/oauth2/openid/vaultwarden";
       SSO_CLIENT_ID = "vaultwarden";
 
