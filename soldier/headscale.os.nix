@@ -31,6 +31,7 @@ let
         "syncthing-soldier"
         "vikunja"
 
+        "vaultwarden"
         "stalwart"
       ];
 in
