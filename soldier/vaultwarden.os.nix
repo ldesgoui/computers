@@ -63,7 +63,7 @@ in
       SSO_AUTHORITY = "https://auth.lde.sg/oauth2/openid/vaultwarden";
       SSO_CLIENT_ID = "vaultwarden";
 
-      SMTP_HOST = "localhost";
+      SMTP_HOST = "mx1.lde.sg";
       SMTP_SECURITY = "force_tls";
       SMTP_PORT = 465;
       SMTP_FROM = "vaultwarden@lde.sg";
