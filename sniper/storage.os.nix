@@ -13,12 +13,12 @@ in
   };
 
   fileSystems."/boot" = {
-    device = bssd "6840b06a-bc08-4571-8571-1f2d9671cf4f";
+    device = bssd "942774f9-55b8-4a61-be92-5c56b2506467-part1";
     fsType = "vfat";
   };
 
   swapDevices = [{
-    device = bssd "942774f9-55b8-4a61-be92-5c56b2506467";
+    device = bssd "942774f9-55b8-4a61-be92-5c56b2506467-part2";
   }];
 
   zfs = {
