@@ -1,14 +1,5 @@
 _:
 {
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
-
-  boot.initrd = {
-    availableKernelModules = [ "nvme" ];
-  };
-
   fileSystems."/boot" = {
     device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNX0NA71896Y-part1";
     fsType = "vfat";

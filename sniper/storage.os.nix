@@ -4,14 +4,6 @@ let
   bssd = uuid: "/dev/disk/by-id/scsi-0SCW_b_ssd_volume-${uuid}";
 in
 {
-  boot.loader = {
-    systemd-boot = {
-      enable = true;
-      configurationLimit = 8;
-    };
-    efi.canTouchEfiVariables = true;
-  };
-
   boot.zfs = {
     devNodes = "/dev/disk/by-path";
   };

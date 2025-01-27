@@ -1,11 +1,26 @@
 _:
 {
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.loader = {
+    systemd-boot.enable = true;
+    # efi.canTouchEfiVariables = true;
+  };
 
-  # XXX: I found these when troubleshooting the hang/reboot issues
-  boot.kernelParams = [ "rcu_nocbs=0-15" "idle=nomwait" ];
+  boot.initrd = {
+    availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
+    systemd.enable = true;
+  };
 
-  hardware.enableRedistributableFirmware = true;
-  hardware.graphics.enable = true;
+  boot = {
+    kernelModules = [ "kvm-amd" ];
+
+    # XXX: I found these when troubleshooting the hang/reboot issues
+    kernelParams = [ "rcu_nocbs=0-15" "idle=nomwait" ];
+  };
+
+  hardware = {
+    enableRedistributableFirmware = true;
+    graphics.enable = true;
+  };
+
+  powerManagement.powertop.enable = true;
 }

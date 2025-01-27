@@ -1,14 +1,5 @@
 _:
 {
-  boot.loader = {
-    systemd-boot.enable = true;
-    # efi.canTouchEfiVariables = true;
-  };
-
-  boot.initrd = {
-    availableKernelModules = [ "nvme" ];
-  };
-
   fileSystems."/boot" = {
     device = "/dev/disk/by-id/nvme-Samsung_SSD_980_PRO_1TB_S5GXNS0T108224Y-part1";
     fsType = "vfat";

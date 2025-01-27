@@ -1,6 +1,5 @@
 _:
 { lib, pkgs, ... }: {
-
   users.users.ldesgoui.homeMode = "711"; # services need x
 
   networking.networkmanager.enable = true;
@@ -9,7 +8,6 @@ _:
   home-manager.users.ldesgoui = {
     home.packages = (builtins.attrValues {
       inherit (pkgs)
-        wireguard-tools
         mumble
 
         chatterino2
