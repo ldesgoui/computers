@@ -7,6 +7,7 @@
 
   home-manager.users.ldesgoui = {
     imports = [
+      self.modules.homeManager.ldesgoui-helix
       self.modules.homeManager.ldesgoui-htop
       self.modules.homeManager.ldesgoui-shell
       self.modules.homeManager.ldesgoui-xdg
