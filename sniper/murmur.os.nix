@@ -2,6 +2,7 @@ _:
 {
   services.murmur = {
     enable = true;
+    openFirewall = true;
     registerName = "SERVER HAS MOVED";
     welcometext = builtins.replaceStrings [ "\n" ] [ "<br />" ] ''
       Hello, the server has moved hosts.
