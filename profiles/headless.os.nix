@@ -1,6 +1,6 @@
 _:
-{ lib, ... }: {
-  boot.loader.systemd-boot.configurationLimit = lib.mkDefault 5;
+{
+  boot.loader.systemd-boot.configurationLimit = 5;
 
   documentation = {
     enable = false;
@@ -8,5 +8,10 @@ _:
     info.enable = false;
     man.enable = false;
     nixos.enable = false;
+  };
+
+  environment = {
+    stub-ld.enable = false;
+    ldso32 = null;
   };
 }
