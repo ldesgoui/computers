@@ -1,29 +1,23 @@
-{ self, inputs, ... }: {
+{ lib, self, ... }: {
   system = "x86_64-linux";
 
-  modules =
-    (builtins.attrValues {
-      inherit (self.nixosModules)
-        sniper-nixos
-        sniper-hardware
-        sniper-storage
+  modules = [
+    # inputs.agenix.nixosModules.default
+    # inputs.agenix-rekey.nixosModules.default
+  ]
+  ++ lib.mapAttrsToList
+    (name: module: if lib.hasPrefix "sniper-" name then module else { })
+    self.nixosModules
+  ++ builtins.attrValues {
+    inherit (self.nixosModules)
+      nixos-zfs
 
-        sniper-murmur
+      profiles-defaults
+      profiles-acme
+      profiles-nix
+      profiles-zfs-datasets
 
-        nixos-zfs
-
-        ldesgoui-user
-
-        profiles-defaults
-        profiles-nix
-        profiles-zfs-datasets
-
-        # age-rekey-settings
-        ;
-    })
-    ++ [
-      inputs.home-manager.nixosModules.home-manager
-      # inputs.agenix.nixosModules.default
-      # inputs.agenix-rekey.nixosModules.default
-    ];
+      # age-rekey-settings
+      ;
+  };
 }
