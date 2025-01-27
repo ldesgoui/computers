@@ -13,12 +13,12 @@ in
   };
 
   fileSystems."/boot" = {
-    device = bssd "598d1d74-ee70-4676-a705-c5e3dfa4a246";
+    device = bssd "6840b06a-bc08-4571-8571-1f2d9671cf4f";
     fsType = "vfat";
   };
 
   swapDevices = [{
-    device = bssd "1a2f6f2e-5ed8-4128-a5cb-5c186e338502";
+    device = bssd "942774f9-55b8-4a61-be92-5c56b2506467";
   }];
 
   zfs = {
@@ -36,7 +36,7 @@ in
   };
 
   zfs.pools.block = {
-    vdevs = [ (bssd "99d05e0e-dcb9-44fd-9a5b-2171078e0d9a") ];
+    vdevs = [ (bssd "6a149eb0-0a70-4c13-a6fa-584b6cf2a7b2") ];
 
     properties = {
       ashift = "12";
