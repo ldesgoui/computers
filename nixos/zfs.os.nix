@@ -62,12 +62,12 @@ let
       system.build = {
         zfsCreatePools = pkgs.writeShellApplication {
           name = "create-zpools";
-          text = lib.concatMapStringsSep "\n\n" zpoolCreate (builtins.attrValues cfg.pools);
+          text = "set -x\n" + lib.concatMapStringsSep "\n\n" zpoolCreate (builtins.attrValues cfg.pools);
         };
 
         zfsCreateDatasets = pkgs.writeShellApplication {
           name = "create-datasets";
-          text = builtins.concatStringsSep "\n\n" (mapDatasets zfsCreate);
+          text = "set -x\n" + builtins.concatStringsSep "\n\n" (mapDatasets zfsCreate);
         };
       };
     };
