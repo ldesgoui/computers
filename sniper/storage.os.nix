@@ -1,4 +1,7 @@
 _:
+let
+  bssd = uuid: "/dev/disk/by-id/scsi-0SCW_b_ssd_volume-${uuid}";
+in
 {
   boot.loader = {
     systemd-boot = {
@@ -9,12 +12,12 @@ _:
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-id/scsi-0SCW_sbs_volume-052039c2-63c0-460b-872c-e70f9aa62c19";
+    device = bssd "598d1d74-ee70-4676-a705-c5e3dfa4a246";
     fsType = "vfat";
   };
 
   swapDevices = [{
-    device = "/dev/disk/by-id/scsi-0SCW_sbs_volume-a45d3e8d-9b92-4a08-994f-8edeaf8d41ba";
+    device = bssd "1a2f6f2e-5ed8-4128-a5cb-5c186e338502";
   }];
 
   zfs = {
@@ -22,7 +25,7 @@ _:
   };
 
   zfs.pools.main = {
-    vdevs = [ "/dev/disk/by-id/scsi-0SCW_b_ssd_volume-00aebd75-c0e5-42de-9d8c-1e043a7f6d59" ];
+    vdevs = [ "/dev/vda" ];
 
     properties = {
       ashift = "12";
@@ -32,7 +35,7 @@ _:
   };
 
   zfs.pools.block = {
-    vdevs = [ "/dev/disk/by-id/scsi-0SCW_sbs_volume-6a48a976-9db2-4ac2-98a2-7cde547ebfb5" ];
+    vdevs = [ (bssd "99d05e0e-dcb9-44fd-9a5b-2171078e0d9a") ];
 
     properties = {
       ashift = "12";
