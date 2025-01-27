@@ -13,9 +13,11 @@
       nixos-zfs
 
       profiles-defaults
-      profiles-acme
+      profiles-headless
       profiles-nix
       profiles-zfs-datasets
+
+      profiles-acme
 
       # age-rekey-settings
       ;
