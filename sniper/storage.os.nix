@@ -12,6 +12,10 @@ in
     efi.canTouchEfiVariables = true;
   };
 
+  boot.zfs = {
+    devNodes = "/dev/disk/by-path";
+  };
+
   fileSystems."/boot" = {
     device = bssd "942774f9-55b8-4a61-be92-5c56b2506467-part1";
     fsType = "vfat";
