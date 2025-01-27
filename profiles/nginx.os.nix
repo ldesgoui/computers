@@ -1,5 +1,5 @@
 _:
-{ config, ... }: {
+{ config, lib, ... }: {
   networking.firewall = {
     allowedTCPPorts = [ 80 443 ];
   };
@@ -16,6 +16,8 @@ _:
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
     recommendedZstdSettings = true;
+
+    resolver.addresses = lib.mkIf config.services.tailscale.enabled [ "100.100.100.100" ];
 
     virtualHosts = {
       "0.0.0.0" = {
