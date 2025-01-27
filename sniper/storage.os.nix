@@ -1,4 +1,5 @@
 _:
+{ config, ... }:
 let
   bssd = uuid: "/dev/disk/by-id/scsi-0SCW_b_ssd_volume-${uuid}";
 in
@@ -43,5 +44,9 @@ in
       autotrim = "on";
       compatibility = "openzfs-2.2-linux";
     };
+  };
+
+  zfs.datasets.block = {
+    inherit (config.zfs.datasets.main) properties;
   };
 }
