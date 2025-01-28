@@ -31,6 +31,8 @@ let
 
     config = {
       boot = mkIf cfg.enableRecommended {
+        initrd.kernelModules = [ "zfs" ];
+
         supportedFilesystems = mkMoreDefault [ "zfs" ];
 
         zfs = {

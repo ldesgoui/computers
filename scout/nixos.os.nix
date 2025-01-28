@@ -40,4 +40,7 @@ _:
   services.pcscd = {
     enable = true;
   };
+
+  # TODO: i fucked up :'(
+  boot.zfs.forceImportRoot = true;
 }
