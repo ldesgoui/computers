@@ -15,6 +15,7 @@
       profiles-defaults
       profiles-headless
       profiles-nix
+      profiles-networkd
       profiles-ssh
       profiles-zfs-datasets
 
