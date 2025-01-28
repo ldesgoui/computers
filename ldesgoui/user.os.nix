@@ -1,7 +1,13 @@
 _:
-{
+{ config, ... }: {
+  age.secrets.ldesgoui-password = {
+    rekeyFile = ./ldesgoui-password.age;
+    generator.script = _: "mkpasswd -m sha-512";
+  };
+
   users.users.ldesgoui = {
     isNormalUser = true;
+    hashedPasswordFile = config.age.secrets.ldesgoui-password.path;
     extraGroups = [ "wheel" ];
   };
 
