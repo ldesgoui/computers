@@ -11,9 +11,6 @@ _:
 
       ratio-limit-enabled = true;
       ratio-limit = 0;
-
-      idle-seeding-limit-enabled = true;
-      idle-seeding-limit = 5;
     };
   };
 
