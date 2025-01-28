@@ -17,7 +17,10 @@ _:
     recommendedTlsSettings = true;
     recommendedZstdSettings = true;
 
-    resolver.addresses = lib.mkIf config.services.tailscale.enable [ "100.100.100.100" "fd7a:115c:a1e0::53" ];
+    resolver.addresses = lib.mkIf config.services.tailscale.enable [
+      "100.100.100.100"
+      "[fd7a:115c:a1e0::53]"
+    ];
 
     virtualHosts = {
       "0.0.0.0" = {
