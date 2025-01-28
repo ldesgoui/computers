@@ -24,7 +24,15 @@ in
       log = [{ target = "syslog"; any = "info"; }];
 
       server = {
-        listen = [ "0.0.0.0@53" "::0@53" ];
+        listen = [
+          # enp2s0
+          "192.168.1.2@53"
+          "2001:41d0:fc14:ca00:aaa1:59ff:fe44:7806@53"
+
+          #tailscale0
+          "100.101.0.130@53"
+          "fd7a:115c:a1e0::678b@53"
+        ];
       };
 
       acl = [{
