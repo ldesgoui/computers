@@ -13,6 +13,7 @@
 
       profiles-defaults
       profiles-nix
+      profiles-networkd
       profiles-ssh
       profiles-zfs-datasets
 
