@@ -1,5 +1,12 @@
 { self, ... }:
 { config, ... }: {
+  age.generators = {
+    dependencies-to-env = { lib, decrypt, deps, ... }:
+      lib.concatStringsSep "\n" (
+        lib.mapAttrsToList (k: s: "printf '${k}=%s\n' $(${decrypt} ${lib.escapeShellArg s.file})") deps
+      );
+  };
+
   age.rekey = {
     masterIdentities = [
       {

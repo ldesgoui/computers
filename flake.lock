@@ -38,17 +38,17 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1737808592,
-        "narHash": "sha256-zSr8rSnaDlsifQhKW6kLKr+zZj0h9jbx/DQ8V7PENhM=",
-        "owner": "oddlama",
-        "repo": "agenix-rekey",
-        "rev": "a1dcdd27ff12a24f0d3ac1fe016ed08e1a89291f",
-        "type": "github"
+        "lastModified": 1738076745,
+        "narHash": "sha256-Ak6APzE80O+IBBZcNUB90WvfYIAEKveqS/96DRqu0i8=",
+        "ref": "refs/heads/script-dependencies-attrs",
+        "rev": "b6a3023133c710632787b8b4edc6ad7724f85c4a",
+        "revCount": 189,
+        "type": "git",
+        "url": "file:///home/ldesgoui/agenix-rekey"
       },
       "original": {
-        "owner": "oddlama",
-        "repo": "agenix-rekey",
-        "type": "github"
+        "type": "git",
+        "url": "file:///home/ldesgoui/agenix-rekey"
       }
     },
     "darwin": {

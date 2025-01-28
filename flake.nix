@@ -22,7 +22,7 @@
     };
 
     agenix-rekey = {
-      url = "github:oddlama/agenix-rekey";
+      url = "git+file:///home/ldesgoui/agenix-rekey";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -27,21 +27,12 @@ in
       owner = "vaultwarden";
       group = "vaultwarden";
       generator = {
-        dependencies = [
-          secrets.vaultwarden-oidc-secret
-          secrets.vaultwarden-smtp-password
-          secrets.vaultwarden-installation-key
-        ];
-        script = { decrypt, deps, ... }:
-          lib.concatStringsSep "\n" (
-            lib.zipListsWith (k: s: "printf '${k}=%s\n' $(${decrypt} ${lib.escapeShellArg s.file})")
-              [
-                "SSO_CLIENT_SECRET"
-                "SMTP_PASSWORD"
-                "PUSH_INSTALLATION_KEY"
-              ]
-              deps
-          );
+        dependencies = {
+          SSO_CLIENT_SECRET = secrets.vaultwarden-oidc-secret;
+          SMTP_PASSWORD = secrets.vaultwarden-smtp-password;
+          PUSH_INSTALLATION_KEY = secrets.vaultwarden-installation-key;
+        };
+        script = "dependencies-to-env";
       };
     };
   };

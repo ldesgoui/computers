@@ -15,11 +15,10 @@ in
     mealie-secrets = {
       rekeyFile = ./mealie-secrets.age;
       generator = {
-        dependencies = [ config.age.secrets.kanidm-mealie-oidc-secret ];
-        script = { lib, decrypt, deps, ... }: ''
-          ${decrypt} ${lib.escapeShellArg (builtins.head deps).file} \
-          | xargs printf 'OIDC_CLIENT_SECRET=%s\n'
-        '';
+        dependencies = {
+          OIDC_CLIENT_SECRET = config.age.secrets.kanidm-mealie-oidc-secret;
+        };
+        script = "dependencies-to-env";
       };
     };
   };

@@ -17,9 +17,9 @@ in
     vikunja-config = {
       rekeyFile = ./vikunja-config.age;
       generator = {
-        dependencies = [ config.age.secrets.kanidm-vikunja-oidc-secret ];
+        dependencies = { secret = config.age.secrets.kanidm-vikunja-oidc-secret; };
         script = { lib, decrypt, deps, ... }: ''
-          ${decrypt} ${lib.escapeShellArg (builtins.head deps).file} \
+          ${decrypt} ${lib.escapeShellArg deps.secret.file} \
           | xargs ${lib.getExe pkgs.jq} '.auth.openid.providers[0].clientsecret = $secret' ${configFile} --arg secret
         '';
       };
