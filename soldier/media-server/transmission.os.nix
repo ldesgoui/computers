@@ -11,6 +11,8 @@ _:
 
       ratio-limit-enabled = true;
       ratio-limit = 0;
+
+      message-level = 5;
     };
   };
 
