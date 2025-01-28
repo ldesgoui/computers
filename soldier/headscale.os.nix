@@ -3,37 +3,13 @@ _:
 let
   extra_records =
     [
-      { name = "scout.ts.lde.sg"; type = "AAAA"; value = "fd7a:115c:a1e0::deb9"; }
-      { name = "soldier.ts.lde.sg"; type = "AAAA"; value = "fd7a:115c:a1e0::678b"; }
-      { name = "demoman.ts.lde.sg"; type = "AAAA"; value = "fd7a:115c:a1e0::9383"; }
-      { name = "engineer.ts.lde.sg"; type = "AAAA"; value = "fd7a:115c:a1e0::8c6f"; }
-      { name = "spy.ts.lde.sg"; type = "AAAA"; value = "fd7a:115c:a1e0::1458"; }
-
-      { name = "syncthing-scout.int.lde.sg"; type = "A"; value = "100.101.0.211"; }
-      { name = "syncthing-scout.int.lde.sg"; type = "AAAA"; value = "fd7a:115c:a1e0::deb9"; }
-    ] ++
-    builtins.concatMap
-      (name: [
-        { name = "${name}.int.lde.sg"; type = "A"; value = "100.101.0.130"; }
-        { name = "${name}.int.lde.sg"; type = "AAAA"; value = "fd7a:115c:a1e0::678b"; }
-      ])
-      [
-        "jellyfin"
-        "jellyseerr"
-        "radarr"
-        "sonarr"
-        "lidarr"
-        "bazarr"
-        "prowlarr"
-        "transmission"
-
-        "mealie"
-        "syncthing-soldier"
-        "vikunja"
-
-        "vaultwarden"
-        "stalwart"
-      ];
+      { type = "AAAA"; value = "fd7a:115c:a1e0::deb9"; name = "scout.ts.lde.sg"; }
+      { type = "AAAA"; value = "fd7a:115c:a1e0::678b"; name = "soldier.ts.lde.sg"; }
+      { type = "AAAA"; value = "fd7a:115c:a1e0::9383"; name = "demoman.ts.lde.sg"; }
+      { type = "AAAA"; value = "fd7a:115c:a1e0::8c6f"; name = "engineer.ts.lde.sg"; }
+      { type = "AAAA"; value = "fd7a:115c:a1e0::73e1"; name = "sniper.ts.lde.sg"; }
+      { type = "AAAA"; value = "fd7a:115c:a1e0::1458"; name = "spy.ts.lde.sg"; }
+    ];
 in
 {
   age.secrets = {
