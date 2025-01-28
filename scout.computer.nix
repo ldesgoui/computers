@@ -3,6 +3,8 @@
 
   modules = [
     inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
+    inputs.agenix.nixosModules.default
+    inputs.agenix-rekey.nixosModules.default
   ]
   ++ lib.mapAttrsToList
     (name: module: if lib.hasPrefix "scout-" name then module else { })
@@ -18,6 +20,8 @@
       profiles-zfs-datasets
 
       profiles-acme
+
+      age-rekey-settings
       ;
   };
 }

@@ -1,9 +1,9 @@
-{ lib, self, ... }: {
+{ lib, self, inputs, ... }: {
   system = "x86_64-linux";
 
   modules = [
-    # inputs.agenix.nixosModules.default
-    # inputs.agenix-rekey.nixosModules.default
+    inputs.agenix.nixosModules.default
+    inputs.agenix-rekey.nixosModules.default
   ]
   ++ lib.mapAttrsToList
     (name: module: if lib.hasPrefix "sniper-" name then module else { })
@@ -20,7 +20,7 @@
 
       profiles-acme
 
-      # age-rekey-settings
+      age-rekey-settings
       ;
   };
 }
