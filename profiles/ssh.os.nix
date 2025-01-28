@@ -1,6 +1,8 @@
 _:
 {
   services.openssh = {
+    enable = true;
+
     authorizedKeysFiles = [ "/etc/ssh/authorized_keys.d/%u" ];
 
     settings = {
