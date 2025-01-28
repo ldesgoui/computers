@@ -11,9 +11,4 @@ _:
   };
 
   users.users.ldesgoui.homeMode = "711"; # services need x
-
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-  };
 }
