@@ -18,6 +18,22 @@ _:
           proxy_ssl_server_name on;
         '';
       };
+
+      locations."= /static/js/main.b1d1072d.js" = {
+        root = ./acted-wtf-temporary-for-northernlion;
+      };
+
+      locations."/api" = {
+        proxyPass = "https://acted-server-new.onrender.com";
+        recommendedProxySettings = false;
+        extraConfig = ''
+          proxy_set_header Host acted-server-new.onrender.com;
+          proxy_ssl_verify on;
+          proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
+          proxy_ssl_name acted-server-new.onrender.com;
+          proxy_ssl_server_name on;
+        '';
+      };
     };
   };
 }
