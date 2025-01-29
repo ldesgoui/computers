@@ -72,6 +72,8 @@ in
         thelounge.CNAME = [ "soldier.ts" ];
         mealie.CNAME = [ "soldier.ts" ];
         vikunja.CNAME = [ "soldier.ts" ];
+
+        acted-wtf-temporary-for-northernlion = wi.soldier;
       };
     };
   };
