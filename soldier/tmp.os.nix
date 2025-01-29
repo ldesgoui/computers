@@ -1,7 +1,7 @@
 _:
 {
   services.nginx = {
-    virtualHosts."acted-wtf-temporary-for-nothernlion.lde.sg" = {
+    virtualHosts."acted-wtf-temporary-for-northernlion.lde.sg" = {
       listenAddresses = [ "0.0.0.0" "[::0]" ];
       enableACME = true;
       acmeRoot = null;
