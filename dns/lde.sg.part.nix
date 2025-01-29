@@ -43,6 +43,8 @@ in
 
       autoconfig.CNAME = [ "mx1" ];
 
+      acted-wtf-temporary-for-northernlion = wi.soldier;
+
       auth = wi.soldier;
       headscale = wi.soldier;
 
@@ -72,8 +74,6 @@ in
         thelounge.CNAME = [ "soldier.ts" ];
         mealie.CNAME = [ "soldier.ts" ];
         vikunja.CNAME = [ "soldier.ts" ];
-
-        acted-wtf-temporary-for-northernlion = wi.soldier;
       };
     };
   };
