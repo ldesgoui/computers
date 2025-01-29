@@ -11,6 +11,7 @@ _:
         proxyPass = "https://104.21.66.254";
         recommendedProxySettings = false;
         extraConfig = ''
+          proxy_set_header Host acted.wtf;
           proxy_ssl_verify off;
           proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
           proxy_ssl_name acted.wtf;
