@@ -2,10 +2,10 @@ _:
 { config, pkgs, ... }:
 let
   nameserver =
-    if config.networking.hostName == "soldier" then
-      "127.0.0.1"
-    else
-      "soldier.ts.lde.sg";
+    # if config.networking.hostName == "soldier" then
+    #   "127.0.0.1"
+    # else
+    "soldier.ts.lde.sg";
 in
 {
   security.acme = {
