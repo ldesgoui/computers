@@ -69,6 +69,7 @@ in
         prowlarr.CNAME = [ "soldier.ts" ];
         transmission.CNAME = [ "soldier.ts" ];
 
+        thelounge.CNAME = [ "soldier.ts" ];
         mealie.CNAME = [ "soldier.ts" ];
         vikunja.CNAME = [ "soldier.ts" ];
       };
