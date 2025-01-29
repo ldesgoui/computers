@@ -2,6 +2,7 @@ _:
 { config, ... }: {
   services.thelounge = {
     enable = true;
+    port = 9020;
     extraConfig = {
       reverseProxy = true;
       leaveMessage = "giga";
