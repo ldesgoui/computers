@@ -8,7 +8,7 @@ _:
       forceSSL = true;
 
       locations."/" = {
-        proxyPass = "104.21.66.254";
+        proxyPass = "https://104.21.66.254";
         recommendedProxySettings = false;
         extraConfig = ''
           proxy_ssl_verify off;
