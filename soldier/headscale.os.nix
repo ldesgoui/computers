@@ -89,7 +89,11 @@ in
   };
 
   systemd.services.headscale = {
-    after = [ "kanidm.service" ];
+    after = [ "kanidm.service" "nginx.service" ];
+    serviceConfig = {
+      RestartMaxDelaySec = "1s";
+      RestartSteps = 3;
+    };
   };
 
   zfs.datasets = {
