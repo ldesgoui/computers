@@ -15,7 +15,7 @@ _:
           proxy_ssl_verify on;
           proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
           proxy_ssl_name acted.wtf;
-          proxy_ssl_server_name on
+          proxy_ssl_server_name on;
         '';
       };
     };
