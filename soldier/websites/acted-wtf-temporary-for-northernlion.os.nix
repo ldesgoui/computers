@@ -8,7 +8,7 @@ _:
       forceSSL = true;
 
       locations."/" = {
-        proxyPass = "https://104.21.66.254";
+        proxyPass = "https://cloudflare.com";
         recommendedProxySettings = false;
         extraConfig = ''
           proxy_set_header Host acted.wtf;
