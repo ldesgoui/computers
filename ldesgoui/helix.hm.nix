@@ -20,7 +20,6 @@ _:
       theme = "sonokai-no-bg";
 
       editor = {
-        auto-pairs = false;
         bufferline = "multiple";
 
         file-picker = {

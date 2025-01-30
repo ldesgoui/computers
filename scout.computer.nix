@@ -15,6 +15,7 @@
 
       profiles-defaults
       profiles-nix
+      profiles-use-soldier-remote-builder
       profiles-networkd
       profiles-ssh
       profiles-zfs-datasets
