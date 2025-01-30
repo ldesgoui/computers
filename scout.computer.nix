@@ -13,14 +13,13 @@
     inherit (self.nixosModules)
       nixos-zfs
 
-      profiles-defaults
-      profiles-nix
-      profiles-use-soldier-remote-builder
-      profiles-networkd
-      profiles-ssh
-      profiles-zfs-datasets
-
       profiles-acme
+      profiles-defaults
+      profiles-networkd
+      profiles-nix
+      profiles-ssh
+      profiles-use-soldier-remote-builder
+      profiles-zfs-datasets
 
       age-rekey-settings
       ;

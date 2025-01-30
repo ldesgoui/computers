@@ -12,14 +12,13 @@
     inherit (self.nixosModules)
       nixos-zfs
 
+      profiles-acme
       profiles-defaults
       profiles-headless
-      profiles-nix
       profiles-networkd
+      profiles-nix
       profiles-ssh
       profiles-zfs-datasets
-
-      profiles-acme
 
       age-rekey-settings
       ;
