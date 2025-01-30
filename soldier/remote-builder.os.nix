@@ -5,6 +5,7 @@ in
 {
   users.users.nix-remote-builder = {
     isSystemUser = true;
+    useDefaultShell = true;
     group = "nogroup";
 
     openssh.authorizedKeys.keys =
