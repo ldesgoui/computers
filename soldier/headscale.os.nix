@@ -44,6 +44,7 @@ in
       dns = {
         base_domain = "ts.lde.sg";
         inherit extra_records;
+        split."int.lde.sg" = [ "ns1.piss-your.se" ];
       };
 
       oidc = {
