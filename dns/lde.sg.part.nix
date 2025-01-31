@@ -56,24 +56,24 @@ in
       }];
 
       int.subdomains = {
-        syncthing-scout.ANAME = [ "scout.ts" ];
-        syncthing-soldier.ANAME = [ "soldier.ts" ];
+        syncthing-scout.CNAME = [ "scout.ts" ];
+        syncthing-soldier.CNAME = [ "soldier.ts" ];
 
-        vaultwarden.ANAME = [ "soldier.ts" ];
-        stalwart.ANAME = [ "soldier.ts" ];
+        vaultwarden.CNAME = [ "soldier.ts" ];
+        stalwart.CNAME = [ "soldier.ts" ];
 
-        jellyfin.ANAME = [ "soldier.ts" ];
-        jellyseerr.ANAME = [ "soldier.ts" ];
-        radarr.ANAME = [ "soldier.ts" ];
-        sonarr.ANAME = [ "soldier.ts" ];
-        lidarr.ANAME = [ "soldier.ts" ];
-        bazarr.ANAME = [ "soldier.ts" ];
-        prowlarr.ANAME = [ "soldier.ts" ];
-        transmission.ANAME = [ "soldier.ts" ];
+        jellyfin.CNAME = [ "soldier.ts" ];
+        jellyseerr.CNAME = [ "soldier.ts" ];
+        radarr.CNAME = [ "soldier.ts" ];
+        sonarr.CNAME = [ "soldier.ts" ];
+        lidarr.CNAME = [ "soldier.ts" ];
+        bazarr.CNAME = [ "soldier.ts" ];
+        prowlarr.CNAME = [ "soldier.ts" ];
+        transmission.CNAME = [ "soldier.ts" ];
 
-        thelounge.ANAME = [ "soldier.ts" ];
-        mealie.ANAME = [ "soldier.ts" ];
-        vikunja.ANAME = [ "soldier.ts" ];
+        thelounge.CNAME = [ "soldier.ts" ];
+        mealie.CNAME = [ "soldier.ts" ];
+        vikunja.CNAME = [ "soldier.ts" ];
       };
     };
   };
