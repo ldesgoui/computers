@@ -34,10 +34,10 @@ in
     subdomains = {
       autoconfig.CNAME = [ "mx1.lde.sg." ];
 
-      jf = wi.soldier;
-      js = wi.soldier;
+      jf.CNAME = [ "soldier.wi.lde.sg." ];
+      js.CNAME = [ "soldier.wi.lde.sg." ];
 
-      mumble = wi.soldier;
+      mumble.CNAME = [ "soldier.wi.lde.sg." ];
     };
   };
 }

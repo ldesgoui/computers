@@ -7,6 +7,8 @@ let
     soldier = host "109.190.105.250" "2001:41d0:fc14:ca00:aaa1:59ff:fe44:7806";
     sniper = host "212.47.233.201" "2001:bc8:710:7dfc:dc00:ff:fe74:3feb";
   };
+
+
 in
 {
   dns.zones."lde.sg" = {
@@ -38,15 +40,15 @@ in
     subdomains = {
       wi.subdomains = wi;
 
-      mx1 = wi.soldier;
-      mx2 = wi.sniper;
+      mx1.CNAME = [ "soldier.wi" ];
+      mx2.CNAME = [ "sniper.wi" ];
 
       autoconfig.CNAME = [ "mx1" ];
 
-      acted-wtf-temporary-for-northernlion = wi.soldier;
+      acted-wtf-temporary-for-northernlion.CNAME = [ "soldier.wi" ];
 
-      auth = wi.soldier;
-      headscale = wi.soldier;
+      auth.CNAME = [ "soldier.wi" ];
+      headscale.CNAME = [ "soldier.wi" ];
 
       cool-zone.SRV = [{
         service = "mumble";

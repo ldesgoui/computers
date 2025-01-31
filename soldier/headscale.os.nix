@@ -1,17 +1,5 @@
 _:
-{ config, pkgs, ... }:
-let
-  extra_records =
-    [
-      { type = "AAAA"; value = "fd7a:115c:a1e0::deb9"; name = "scout.ts.lde.sg"; }
-      { type = "AAAA"; value = "fd7a:115c:a1e0::678b"; name = "soldier.ts.lde.sg"; }
-      { type = "AAAA"; value = "fd7a:115c:a1e0::9383"; name = "demoman.ts.lde.sg"; }
-      { type = "AAAA"; value = "fd7a:115c:a1e0::8c6f"; name = "engineer.ts.lde.sg"; }
-      { type = "AAAA"; value = "fd7a:115c:a1e0::73e1"; name = "sniper.ts.lde.sg"; }
-      { type = "AAAA"; value = "fd7a:115c:a1e0::1458"; name = "spy.ts.lde.sg"; }
-    ];
-in
-{
+{ config, pkgs, ... }: {
   age.secrets = {
     headscale-oidc-secret = {
       rekeyFile = ./headscale-oidc-secret.age;
@@ -43,7 +31,6 @@ in
 
       dns = {
         base_domain = "ts.lde.sg";
-        inherit extra_records;
         nameservers.split = {
           "int.lde.sg" = [ "100.101.0.130" "fd7a:115c:a1e0::678b" ];
         };
