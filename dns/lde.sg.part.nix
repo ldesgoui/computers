@@ -8,7 +8,10 @@ let
     sniper = host "212.47.233.201" "2001:bc8:710:7dfc:dc00:ff:fe74:3feb";
   };
 
-
+  ts = {
+    scout = host "100.101.0.211" "fd7a:115c:a1e0::deb9";
+    soldier = host "100.101.0.130" "fd7a:115c:a1e0::678b";
+  };
 in
 {
   dns.zones."lde.sg" = {
@@ -58,24 +61,24 @@ in
       }];
 
       int.subdomains = {
-        syncthing-scout.CNAME = [ "scout.ts" ];
-        syncthing-soldier.CNAME = [ "soldier.ts" ];
+        syncthing-scout = ts.scout;
+        syncthing-soldier = ts.soldier;
 
-        vaultwarden.CNAME = [ "soldier.ts" ];
-        stalwart.CNAME = [ "soldier.ts" ];
+        vaultwarden = ts.soldier;
+        stalwart = ts.soldier;
 
-        jellyfin.CNAME = [ "soldier.ts" ];
-        jellyseerr.CNAME = [ "soldier.ts" ];
-        radarr.CNAME = [ "soldier.ts" ];
-        sonarr.CNAME = [ "soldier.ts" ];
-        lidarr.CNAME = [ "soldier.ts" ];
-        bazarr.CNAME = [ "soldier.ts" ];
-        prowlarr.CNAME = [ "soldier.ts" ];
-        transmission.CNAME = [ "soldier.ts" ];
+        jellyfin = ts.soldier;
+        jellyseerr = ts.soldier;
+        radarr = ts.soldier;
+        sonarr = ts.soldier;
+        lidarr = ts.soldier;
+        bazarr = ts.soldier;
+        prowlarr = ts.soldier;
+        transmission = ts.soldier;
 
-        thelounge.CNAME = [ "soldier.ts" ];
-        mealie.CNAME = [ "soldier.ts" ];
-        vikunja.CNAME = [ "soldier.ts" ];
+        thelounge = ts.soldier;
+        mealie = ts.soldier;
+        vikunja = ts.soldier;
       };
     };
   };
