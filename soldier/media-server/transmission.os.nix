@@ -1,8 +1,10 @@
 _:
-{
+{ pkgs, ... }: {
   services.transmission = {
     enable = true;
     openPeerPorts = true;
+
+    package = pkgs.transmission_4;
 
     settings = {
       rpc-bind-address = "::1";
