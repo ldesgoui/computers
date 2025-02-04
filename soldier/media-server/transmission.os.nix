@@ -10,11 +10,6 @@ _:
       rpc-bind-address = "::1";
       rpc-host-whitelist-enabled = false;
       rpc-whitelist-enabled = false;
-
-      ratio-limit-enabled = true;
-      ratio-limit = 0;
-
-      message-level = 5;
     };
   };
 
