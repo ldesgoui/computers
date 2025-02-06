@@ -10,6 +10,8 @@ _:
       rpc-bind-address = "::1";
       rpc-host-whitelist-enabled = false;
       rpc-whitelist-enabled = false;
+
+      message-level = 4;
     };
   };
 
