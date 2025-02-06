@@ -12,6 +12,6 @@ _:
   };
 
   zfs.datasets.main._.enc._.services._.flood = {
-    mountPoint = "/var/lib/flood"; # StateDirectory
+    mountPoint = "/var/lib/private/flood"; # StateDirectory
   };
 }
