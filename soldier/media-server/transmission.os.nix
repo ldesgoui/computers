@@ -12,6 +12,11 @@ _:
       rpc-whitelist-enabled = false;
 
       message-level = 4;
+
+      cache-size-mb = 128;
+      download-queue-size = 10;
+      peer-limit-global = 5000;
+      upload-slots-per-torrent = 50;
     };
   };
 
