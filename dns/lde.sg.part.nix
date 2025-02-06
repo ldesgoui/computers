@@ -75,7 +75,7 @@ in
         bazarr = ts.soldier;
         prowlarr = ts.soldier;
         transmission = ts.soldier;
-        floor = ts.soldier;
+        flood = ts.soldier;
 
         thelounge = ts.soldier;
         mealie = ts.soldier;
