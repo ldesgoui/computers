@@ -33,6 +33,9 @@ in
         "mac"
         "squirrel"
 
+        "warhuryeah"
+        "zombotec"
+
         "mira"
         "smarmy"
         "spacesloth"

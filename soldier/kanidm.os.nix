@@ -58,6 +58,9 @@ in
         mac.displayName = "Mac";
         squirrel.displayName = "Squirrel";
 
+        warhuryeah.displayName = "WARHURYEAH";
+        zombotec.displayName = "Zombotec";
+
         mira.displayName = "Mira";
         smarmy.displayName = "Smarmy";
         spacesloth.displayName = "Spacesloth";
