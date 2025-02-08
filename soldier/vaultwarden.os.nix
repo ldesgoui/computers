@@ -104,7 +104,7 @@ in
     };
   };
 
-  zfs.datasets.main._.enc._.services._.vaultwarden = {
+  zfs.datasets.main.enc.services.vaultwarden = {
     mountPoint = "/var/lib/vaultwarden"; # StateDirectory
   };
 }

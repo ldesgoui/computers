@@ -67,7 +67,7 @@ in
     credentialsFile = config.age.secrets.mealie-secrets.path;
   };
 
-  zfs.datasets.main._.enc._.services._.mealie = {
+  zfs.datasets.main.enc.services.mealie = {
     mountPoint = "/var/lib/private/mealie"; # StateDirectory
   };
 }

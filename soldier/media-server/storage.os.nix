@@ -22,20 +22,20 @@ _:
     "syncthing"
   ];
 
-  zfs.datasets.main._.enc._.media = {
-    _.home = {
+  zfs.datasets.main.enc.media = {
+    home = {
       mountPoint = "/srv/home";
     };
 
-    _.movies = {
+    movies = {
       mountPoint = "/srv/movies";
     };
 
-    _.music = {
+    music = {
       mountPoint = "/srv/music";
     };
 
-    _.series = {
+    series = {
       mountPoint = "/srv/series";
     };
   };

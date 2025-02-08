@@ -88,7 +88,7 @@ in
     '';
   };
 
-  zfs.datasets.main._.enc._.services._.vikunja = {
+  zfs.datasets.main.enc.services.vikunja = {
     mountPoint = "/var/lib/private/vikunja"; # StateDirectory
   };
 }

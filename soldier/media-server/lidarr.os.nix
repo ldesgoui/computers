@@ -11,7 +11,7 @@ _:
     locations."/".proxyPass = "http://[::1]:8686";
   };
 
-  zfs.datasets.main._.enc._.services._.lidarr = {
+  zfs.datasets.main.enc.services.lidarr = {
     mountPoint = "/var/lib/lidarr"; # Weird hardcode
   };
 }

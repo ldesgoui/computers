@@ -20,7 +20,7 @@ _:
     locations."/".proxyPass = "http://[::1]:8989";
   };
 
-  zfs.datasets.main._.enc._.services._.sonarr = {
+  zfs.datasets.main.enc.services.sonarr = {
     mountPoint = "/var/lib/sonarr"; # Weird hardcode
   };
 }

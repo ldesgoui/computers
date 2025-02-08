@@ -11,7 +11,7 @@ _:
     locations."/".proxyPass = "http://[::1]:${toString config.services.flood.port}";
   };
 
-  zfs.datasets.main._.enc._.services._.flood = {
+  zfs.datasets.main.enc.services.flood = {
     mountPoint = "/var/lib/private/flood"; # StateDirectory
   };
 }

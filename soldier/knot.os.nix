@@ -87,7 +87,7 @@ in
   '';
 
   zfs.datasets.main = {
-    _.enc._.services._.knot = {
+    enc.services.knot = {
       mountPoint = "/var/lib/knot"; # StateDirectory
     };
   };

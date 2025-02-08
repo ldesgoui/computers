@@ -24,8 +24,8 @@
 
   users.groups.ldesgoui-syncthing.members = [ "ldesgoui" "syncthing" ];
 
-  zfs.datasets.main._.enc._.users._.ldesgoui = {
-    _.keepass = {
+  zfs.datasets.main.enc.users.ldesgoui = {
+    keepass = {
       mountPoint = config.services.syncthing.settings.folders.KeePass.path;
     };
   };

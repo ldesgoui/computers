@@ -11,7 +11,7 @@ _:
     locations."/".proxyPass = "http://[::1]:7878";
   };
 
-  zfs.datasets.main._.enc._.services._.radarr = {
+  zfs.datasets.main.enc.services.radarr = {
     mountPoint = "/var/lib/radarr"; # Weird hardcode
   };
 }

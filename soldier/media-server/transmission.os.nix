@@ -46,12 +46,12 @@ _:
     "lidarr"
   ];
 
-  zfs.datasets.main._.enc._.services._.transmission = {
-    _.config = {
+  zfs.datasets.main.enc.services.transmission = {
+    config = {
       mountPoint = "/var/lib/transmission/.config";
     };
 
-    _.state = {
+    state = {
       mountPoint = "/var/lib/transmission"; # StateDirectory
     };
   };

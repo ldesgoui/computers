@@ -14,10 +14,10 @@ _:
     };
 
     # Cleartext
-    main._.clr = { };
+    main.clr = { };
 
     # Encrypted
-    main._.enc = {
+    main.enc = {
       properties = {
         encryption = "on";
         keylocation = "prompt";
@@ -25,11 +25,11 @@ _:
       };
     };
 
-    main._.enc._.sys._.root = {
+    main.enc.sys.root = {
       mountPoint = "/";
     };
 
-    main._.clr._.sys._.nix = {
+    main.clr.sys.nix = {
       mountPoint = "/nix";
 
       properties = {

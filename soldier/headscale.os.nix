@@ -87,8 +87,8 @@ _:
   };
 
   zfs.datasets = {
-    main._.enc._.services = {
-      _.headscale = {
+    main.enc.services = {
+      headscale = {
         mountPoint = "/var/lib/headscale"; # StateDirectory
       };
     };

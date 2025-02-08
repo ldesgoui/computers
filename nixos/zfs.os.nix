@@ -33,7 +33,7 @@ let
       boot = mkIf cfg.enableRecommended {
         initrd.kernelModules = [ "zfs" ];
 
-        supportedFilesystems = mkMoreDefault [ "zfs" ];
+        supportedFilesystems = [ "zfs" ];
 
         zfs = {
           forceImportRoot = mkMoreDefault false;
@@ -103,7 +103,9 @@ let
     })
   ];
 
-  datasetModule = { config, ... }: {
+  datasetModule = { config, options, ... }: {
+    freeformType = with types; lazyAttrsOf (submodule datasetModule);
+
     options = {
       properties = mkOption {
         type = with types; attrsOf str;
@@ -125,7 +127,7 @@ let
         default = false;
       };
 
-      _ = mkOption {
+      children = mkOption {
         description = "Children datasets";
         type = with types; lazyAttrsOf (submodule datasetModule);
         default = { };
@@ -141,6 +143,8 @@ let
       (mkIf (config.mountPoint != null) {
         properties.mountpoint = mkDefault "legacy";
       })
+
+      { children = removeAttrs config (builtins.attrNames options); }
     ];
   };
 
@@ -153,7 +157,7 @@ let
               dataset = ds.${name};
               path = prevPath ++ [ name ];
             in
-            [ (f path dataset) ] ++ recurse path dataset._
+            [ (f path dataset) ] ++ recurse path dataset.children
           )
           (builtins.attrNames ds);
     in

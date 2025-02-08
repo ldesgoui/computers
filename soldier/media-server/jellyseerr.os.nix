@@ -29,7 +29,7 @@ _:
     # };
   };
 
-  zfs.datasets.main._.enc._.services._.jellyseerr = {
+  zfs.datasets.main.enc.services.jellyseerr = {
     mountPoint = "/var/lib/private/jellyseerr"; # StateDirectory
   };
 }

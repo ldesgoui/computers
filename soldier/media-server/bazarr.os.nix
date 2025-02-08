@@ -11,7 +11,7 @@ _:
     locations."/".proxyPass = "http://[::1]:6767";
   };
 
-  zfs.datasets.main._.enc._.services._.bazarr = {
+  zfs.datasets.main.enc.services.bazarr = {
     mountPoint = "/var/lib/bazarr"; # Weird hardcode
   };
 }

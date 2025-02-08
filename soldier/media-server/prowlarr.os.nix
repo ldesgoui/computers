@@ -11,7 +11,7 @@ _:
     locations."/".proxyPass = "http://[::1]:9696";
   };
 
-  zfs.datasets.main._.enc._.services._.prowlarr = {
+  zfs.datasets.main.enc.services.prowlarr = {
     mountPoint = "/var/lib/private/prowlarr"; # StateDirectory
   };
 }

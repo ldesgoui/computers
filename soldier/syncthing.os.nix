@@ -31,12 +31,12 @@
 
   users.groups.ldesgoui-syncthing.members = [ "ldesgoui" "syncthing" ];
 
-  zfs.datasets.main._.enc._.users._.ldesgoui = {
-    _.android-camera = {
+  zfs.datasets.main.enc.users.ldesgoui = {
+    android-camera = {
       mountPoint = "/home/ldesgoui/Android Camera";
     };
 
-    _.keepass = {
+    keepass = {
       mountPoint = config.services.syncthing.settings.folders.KeePass.path;
     };
   };

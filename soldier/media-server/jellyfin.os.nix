@@ -95,12 +95,12 @@ in
       ${config.services.jellyfin.cacheDir} = z "0755" "jellyfin" "jellyfin";
     };
 
-  zfs.datasets.main._.enc._.services._.jellyfin = {
-    _.data = {
+  zfs.datasets.main.enc.services.jellyfin = {
+    data = {
       mountPoint = config.services.jellyfin.dataDir;
     };
 
-    _.cache = {
+    cache = {
       mountPoint = config.services.jellyfin.cacheDir;
     };
   };

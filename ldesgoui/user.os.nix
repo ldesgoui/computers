@@ -21,7 +21,7 @@ _:
   };
 
   zfs.datasets = {
-    main._.enc._.users._.ldesgoui = {
+    main.enc.users.ldesgoui = {
       # We would prefer using `config.users.users.ldesgoui.home` here
       # but doing so causes an infinite recursion error.
       mountPoint = "/home/ldesgoui";

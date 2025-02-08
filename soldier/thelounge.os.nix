@@ -16,7 +16,7 @@ _:
     locations."/".proxyPass = "http://[::1]:${toString config.services.thelounge.port}";
   };
 
-  zfs.datasets.main._.enc._.services._.thelounge = {
+  zfs.datasets.main.enc.services.thelounge = {
     mountPoint = "/var/lib/thelounge"; # StateDirectory
   };
 }
