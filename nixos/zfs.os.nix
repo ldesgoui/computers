@@ -61,15 +61,28 @@ let
         hostId = mkMoreDefault "8425e349";
       };
 
+      system.activationScripts."zfs-pools".text = ''
+        echo '[zfs-pools] Checking all zfs pools exist'
+        ${config.system.build.zfsCreatePools}
+      '';
+
+      system.activationScripts."zfs-datasets" = {
+        deps = [ "zfs-pools" ];
+        text = ''
+          echo '[zfs-datasets] Checking all zfs datasets exist'
+          ${config.system.build.zfsCreateDatasets}
+        '';
+      };
+
       system.build = {
         zfsCreatePools = pkgs.writeShellApplication {
           name = "create-zpools";
-          text = "set -x\n" + lib.concatMapStringsSep "\n\n" zpoolCreate (builtins.attrValues cfg.pools);
+          text = lib.concatMapStringsSep "\n\n" zpoolCreate (builtins.attrValues cfg.pools);
         };
 
         zfsCreateDatasets = pkgs.writeShellApplication {
           name = "create-datasets";
-          text = "set -x\n" + builtins.concatStringsSep "\n\n" (mapDatasets zfsCreate);
+          text = builtins.concatStringsSep "\n\n" (mapDatasets zfsCreate);
         };
       };
     };
@@ -172,15 +185,20 @@ let
       zprops = attrsToProps "-O" cfg.datasets.${zpool.name}.properties;
       vdevs = builtins.concatMap (v: if builtins.isString v then [ v ] else [ v.type ] ++ v.devices) zpool.vdevs;
     in
-    "zpool create ${lib.escapeShellArgs ([zpool.name] ++ pprops ++ zprops ++ vdevs)}";
+    ''
+      zpool list '${zpool.name}' > /dev/null || \
+      zpool create ${lib.escapeShellArgs ([zpool.name] ++ pprops ++ zprops ++ vdevs)}
+    '';
 
   zfsCreate = path: ds:
     let
       name = builtins.concatStringsSep "/" path;
       props = attrsToProps "-o" ds.properties;
-      # Root datasets are created when the zpool is created
       comment = if builtins.length path == 1 then "# " else "";
     in
-    "${comment}zfs create -u ${lib.escapeShellArgs ([name] ++ props)}";
+    ''
+      ${comment}zfs list '${name}' > /dev/null || \
+      ${comment}zfs create -u ${lib.escapeShellArgs ([name] ++ props)}
+    '';
 in
 module
