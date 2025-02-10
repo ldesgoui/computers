@@ -63,14 +63,14 @@ let
 
       system.activationScripts."zfs-pools".text = ''
         echo '[zfs-pools] Checking all zfs pools exist'
-        ${config.system.build.zfsCreatePools}
+        ${lib.getExe config.system.build.zfsCreatePools}
       '';
 
       system.activationScripts."zfs-datasets" = {
         deps = [ "zfs-pools" ];
         text = ''
           echo '[zfs-datasets] Checking all zfs datasets exist'
-          ${config.system.build.zfsCreateDatasets}
+          ${lib.getExe config.system.build.zfsCreateDatasets}
         '';
       };
 
