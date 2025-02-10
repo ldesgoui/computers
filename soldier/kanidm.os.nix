@@ -56,6 +56,7 @@ in
         gubbins.displayName = "Gubbins";
         loopylazz.displayName = "Lux";
         mac.displayName = "Mac";
+        mrsmithers.displayName = "MrSmithers";
         squirrel.displayName = "Squirrel";
 
         warhuryeah.displayName = "WARHURYEAH";

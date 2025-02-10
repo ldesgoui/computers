@@ -31,6 +31,7 @@ in
         "gubbins"
         "loopylazz"
         "mac"
+        "mrsmithers"
         "squirrel"
 
         "warhuryeah"
