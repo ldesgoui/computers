@@ -77,11 +77,13 @@ let
       system.build = {
         zfsCreatePools = pkgs.writeShellApplication {
           name = "create-zpools";
+          runtimeInputs = [ config.boot.zfs.package ];
           text = lib.concatMapStringsSep "\n\n" zpoolCreate (builtins.attrValues cfg.pools);
         };
 
         zfsCreateDatasets = pkgs.writeShellApplication {
           name = "create-datasets";
+          runtimeInputs = [ config.boot.zfs.package ];
           text = builtins.concatStringsSep "\n\n" (mapDatasets zfsCreate);
         };
       };
