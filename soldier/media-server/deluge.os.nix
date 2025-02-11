@@ -11,6 +11,7 @@ _:
     '';
 
     config = {
+      random_port = false;
       listen_ports = [ 6880 6889 ];
       dht = false;
       upnp = false;
