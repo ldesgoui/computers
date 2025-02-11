@@ -76,7 +76,6 @@ in
         prowlarr = ts.soldier;
         transmission = ts.soldier;
         deluge = ts.soldier;
-        flood = ts.soldier;
 
         thelounge = ts.soldier;
         mealie = ts.soldier;
