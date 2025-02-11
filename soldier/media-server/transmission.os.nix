@@ -39,7 +39,6 @@ _:
     };
   };
 
-
   users.groups.transmission.members = [
     "sonarr"
     "radarr"
