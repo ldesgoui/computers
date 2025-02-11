@@ -30,7 +30,7 @@ _:
     enableACME = true;
     acmeRoot = null;
     forceSSL = true;
-    locations."/".proxyPass = "http://[::1]:${toString config.services.deluge.web.port}";
+    locations."/".proxyPass = "http://127.0.0.1:${toString config.services.deluge.web.port}";
   };
 
   zfs.datasets.main.enc.services.deluge = {
