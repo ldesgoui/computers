@@ -34,6 +34,10 @@ _:
     locations."/".proxyPass = "http://127.0.0.1:${toString config.services.deluge.web.port}";
   };
 
+  users.groups.deluge.members = [
+    "lidarr"
+  ];
+
   zfs.datasets.main.enc.services.deluge = {
     mountPoint = config.services.deluge.dataDir;
   };
