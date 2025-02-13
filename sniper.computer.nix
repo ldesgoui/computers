@@ -15,6 +15,7 @@
       profiles-acme
       profiles-defaults
       profiles-headless
+      profiles-networkd
       profiles-nix
       profiles-ssh
       profiles-zfs-datasets
