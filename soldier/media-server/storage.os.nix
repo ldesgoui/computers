@@ -9,6 +9,7 @@ _:
       "/srv/movies" = z "02775" "root" "media";
       "/srv/music" = z "02775" "root" "media";
       "/srv/series" = z "02775" "root" "media";
+      "/srv/torrents" = z "02775" "root" "media";
     };
 
   users.groups.media.members = [
@@ -22,21 +23,31 @@ _:
     "syncthing"
   ];
 
-  zfs.datasets.main.enc.media = {
-    home = {
-      mountPoint = "/srv/home";
+  zfs.datasets = {
+    main.enc.media = {
+      home = {
+        mountPoint = "/srv/home";
+      };
     };
 
-    movies = {
-      mountPoint = "/srv/movies";
+    sata1.enc.media = {
+      movies = {
+        mountPoint = "/srv/movies";
+      };
     };
 
-    music = {
-      mountPoint = "/srv/music";
-    };
+    sata2.enc.media = {
+      music = {
+        mountPoint = "/srv/music";
+      };
 
-    series = {
-      mountPoint = "/srv/series";
+      series = {
+        mountPoint = "/srv/series";
+      };
+
+      torrents = {
+        mountPoint = "/srv/torrents";
+      };
     };
   };
 }

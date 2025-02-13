@@ -13,29 +13,75 @@ _:
     enableRecommended = true;
   };
 
-  zfs.pools.main = {
-    vdevs = [
-      {
-        type = "mirror";
-        devices = [
-          "/dev/disk/by-id/ata-WDC_WDS200T2B0B-00YS70_20321R457706"
-          "/dev/disk/by-id/ata-WDC_WDS200T2B0B-00YS70_204256440404"
-        ];
-      }
-      {
-        type = "log";
-        devices = [ "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNX0NA71896Y-part3" ];
-      }
-      {
-        type = "cache";
-        devices = [ "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNX0NA71896Y-part4" ];
-      }
-    ];
+  zfs.pools = {
+    main = {
+      vdevs = [ "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNX0NA71896Y-part3" ];
 
-    properties = {
-      ashift = "12";
-      autotrim = "on";
-      compatibility = "openzfs-2.2-linux";
+      properties = {
+        ashift = "12";
+        autotrim = "on";
+        compatibility = "openzfs-2.2-linux";
+      };
+    };
+
+    sata1 = {
+      vdevs = [ "/dev/disk/by-id/ata-WDC_WDS200T2B0B-00YS70_20321R457706" ];
+      properties = {
+        ashift = "12";
+        autotrim = "on";
+        compatibility = "openzfs-2.2-linux";
+      };
+    };
+
+    sata2 = {
+      vdevs = [ "/dev/disk/by-id/ata-WDC_WDS200T2B0B-00YS70_204256440404" ];
+      properties = {
+        ashift = "12";
+        autotrim = "on";
+        compatibility = "openzfs-2.2-linux";
+      };
+    };
+  };
+
+  zfs.datasets = {
+    sata1 = {
+      properties = {
+        acltype = "posix";
+        atime = "off";
+        compression = "on";
+        dnodesize = "auto";
+        normalization = "formD";
+        relatime = "on";
+        xattr = "sa";
+      };
+    };
+
+    sata1.enc = {
+      properties = {
+        encryption = "on";
+        keylocation = "prompt";
+        keyformat = "passphrase";
+      };
+    };
+
+    sata2 = {
+      properties = {
+        acltype = "posix";
+        atime = "off";
+        compression = "on";
+        dnodesize = "auto";
+        normalization = "formD";
+        relatime = "on";
+        xattr = "sa";
+      };
+    };
+
+    sata2.enc = {
+      properties = {
+        encryption = "on";
+        keylocation = "prompt";
+        keyformat = "passphrase";
+      };
     };
   };
 }
