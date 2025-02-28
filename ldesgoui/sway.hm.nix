@@ -54,6 +54,7 @@ in
 
       modifier = "Mod4";
       keybindings = lib.mkOptionDefault {
+        "${cfg.modifier}+Shift+Return" = "exec xdg-open about:blank";
         "${cfg.modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy -t image/png";
         "${cfg.modifier}+Shift+p" = "exec grim - | wl-copy -t image/png";
       };

@@ -23,7 +23,7 @@ _:
           {
             criteria = "LG Electronics LG ULTRAGEAR 103NTXREH162";
             status = "enable";
-            mode = "3440x1440@99.99Hz";
+            mode = "3440x1440@160Hz";
           }
         ];
       }
