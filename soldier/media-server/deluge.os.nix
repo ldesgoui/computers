@@ -35,6 +35,8 @@ _:
   };
 
   users.groups.deluge.members = [
+    "radarr"
+    "sonarr"
     "lidarr"
   ];
 
