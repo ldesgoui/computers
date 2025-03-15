@@ -28,7 +28,7 @@ _:
       sslCert = "${certDir}/full.pem";
       sslKey = "${certDir}/key.pem";
 
-      registerName = "SORRY IF I BROKE SOMETHING";
+      registerName = "da server >;D";
 
       bandwidth = 558000;
       imgMsgLength = 1024 * 1024 * 10;
