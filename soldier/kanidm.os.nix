@@ -49,15 +49,17 @@ in
         ldesgoui = {
           displayName = "Lucas";
           mailAddresses = [ "ldesgoui@gmail.com" ];
-          groups = [ ];
         };
 
         eepily.displayName = "Eepily";
         gubbins.displayName = "Gubbins";
+        jjake.displayName = "Jake";
         loopylazz.displayName = "Lux";
         mac.displayName = "Mac";
         mrsmithers.displayName = "MrSmithers";
+        samiface.displayName = "Samiface";
         squirrel.displayName = "Squirrel";
+        tom.displayName = "Tom";
 
         warhuryeah.displayName = "WARHURYEAH";
         zombotec.displayName = "Zombotec";

@@ -29,10 +29,13 @@ in
 
         "eepily"
         "gubbins"
+        "jjake"
         "loopylazz"
         "mac"
         "mrsmithers"
+        "samiface"
         "squirrel"
+        "tom"
 
         "warhuryeah"
         "zombotec"
