@@ -72,10 +72,7 @@ in
       }];
 
       zone = [
-        {
-          domain = "lde.sg";
-          dnssec-signing = "off"; # XXX: netim please
-        }
+        { domain = "lde.sg"; }
         { domain = "ldesgoui.xyz"; }
         { domain = "piss-your.se"; }
       ];
