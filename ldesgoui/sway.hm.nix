@@ -43,7 +43,7 @@ in
     enable = true;
 
     config = {
-      # input."*".xkb_options = "compose:ralt";
+      input."*".xkb_options = "compose:ralt";
 
       input."type:touchpad" = {
         tap = "enabled";
