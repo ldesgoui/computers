@@ -1,4 +1,8 @@
-_:
+{ inputs, ... }:
+{ pkgs, ... }:
+let
+  pkgs-unstable = import inputs.nixpkgs-unstable { inherit (pkgs) config system; };
+in
 {
   programs.git = {
     enable = true;
@@ -21,6 +25,7 @@ _:
 
   programs.jujutsu = {
     enable = true;
+    package = pkgs-unstable.jujutsu;
     settings = {
       user.name = "ldesgoui";
       user.email = "ldesgoui@gmail.com";
