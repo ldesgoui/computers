@@ -14,12 +14,13 @@ _:
       inherit (pkgs)
         mumble
 
+        ffmpeg
+        yt-dlp
+
         chatterino2
         streamlink
 
         moonlight-qt
-
-        keepassxc
         ;
     });
   };
