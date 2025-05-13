@@ -78,7 +78,6 @@ in
         deluge = ts.soldier;
 
         thelounge = ts.soldier;
-        mealie = ts.soldier;
         vikunja = ts.soldier;
       };
     };
