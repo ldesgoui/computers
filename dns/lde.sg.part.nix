@@ -11,6 +11,7 @@ let
   ts = {
     scout = host "100.101.0.211" "fd7a:115c:a1e0::deb9";
     soldier = host "100.101.0.130" "fd7a:115c:a1e0::678b";
+    heavy = host "100.101.0.196" "fd7a:115c:a1e0::dbaf";
   };
 in
 {
