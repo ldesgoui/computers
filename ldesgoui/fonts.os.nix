@@ -7,7 +7,6 @@ _:
     pkgs.fira
     pkgs.paratype-pt-serif
     pkgs.work-sans
-
-    (pkgs.nerdfonts.override { fonts = [ "FiraMono" ]; })
+    pkgs.nerd-fonts.fira-mono
   ];
 }
