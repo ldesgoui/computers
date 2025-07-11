@@ -6,12 +6,21 @@ _:
   };
 
   boot.initrd = {
-    availableKernelModules = [ "mpt3sas" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
+    availableKernelModules = [
+      "mpt3sas"
+      "xhci_pci"
+      "ahci"
+      "usbhid"
+      "sd_mod"
+    ];
     systemd.enable = true;
   };
 
   boot = {
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [
+      "kvm-amd"
+      "nct6775"
+    ];
   };
 
   hardware = {
