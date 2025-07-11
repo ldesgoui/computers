@@ -18,9 +18,7 @@ _:
 
   boot = {
     kernelModules = [
-      "drivetemp"
       "kvm-amd"
-      "nct6775"
     ];
   };
 
