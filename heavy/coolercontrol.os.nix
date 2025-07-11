@@ -9,6 +9,8 @@ _:
     enable = true;
   };
 
+  systemd.services.coolercontrol-liqctld.enable = false;
+
   nixpkgs.config.allowUnfreePredicate = pkg: lib.getName pkg == "lsiutil";
 
   systemd.services."coolercontrol-lsi-temperature" = {
@@ -20,6 +22,8 @@ _:
           > $RUNTIME_DIRECTORY/temp
       done
     '';
+
+    wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
       RuntimeDirectory = "coolercontrol-lsi-temperature";
