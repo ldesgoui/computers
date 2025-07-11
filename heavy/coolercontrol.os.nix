@@ -13,7 +13,7 @@ _:
 
   systemd.services."coolercontrol-lsi-temperature" = {
     script = ''
-      set -eu
+      set -eux
       ${pkgs.lsiutil}/bin/lsiutil -p1 -a 25,2,0,0 \
         | ${lib.getExe pkgs.gawk} '/IOCTemperature: /{print strtonum($2)*1000}' \
         > $RUNTIME_DIRECTORY/temp
