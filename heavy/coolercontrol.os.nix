@@ -24,6 +24,10 @@ _:
       Type = "oneshot";
       User = "root";
     };
+
+    unitConfig = {
+      StartLimitIntervalSec = 0;
+    };
   };
 
   systemd.timers."coolercontrol-lsi-temperature" = {
