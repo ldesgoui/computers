@@ -43,7 +43,7 @@ _:
       set -eu
       while sleep 1; do
         for id in wwn-0x5000c500f4784a67 wwn-0x6000c500d81c4aef0000000000000000 wwn-0x6000c500d8147dd30000000000000000 wwn-0x6000c500d81432230000000000000000; do
-          ${lib.getExe pkgs.hddtemp} /dev/disk/by-id/$id > $RUNTIME_DIRECTORY/$id
+          echo $(( 1000 * $(${lib.getExe pkgs.hddtemp} -n /dev/disk/by-id/$id) )) > $RUNTIME_DIRECTORY/$id
         done
       done
     '';
