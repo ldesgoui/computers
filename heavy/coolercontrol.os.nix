@@ -9,6 +9,13 @@ _:
     enable = true;
   };
 
+  services.nginx.virtualHosts."coolercontrol-heavy.int.lde.sg" = {
+    enableACME = true;
+    acmeRoot = null;
+    forceSSL = true;
+    locations."/".proxyPass = "http://127.0.0.1:11987";
+  };
+
   systemd.services.coolercontrol-liqctld.enable = false;
 
   nixpkgs.config.allowUnfreePredicate = pkg: lib.getName pkg == "lsiutil";

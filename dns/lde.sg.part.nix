@@ -65,6 +65,8 @@ in
         syncthing-scout = ts.scout;
         syncthing-soldier = ts.soldier;
 
+        coolercontrol-heavy = ts.heavy;
+
         vaultwarden = ts.soldier;
         stalwart = ts.soldier;
 
