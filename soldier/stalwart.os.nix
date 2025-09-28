@@ -93,6 +93,7 @@ in
     serverAliases = [
       "autoconfig.ldesgoui.xyz"
       "autoconfig.piss-your.se"
+      "autoconfig.tf2.spot"
     ];
     listenAddresses = [ "0.0.0.0" "[::0]" ];
     enableACME = true;

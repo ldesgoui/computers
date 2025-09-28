@@ -78,6 +78,7 @@ in
         }
         { domain = "ldesgoui.xyz"; }
         { domain = "piss-your.se"; }
+        { domain = "tf2.spot"; }
       ];
     };
   };
