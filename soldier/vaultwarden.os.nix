@@ -49,7 +49,7 @@ in
   services.vaultwarden = {
     enable = true;
 
-    package = withSystem pkgs.stdenv.hostPlatform.system ({ config, ... }: config.packages.vaultwarden-oidc);
+    # package = withSystem pkgs.stdenv.hostPlatform.system ({ config, ... }: config.packages.vaultwarden-oidc);
 
     config = {
       ROCKET_ADDRESS = "::1";
