@@ -27,9 +27,9 @@ in
         listen = [
           # enp2s0
           "192.168.1.2@53"
-          "2001:41d0:fc14:ca00:aaa1:59ff:fe44:7806@53"
+          "2001:41d0:fc14:ca00:a0f0:ded9:bbeb:2e85@53"
 
-          #tailscale0
+          # tailscale0
           "100.101.0.130@53"
           "fd7a:115c:a1e0::678b@53"
         ];
