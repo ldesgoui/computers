@@ -5,12 +5,12 @@
     generator.script = _: "mkpasswd -m sha-512";
   };
 
-
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
   };
 
+  # TODO: replace with something safer
   security.sudo = {
     execWheelOnly = true;
     extraConfig = ''

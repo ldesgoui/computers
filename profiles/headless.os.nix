@@ -1,6 +1,6 @@
 _:
 {
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.systemd-boot.configurationLimit = 10;
 
   documentation = {
     enable = false;

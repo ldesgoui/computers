@@ -4,8 +4,8 @@ let
   inherit (dns.lib) host;
 
   wi = {
-    soldier = host "109.190.105.250" "2001:41d0:fc14:ca00:a0f0:ded9:bbeb:2e85";
-    sniper = host "212.47.233.201" "2001:bc8:710:7dfc:9a20:4ca1:f63e:461f";
+    soldier = host "109.190.105.250" "2001:41d0:fc14:ca00:3e7c:3fff:fe22:bb0d";
+    sniper = host "212.47.233.201" "2001:bc8:710:7dfc:dc00:ff:fe90:1119";
   };
 
   ts = {
