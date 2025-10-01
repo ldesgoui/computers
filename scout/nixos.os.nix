@@ -41,4 +41,6 @@ _:
   services.pcscd = {
     enable = true;
   };
+
+  programs.niri.enable = true;
 }
