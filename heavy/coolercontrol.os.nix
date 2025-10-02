@@ -42,9 +42,20 @@ _:
     script = ''
       set -eu
       while sleep 1; do
-        for id in wwn-0x5000c500f4784a67 wwn-0x6000c500d81c4aef0000000000000000 wwn-0x6000c500d8147dd30000000000000000 wwn-0x6000c500d81432230000000000000000; do
-          echo $(( 1000 * $(${lib.getExe pkgs.hddtemp} -n /dev/disk/by-id/$id) )) > $RUNTIME_DIRECTORY/$id
+        max=0
+        for id in phy{0..7}; do
+          path="/dev/disk/by-path/pci-0000:06:00.0-sas-''${id}-lun-0"
+          if [[ -f "$path" ]]; then
+            rm -f $RUNTIME_DIRECTORY/$id
+          else
+            temp=$(( 1000 * $(${lib.getExe pkgs.hddtemp} -n "$path") ))
+            echo "$temp" > $RUNTIME_DIRECTORY/$id
+            if [ $temp -gt $max ]; then
+              max=$temp
+            fi
+          fi
         done
+        echo "$max" > "$RUNTIME_DIRECTORY/max"
       done
     '';
 
