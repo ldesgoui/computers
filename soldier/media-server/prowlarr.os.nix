@@ -1,7 +1,12 @@
-_:
+{ inputs, ... }:
+{ pkgs, ... }:
+let
+  pkgs-unstable = import inputs.nixpkgs-unstable { inherit (pkgs) config system; };
+in
 {
   services.prowlarr = {
     enable = true;
+    package = pkgs-unstable.prowlarr;
   };
 
   services.nginx.virtualHosts."prowlarr.int.lde.sg" = {
