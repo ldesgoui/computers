@@ -1,0 +1,13 @@
+diff --git a/src/Jackett.Common/Definitions/aither-api.yml b/src/Jackett.Common/Definitions/aither-api.yml
+index 5252142d5..65fb26b46 100644
+--- a/src/Jackett.Common/Definitions/aither-api.yml
++++ b/src/Jackett.Common/Definitions/aither-api.yml
+@@ -116,8 +116,6 @@ search:
+       selector: details_link
+     download:
+       selector: download_link
+-    infohash:
+-      selector: info_hash
+     poster:
+       selector: meta.poster
+       filters:

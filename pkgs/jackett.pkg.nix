@@ -32,6 +32,7 @@ buildDotnetModule rec {
     "net9.0"
   ];
 
+  patches = [ ./jackett-aither-api.patch ];
   postPatch = ''
     substituteInPlace ${projectFile} ${testProjectFile} \
       --replace-fail '<TargetFrameworks>net9.0;net471</' '<TargetFrameworks>net9.0</'
