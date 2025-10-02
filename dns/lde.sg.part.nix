@@ -77,6 +77,7 @@ in
         lidarr = ts.soldier;
         bazarr = ts.soldier;
         prowlarr = ts.soldier;
+        jackett = ts.soldier;
         transmission = ts.soldier;
         deluge = ts.soldier;
 
