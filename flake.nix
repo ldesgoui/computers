@@ -33,12 +33,6 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
-    # TODO: when flaresolverr is fixed (xdd)
-    nur-xddxdd = {
-      url = "github:xddxdd/nur-packages";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     dns = {
       url = "github:nix-community/dns.nix";
       inputs.nixpkgs.follows = "nixpkgs";
