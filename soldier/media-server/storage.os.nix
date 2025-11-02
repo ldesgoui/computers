@@ -30,6 +30,10 @@ _:
     };
 
     slow.enc.media = {
+      properties = {
+        compression = "off";
+      };
+
       movies = {
         mountPoint = "/srv/movies";
       };
