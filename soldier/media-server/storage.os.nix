@@ -9,7 +9,6 @@ _:
       "/srv/movies" = z "02775" "root" "media";
       "/srv/music" = z "02775" "root" "media";
       "/srv/series" = z "02775" "root" "media";
-      "/srv/torrents" = z "02775" "root" "media";
     };
 
   users.groups.media.members = [
@@ -30,23 +29,17 @@ _:
       };
     };
 
-    sata1.enc.media = {
+    slow.enc.media = {
       movies = {
         mountPoint = "/srv/movies";
       };
-    };
 
-    sata2.enc.media = {
       music = {
         mountPoint = "/srv/music";
       };
 
       series = {
         mountPoint = "/srv/series";
-      };
-
-      torrents = {
-        mountPoint = "/srv/torrents";
       };
     };
   };

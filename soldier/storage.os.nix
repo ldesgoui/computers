@@ -24,6 +24,21 @@ _:
       };
     };
 
+    slow = {
+      vdevs = [{
+        type = "raidz1";
+        devices = [
+          "/dev/disk/by-id/ata-HITACHI_HUA723020ALA640_YFJZWDLA"
+          "/dev/disk/by-id/ata-HITACHI_HUA723020ALA640_YFK03TGA"
+          "/dev/disk/by-id/ata-HITACHI_HUA723020ALA640_YFK3TYWA"
+        ];
+      }];
+      properties = {
+        ashift = "12";
+        compatibility = "openzfs-2.2-linux";
+      };
+    };
+
     sata1 = {
       vdevs = [ "/dev/disk/by-id/ata-WDC_WDS200T2B0B-00YS70_20321R457706" ];
       properties = {
@@ -77,6 +92,21 @@ _:
     };
 
     sata2.enc = {
+      properties = {
+        encryption = "on";
+        keylocation = "prompt";
+        keyformat = "passphrase";
+      };
+    };
+
+    slow = {
+      properties = {
+        atime = "off";
+        normalization = "formD";
+      };
+    };
+
+    slow.enc = {
       properties = {
         encryption = "on";
         keylocation = "prompt";

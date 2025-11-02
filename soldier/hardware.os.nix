@@ -12,9 +12,6 @@ _:
 
   boot = {
     kernelModules = [ "kvm-amd" ];
-
-    # XXX: I found these when troubleshooting the hang/reboot issues
-    kernelParams = [ "rcu_nocbs=0-15" "idle=nomwait" ];
   };
 
   hardware = {
