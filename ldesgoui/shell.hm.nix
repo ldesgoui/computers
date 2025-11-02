@@ -30,6 +30,7 @@ _:
     git = true;
     icons = "auto";
     extraOptions = [
+      "--binary"
       "--group"
       "--group-directories-first"
     ];
