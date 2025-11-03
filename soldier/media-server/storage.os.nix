@@ -9,6 +9,8 @@ _:
       "/srv/movies" = z "02775" "root" "media";
       "/srv/music" = z "02775" "root" "media";
       "/srv/series" = z "02775" "root" "media";
+      "/srv/movies-fast" = z "02775" "root" "media";
+      "/srv/series-fast" = z "02775" "root" "media";
     };
 
   users.groups.media.members = [
@@ -24,8 +26,21 @@ _:
 
   zfs.datasets = {
     main.enc.media = {
+      properties = {
+        compression = "off";
+        recordsize = "1M";
+      };
+
       home = {
         mountPoint = "/srv/home";
+      };
+
+      movies = {
+        mountPoint = "/srv/movies-fast";
+      };
+
+      series = {
+        mountPoint = "/srv/series-fast";
       };
     };
 
