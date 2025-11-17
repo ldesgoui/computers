@@ -1,3 +1,4 @@
+_:
 {
   programs.bash = {
     profileExtra = ''
