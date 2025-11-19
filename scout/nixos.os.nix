@@ -7,7 +7,7 @@ _:
   users.users.ldesgoui.homeMode = "711"; # services need x
 
   networking.networkmanager.enable = true;
-  users.users.ldesgoui.extraGroups = [ "networkmanager" "dialout" ];
+  users.users.ldesgoui.extraGroups = [ "networkmanager" "dialout" "plugdev" ];
 
   home-manager.users.ldesgoui = {
     home.packages = (builtins.attrValues {
@@ -43,4 +43,6 @@ _:
   };
 
   programs.niri.enable = true;
+
+  hardware.keyboard.qmk.enable = true;
 }

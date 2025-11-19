@@ -62,7 +62,6 @@ in
       }];
 
       int.subdomains = {
-        syncthing-scout = ts.scout;
         syncthing-soldier = ts.soldier;
 
         coolercontrol-heavy = ts.heavy;
