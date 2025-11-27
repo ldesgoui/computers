@@ -58,7 +58,7 @@ in
         mac.displayName = "Mac";
         mrsmithers.displayName = "MrSmithers";
         samiface.displayName = "Samiface";
-        sebastian.dislpayName = "Sebastian";
+        sebastian.displayName = "Sebastian";
         sneakeh.displayName = "Sneakeh";
         squirrel.displayName = "Squirrel";
         tom.displayName = "Tom";
