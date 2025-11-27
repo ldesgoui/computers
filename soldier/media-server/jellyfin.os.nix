@@ -34,6 +34,7 @@ in
         "mac"
         "mrsmithers"
         "samiface"
+        "sebastian"
         "sneakeh"
         "squirrel"
         "tom"
