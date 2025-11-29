@@ -310,7 +310,8 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "systems": "systems"
+        "systems": "systems",
+        "zmk-nix": "zmk-nix"
       }
     },
     "systems": {
@@ -346,6 +347,26 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "zmk-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1763858596,
+        "narHash": "sha256-Y5EUu/jzFhmZYc39Fx+whxEMRdVq7QXBpbFSAj0p+HU=",
+        "owner": "lilyinstarlight",
+        "repo": "zmk-nix",
+        "rev": "66b8c79eeb349a6ae4474ab553e664f439069033",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lilyinstarlight",
+        "repo": "zmk-nix",
         "type": "github"
       }
     }

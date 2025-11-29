@@ -37,6 +37,11 @@
       url = "github:nix-community/dns.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    zmk-nix = {
+      url = "github:lilyinstarlight/zmk-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ { flake-parts, ... }:
