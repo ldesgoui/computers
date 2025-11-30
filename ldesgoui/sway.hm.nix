@@ -43,7 +43,7 @@ in
     enable = true;
 
     config = {
-      input."*".xkb_options = "compose:rwin";
+      input."type:keyboard".xkb_options = "compose:sclk";
 
       input."type:touchpad" = {
         tap = "enabled";
