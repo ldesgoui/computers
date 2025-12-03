@@ -42,7 +42,5 @@ _:
     enable = true;
   };
 
-  programs.niri.enable = true;
-
   hardware.keyboard.qmk.enable = true;
 }

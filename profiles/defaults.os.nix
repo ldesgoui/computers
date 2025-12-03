@@ -6,6 +6,7 @@
   };
 
   home-manager = {
+    backupFileExtension = "backup-before-hm";
     useGlobalPkgs = true;
     useUserPackages = true;
   };
