@@ -6,6 +6,7 @@ _:
   };
 
   users.users.ldesgoui = {
+    description = "Lucas";
     isNormalUser = true;
     hashedPasswordFile = config.age.secrets.ldesgoui-password.path;
     extraGroups = [ "wheel" ];
