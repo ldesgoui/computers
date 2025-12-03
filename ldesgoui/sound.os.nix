@@ -2,7 +2,7 @@ _:
 { pkgs, ... }: {
   environment.systemPackages = [
     pkgs.helvum
-    pkgs.pavucontrol
+    pkgs.pwvucontrol
   ];
 
   security.rtkit.enable = true;
