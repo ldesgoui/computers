@@ -1,5 +1,7 @@
 _:
 { config, ... }: {
+  hardware.i2c.enable = true;
+
   services.ddccontrol = {
     enable = true;
   };
