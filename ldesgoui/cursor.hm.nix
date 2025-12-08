@@ -7,7 +7,7 @@ _:
     name = "Vanilla-DMZ";
 
     gtk.enable = true;
-    sway.enable = true;
+    # sway.enable = true;
   };
 }
 

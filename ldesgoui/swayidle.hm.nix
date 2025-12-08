@@ -5,15 +5,10 @@ _:
 
     events = [{
       event = "before-sleep";
-      command = "swaylock --daemonize";
+      command = "${pkgs.niri}/bin/niri msg action lockScreen enable";
     }];
 
     timeouts = [
-      # {
-      #   timeout = 60;
-      #   command = "${pkgs.sway}/bin/swaymsg 'output * power off'";
-      #   resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * power on'";
-      # }
       {
         timeout = 60;
         command = "${pkgs.niri}/bin/niri msg action power-off-monitors";
