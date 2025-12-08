@@ -12,6 +12,8 @@ _: {
         board = "nice_nano_v2";
         shield = "splitkb_aurora_corne_%PART%";
 
+        enableZmkStudio = true;
+
         zephyrDepsHash = "sha256-SHiCGErcstMH9EbvbQROXIhxFEbMf3AungYu5YvqMEg=";
       };
     };
