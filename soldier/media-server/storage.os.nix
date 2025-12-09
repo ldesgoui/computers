@@ -44,7 +44,7 @@ _:
       };
     };
 
-    slow.enc.media = {
+    big.enc.media = {
       properties = {
         compression = "off";
       };

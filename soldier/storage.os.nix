@@ -39,13 +39,12 @@ _:
       };
     };
 
-    slow = {
+    big = {
       vdevs = [{
-        type = "raidz1";
+        type = "mirror";
         devices = [
-          "/dev/disk/by-id/ata-HITACHI_HUA723020ALA640_YFJZWDLA"
-          "/dev/disk/by-id/ata-HITACHI_HUA723020ALA640_YFK03TGA"
-          "/dev/disk/by-id/ata-HITACHI_HUA723020ALA640_YFK3TYWA"
+          "/dev/disk/by-id/ata-ST16000NM000J-2TW103_ZR5DJV2K"
+          "/dev/disk/by-id/ata-ST16000NM000J-2TW103_ZR5DKNPR"
         ];
       }];
       properties = {
@@ -56,14 +55,14 @@ _:
   };
 
   zfs.datasets = {
-    slow = {
+    big = {
       properties = {
         atime = "off";
         normalization = "formD";
       };
     };
 
-    slow.enc = {
+    big.enc = {
       properties = {
         encryption = "on";
         keylocation = "prompt";
