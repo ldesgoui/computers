@@ -23,6 +23,8 @@ _:
     settings = {
       server_url = "https://headscale.lde.sg";
 
+      noise.private_key_path = "/var/lib/headscale/noise_private.key";
+
       prefixes = {
         v4 = "100.101.0.0/24";
         v6 = "fd7a:115c:a1e0::/112";
