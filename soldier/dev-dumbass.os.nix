@@ -27,7 +27,7 @@ _:
   };
 
   services.headscale.settings.dns.extra_records = [
-    { name = "dumbass.int.lde.sg"; type = "A"; value = "100.101.0.211"; }
-    { name = "dumbass.int.lde.sg"; type = "AAAA"; value = "fd7a:115c:a1e0::deb9"; }
+    { name = "dumbass.int.lde.sg"; type = "A"; value = "100.101.0.18"; }
+    { name = "dumbass.int.lde.sg"; type = "AAAA"; value = "fd7a:115c:a1e0::1a7c"; }
   ];
 }

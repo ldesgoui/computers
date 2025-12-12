@@ -34,7 +34,7 @@ _:
       dns = {
         base_domain = "ts.lde.sg";
         nameservers.split = {
-          "int.lde.sg" = [ "100.101.0.130" "fd7a:115c:a1e0::678b" ];
+          "int.lde.sg" = [ "100.101.0.5" "fd7a:115c:a1e0::ced8" ];
         };
       };
 
