@@ -17,6 +17,20 @@
         devices = [ "spy" ];
         ignorePerms = true;
       };
+
+      folders."Android Downloads" = {
+        id = "30td3-ltwk1";
+        path = "/srv/home/Android Downloads";
+        devices = [ "spy" ];
+        ignorePerms = true;
+      };
+
+      folders."Android Pictures" = {
+        id = "5dron-43amb";
+        path = "/srv/home/Android Pictures";
+        devices = [ "spy" ];
+        ignorePerms = true;
+      };
     };
   };
 

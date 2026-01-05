@@ -38,7 +38,7 @@ _:
       };
 
       devices.spy = {
-        id = "7PDDZFT-KCE7IKN-RMWIINY-26Q6GKP-KSBCOKQ-MCQIIYP-6WCQI7L-O55PFAT";
+        id = "JZZDZ4I-3M2EQFJ-VQYUSWC-JM6DZCV-USCEVXX-XY2FSUI-XNWLGAV-QKNLTQB";
         addresses = [ "tcp://spy.ts.lde.sg" "quic://spy.ts.lde.sg" ];
       };
     };
