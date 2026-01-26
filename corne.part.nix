@@ -16,8 +16,8 @@ _: {
         zephyrDepsHash = "sha256-SHiCGErcstMH9EbvbQROXIhxFEbMf3AungYu5YvqMEg=";
       };
 
-      reset-firmware = inputs'.zmk-nix.legacyPackages.buildKeyboard {
-        name = "reset-firmware";
+      nn-reset-firmware = inputs'.zmk-nix.legacyPackages.buildKeyboard {
+        name = "nn-reset-firmware";
 
         src = pkgs.runCommand "corne-firmware-config" { } ''
           mkdir $out

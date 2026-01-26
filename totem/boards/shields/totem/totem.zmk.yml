@@ -1,0 +1,13 @@
+file_format: "1"
+id: totem-shift
+name: TOTEM-SHIFT
+type: shield
+url: https://github.com/Endracion/TOTEM-SHIFT
+requires:
+  - seeeduino_xiao_ble
+features:
+  - keys
+siblings:
+  - totem_left
+  - totem_right
+  - totem_dongle
