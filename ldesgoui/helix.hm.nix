@@ -45,6 +45,15 @@ _:
         name = "toml";
         auto-format = true;
       }
+
+      {
+        name = "python";
+        auto-format = true;
+        formatter = {
+          command = "ruff";
+          args = [ "format" "-" ];
+        };
+      }
     ];
 
     themes.sonokai-no-bg = {
