@@ -6,7 +6,7 @@ _:
   };
 
   swapDevices = [{
-    device = "/dev/disk/by-id/nvme-Samsung_SSD_980_PRO_with_Heatsingk_1TB_S6WSNS0W506202F-part3";
+    device = "/dev/disk/by-id/nvme-Samsung_SSD_980_PRO_with_Heatsingk_1TB_S6WSNS0W506202F-part2";
   }];
 
   zfs = {
@@ -14,7 +14,7 @@ _:
   };
 
   zfs.pools.main = {
-    vdevs = [ "/dev/disk/by-id/nvme-Samsung_SSD_980_PRO_with_Heatsingk_1TB_S6WSNS0W506202F-part2" ];
+    vdevs = [ "/dev/disk/by-id/nvme-Samsung_SSD_980_PRO_with_Heatsingk_1TB_S6WSNS0W506202F-part3" ];
 
     properties = {
       ashift = "12";
