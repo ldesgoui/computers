@@ -10,7 +10,6 @@ in
 
   services.ollama = {
     enable = true;
-    package = pkgs-unstable.ollama-rocm;
-    # rocmOverrideGfx = "10.3.0";
+    package = pkgs-unstable.ollama-vulkan;
   };
 }
