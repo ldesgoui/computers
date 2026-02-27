@@ -6,7 +6,7 @@ _: {
     acmeRoot = null;
     forceSSL = true;
     locations."/" = {
-      proxyPass = "https://127.0.0.1:4242";
+      proxyPass = "http://127.0.0.1:4242";
     };
   };
 }
