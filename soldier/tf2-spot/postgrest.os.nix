@@ -5,7 +5,7 @@ _:
 
     settings = {
       db-uri = {
-        host = "localhost";
+        user = "postgrest";
         dbname = "postgres";
       };
 
