@@ -26,6 +26,10 @@ in
     reloadServices = [ "kanidm" ];
   };
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "kanidm-with-secret-provisioning-1.7.4"
+  ];
+
   services.kanidm = {
     enableServer = true;
     package = pkgs.kanidmWithSecretProvisioning_1_7;
