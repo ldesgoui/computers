@@ -28,7 +28,7 @@ in
 
   services.kanidm = {
     enableServer = true;
-    package = pkgs.kanidmWithSecretProvisioning_1_6;
+    package = pkgs.kanidmWithSecretProvisioning_1_7;
 
     serverSettings = {
       inherit domain;
