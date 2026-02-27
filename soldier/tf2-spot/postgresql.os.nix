@@ -4,9 +4,11 @@ _:
     enable = true;
     package = pkgs.postgresql_17;
 
+    enableTCPIP = true;
+
     authentication = lib.mkOverride 10 ''
-      #type database  DBuser  auth-method
-      local all       all     trust
+      local all all                 trust
+      host  all all 100.101.0.18/32 trust
     '';
   };
 
