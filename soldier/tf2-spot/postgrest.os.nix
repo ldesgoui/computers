@@ -13,6 +13,7 @@ _:
       db-anon-role = "fantasy_visitor";
 
       server-port = 3000;
+      server-unix-socket = null;
     };
 
     jwtSecretFile = "/tmp/fantasy-jwt";
