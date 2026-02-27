@@ -33,6 +33,9 @@ _:
 
       dns = {
         base_domain = "ts.lde.sg";
+
+        nameservers.global = [ "194.242.2.2" "2a07:e340::2" ];
+
         nameservers.split = {
           "int.lde.sg" = [ "100.101.0.5" "fd7a:115c:a1e0::ced8" ];
         };
