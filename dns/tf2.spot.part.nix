@@ -34,7 +34,7 @@ in
     subdomains = {
       autoconfig.CNAME = [ "mx1.lde.sg." ];
 
-      fantasy.CNAME = [ "fantasy-tf2.b-cdn.net." ];
+      fantasy.CNAME = [ "soldier.wi.lde.sg." ];
       mathesar.CNAME = [ "soldier.wi.lde.sg." ];
     };
   };
