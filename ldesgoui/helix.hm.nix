@@ -47,6 +47,14 @@ _:
       }
 
       {
+        name = "typst";
+        auto-format = true;
+        formatter = {
+          command = "typstyle";
+        };
+      }
+
+      {
         name = "python";
         auto-format = true;
         formatter = {

@@ -18,6 +18,11 @@
         pkgs.rage
         pkgs.age-plugin-yubikey
         config.agenix-rekey.package
+
+        (pkgs.typst.withPackages (p: [ p.fontawesome ]))
+        pkgs.typst-live
+        pkgs.tinymist
+        pkgs.typstyle
       ];
     };
 
