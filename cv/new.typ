@@ -18,17 +18,13 @@
   leading: .9em,
 )
 
-#set text(font: "Fira Sans", size: 10pt)
+#set text(font: "Fira Sans")
 
 #let heading-with-location(heading, location) = {
-  block(
-    width: 100%,
-    inset: (top: 7pt),
-    grid(
-      columns: (auto, 1fr),
-      align: (horizon + left, horizon + right),
-      heading, location,
-    ),
+  grid(
+    columns: (1fr, auto),
+    align: (horizon + left, horizon + right),
+    heading, location,
   )
 }
 
@@ -53,7 +49,8 @@
       ),
     )
 
-    #show emph: it => box(fill: luma(230), it)
+    #set text(size: 10pt)
+    #show emph: it => box(outset: 2pt, fill: luma(230), it)
 
     = Skills
 
@@ -94,74 +91,68 @@
 
     #line(length: 100%, stroke: 0.2pt)
 
-    #text(size: 0.75em)[
+    #text(size: 8pt)[
       Legend: *Proficient* | _Versed_ | Competent
     ]
-
   ],
 )[
-  #text(size: 1.2em, context document.description)
+  #text(size: 14pt, context document.description)
+  #set strong(delta: 150)
 
   = Experience
 
-  #heading-with-location(
-    [== Software Developer II at Kraken Futures],
-    [Fully remote],
-  )
+  #block(fill: luma(240), outset: (x: 8pt), inset: (y: 8pt), radius: 6pt)[
+    #heading-with-location(
+      [== Software Developer II at Kraken Futures],
+      [Fully remote],
+    )
 
-  2020 Q2 → 2024 Q4
+    2020 Q2 → 2024 Q4
 
-  Software development of distributed systems in Financial Technology,
-  using Rust, Kotlin and Java, deployed on Kubernetes. \
-  My keen interest in DevOps and Security led me to adopt a flexible role,
-  providing support to my colleagues, as well as spearheading
-  improvements in development and deployment workflows.
+    Software development of distributed systems in Financial Technology,
+    using Rust, Kotlin and Java, deployed on Kubernetes. \
+    My keen interest in DevOps and Security led me to adopt a flexible role,
+    providing support to my colleagues, as well as spearheading
+    improvements in development and deployment workflows.
+  ]
 
-  - Developed and deployed an active monitoring service to ensure the integrity
-    of a cached view of financial transactions, consumed by downstream services.
-    Implemented four-eyes principle on existing administrative APIs.
-    Helped maintain various small services with regards to dependency security updates.
+  - Implemented features on services to *improve our compliance standing*.
+  - Helped maintain various services to stay on top of *security updates*.
   - Overhauled GitLab settings and CI pipelines with a documented and extensible
-    system, streamlining the team's projects all at once without disruption. \
-    Tightened security by revamping access to secrets and improved
-    performance by up to 30 minutes per pipeline on active projects.
-  - Developed a Nix package set for use in various workflows: CI, dev services,
-    and local development environment. Deployed a Nix binary cache with proactive
-    build pipelines eliminating cold-cache issues.
-    Set up cross-compilation to support developers using Macbooks with aarch64 CPUs.
-  - Wrote and implemented an RFC to migrate the Kubernetes resources of our dozen
-    projects to a GitOps deployment system with ArgoCD.
-    Streamlined the deployment of secrets using SealedSecrets.
-    This improved the resiliency of our deployments
-    and empowered developers without cluster permissions.
+    system, streamlining the team's projects without disruption.
+    *Tightened security* by revamping access to secrets and improved
+    performance by *up to 30 minutes* per pipeline on active projects.
+  - Introduced Nix in CI and development services to streamline external dependencies.
+    Deployed a Nix binary cache with proactive build pipelines and cross-compilation
+    to *eliminate cold-cache issues* on all environments, including developer Macbooks.
+  - Wrote and implemented an RFC to adopt a GitOps deployment model in Kubernetes,
+    *improving the resiliency* of operations on our dozen projects
+    and *empowering developers* without cluster permissions.
   - Wrote and implemented an RFC to port all our Kubernetes manifests to a bespoke
-    solution using #link("https://nickel-lang.org")[Nickel], greatly improving
-    the legibility and development experience compared to status quo.
-  - Developed a fully automated development environment using Nix, Tilt and k3d,
-    allowing all developers to run a copy of our software stack with as little as
-    Docker and Nix installed, and often no manual intervention.
-    Implemented "live update" to push and run debug builds into the cluster without
-    rescheduling, shortening the development loop by over a minute. \
-    Used it to streamline the various inconsistent End-To-End test setups.
+    solution using #link("https://nickel-lang.org")[Nickel], *greatly improving
+    the legibility and development experience* compared to status quo.
+  - Implemented a development environment to locally run a cluster with our software stack,
+    often with *no manual intervention required*. "Live update" mode allowed running
+    debug builds without rescheduling containers, *shortening development loop by over a minute*.
+    Used this to *streamline* various end-to-end testing setups in CI.
 
   == Freelance Software Developer
 
   2016 → 2020
 
   - Developed for the Web using Python, Javascript, Elm, Haskell.
-  - Deployed on Linux and cloud infrastructure (AWS, GCP).
-
+  - Deployed on Linux (Debian, NixOS) and cloud infrastructure (AWS, GCP).
 ]
 
-#set page(margin: 1.2cm, columns: 2, header: context {
-  if counter(page).get().first() > 1 {
-    align(right)[
-      Lucas Desgouilles - CV
-    ]
-  }
-})
+#set page(
+  margin: 1.2cm,
+  columns: 2,
+  header: align(right)[ Lucas Desgouilles - CV ],
+)
 
 = Education
+
+#v(4pt) // hack
 
 #heading-with-location(
   [== #link("https://42.fr")[École 42]],
@@ -200,13 +191,15 @@
 - Authored Rust library #discord_game_sdk, providing a safe and idiomatic
   interface to an external library with no first-party support.
 
-== Contributor to Grassroots Esports Scene
+#block(fill: luma(240), outset: (x: 8pt), inset: (y: 8pt), radius: 6pt)[
+  == Contributor to Grassroots Esports Scene
 
-2016 → Now
+  2016 → Now
 
-#link("https://teamfortress.com")[Team Fortress 2] is a goofy multiplayer game
-developed by #link("https://www.valvesoftware.com")[VALV#super(baseline: -.26em)[E] Software].
-It has been played in a serious competitive 6v6 setting since its release.
+  #link("https://teamfortress.com")[Team Fortress 2] is a goofy multiplayer game
+  developed by #link("https://www.valvesoftware.com")[VALV#super(baseline: -.26em)[E] Software].
+  It has been played in a serious competitive 6v6 setting since its release.
+]
 - Developed a widely used
   #link("https://github.com/ldesgoui/tf2-comp-fixes")[server-side plugin] that
   implements fixes and gameplay balances catered towards competitive play.
