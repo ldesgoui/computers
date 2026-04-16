@@ -32,7 +32,7 @@ in
 
     MX = [{ exchange = "mx1"; preference = 10; }];
 
-    TXT = [ (dns.lib.spf.strict [ "mx a ra=postmaster" ]) ];
+    TXT = [ (dns.lib.spf.strict [ "mx ra=postmaster" ]) ];
 
     DMARC = [{
       p = "reject";
