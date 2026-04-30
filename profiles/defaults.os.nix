@@ -1,5 +1,5 @@
 { self, ... }:
-{ config, ... }: {
+{ config, pkgs, ... }: {
   age.secrets.root-password = {
     rekeyFile = "${self}/${config.networking.hostName}/root-password.age";
     generator.script = _: "mkpasswd -m sha-512";
@@ -27,4 +27,6 @@
       hashedPasswordFile = config.age.secrets.root-password.path;
     };
   };
+
+  boot.extraModprobeConfig = "install algif_aead ${pkgs.coreutils}/bin/false";
 }
