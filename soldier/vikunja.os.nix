@@ -58,7 +58,6 @@ in
 
     settings = {
       service = {
-        publicurl = "https://vikunja.int.lde.sg";
         enablecaldav = false;
         enabletotp = false;
         enableemailreminders = false;

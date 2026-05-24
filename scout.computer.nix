@@ -5,6 +5,7 @@
     inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
     inputs.agenix.nixosModules.default
     inputs.agenix-rekey.nixosModules.default
+    inputs.microvm.nixosModules.host
   ]
   ++ lib.mapAttrsToList
     (name: module: if lib.hasPrefix "scout-" name then module else { })
