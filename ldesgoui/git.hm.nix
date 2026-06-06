@@ -11,7 +11,7 @@ in
       user.name = "ldesgoui";
       user.email = "ldesgoui@gmail.com";
 
-      aliases = {
+      alias = {
         a = "add";
         ap = "add --patch";
         c = "commit --verbose";
