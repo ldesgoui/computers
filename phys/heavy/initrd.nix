@@ -3,6 +3,8 @@
   boot.initrd = {
     systemd.enable = true;
 
+    systemd.emergencyAccess = true;
+
     # We replace the NixOS implementation
     systemd.services.zfs-import-bagel.enable = false;
 
