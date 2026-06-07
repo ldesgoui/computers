@@ -9,15 +9,37 @@
       modules = [
         inputs.disko.nixosModules.default
         inputs.disko-zfs.nixosModules.default
+        inputs.microvm.nixosModules.host
         ./disko.nix
         ./initrd.nix
         {
           boot.loader = {
-            systemd-boot.enable = true;
+            systemd-boot = {
+              enable = true;
+
+              # Automatically drop the oldest configs,
+              # mostly so that the ESP doesn't fill up too much
+              configurationLimit = 10;
+            };
+
+            # There won't be another OS touching it so this is fine
             efi.canTouchEfiVariables = true;
           };
 
+          # This is the new recommended default
           boot.zfs.forceImportRoot = false;
+
+          documentation = {
+            enable = false;
+            doc.enable = false;
+            info.enable = false;
+            man.enable = false;
+            nixos.enable = false;
+          };
+
+          environment = {
+            stub-ld.enable = false; # I don't need warnings about out-of-nix binaries
+          };
 
           hardware.facter.report = facter;
 
@@ -30,20 +52,24 @@
             hostId = "8425e349";
 
             hostName = "heavy";
+
             useNetworkd = true;
           };
 
           nix = {
-            channel.enable = false;
+            channel.enable = false; # We never use nix channels
 
             nixPath = lib.mkForce [
+              # In the rare cases where we evaluate <nixpkgs> or <nixos>
               "nixpkgs=${inputs.nixpkgs-unstable}"
               "nixos=${inputs.nixpkgs-unstable}"
             ];
 
-            optimise.automatic = true;
+            optimise.automatic = true; # Run dedup once a day
 
             registry = {
+              # This is to speed up `nix <action> nixos#<whatever>`
+              # If I want something fresher, I usually go for nixpkgs#<whatever>
               nixos.flake = inputs.nixpkgs-unstable;
             };
 
@@ -53,12 +79,16 @@
             };
           };
 
-          system.stateVersion = "25.11";
+          services.openssh = {
+            enable = true;
+          };
+
+          system.stateVersion = "25.11"; # No touchie
 
           time.timeZone = "Europe/Paris";
 
           users = {
-            mutableUsers = false;
+            mutableUsers = false; # Stateless users, but gotta provision passwords
             users.root.initialPassword = "toor";
           };
         }
