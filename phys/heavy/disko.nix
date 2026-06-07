@@ -99,7 +99,7 @@ in
               postCreateHook = ''
                 dir=$(mktemp -td heavy-keys-XXXXX)
                 mount /dev/mapper/heavy-keys $dir
-                cp -r /tmp/oh-god-dont-leak/heavy $dir/heavy
+                cp -r /tmp/oh-god-dont-leak/heavy.passphrase $dir/
                 umount $dir
               '';
             };
@@ -110,13 +110,13 @@ in
           type = "zfs_fs";
           options = {
             encryption = "on";
-            keylocation = "file:///tmp/oh-god-dont-leak/heavy";
+            keylocation = "file:///tmp/oh-god-dont-leak/heavy.passphrase";
             keyformat = "passphrase";
           };
 
           preCreateHook = ''
             mkdir -p /tmp/oh-god-dont-leak
-            ${pkgs.xkcdpass}/bin/xkcdpass -n 10 > /tmp/oh-god-dont-leak/heavy
+            ${pkgs.xkcdpass}/bin/xkcdpass -n 10 > /tmp/oh-god-dont-leak/heavy.passprase
           '';
         };
 
