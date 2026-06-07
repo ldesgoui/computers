@@ -67,7 +67,7 @@
         {
           disko.devices.disk.transcend-mte110s = {
             type = "disk";
-            device = "/dev/disk/by-id/nvme-eui.48373831393032314ce0001838302020-part1";
+            device = "/dev/disk/by-id/nvme-eui.48373831393032314ce0001838302020";
             content = {
               type = "gpt";
               partitions = {
