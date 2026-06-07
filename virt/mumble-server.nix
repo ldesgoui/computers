@@ -26,7 +26,7 @@
             type = "macvtap";
             id = "vm-a1";
             mac = "02:00:00:00:00:11";
-            macvtap.link = "wlp170s0";
+            macvtap.link = "en03";
             macvtap.mode = "bridge";
           }];
         };
