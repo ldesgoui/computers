@@ -105,8 +105,6 @@
             type = "zpool";
 
             options = {
-              canmount = "off";
-
               ashift = "12"; # 2^12 sectors
               autotrim = "on"; # good happy for SSDs
               cachefile = "none"; # trying shit
@@ -114,6 +112,8 @@
             };
 
             rootFsOptions = {
+              canmount = "off";
+
               recordsize = "1M";
 
               compression = "zstd-3"; # lil harder than lz4
