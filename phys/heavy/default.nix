@@ -174,7 +174,7 @@
                       # mountpoint = "/mnt/heavy-keys/hack"; # HACK: disko doesn't know about the dependency to heavy-keys
                       encryption = "on";
                       keylocation = "file:///mnt/heavy-keys/heavy";
-                      keyformat = "raw";
+                      keyformat = "passphrase";
                     };
 
                     preCreateHook = ''
