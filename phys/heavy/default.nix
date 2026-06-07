@@ -111,7 +111,7 @@
             };
           };
 
-          disko.devices.zpool.bagel = {
+          disko.devices.zpool.bagel = { rootMountPoint, ... }: {
             type = "zpool";
 
             options = {
@@ -146,7 +146,7 @@
                   name = "heavy-keys";
                   settings.allowDiscards = true;
                   passwordFile = "/tmp/heavy-lockbox";
-                  content = { rootMountPoint, ... }: {
+                  content = {
                     type = "filesystem";
                     format = "ext4";
                     mountpoint = "/mnt/heavy-keys";
@@ -161,9 +161,9 @@
                 type = "zfs_fs";
                 options = {
                   # mountpoint = "/mnt/heavy-keys/hack"; # HACK: disko doesn't know about the dependency to heavy-keys
-                  encryption = "on";
-                  keylocation = "file:///mnt/heavy-keys/zfs";
-                  keyformat = "raw";
+                  # encryption = "on";
+                  # keylocation = "file:///mnt/heavy-keys/zfs";
+                  # keyformat = "raw";
                 };
               };
 
@@ -186,7 +186,7 @@
                 mountpoint = "/var/lib/nixos";
               };
 
-              "heavy/systemd" = { rootMountPoint, ... }: {
+              "heavy/systemd" = {
                 type = "zfs_fs";
                 mountpoint = "/var/lib/systemd";
                 postCreateHook = ''
