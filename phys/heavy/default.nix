@@ -65,6 +65,16 @@
           };
         }
         {
+          disko.devices.nodev.root = {
+            type = "tmpfs";
+            mountpoint = "/";
+            mountOptions = [
+              "size=2G"
+              "defaults"
+              "mode=755"
+            ];
+          };
+
           disko.devices.disk.transcend-mte110s = {
             type = "disk";
             device = "/dev/disk/by-id/nvme-eui.48373831393032314ce0001838302020";
@@ -136,12 +146,12 @@
                   name = "heavy-keys";
                   settings.allowDiscards = true;
                   passwordFile = "/tmp/heavy-lockbox";
-                  content = {
+                  content = { rootMountPoint, ... }: {
                     type = "filesystem";
                     format = "ext4";
                     mountpoint = "/mnt/heavy-keys";
                     postCreateHook = ''
-                      dd bs=32 count=1 if=/dev/urandom of=/mnt/heavy-keys/zfs
+                      dd bs=32 count=1 if=/dev/urandom of=${rootMountPoint}/mnt/heavy-keys/zfs
                     '';
                   };
                 };
@@ -150,16 +160,11 @@
               heavy = {
                 type = "zfs_fs";
                 options = {
-                  mountpoint = "/mnt/heavy-keys/hack"; # HACK: disko doesn't know about the dependency to heavy-keys
+                  # mountpoint = "/mnt/heavy-keys/hack"; # HACK: disko doesn't know about the dependency to heavy-keys
                   encryption = "on";
                   keylocation = "file:///mnt/heavy-keys/zfs";
                   keyformat = "raw";
                 };
-              };
-
-              "heavy/rootfs" = {
-                type = "zfs_fs";
-                mountpoint = "/";
               };
 
               "heavy/nix" = {
@@ -170,17 +175,23 @@
                 };
               };
 
+              # Just in case
+              "heavy/var" = {
+                type = "zfs_fs";
+                mountpoint = "/var";
+              };
+
               "heavy/nixos" = {
                 type = "zfs_fs";
                 mountpoint = "/var/lib/nixos";
               };
 
-              "heavy/systemd" = {
+              "heavy/systemd" = { rootMountPoint, ... }: {
                 type = "zfs_fs";
                 mountpoint = "/var/lib/systemd";
                 postCreateHook = ''
-                  ln -snfT /var/lib/systemd/machine-id /etc/machine-id
-                  systemd-machine-id-setup
+                  ln -snfT ${rootMountPoint}/var/lib/systemd/machine-id ${rootMountPoint}/etc/machine-id
+                  systemd-machine-id-setup --root ${rootMountPoint}
                 '';
               };
 
