@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./mumble-server.nix
+  ];
+}

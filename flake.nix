@@ -47,6 +47,18 @@
       url = "github:microvm-nix/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    disko-zfs = {
+      url = "github:numtide/disko-zfs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.disko.follows = "disko";
+    };
   };
 
   outputs = inputs @ { flake-parts, ... }:
@@ -55,8 +67,18 @@
 
       imports = [
         flake-parts.flakeModules.modules
-        ./auto-import.nix
         inputs.agenix-rekey.flakeModule
+
+        ./auto-import.nix
+
+        ./phys
+        ./virt
       ];
+
+      perSystem = { inputs', ... }: {
+        packages = {
+          inherit (inputs'.disko.packages) disko disko-install;
+        };
+      };
     };
 }
