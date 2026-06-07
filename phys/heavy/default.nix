@@ -149,8 +149,8 @@
 
               heavy = {
                 type = "zfs_fs";
-                mountpoint = "/mnt/heavy-keys/hack"; # HACK: disko doesn't know about the dependency to heavy-keys
                 options = {
+                  mountpoint = "/mnt/heavy-keys/hack"; # HACK: disko doesn't know about the dependency to heavy-keys
                   encryption = "on";
                   keylocation = "file:///mnt/heavy-keys/zfs";
                   keyformat = "raw";
