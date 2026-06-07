@@ -128,6 +128,7 @@
 
                 rootFsOptions = {
                   canmount = "off";
+                  mountpoint = "none";
 
                   recordsize = "1M";
 
@@ -182,6 +183,9 @@
                       mkdir -p /mnt/heavy-keys
                       ln -snfT /tmp/oh-god-dont-leak/heavy /mnt/heavy-keys/heavy 
                     '';
+                    postCreateHook = ''
+                      rm -r /mnt/heavy-keys
+                    '';
                   };
 
                   "heavy/nix" = {
@@ -206,7 +210,8 @@
                   "heavy/systemd" = {
                     type = "zfs_fs";
                     mountpoint = "/var/lib/systemd";
-                    postCreateHook = ''
+                    postMountHook = ''
+                      mkdir ${rootMountPoint}/etc
                       ln -snfT ${rootMountPoint}/var/lib/systemd/machine-id ${rootMountPoint}/etc/machine-id
                       systemd-machine-id-setup --root ${rootMountPoint}
                     '';
