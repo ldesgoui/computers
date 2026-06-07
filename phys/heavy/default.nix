@@ -64,144 +64,150 @@
             users.root.initialPassword = "toor";
           };
         }
-        {
-          disko.devices.nodev.root = {
-            type = "tmpfs";
-            mountpoint = "/";
-            mountOptions = [
-              "size=2G"
-              "defaults"
-              "mode=755"
-            ];
-          };
+        ({ config, ... }:
+          let
+            inherit (config.disko) rootMountPoint;
+          in
+          {
+            disko = {
+              devices.nodev.root = {
+                fsType = "tmpfs";
+                mountpoint = "/";
+                mountOptions = [
+                  "size=2G"
+                  "defaults"
+                  "mode=755"
+                ];
+              };
 
-          disko.devices.disk.transcend-mte110s = {
-            type = "disk";
-            device = "/dev/disk/by-id/nvme-eui.48373831393032314ce0001838302020";
-            content = {
-              type = "gpt";
-              partitions = {
-                esp = {
-                  size = "1G";
-                  type = "EF00";
-                  content = {
-                    type = "filesystem";
-                    format = "vfat";
-                    mountpoint = "/boot";
-                    mountOptions = [ "umask=0077" ];
-                  };
-                };
+              devices.disk.transcend-mte110s = {
+                type = "disk";
+                device = "/dev/disk/by-id/nvme-eui.48373831393032314ce0001838302020";
+                content = {
+                  type = "gpt";
+                  partitions = {
+                    esp = {
+                      size = "1G";
+                      type = "EF00";
+                      content = {
+                        type = "filesystem";
+                        format = "vfat";
+                        mountpoint = "/boot";
+                        mountOptions = [ "umask=0077" ];
+                      };
+                    };
 
-                swap = {
-                  size = "7G";
-                  content = {
-                    type = "swap";
-                    randomEncryption = true;
-                  };
-                };
+                    swap = {
+                      size = "7G";
+                      content = {
+                        type = "swap";
+                        randomEncryption = true;
+                      };
+                    };
 
-                zfs = {
-                  size = "100%";
-                  content = {
-                    type = "zfs";
-                    pool = "bagel";
+                    zfs = {
+                      size = "100%";
+                      content = {
+                        type = "zfs";
+                        pool = "bagel";
+                      };
+                    };
                   };
                 };
               };
-            };
-          };
 
-          disko.devices.zpool.bagel = { rootMountPoint, ... }: {
-            type = "zpool";
+              devices.zpool.bagel = {
+                type = "zpool";
 
-            options = {
-              ashift = "12"; # 2^12 sectors
-              autotrim = "on"; # good happy for SSDs
-              cachefile = "none"; # trying shit
-              compatibility = "openzfs-2.3-linux";
-            };
+                options = {
+                  ashift = "12"; # 2^12 sectors
+                  autotrim = "on"; # good happy for SSDs
+                  cachefile = "none"; # trying shit
+                  compatibility = "openzfs-2.3-linux";
+                };
 
-            rootFsOptions = {
-              canmount = "off";
+                rootFsOptions = {
+                  canmount = "off";
 
-              recordsize = "1M";
+                  recordsize = "1M";
 
-              compression = "zstd-3"; # lil harder than lz4
+                  compression = "zstd-3"; # lil harder than lz4
 
-              acltype = "posix";
-              atime = "off"; # don't care about access times
-              dnodesize = "auto"; # more efficient than legacy
-              xattr = "sa"; # enhances perf for acltype=posix and dnodesize=auto
+                  acltype = "posix";
+                  atime = "off"; # don't care about access times
+                  dnodesize = "auto"; # more efficient than legacy
+                  xattr = "sa"; # enhances perf for acltype=posix and dnodesize=auto
 
-              utf8only = "on";
-              normalization = "formD";
-            };
+                  utf8only = "on";
+                  normalization = "formD";
+                };
 
-            datasets = {
-              heavy-keys = {
-                type = "zfs_volume";
-                size = "4M";
-                content = {
-                  type = "luks";
-                  name = "heavy-keys";
-                  settings.allowDiscards = true;
-                  passwordFile = "/tmp/heavy-lockbox";
-                  content = {
-                    type = "filesystem";
-                    format = "ext4";
-                    mountpoint = "/mnt/heavy-keys";
+                datasets = {
+                  heavy-keys = {
+                    type = "zfs_volume";
+                    size = "4M";
+                    content = {
+                      type = "luks";
+                      name = "heavy-keys";
+                      settings.allowDiscards = true;
+                      passwordFile = "/tmp/heavy-lockbox";
+                      content = {
+                        type = "filesystem";
+                        format = "ext4";
+                        mountpoint = "/mnt/heavy-keys";
+                        postCreateHook = ''
+                          dd bs=32 count=1 if=/dev/urandom of=${rootMountPoint}/mnt/heavy-keys/zfs
+                        '';
+                      };
+                    };
+                  };
+
+                  heavy = {
+                    type = "zfs_fs";
+                    options = {
+                      # mountpoint = "/mnt/heavy-keys/hack"; # HACK: disko doesn't know about the dependency to heavy-keys
+                      # encryption = "on";
+                      # keylocation = "file:///mnt/heavy-keys/zfs";
+                      # keyformat = "raw";
+                    };
+                  };
+
+                  "heavy/nix" = {
+                    type = "zfs_fs";
+                    mountpoint = "/nix";
+                    options = {
+                      exec = "on";
+                    };
+                  };
+
+                  # Just in case
+                  "heavy/var" = {
+                    type = "zfs_fs";
+                    mountpoint = "/var";
+                  };
+
+                  "heavy/nixos" = {
+                    type = "zfs_fs";
+                    mountpoint = "/var/lib/nixos";
+                  };
+
+                  "heavy/systemd" = {
+                    type = "zfs_fs";
+                    mountpoint = "/var/lib/systemd";
                     postCreateHook = ''
-                      dd bs=32 count=1 if=/dev/urandom of=${rootMountPoint}/mnt/heavy-keys/zfs
+                      ln -snfT ${rootMountPoint}/var/lib/systemd/machine-id ${rootMountPoint}/etc/machine-id
+                      systemd-machine-id-setup --root ${rootMountPoint}
                     '';
                   };
+
+                  "heavy/journald" = {
+                    type = "zfs_fs";
+                    mountpoint = "/var/log/journal";
+                  };
                 };
-              };
-
-              heavy = {
-                type = "zfs_fs";
-                options = {
-                  # mountpoint = "/mnt/heavy-keys/hack"; # HACK: disko doesn't know about the dependency to heavy-keys
-                  # encryption = "on";
-                  # keylocation = "file:///mnt/heavy-keys/zfs";
-                  # keyformat = "raw";
-                };
-              };
-
-              "heavy/nix" = {
-                type = "zfs_fs";
-                mountpoint = "/nix";
-                options = {
-                  exec = "on";
-                };
-              };
-
-              # Just in case
-              "heavy/var" = {
-                type = "zfs_fs";
-                mountpoint = "/var";
-              };
-
-              "heavy/nixos" = {
-                type = "zfs_fs";
-                mountpoint = "/var/lib/nixos";
-              };
-
-              "heavy/systemd" = {
-                type = "zfs_fs";
-                mountpoint = "/var/lib/systemd";
-                postCreateHook = ''
-                  ln -snfT ${rootMountPoint}/var/lib/systemd/machine-id ${rootMountPoint}/etc/machine-id
-                  systemd-machine-id-setup --root ${rootMountPoint}
-                '';
-              };
-
-              "heavy/journald" = {
-                type = "zfs_fs";
-                mountpoint = "/var/log/journal";
               };
             };
-          };
-        }
+          })
       ];
     };
 }
