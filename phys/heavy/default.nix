@@ -64,7 +64,7 @@
             users.root.initialPassword = "toor";
           };
         }
-        ({ config, ... }:
+        ({ config, pkgs, ... }:
           let
             inherit (config.disko) rootMountPoint;
           in
@@ -143,20 +143,26 @@
                 };
 
                 datasets = {
-                  heavy-keys = {
+                  heavy-lockbox = {
                     type = "zfs_volume";
                     size = "64M";
                     content = {
                       type = "luks";
                       name = "heavy-keys";
+
+                      passwordFile = "/tmp/oh-god-dont-leak/heavy-lockbox";
                       settings.allowDiscards = true;
-                      passwordFile = "/tmp/heavy-lockbox";
+
                       content = {
                         type = "filesystem";
                         format = "ext4";
                         mountpoint = "/mnt/heavy-keys";
-                        postCreateHook = ''
-                          dd bs=32 count=1 if=/dev/urandom of=${rootMountPoint}/mnt/heavy-keys/zfs
+
+                        preCreateHook = ''
+                          ${pkgs.xkcdpass}/bin/xkcdpass -n 10 > /tmp/oh-god-dont-leak/heavy-lockbox
+                        '';
+                        postMountHook = ''
+                          cp -r /tmp/oh-god-dont-leak/heavy ${rootMountPoint}/mnt/heavy-keys/heavy
                         '';
                       };
                     };
@@ -166,9 +172,13 @@
                     type = "zfs_fs";
                     options = {
                       # mountpoint = "/mnt/heavy-keys/hack"; # HACK: disko doesn't know about the dependency to heavy-keys
-                      # encryption = "on";
-                      # keylocation = "file:///mnt/heavy-keys/zfs";
-                      # keyformat = "raw";
+                      encryption = "on";
+                      keylocation = "file:///mnt/heavy-keys/heavy";
+                      keyformat = "raw";
+
+                      preCreateHook = ''
+                        ${pkgs.xkcdpass}/bin/xkcdpass -n 10 > /tmp/oh-god-dont-leak/heavy
+                      '';
                     };
                   };
 
