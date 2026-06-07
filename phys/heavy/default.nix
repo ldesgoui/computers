@@ -179,6 +179,8 @@
 
                     preCreateHook = ''
                       ${pkgs.xkcdpass}/bin/xkcdpass -n 10 > /tmp/oh-god-dont-leak/heavy
+                      mkdir -p /mnt/heavy-keys
+                      ln -s /mnt/heavy-keys/heavy /tmp/oh-god-dont-leak/heavy
                     '';
                   };
 
