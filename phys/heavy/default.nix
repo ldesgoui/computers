@@ -105,6 +105,8 @@
             type = "zpool";
 
             options = {
+              canmount = "off";
+
               ashift = "12"; # 2^12 sectors
               autotrim = "on"; # good happy for SSDs
               cachefile = "none"; # trying shit
