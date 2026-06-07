@@ -89,6 +89,7 @@ in
             settings.allowDiscards = true;
 
             preCreateHook = ''
+              mkdir -p /tmp/oh-god-dont-leak
               ${pkgs.xkcdpass}/bin/xkcdpass -n 10 > /tmp/oh-god-dont-leak/heavy-lockbox
             '';
 
@@ -114,6 +115,7 @@ in
           };
 
           preCreateHook = ''
+            mkdir -p /tmp/oh-god-dont-leak
             ${pkgs.xkcdpass}/bin/xkcdpass -n 10 > /tmp/oh-god-dont-leak/heavy
           '';
         };
@@ -141,7 +143,8 @@ in
           type = "zfs_fs";
           mountpoint = "/var/lib/systemd";
           postMountHook = ''
-            systemd-machine-id-setup --root ${rootMountPoint}/var/lib/systemd
+            systemd-machine-id-setup
+            cp /etc/machine-id ${rootMountPoint}/var/lib/systemd/
           '';
         };
 
