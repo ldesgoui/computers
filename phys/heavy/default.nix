@@ -145,7 +145,7 @@
                 datasets = {
                   heavy-keys = {
                     type = "zfs_volume";
-                    size = "32M";
+                    size = "64M";
                     content = {
                       type = "luks";
                       name = "heavy-keys";
