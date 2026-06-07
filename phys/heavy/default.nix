@@ -175,11 +175,11 @@
                       encryption = "on";
                       keylocation = "file:///mnt/heavy-keys/heavy";
                       keyformat = "raw";
-
-                      preCreateHook = ''
-                        ${pkgs.xkcdpass}/bin/xkcdpass -n 10 > /tmp/oh-god-dont-leak/heavy
-                      '';
                     };
+
+                    preCreateHook = ''
+                      ${pkgs.xkcdpass}/bin/xkcdpass -n 10 > /tmp/oh-god-dont-leak/heavy
+                    '';
                   };
 
                   "heavy/nix" = {
