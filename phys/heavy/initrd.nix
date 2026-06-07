@@ -107,14 +107,12 @@
         RequiresMountsFor = "/etc/credstore";
       };
 
-      path = [ config.boot.zfs.package ];
-
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;
 
         ImportCredential = "heavy.passphrase";
-        ExecStart = "zfs load-key -L file://%d/heavy.passphrase bagel/heavy";
+        ExecStart = "${config.boot.zfs.package}/bin/zfs load-key -L file://%d/heavy.passphrase bagel/heavy";
       };
     };
 
