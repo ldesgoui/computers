@@ -153,14 +153,14 @@
                       passwordFile = "/tmp/oh-god-dont-leak/heavy-lockbox";
                       settings.allowDiscards = true;
 
+                      preCreateHook = ''
+                        ${pkgs.xkcdpass}/bin/xkcdpass -n 10 > /tmp/oh-god-dont-leak/heavy-lockbox
+                      '';
+
                       content = {
                         type = "filesystem";
                         format = "ext4";
                         mountpoint = "/mnt/heavy-keys";
-
-                        preCreateHook = ''
-                          ${pkgs.xkcdpass}/bin/xkcdpass -n 10 > /tmp/oh-god-dont-leak/heavy-lockbox
-                        '';
                         postMountHook = ''
                           cp -r /tmp/oh-god-dont-leak/heavy ${rootMountPoint}/mnt/heavy-keys/heavy
                         '';
