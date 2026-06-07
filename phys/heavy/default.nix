@@ -212,8 +212,8 @@
                     mountpoint = "/var/lib/systemd";
                     postMountHook = ''
                       mkdir ${rootMountPoint}/etc
+                      systemd-machine-id-setup --root ${rootMountPoint}/var/lib/systemd
                       ln -snfT ${rootMountPoint}/var/lib/systemd/machine-id ${rootMountPoint}/etc/machine-id
-                      systemd-machine-id-setup --root ${rootMountPoint}
                     '';
                   };
 
