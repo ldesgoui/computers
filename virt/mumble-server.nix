@@ -63,7 +63,7 @@
           networks."10-vlan100" = {
             matchConfig.MACAddress = "02:ca:fe:c2:46:75";
             networkConfig = {
-              Address = [ "10.100.194.70" ];
+              Address = [ "10.100.194.70/16" ];
               Gateway = "10.100.0.1";
               DNS = [ "10.100.0.1" ];
               IPv6AcceptRA = true;
