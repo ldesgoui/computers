@@ -24,9 +24,9 @@
 
           interfaces = [{
             type = "macvtap";
-            id = "vm-a1";
-            mac = "02:00:00:00:00:11";
-            macvtap.link = "eno3";
+            id = "vm-c24675";
+            mac = "02:ca:fe:c2:46:75";
+            macvtap.link = "vlan100";
             macvtap.mode = "bridge";
           }];
         };
@@ -57,6 +57,19 @@
           extraConfig = ''
             rememberchannelduration=3600
           '';
+        };
+
+        systemd.network = {
+          network."10-vlan100" = {
+            matchConfig.MacAddress = "02:ca:fe:c2:46:75";
+            networkConfig = {
+              Address = [ "10.100.194.70" ];
+              Gateway = "10.100.0.1";
+              DNS = [ "10.100.0.1" ];
+              IPv6AcceptRA = true;
+              DHCP = "no";
+            };
+          };
         };
 
         systemd.services.murmur = {

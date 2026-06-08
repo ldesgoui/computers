@@ -85,6 +85,21 @@
 
           system.stateVersion = "25.11"; # No touchie
 
+          systemd.network = {
+            networks."10-eno3-vlan100" = {
+              matchConfig.Name = "eno3";
+              networkConfig.VLAN = "vlan100";
+            };
+
+            netdev."20-vlan100" = {
+              netdevConfig = {
+                Kind = "vlan";
+                Name = "vlan100";
+              };
+              vlanConfig.ID = "100";
+            };
+          };
+
           time.timeZone = "Europe/Paris";
 
           users = {
