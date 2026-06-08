@@ -61,7 +61,7 @@
 
         systemd.network = {
           networks."10-vlan100" = {
-            matchConfig.MacAddress = "02:ca:fe:c2:46:75";
+            matchConfig.MACAddress = "02:ca:fe:c2:46:75";
             networkConfig = {
               Address = [ "10.100.194.70" ];
               Gateway = "10.100.0.1";
