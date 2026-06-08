@@ -91,7 +91,7 @@
               networkConfig.VLAN = "vlan100";
             };
 
-            netdev."20-vlan100" = {
+            netdevs."20-vlan100" = {
               netdevConfig = {
                 Kind = "vlan";
                 Name = "vlan100";
