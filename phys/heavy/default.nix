@@ -96,7 +96,7 @@
                 Kind = "vlan";
                 Name = "vlan100";
               };
-              vlanConfig.ID = 100;
+              vlanConfig.Id = 100;
             };
           };
 
