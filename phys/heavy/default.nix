@@ -88,7 +88,11 @@
           systemd.network = {
             networks."10-eno3-vlan100" = {
               matchConfig.Name = "eno3";
-              networkConfig.VLAN = "vlan100";
+              networkConfig = {
+                DHCP = true;
+                IPv6PrivacyExtensions = "kernel";
+                VLAN = "vlan100";
+              };
             };
 
             netdevs."20-vlan100" = {
