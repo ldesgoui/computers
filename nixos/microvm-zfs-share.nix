@@ -46,15 +46,15 @@
     microvm-zfs-shares-host = { config, lib, utils, ... }: {
       options = {
         zfsSharesFor = lib.mkOption {
-          type = with lib.types; attrsOf str;
+          type = with lib.types; attrsOf (listOf str);
           default = { };
         };
       };
 
       config = {
-        disko.devices.zpool = lib.mkMerge (lib.mapAttrsToList
-          (hostName: pool: {
-            "${pool}" = {
+        disko.devices.zpool = builtins.mapAttrs
+          (pool: hostNames: lib.mkMerge (map
+            (hostName: {
               datasets = lib.mapAttrs'
                 (name: ds: {
                   name = "${hostName}/${name}";
@@ -70,9 +70,9 @@
                   };
                 })
                 self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets;
-            };
-          })
-          config.zfsSharesFor);
+            })
+            hostNames))
+          config.zfsSharesFor;
       };
     };
   };
