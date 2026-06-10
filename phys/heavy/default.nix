@@ -16,7 +16,7 @@
 
         {
           zfsSharesFor = {
-            "virt-mumble-server" = "bagel";
+            "mumble-server" = "bagel";
           };
 
           boot.loader = {
