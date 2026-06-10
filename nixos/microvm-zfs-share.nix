@@ -77,6 +77,7 @@
               (name: _: {
                 name = utils.escapeSystemdPath "/var/lib/microvms/${hostName}/shares/${name}";
                 value = {
+                  overrideStrategy = "asDropin";
                   unitConfig.DefaultDependencies = false;
                   before = [ "umount.target" "microvm-virtiofsd@${hostName}.service" ];
                   conflicts = [ "umount.target" ];
