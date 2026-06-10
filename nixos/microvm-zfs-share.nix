@@ -64,7 +64,7 @@
 
                     options = ds.options;
                     mountOptions = [
-                      "x-systemd.required-by=microvm-virtiofsd@${hostName}.service"
+                      "nofail"
                     ] ++ ds.mountOptions;
                   };
                 })
