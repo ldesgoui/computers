@@ -80,7 +80,7 @@
                   self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets;
             in
             {
-              "microvm-virtiofs@${hostName}" = {
+              "microvm-virtiofsd@${hostName}" = {
                 overrideStrategy = "asDropin";
                 requires = mounts;
                 after = mounts;
