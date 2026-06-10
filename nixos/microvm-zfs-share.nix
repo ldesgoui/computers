@@ -63,7 +63,10 @@
                     mountpoint = "/var/lib/microvms/${hostName}/shares/${name}";
 
                     options = ds.options;
-                    mountOptions = [ "nofail" ] ++ ds.mountOptions;
+                    mountOptions = [
+                      "x-systemd.required-by=microvm-virtiofsd@${hostName}.service"
+                      "x-systemd.before=microvm-virtiofsd@${hostName}.service"
+                    ] ++ ds.mountOptions;
                   };
                 })
                 self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets;
@@ -71,41 +74,41 @@
           })
           config.zfsSharesFor);
 
-        systemd.units = lib.mkMerge (lib.mapAttrsToList
-          (hostName: _:
-            lib.mapAttrs'
-              (name: _: {
-                name = utils.escapeSystemdPath "/var/lib/microvms/${hostName}/shares/${name}" + ".mount";
-                value = {
-                  overrideStrategy = "asDropin";
-                  text = ''
-                    [Unit]
-                    DefaultDependencies = no
-                    Before = umount.target microvm-virtiofsd@${hostName}.service
-                    Conflicts = umount.target
-                    RequiredBy = microvm-virtiofsd@${hostName}.service
-                  '';
-                };
-              })
-              self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets)
-          config.zfsSharesFor);
+        # systemd.units = lib.mkMerge (lib.mapAttrsToList
+        #   (hostName: _:
+        #     lib.mapAttrs'
+        #       (name: _: {
+        #         name = utils.escapeSystemdPath "/var/lib/microvms/${hostName}/shares/${name}" + ".mount";
+        #         value = {
+        #           overrideStrategy = "asDropin";
+        #           text = ''
+        #             [Unit]
+        #             DefaultDependencies = no
+        #             Before = umount.target microvm-virtiofsd@${hostName}.service
+        #             Conflicts = umount.target
+        #             RequiredBy = microvm-virtiofsd@${hostName}.service
+        #           '';
+        #         };
+        #       })
+        #       self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets)
+        #   config.zfsSharesFor);
 
-        systemd.services = lib.mkMerge (lib.mapAttrsToList
-          (hostName: _:
-            let
-              mounts =
-                lib.mapAttrsToList
-                  (name: _: (utils.escapeSystemdPath "/var/lib/microvms/${hostName}/shares/${name}") + ".mount")
-                  self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets;
-            in
-            {
-              "microvm-virtiofsd@${hostName}" = {
-                overrideStrategy = "asDropin";
-                requires = mounts;
-                after = mounts;
-              };
-            })
-          config.zfsSharesFor);
+        # systemd.services = lib.mkMerge (lib.mapAttrsToList
+        #   (hostName: _:
+        #     let
+        #       mounts =
+        #         lib.mapAttrsToList
+        #           (name: _: utils.escapeSystemdPath "/var/lib/microvms/${hostName}/shares/${name}" + ".mount")
+        #           self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets;
+        #     in
+        #     {
+        #       "microvm-virtiofsd@${hostName}" = {
+        #         overrideStrategy = "asDropin";
+        #         requires = mounts;
+        #         after = mounts;
+        #       };
+        #     })
+        #   config.zfsSharesFor);
       };
     };
   };
