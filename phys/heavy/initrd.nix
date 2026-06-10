@@ -7,7 +7,7 @@
       ssh = {
         enable = true;
         port = 2222;
-        hostKeys = [ ./ssh_host_initrd ];
+        hostKeys = [ "/etc/ssh/host-keys/initrd_ed25519" ];
         authorizedKeys = config.users.users.root.openssh.authorizedKeys.keys;
       };
     };

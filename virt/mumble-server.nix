@@ -51,7 +51,7 @@
         system.stateVersion = "25.11";
 
         age.rekey = {
-          # hostPubkey = "";
+          hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJBlbiOZ77MveihFLNG8T5eGLcx5+IG1qnTwNpAzPkZD";
         };
 
         age.secrets.murmur_password = {

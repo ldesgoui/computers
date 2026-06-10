@@ -24,7 +24,7 @@
           networking.hostName = "heavy";
 
           age.rekey = {
-            # hostPubkey = "";
+            hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJh+dCsc70rQ/fx+z2usRGdsEdsb4E+CDHkc7HLhJZO7";
           };
 
           zfsSharesFor = {
