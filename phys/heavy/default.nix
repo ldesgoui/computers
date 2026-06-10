@@ -1,4 +1,4 @@
-{ lib, inputs, ... }: {
+{ lib, self, inputs, ... }: {
   flake.nixosConfigurations.heavy =
     let
       facter = lib.importJSON ./facter.json;
@@ -10,9 +10,15 @@
         inputs.disko.nixosModules.default
         inputs.disko-zfs.nixosModules.default
         inputs.microvm.nixosModules.host
+        self.nixosModules.microvm-zfs-shares-host
         ./disko.nix
         ./initrd.nix
+
         {
+          zfsSharesFor = {
+            "virt-mumble-server" = "bagel";
+          };
+
           boot.loader = {
             systemd-boot = {
               enable = true;

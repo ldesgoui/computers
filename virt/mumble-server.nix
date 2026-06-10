@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ self, inputs, ... }:
 {
   flake.nixosConfigurations.virt-mumble-server = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
@@ -6,6 +6,7 @@
       # inputs.agenix.nixosModules.default
       # inputs.agenix-rekey.nixosModules.default
       inputs.microvm.nixosModules.microvm
+      self.nixosModules.microvm-zfs-shares-guest
 
       ({ ... }: {
         microvm = {
@@ -15,13 +16,6 @@
           systemSymlink = true;
           vsock.cid = 5;
 
-          shares = [{
-            proto = "virtiofs";
-            tag = "ro-store";
-            source = "/nix/store";
-            mountPoint = "/nix/.ro-store";
-          }];
-
           interfaces = [{
             type = "macvtap";
             id = "vm-c24675";
@@ -29,6 +23,25 @@
             macvtap.link = "vlan100";
             macvtap.mode = "bridge";
           }];
+
+          shares = [{
+            proto = "virtiofs";
+            tag = "ro-store";
+            source = "/nix/store";
+            mountPoint = "/nix/.ro-store";
+          }];
+
+          zfs = {
+            datasets = {
+              var = { mountPoint = "/var"; }; # Just in case
+              nixos = { mountPoint = "/var/lib/nixos"; };
+              systemd = { mountPoint = "/var/lib/systemd"; };
+
+              mumble-server = {
+                mountPoint = "/var/lib/murmur";
+              };
+            };
+          };
         };
 
         system.stateVersion = "25.11";
@@ -61,7 +74,7 @@
 
         systemd.network = {
           networks."10-vlan100" = {
-            matchConfig.MACAddress = "02:ca:fe:c2:46:75";
+            matchConfig.MACAddress = "02:00:00:00:c2:46";
             networkConfig = {
               Address = [ "10.100.194.70/16" ];
               Gateway = "10.100.0.1";
@@ -70,10 +83,6 @@
               DHCP = "no";
             };
           };
-        };
-
-        systemd.services.murmur = {
-          restartIfChanged = false;
         };
 
         services.openssh = {

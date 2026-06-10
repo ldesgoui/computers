@@ -73,6 +73,7 @@
 
         ./phys
         ./virt
+        ./nixos
       ];
 
       perSystem = { inputs', ... }: {
