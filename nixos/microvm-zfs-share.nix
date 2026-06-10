@@ -62,7 +62,7 @@
                     type = "zfs_fs";
                     mountpoint = "/var/lib/microvms/${hostName}/shares/${utils.escapeSystemdPath name}";
 
-                    options = ds.options;
+                    options = [ "nofail" ] ++ ds.options;
                     mountOptions = ds.mountOptions;
                   };
                 })
