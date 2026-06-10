@@ -64,8 +64,8 @@
 
                     options = ds.options;
                     mountOptions = [
-                      "x-systemd.required-by=microvm-virtiofsd@${hostName}"
-                      "x-systemd.before=microvm-virtiofsd@${hostName}"
+                      "x-systemd.required-by=microvm-virtiofsd@${hostName}.service"
+                      "x-systemd.before=microvm-virtiofsd@${hostName}.service"
                     ] ++ ds.mountOptions;
                   };
                 })
