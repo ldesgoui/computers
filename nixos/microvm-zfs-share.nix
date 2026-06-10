@@ -36,7 +36,7 @@
               (name: ds: {
                 proto = "virtiofs";
                 tag = utils.escapeSystemdPath name;
-                source = "/var/lib/microvms/${config.networking.hostName}/shares/${utils.escapeSystemdPath name}";
+                source = "/var/lib/microvms/${config.networking.hostName}/shares/${name}";
                 mountPoint = ds.mountPoint;
               })
               cfg.datasets;
@@ -60,7 +60,7 @@
                   name = "${hostName}/${name}";
                   value = {
                     type = "zfs_fs";
-                    mountpoint = "/var/lib/microvms/${hostName}/shares/${utils.escapeSystemdPath name}";
+                    mountpoint = "/var/lib/microvms/${hostName}/shares/${name}";
 
                     options = ds.options;
                     mountOptions = [ "nofail" ] ++ ds.mountOptions;
@@ -69,6 +69,25 @@
                 self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets;
             };
           })
+          config.zfsSharesFor);
+
+        systemd.services = lib.mkMerge (lib.mapAttrsToList
+          (hostName: _:
+            let
+              mounts =
+                lib.mapAttrs'
+                  (name: _: (utils.escapeSystemdPath "/var/lib/microvms/${hostName}/shares/${name}") + ".mount")
+                  self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets;
+            in
+            {
+              "microvm-virtiofs@${hostName}" = {
+                overrideStrategy = "asDropin";
+                unitConfiguration = {
+                  Requires = mounts;
+                  After = mounts;
+                };
+              };
+            })
           config.zfsSharesFor);
       };
     };
