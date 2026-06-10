@@ -1,6 +1,10 @@
 {
   imports = [
     ./age-rekey.nix
+    ./microvm-nix-store-ro.nix
+    ./microvm-ssh.nix
+    ./microvm-vlan100.nix
+    ./microvm-vsock-cid.nix
     ./microvm-zfs-share.nix
   ];
 }
