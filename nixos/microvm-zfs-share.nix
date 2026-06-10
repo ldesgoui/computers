@@ -63,7 +63,7 @@
                     mountpoint = "/var/lib/microvms/${hostName}/shares/${name}";
 
                     options = ds.options;
-                    mountOptions = [ ] ++ ds.mountOptions;
+                    mountOptions = [ "nofail" ] ++ ds.mountOptions;
                   };
                 })
                 self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets;
