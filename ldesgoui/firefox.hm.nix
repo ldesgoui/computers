@@ -6,6 +6,8 @@ in
 {
   programs.firefox = {
     enable = true;
-    package = pkgs-unstable.firefox;
+    package = pkgs-unstable.firefox.override {
+      cfg.speechSynthesisSupport = false;
+    };
   };
 }
