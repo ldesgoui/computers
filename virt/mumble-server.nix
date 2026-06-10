@@ -9,7 +9,7 @@
       inputs.microvm.nixosModules.microvm
       self.nixosModules.microvm-zfs-shares-guest
 
-      ({ ... }: {
+      ({ config, ... }: {
         networking.hostName = "mumble-server";
 
         microvm = {
@@ -63,18 +63,19 @@
         services.murmur = {
           enable = true;
 
+          environmentFile = config.age.secrets.murmur_password.path;
+
           openFirewall = true;
 
-          registerName = "da server >;D";
+          registerName = "epic server of cool";
 
           bandwidth = 558000;
           imgMsgLength = 1024 * 1024 * 10;
 
-          password = "test";
+          password = "$PASSWORD";
 
           welcometext = builtins.replaceStrings [ "\n" ] [ "<br />" ] ''
-            Wow! It's you! Nice!
-            The server has moved hosts :)
+            hi
           '';
 
           extraConfig = ''
