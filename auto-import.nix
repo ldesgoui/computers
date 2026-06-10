@@ -22,16 +22,6 @@ let
           else if lib.hasSuffix ".part.nix" name then
             [ file ]
 
-          else if lib.hasSuffix ".computer.nix" name then
-            [{
-              flake.nixosConfigurations.${full-name} =
-                inputs.nixpkgs.lib.nixosSystem (applied // {
-                  modules = applied.modules ++ [{
-                    networking.hostName = lib.mkDefault full-name;
-                  }];
-                });
-            }]
-
           else if lib.hasSuffix ".os.nix" name then
             [{
               flake.nixosModules.${full-name} = {
