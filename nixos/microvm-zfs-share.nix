@@ -75,17 +75,15 @@
           (hostName: _:
             let
               mounts =
-                lib.mapAttrs'
+                lib.mapAttrsToList
                   (name: _: (utils.escapeSystemdPath "/var/lib/microvms/${hostName}/shares/${name}") + ".mount")
                   self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets;
             in
             {
               "microvm-virtiofs@${hostName}" = {
                 overrideStrategy = "asDropin";
-                unitConfiguration = {
-                  Requires = mounts;
-                  After = mounts;
-                };
+                requires = mounts;
+                after = mounts;
               };
             })
           config.zfsSharesFor);
