@@ -62,8 +62,8 @@
                     type = "zfs_fs";
                     mountpoint = "/var/lib/microvms/${hostName}/shares/${utils.escapeSystemdPath name}";
 
-                    options = [ "nofail" ] ++ ds.options;
-                    mountOptions = ds.mountOptions;
+                    options = ds.options;
+                    mountOptions = [ "nofail" ] ++ ds.mountOptions;
                   };
                 })
                 self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets;
