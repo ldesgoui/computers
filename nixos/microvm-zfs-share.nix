@@ -63,14 +63,27 @@
                     mountpoint = "/var/lib/microvms/${hostName}/shares/${name}";
 
                     options = ds.options;
-                    mountOptions = [
-                      "x-systemd.required-by=microvm-virtiofsd@${hostName}.service"
-                    ] ++ ds.mountOptions;
+                    mountOptions = [ ] ++ ds.mountOptions;
                   };
                 })
                 self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets;
             };
           })
+          config.zfsSharesFor);
+
+        systemd.mounts = lib.mkMerge (lib.mapAttrsToList
+          (hostName: _:
+            lib.mapAttrs'
+              (name: _: {
+                name = utils.escapeSystemdPath "/var/lib/microvms/${hostName}/shares/${name}";
+                value = {
+                  unitConfig.DefaultDependencies = false;
+                  before = [ "umount.target" "microvm-virtiofsd@${hostName}.service" ];
+                  conflicts = [ "umount.target" ];
+                  requiredBy = [ "microvm-virtiofsd@${hostName}.service" ];
+                };
+              })
+              self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets)
           config.zfsSharesFor);
 
         systemd.services = lib.mkMerge (lib.mapAttrsToList
