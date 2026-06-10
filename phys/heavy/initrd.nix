@@ -6,7 +6,8 @@
 
       ssh = {
         enable = true;
-        ignoreEmptyHostKeys = true;
+        port = 2222;
+        hostKeys = [ ./ssh_host_initrd ];
         authorizedKeys = config.users.users.root.openssh.authorizedKeys.keys;
       };
     };
