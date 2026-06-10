@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.nixosConfigurations.virt-mumble-server = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.mumble-server = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
       # inputs.agenix.nixosModules.default
