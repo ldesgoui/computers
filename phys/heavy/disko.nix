@@ -4,6 +4,8 @@ let
 in
 {
   disko = {
+    zfs.enable = true;
+
     devices.nodev.root = {
       fsType = "tmpfs";
       mountpoint = "/";
