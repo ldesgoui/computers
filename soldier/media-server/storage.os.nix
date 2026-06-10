@@ -18,8 +18,6 @@ _:
     "radarr"
     "lidarr"
     "bazarr"
-
-    "syncthing"
   ];
 
   zfs.datasets = {

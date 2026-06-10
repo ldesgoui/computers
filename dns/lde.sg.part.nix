@@ -48,8 +48,6 @@ in
 
       autoconfig.CNAME = [ "mx1" ];
 
-      acted-wtf-temporary-for-northernlion.CNAME = [ "soldier.wi" ];
-
       auth.CNAME = [ "soldier.wi" ];
       headscale.CNAME = [ "soldier.wi" ];
 
@@ -61,8 +59,6 @@ in
       }];
 
       int.subdomains = {
-        syncthing-soldier = ts.soldier;
-
         vaultwarden = ts.soldier;
         stalwart = ts.soldier;
 
@@ -78,7 +74,6 @@ in
         deluge = ts.soldier;
 
         thelounge = ts.soldier;
-        vikunja = ts.soldier;
       };
     };
   };
