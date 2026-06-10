@@ -9,12 +9,24 @@
       modules = [
         inputs.disko.nixosModules.default
         inputs.disko-zfs.nixosModules.default
+        ./disko.nix
+
+        inputs.agenix.nixosModules.default
+        inputs.agenix-rekey.nixosModules.default
+        self.nixosModules.age-rekey-settings
+
         inputs.microvm.nixosModules.host
         self.nixosModules.microvm-zfs-shares-host
-        ./disko.nix
+
         ./initrd.nix
 
         {
+          networking.hostName = "heavy";
+
+          age.rekey = {
+            # hostPubkey = "";
+          };
+
           zfsSharesFor = {
             "bagel" = [ "mumble-server" ];
           };
@@ -57,8 +69,6 @@
             # while people using ZFS on ISCSI is quite rare.
             hostId = "8425e349";
 
-            hostName = "heavy";
-
             useNetworkd = true;
           };
 
@@ -87,6 +97,11 @@
 
           services.openssh = {
             enable = true;
+
+            hostKeys = [{
+              path = "/etc/ssh/host-keys/host_id25519";
+              type = "ed25519";
+            }];
           };
 
           system.stateVersion = "25.11"; # No touchie

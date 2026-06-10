@@ -154,6 +154,11 @@ in
           type = "zfs_fs";
           mountpoint = "/var/log/journal";
         };
+
+        "heavy/ssh-host-keys" = {
+          type = "zfs_fs";
+          mountpoint = "/etc/ssh/host-keys";
+        };
       };
     };
   };

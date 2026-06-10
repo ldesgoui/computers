@@ -3,12 +3,15 @@
   flake.nixosConfigurations.mumble-server = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      # inputs.agenix.nixosModules.default
-      # inputs.agenix-rekey.nixosModules.default
+      inputs.agenix.nixosModules.default
+      inputs.agenix-rekey.nixosModules.default
+      self.nixosModules.age-rekey-settings
       inputs.microvm.nixosModules.microvm
       self.nixosModules.microvm-zfs-shares-guest
 
       ({ ... }: {
+        networking.hostName = "mumble-server";
+
         microvm = {
           # hypervisor = "cloud-hypervisor";
           machineId = "c246757b-18a3-436e-adb2-475c5dde0923";
@@ -36,6 +39,7 @@
               var = { mountPoint = "/var"; }; # Just in case
               nixos = { mountPoint = "/var/lib/nixos"; };
               systemd = { mountPoint = "/var/lib/systemd"; };
+              ssh-host-keys = { mountPoint = "/etc/ssh/host-keys"; };
 
               mumble-server = {
                 mountPoint = "/var/lib/murmur";
@@ -46,7 +50,13 @@
 
         system.stateVersion = "25.11";
 
-        networking.hostName = "mumble-server";
+        age.rekey = {
+          # hostPubkey = "";
+        };
+
+        age.secrets.murmur_password = {
+          rekeyFile = ../soldier/murmur_password.age;
+        };
 
         users.users.root.password = "toor";
 
@@ -87,6 +97,12 @@
 
         services.openssh = {
           enable = true;
+
+          hostKeys = [{
+            path = "/etc/ssh/host-keys/host_id25519";
+            type = "ed25519";
+          }];
+
           settings.PermitRootLogin = "yes";
         };
       })
