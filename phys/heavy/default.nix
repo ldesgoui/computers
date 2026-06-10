@@ -114,7 +114,13 @@
 
           users = {
             mutableUsers = false; # Stateless users, but gotta provision passwords
-            users.root.initialPassword = "toor";
+
+            users.root = {
+              initialPassword = "toor";
+              openssh.authorizedKeys.keys = [
+                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK25ea20daUVvmTPmUL1nF/0DXEz/7tPBXOSerQNTf6+"
+              ];
+            };
           };
         }
       ];

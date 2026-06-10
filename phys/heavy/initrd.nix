@@ -1,6 +1,16 @@
 # shoutout to da elvish jerricco
 { config, lib, utils, ... }: {
   boot.initrd = {
+    network = {
+      enable = true;
+
+      ssh = {
+        enable = true;
+        ignoreEmptyHostKeys = true;
+        authorizedKeys = config.users.users.root.openssh.authorizedKeys.keys;
+      };
+    };
+
     systemd.enable = true;
 
     systemd.emergencyAccess = true;
