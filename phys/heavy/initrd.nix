@@ -86,18 +86,26 @@
     # orders the way units are stopped.
     supportedFilesystems.ext4 = true;
     systemd.contents."/etc/fstab".text = ''
-      /dev/mapper/heavy-keys /etc/credstore ext4 defaults,x-systemd.after=systemd-cryptsetup@heavy-keys.service 0 2
+      /dev/mapper/heavy-keys /etc/credstore ext4 defaults,x-systemd.after=systemd-cryptsetup@${utils.escapeSystemdPath "heavy-keys"}.service 0 2
     '';
 
     # Add some conflicts to ensure the credstore closes before leaving initrd.
     systemd.targets.initrd-switch-root = {
-      conflicts = [ "etc-credstore.mount" "systemd-cryptsetup@heavy-keys.service" ];
-      after = [ "etc-credstore.mount" "systemd-cryptsetup@heavy-keys.service" ];
+      conflicts = [
+        "etc-credstore.mount"
+        "systemd-cryptsetup@${utils.escapeSystemdPath "heavy-keys"}.service"
+      ];
+      after = [
+        "etc-credstore.mount"
+        "systemd-cryptsetup@${utils.escapeSystemdPath "heavy-keys"}.service"
+      ];
     };
 
     # Though, we need to make sure udev remains up while credstore is closing.
     # Orderings during stop jobs are reversed.
-    systemd.services.systemd-udevd.before = [ "systemd-cryptsetup@heavy-keys.service" ];
+    systemd.services.systemd-udevd.before = [
+      "systemd-cryptsetup@${utils.escapeSystemdPath "heavy-keys"}.service"
+    ];
 
     # After the pool is imported and the credstore is mounted, finally
     # load the key. This uses systemd credentials, which is why the
