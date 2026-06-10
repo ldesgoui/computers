@@ -83,7 +83,7 @@
             in
             {
               "microvm-virtiofsd@${hostName}" = {
-                # overrideStrategy = "asDropin";
+                overrideStrategy = "asDropin";
                 requires = mounts;
                 after = mounts;
               };
