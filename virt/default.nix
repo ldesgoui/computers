@@ -1,6 +1,6 @@
 {
   imports = [
-    ./mumble-server.nix
-    ./tf2-spot.nix
+    ./mumble-server
+    ./tf2-spot
   ];
 }

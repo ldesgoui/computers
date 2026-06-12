@@ -3,8 +3,8 @@ let
     # hypervisor = 0;
     # local = 1;
     # host = 2;
-    "mumble-server" = 3;
-    "tf2-spot" = 4;
+    "tf2-spot" = 3;
+    "mumble-server" = 10;
   };
 in
 {
