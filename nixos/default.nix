@@ -1,5 +1,6 @@
 {
   imports = [
+    ./acme-tsig.nix
     ./age-rekey.nix
     ./microvm-nix-store-ro.nix
     ./microvm-ssh.nix
