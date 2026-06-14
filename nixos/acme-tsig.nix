@@ -3,17 +3,33 @@
     let
       inherit (config.networking) hostName;
 
-      nameserver = "soldier.wi.lde.sg";
-      algorithm = "hmac-sha512";
+      nameserver = "2001:41d0:fc14:cafe::53";
       physNames = [ "scout" "soldier" "pyro" "demoman" "heavy" "engineer" "medic" "sniper" "spy" ];
       dir = if builtins.elem hostName physNames then "phys" else "virt";
     in
     {
       age.secrets.acme-tsig = {
-        rekeyFile = "${self}/${dir}/${hostName}/acme.tsig";
-        generator.script = _: ''
-          ${pkgs.knot-dns}/bin/keymgr --tsig X ${algorithm} | ${pkgs.yq-go} eval '.key[0].secret'
+        rekeyFile = "${self}/${dir}/${hostName}/acme-tsig.age";
+        generator.script = { pkgs, ... }: ''
+          ${pkgs.knot-dns}/bin/keymgr generate --tsig '${hostName}.acme' hmac-sha512
         '';
+      };
+
+      age.secrets.acme-tsig-env = {
+        rekeyFile = "${self}/${dir}/${hostName}/acme-tsig-env.age";
+        generator = {
+          dependencies = { inherit (config.age.secrets) acme-tsig; };
+          script = { decrypt, deps, lib, pkgs, ... }: ''
+            ${pkgs.yq-go}/bin/yq eval -o=shell '
+              .key[0] | {
+                "DNSUPDATE_NAMESERVER": "${nameserver /* would this break on knot-primary? */}",
+                "DNSUPDATE_TSIG_KEY": .id,
+                "DNSUPDATE_TSIG_ALGORITHM": .algorithm,
+                "DNSUPDATE_TSIG_SECRET": .secret
+              }
+            ' $(${decrypt} ${lib.escapeShellArg deps.acme-tsig})
+          '';
+        };
       };
 
       security.acme = {
@@ -22,12 +38,7 @@
           email = "ldesgoui@gmail.com";
 
           dnsProvider = "rfc2136";
-          environmentFile = pkgs.writeText "rfc2136-nameserver.txt" ''
-            DNSUPDATE_NAMESERVER=${nameserver}
-            DNSUPDATE_TSIG_KEY=${hostName}
-            DNSUPDATE_TSIG_ALGORITHM=${algorithm}
-            DNSUPDATE_TSIG_FILE=${config.age.secrets.acme-tsig.path}
-          '';
+          environmentFile = config.age.secrets.acme-tsig-env.path;
 
           dnsResolver = "1.1.1.1:53";
         };
