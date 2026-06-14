@@ -10,11 +10,11 @@
         deps-to-env = { lib, decrypt, deps, ... }:
           let
             args = lib.concatMapAttrsStringsSep " "
-              (name: secret: "${lib.escapeShellArg} $(${decrypt} ${lib.escapeShellArg secret.file})")
+              (name: secret: "${lib.escapeShellArg name} $(${decrypt} ${lib.escapeShellArg secret.file})")
               deps;
           in
           ''
-            printf '%s=%q\n' ${args}
+            printf "%s='%s'\n" ${args}
           '';
       };
 
