@@ -42,14 +42,22 @@
           hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJBlbiOZ77MveihFLNG8T5eGLcx5+IG1qnTwNpAzPkZD";
         };
 
-        age.secrets.murmur_password = {
-          rekeyFile = ../soldier/murmur_password.age;
+        age.secrets.murmur-password = {
+          rekeyFile = ./murmur-password.age;
+        };
+
+        age.secrets.murmur-env = {
+          rekeyFile = ./murmur-env.age;
+          generator = {
+            dependencies = { PASSWORD = config.age.secrets.murmur-password; };
+            script = "deps-to-env";
+          };
         };
 
         services.murmur = {
           enable = true;
 
-          environmentFile = config.age.secrets.murmur_password.path;
+          environmentFile = config.age.secrets.murmur-env.path;
 
           openFirewall = true;
 

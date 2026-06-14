@@ -2,6 +2,22 @@
 {
   flake.nixosModules.age-rekey-settings =
     { config, ... }: {
+      age.generators = {
+        knot-tsig = { secret, pkgs, ... }: ''
+          ${pkgs.knot-dns}/bin/keymgr generate --tsig '${secret.settings.id}' ${secret.settings.algorithm or "hmac-sha512"}
+        '';
+
+        deps-to-env = { lib, decrypt, deps, ... }:
+          let
+            args = lib.concatMapAttrsStringsSep " "
+              (name: secret: "${lib.escapeShellArg} $(${decrypt} ${lib.escapeShellArg secret.file})")
+              deps;
+          in
+          ''
+            printf '%s=%q\n' ${args}
+          '';
+      };
+
       age.rekey = {
         masterIdentities = [
           {

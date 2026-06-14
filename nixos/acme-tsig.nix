@@ -10,9 +10,8 @@
     {
       age.secrets.acme-tsig = {
         rekeyFile = "${self}/${dir}/${hostName}/acme-tsig.age";
-        generator.script = { pkgs, ... }: ''
-          ${pkgs.knot-dns}/bin/keymgr generate --tsig '${hostName}.acme' hmac-sha512
-        '';
+        generator.script = "knot-tsig";
+        settings.id = "${hostName}.acme";
       };
 
       age.secrets.acme-tsig-env = {

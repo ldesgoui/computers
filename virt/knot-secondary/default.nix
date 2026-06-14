@@ -40,9 +40,8 @@
 
         age.secrets.xfr-tsig = {
           rekeyFile = ./xfr-tsig.age;
-          generator.script = { pkgs, ... }: ''
-            ${pkgs.knot-dns}/bin/keymgr generate --tsig knot-secondary.xfr hmac-sha512
-          '';
+          generator.script = "knot-tsig";
+          settings.id = "knot-secondary.xfr";
         };
 
         networking.firewall = {
