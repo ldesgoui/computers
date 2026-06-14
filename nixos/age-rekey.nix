@@ -7,14 +7,20 @@
           ${pkgs.knot-dns}/bin/keymgr generate --tsig '${secret.settings.id}' ${secret.settings.algorithm or "hmac-sha512"}
         '';
 
-        deps-to-env = { lib, decrypt, deps, ... }:
+        deps-to-env = { decrypt, deps, lib, pkgs, ... }:
           let
-            args = lib.concatMapAttrsStringsSep " "
-              (name: secret: "${lib.escapeShellArg name} $(${decrypt} ${lib.escapeShellArg secret.file})")
+            env = lib.concatMapAttrsStringsSep " "
+              (name: secret:
+                ''${name}="$(${decrypt} ${lib.escapeShellArg secret.file})"''
+              )
               deps;
+            query =
+              "{"
+              + lib.concatMapAttrsStringsSep ", " (name: _: ''"${name}": strenv(${name})'') deps
+              + "}";
           in
           ''
-            printf "%s='%s'\n" ${args}
+            ${env} ${pkgs.yq-go}/bin/yq -n -o=shell ${lib.escapeShellArg query}
           '';
       };
 
