@@ -54,10 +54,20 @@
           };
         };
 
+        security.acme.certs."cool-zone.lde.sg" = {
+          extraDomainNames = [
+            "soldier.wi.lde.sg"
+            "mumble.ldesgoui.xyz"
+          ];
+
+          group = "murmur";
+        };
+
         services.murmur = {
           enable = true;
 
           environmentFile = config.age.secrets.murmur-env.path;
+          tls.useACMEHost = "cool-zone.lde.sg";
 
           openFirewall = true;
 
@@ -76,6 +86,8 @@
             rememberchannelduration=3600
           '';
         };
+
+        systemd.services.murmur.reload = "kill -USR1 $MAINPID";
       })
     ];
   };
