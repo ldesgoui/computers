@@ -1,5 +1,5 @@
 { self, ... }: {
-  self.nixosModules.acme-tsig = { config, pkgs, ... }:
+  flake.nixosModules.acme-tsig = { config, pkgs, ... }:
     let
       inherit (config.networking) hostName;
 
