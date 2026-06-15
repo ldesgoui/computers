@@ -29,13 +29,13 @@ in
       {
         selector = "202501e";
         k = "ed25519";
-        h = "sha256";
+        h = [ "sha256" ];
         p = "7mrTqLxCj5dtUJZ9xhrkE4UE5RDayp9+LYbQz/KiAVY=";
       }
       {
         selector = "202501r";
         k = "rsa";
-        h = "sha256";
+        h = [ "sha256" ];
         p = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsi8vECxGl1U4LnCADQzoDZ5vzPC4MvmpHLOCVIiuXlnsIw0w/lr08AOf9su5axwrnm7TxWSFvQLYdDYFeVBrfMncvfwQp3fSGu1wNSpX9NGBitP12IHg4bYz+BydoRJJ9EDvdm1XvrKXj3ZFWddF1OccTNyTfsn0N18gNdbE3BaqOb1fQUT9syiQLA5LqH6OFeqQa+k439VtmN1JEnHqEyffydLc3t9yX+BS1WuCRwYxUdjIFsl7JLuyIY6Pmt0wj7tK0gBShaDhD72LRwcB0IkxztMb/na7JnhTy7gFJmbFOdi0sjNzjltJ7iDXKrDBrJSPguBu7iRVkLvrNbRCRwIDAQAB";
       }
     ];

@@ -4,6 +4,7 @@
       system = "x86_64-linux";
 
       modules = [
+        { networking.hostName = "sniper"; }
         inputs.agenix.nixosModules.default
         inputs.agenix-rekey.nixosModules.default
       ]

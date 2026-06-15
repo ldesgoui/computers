@@ -4,6 +4,7 @@
       system = "x86_64-linux";
 
       modules = [
+        { networking.hostName = "scout"; }
         inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
         inputs.agenix.nixosModules.default
         inputs.agenix-rekey.nixosModules.default
