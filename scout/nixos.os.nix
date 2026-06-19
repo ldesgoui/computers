@@ -19,6 +19,9 @@ _:
 
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = [ "ldesgoui" ];
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.swtpm.enable = true;
+  };
   virtualisation.spiceUSBRedirection.enable = true;
 }
