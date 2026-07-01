@@ -8,6 +8,16 @@
       {
         options = {
           microvm.zfs = {
+            rootFsOptions = lib.mkOption {
+              type = types.attrsOf types.str;
+              default = {
+                canmount = "off";
+                mountpoint = "none";
+
+                encryption = "on";
+              };
+            };
+
             datasets = lib.mkOption {
               type = types.attrsOf (types.submodule {
                 options = {
@@ -54,23 +64,33 @@
       config = {
         disko.devices.zpool = builtins.mapAttrs
           (pool: hostNames: lib.mkMerge (map
-            (hostName: {
-              datasets = lib.mapAttrs'
-                (name: ds: {
-                  name = "${hostName}/${name}";
-                  value = {
+            (hostName:
+              let
+                cfg = self.nixosConfigurations.${hostName}.config.microvm.zfs;
+              in
+              {
+                datasets = {
+                  "${hostName}" = {
                     type = "zfs_fs";
-                    mountpoint = "/var/lib/microvms/${hostName}/shares/${name}";
-
-                    options = ds.options;
-                    mountOptions = [
-                      "x-systemd.required-by=microvm-virtiofsd@${hostName}.service"
-                      "x-systemd.before=microvm-virtiofsd@${hostName}.service"
-                    ] ++ ds.mountOptions;
+                    options = cfg.rootFsOptions;
                   };
-                })
-                self.nixosConfigurations.${hostName}.config.microvm.zfs.datasets;
-            })
+                }
+                // lib.mapAttrs'
+                  (name: ds: {
+                    name = "${hostName}/${name}";
+                    value = {
+                      type = "zfs_fs";
+                      mountpoint = "/var/lib/microvms/${hostName}/shares/${name}";
+
+                      options = ds.options;
+                      mountOptions = [
+                        "x-systemd.required-by=microvm-virtiofsd@${hostName}.service"
+                        "x-systemd.before=microvm-virtiofsd@${hostName}.service"
+                      ] ++ ds.mountOptions;
+                    };
+                  })
+                  cfg.datasets;
+              })
             hostNames))
           config.zfsSharesFor;
       };
