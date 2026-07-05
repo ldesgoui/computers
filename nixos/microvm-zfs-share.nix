@@ -8,13 +8,18 @@
       {
         options = {
           microvm.zfs = {
-            rootFsOptions = lib.mkOption {
-              type = types.attrsOf types.str;
-              default = {
-                canmount = "off";
-                mountpoint = "none";
+            root = {
+              options = lib.mkOption {
+                type = types.attrsOf types.str;
+                default = {
+                  canmount = "off";
+                  mountpoint = "none";
+                };
+              };
 
-                encryption = "on";
+              encryption-passphrase-age-rekeyFile = lib.mkOption {
+                type = types.nullOr types.path;
+                default = null;
               };
             };
 
@@ -41,6 +46,13 @@
         };
 
         config = {
+          microvm.zfs.root.options =
+            lib.mkIf (cfg.root.encryption-passphrase-age-rekeyFile != null) {
+              encryption = "on";
+              keyformat = "passphrase";
+              keylocation = "file:///run/agenix/${config.networking.hostName}-keys"; # HACK: not happy about this
+            };
+
           microvm.shares =
             lib.mapAttrsToList
               (name: ds: {
@@ -62,6 +74,22 @@
       };
 
       config = {
+        age.secrets = lib.mkMerge (lib.mapAttrsToList
+          (_: hostNames: lib.mkMerge (map
+            (hostName:
+              let
+                rekeyFile =
+                  self.nixosConfigurations.${hostName}.config.microvm.zfs.root.encryption-passphrase-age-rekeyFile;
+              in
+              if rekeyFile != null then
+                { "${hostName}-keys".rekeyFile = rekeyFile; }
+              else
+                { }
+            )
+            hostNames
+          ))
+          config.zfsSharesFor);
+
         disko.devices.zpool = builtins.mapAttrs
           (pool: hostNames: lib.mkMerge (map
             (hostName:
@@ -72,7 +100,7 @@
                 datasets = {
                   "${hostName}" = {
                     type = "zfs_fs";
-                    options = cfg.rootFsOptions;
+                    options = cfg.root.options;
                   };
                 }
                 // lib.mapAttrs'
@@ -114,7 +142,7 @@
                 {
                   name = hostName;
                   value = {
-                    properties = cfg.rootFsOptions;
+                    properties = cfg.root.options;
                     children = lib.mapAttrs'
                       (name: ds: {
                         inherit name;

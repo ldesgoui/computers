@@ -23,6 +23,8 @@
           systemSymlink = true;
 
           zfs = {
+            root.encryption-passphrase-age-rekeyFile = ./zfs-encryption-passphrase.age;
+
             datasets = {
               var = { mountPoint = "/var"; }; # Just in case
               nixos = { mountPoint = "/var/lib/nixos"; };
