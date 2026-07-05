@@ -9,14 +9,14 @@
 
         deps-to-env = { decrypt, deps, lib, pkgs, ... }:
           let
-            env = lib.concatMapAttrsStringsSep " "
+            env = lib.concatMapAttrsStringSep " "
               (name: secret:
                 ''${name}="$(${decrypt} ${lib.escapeShellArg secret.file})"''
               )
               deps;
             query =
               "{"
-              + lib.concatMapAttrsStringsSep ", " (name: _: ''"${name}": strenv(${name})'') deps
+              + lib.concatMapAttrsStringSep ", " (name: _: ''"${name}": strenv(${name})'') deps
               + "}";
           in
           ''
