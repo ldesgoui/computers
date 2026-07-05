@@ -80,9 +80,8 @@
                     name = "${hostName}/${name}";
                     value = {
                       type = "zfs_fs";
-                      mountpoint = "/var/lib/microvms/${hostName}/shares/${name}";
-
                       options = ds.options;
+                      mountpoint = "/var/lib/microvms/${hostName}/shares/${name}";
                       mountOptions = [
                         "x-systemd.required-by=microvm-virtiofsd@${hostName}.service"
                         "x-systemd.before=microvm-virtiofsd@${hostName}.service"
@@ -92,6 +91,47 @@
                   cfg.datasets;
               })
             hostNames))
+          config.zfsSharesFor;
+      };
+    };
+
+    microvm-zfs-shares-host-legacy = { config, lib, utils, ... }: {
+      options = {
+        zfsSharesFor = lib.mkOption {
+          type = with lib.types; attrsOf (listOf str);
+          default = { };
+        };
+      };
+
+      config = {
+        zfs.datasets = builtins.mapAttrs
+          (pool: hostNames: {
+            children = builtins.listToAttrs (map
+              (hostName:
+                let
+                  cfg = self.nixosConfigurations.${hostName}.config.microvm.zfs;
+                in
+                {
+                  name = hostName;
+                  value = {
+                    properties = cfg.rootFsOptions;
+                    children = lib.mapAttrs'
+                      (name: ds: {
+                        inherit name;
+                        value = {
+                          properties = ds.options;
+                          mountPoint = "/var/lib/microvms/${hostName}/shares/${name}";
+                          options = [
+                            "x-systemd.required-by=microvm-virtiofsd@${hostName}.service"
+                            "x-systemd.before=microvm-virtiofsd@${hostName}.service"
+                          ] ++ ds.mountOptions;
+                        };
+                      })
+                      cfg.datasets;
+                  };
+                })
+              hostNames);
+          })
           config.zfsSharesFor;
       };
     };

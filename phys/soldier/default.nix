@@ -24,6 +24,7 @@
           profiles-zfs-datasets
 
           age-rekey-settings
+          microvm-zfs-shares-host-legacy
           ;
 
         inherit (inputs.nixos-hardware.nixosModules)
