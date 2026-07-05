@@ -12,6 +12,7 @@
       self.nixosModules.microvm-vlan100
       self.nixosModules.microvm-vsock-cid
       self.nixosModules.microvm-zfs-shares-guest
+      # self.nixosModules.acme-tsig
 
       ({ config, ... }: {
         networking.hostName = "mumble-server";
@@ -54,20 +55,20 @@
           };
         };
 
-        security.acme.certs."cool-zone.lde.sg" = {
-          extraDomainNames = [
-            "soldier.wi.lde.sg"
-            "mumble.ldesgoui.xyz"
-          ];
+        # security.acme.certs."cool-zone.lde.sg" = {
+        #   extraDomainNames = [
+        #     "soldier.wi.lde.sg"
+        #     "mumble.ldesgoui.xyz"
+        #   ];
 
-          group = "murmur";
-        };
+        #   group = "murmur";
+        # };
 
         services.murmur = {
           enable = true;
 
           environmentFile = config.age.secrets.murmur-env.path;
-          tls.useACMEHost = "cool-zone.lde.sg";
+          # tls.useACMEHost = "cool-zone.lde.sg";
 
           openFirewall = true;
 
