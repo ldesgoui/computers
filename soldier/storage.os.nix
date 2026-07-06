@@ -13,6 +13,10 @@ _:
     enableRecommended = true;
   };
 
+  zfsSharesFor = {
+    main = [ "mumble-server" ];
+  };
+
   zfs.pools = {
     main = {
       vdevs = [

@@ -28,7 +28,9 @@
           };
 
           zfsSharesFor = {
-            "bagel" = [ "mumble-server" ];
+            "bagel" = [
+              # "mumble-server"
+            ];
           };
 
           boot.loader = {
