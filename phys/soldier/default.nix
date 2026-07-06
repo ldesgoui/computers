@@ -11,7 +11,7 @@
         self.nixosModules.age-rekey-settings
 
         inputs.microvm.nixosModules.host
-        self.nixosModules.microvm-zfs-shares-host
+        self.nixosModules.microvm-zfs-shares-host-legacy
       ]
       ++ lib.mapAttrsToList
         (name: module: if lib.hasPrefix "soldier-" name then module else { })
