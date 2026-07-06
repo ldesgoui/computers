@@ -132,6 +132,22 @@
       };
 
       config = {
+        age.secrets = lib.mkMerge (lib.mapAttrsToList
+          (_: hostNames: lib.mkMerge (map
+            (hostName:
+              let
+                rekeyFile =
+                  self.nixosConfigurations.${hostName}.config.microvm.zfs.root.encryption-passphrase-age-rekeyFile;
+              in
+              if rekeyFile != null then
+                { "${hostName}-keys".rekeyFile = rekeyFile; }
+              else
+                { }
+            )
+            hostNames
+          ))
+          config.zfsSharesFor);
+
         zfs.datasets = builtins.mapAttrs
           (pool: hostNames: {
             children = builtins.listToAttrs (map
