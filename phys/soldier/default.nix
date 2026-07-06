@@ -5,8 +5,13 @@
 
       modules = [
         { networking.hostName = "soldier"; }
+
         inputs.agenix.nixosModules.default
         inputs.agenix-rekey.nixosModules.default
+        self.nixosModules.age-rekey-settings
+
+        inputs.microvm.nixosModules.host
+        self.nixosModules.microvm-zfs-shares-host
       ]
       ++ lib.mapAttrsToList
         (name: module: if lib.hasPrefix "soldier-" name then module else { })
@@ -22,9 +27,6 @@
           profiles-nix
           profiles-ssh
           profiles-zfs-datasets
-
-          age-rekey-settings
-          microvm-zfs-shares-host-legacy
           ;
 
         inherit (inputs.nixos-hardware.nixosModules)
