@@ -48,7 +48,7 @@
         };
 
         age.rekey = {
-          hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJPHFmebpztBhJ+Em22a+tlAOYUu6/0Nk5LFyk5pkb0H";
+          hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA/ZEvhGwHQ1pfDMeNYZ4vm0A6QJfKW+s27STqlvuc6Z";
         };
 
         age.secrets.murmur-password = {
