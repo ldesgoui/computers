@@ -13,6 +13,8 @@ _:
     enableRecommended = true;
   };
 
+  boot.zfs.requestEncryptionCredentials = [ "main/enc" "big/enc" ];
+
   zfsSharesFor = {
     main = [ "mumble-server" ];
   };

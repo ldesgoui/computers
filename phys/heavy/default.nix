@@ -46,8 +46,15 @@
             efi.canTouchEfiVariables = true;
           };
 
-          # This is the new recommended default
-          boot.zfs.forceImportRoot = false;
+          boot.zfs = {
+            # We don't want to try unlocking everything on boot
+            # as some of the keys are read from agenix secrets,
+            # those are not available.
+            requestEncryptionCredentials = [ "bagel/heavy" ];
+
+            # This is the new recommended default
+            forceImportRoot = false;
+          };
 
           documentation = {
             enable = false;
