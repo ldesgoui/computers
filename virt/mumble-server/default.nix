@@ -41,7 +41,7 @@
 
         users.mutableUsers = false;
         users.users.root = {
-          password = "toor";
+          initialPassword = "toor";
           openssh.authorizedKeys.keys = [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEKTIdCTmYMk+5MxwWLhH4YNDwY2zXIuEvnyzIrXikOe ldesgoui@soldier"
           ];
