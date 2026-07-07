@@ -39,6 +39,7 @@
 
         system.stateVersion = "26.05";
 
+        users.mutableUsers = false;
         users.users.root.password = "toor";
 
         age.rekey = {
