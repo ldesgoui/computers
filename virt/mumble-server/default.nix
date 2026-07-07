@@ -40,7 +40,12 @@
         system.stateVersion = "26.05";
 
         users.mutableUsers = false;
-        users.users.root.password = "toor";
+        users.users.root = {
+          password = "toor";
+          openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEKTIdCTmYMk+5MxwWLhH4YNDwY2zXIuEvnyzIrXikOe ldesgoui@soldier"
+          ];
+        };
 
         age.rekey = {
           hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJPHFmebpztBhJ+Em22a+tlAOYUu6/0Nk5LFyk5pkb0H";
