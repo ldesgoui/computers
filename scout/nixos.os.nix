@@ -16,12 +16,4 @@ _:
       defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
     };
   };
-
-  programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = [ "ldesgoui" ];
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu.swtpm.enable = true;
-  };
-  virtualisation.spiceUSBRedirection.enable = true;
 }
