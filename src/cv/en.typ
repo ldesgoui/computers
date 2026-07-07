@@ -101,6 +101,13 @@
 
   = Experience
 
+  #heading-with-location(
+    [== Architecte Technique DevOps NixOS at DINUM],
+    [Paris, France],
+  )
+
+  2026 → Now
+
   #block(fill: luma(240), outset: (x: 8pt), inset: (y: 8pt), radius: 6pt)[
     #heading-with-location(
       [== Software Developer II at Kraken Futures],
