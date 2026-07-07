@@ -47,6 +47,8 @@
           ];
         };
 
+        systemd.sysusers.enable = true;
+
         age.rekey = {
           hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA/ZEvhGwHQ1pfDMeNYZ4vm0A6QJfKW+s27STqlvuc6Z";
         };
