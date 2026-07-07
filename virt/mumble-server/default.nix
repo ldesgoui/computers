@@ -42,7 +42,7 @@
         users.users.root.password = "toor";
 
         age.rekey = {
-          hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJBlbiOZ77MveihFLNG8T5eGLcx5+IG1qnTwNpAzPkZD";
+          hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJPHFmebpztBhJ+Em22a+tlAOYUu6/0Nk5LFyk5pkb0H";
         };
 
         age.secrets.murmur-password = {
