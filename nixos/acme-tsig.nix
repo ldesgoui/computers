@@ -22,10 +22,10 @@
             ${decrypt} ${lib.escapeShellArg deps.acme-tsig.file} \
             | ${pkgs.yq-go}/bin/yq eval -o=shell '
               .key[0] | {
-                "DNSUPDATE_NAMESERVER": "${nameserver /* would this break on knot-primary? */}",
-                "DNSUPDATE_TSIG_KEY": .id,
-                "DNSUPDATE_TSIG_ALGORITHM": .algorithm,
-                "DNSUPDATE_TSIG_SECRET": .secret
+                "RFC2136_NAMESERVER": "${nameserver /* would this break on knot-primary? */}",
+                "RFC2136_TSIG_KEY": .id,
+                "RFC2136_TSIG_ALGORITHM": .algorithm,
+                "RFC2136_TSIG_SECRET": .secret
               }
             '
           '';
