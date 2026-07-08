@@ -183,12 +183,6 @@
                   zonefile-load = "difference-no-serial";
                   journal-content = "all";
                   serial-policy = "dateserial";
-
-                  global-module = [
-                    "mod-cookies"
-                    "mod-rrl"
-                    "mod-stats/default"
-                  ];
                 }
 
                 {
