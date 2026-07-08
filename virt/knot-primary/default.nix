@@ -52,7 +52,7 @@
           age.secrets.tsig-keys = {
             rekeyFile = ./tsig-keys.age;
 
-            group = "knot";
+            owner = "knot";
 
             generator = {
               dependencies = [
