@@ -3,7 +3,7 @@
     let
       inherit (config.networking) hostName;
 
-      nameserver = "2001:41d0:fc14:cafe::53";
+      nameserver = "2001:41d0:fc14:cafe::ff:fe00:53";
       physNames = [ "scout" "soldier" "pyro" "demoman" "heavy" "engineer" "medic" "sniper" "spy" ];
       dir = if builtins.elem hostName physNames then "phys" else "virt";
     in

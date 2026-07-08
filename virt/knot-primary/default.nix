@@ -9,7 +9,7 @@
       self.nixosModules.microvm-nix-store-ro
       self.nixosModules.microvm-ssh
       self.nixosModules.microvm-users
-      self.nixosModules.microvm-vlan100 # TODO: force ipv6 ::53
+      self.nixosModules.microvm-vlan100
       self.nixosModules.microvm-vsock-cid
       self.nixosModules.microvm-zfs-shares-guest
 
@@ -96,8 +96,8 @@
 
               remote = [{
                 id = "knot-secondary";
-                address = [ "2001:41d0:fc14:cafe::2:53" ];
-                via = [ "2001:41d0:fc14:cafe::53" ];
+                address = [ "2001:41d0:fc14:cafe::ff:fe02:53" ];
+                via = [ "2001:41d0:fc14:cafe::ff:fe00:53" ];
                 key = "knot-secondary.xfr";
               }];
 

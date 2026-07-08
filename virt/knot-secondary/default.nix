@@ -10,7 +10,7 @@
       self.nixosModules.microvm-nix-store-ro
       self.nixosModules.microvm-ssh
       self.nixosModules.microvm-users
-      self.nixosModules.microvm-vlan100 # TODO: force ipv6 ::2:53
+      self.nixosModules.microvm-vlan100
       self.nixosModules.microvm-vsock-cid
       self.nixosModules.microvm-zfs-shares-guest
 
@@ -19,7 +19,7 @@
         system.stateVersion = "26.05";
 
         microvm = {
-          machineId = "0002539a-4b9c-486f-aa2f-e3adc65dfef4";
+          machineId = "0200539a-4b9c-486f-aa2f-e3adc65dfef4";
           registerWithMachined = true;
           systemSymlink = true;
 
@@ -63,8 +63,8 @@
 
             remote = [{
               id = "knot-primary";
-              address = [ "2001:41d0:fc14:cafe::53" ];
-              via = [ "2001:41d0:fc14:cafe::2:53" ];
+              address = [ "2001:41d0:fc14:cafe::ff:fe00:53" ];
+              via = [ "2001:41d0:fc14:cafe::ff:fe02:53" ];
               key = "knot-secondary.xfr";
             }];
 
