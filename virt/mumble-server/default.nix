@@ -55,14 +55,14 @@
           };
         };
 
-        # security.acme.certs."cool-zone.lde.sg" = {
-        #   extraDomainNames = [
-        #     "soldier.wi.lde.sg"
-        #     "mumble.ldesgoui.xyz"
-        #   ];
+        security.acme.certs."cool-zone.lde.sg" = {
+          extraDomainNames = [
+            "soldier.wi.lde.sg"
+            "mumble.ldesgoui.xyz"
+          ];
 
-        #   group = "murmur";
-        # };
+          group = "murmur";
+        };
 
         services.murmur = {
           enable = true;
