@@ -82,7 +82,12 @@
                   self.nixosConfigurations.${hostName}.config.microvm.zfs.root.encryption-passphrase-age-rekeyFile;
               in
               if rekeyFile != null then
-                { "${hostName}-keys".rekeyFile = rekeyFile; }
+                {
+                  "${hostName}-keys" = {
+                    rekeyFile = rekeyFile;
+                    generator.script = "passphrase";
+                  };
+                }
               else
                 { }
             )
@@ -140,7 +145,12 @@
                   self.nixosConfigurations.${hostName}.config.microvm.zfs.root.encryption-passphrase-age-rekeyFile;
               in
               if rekeyFile != null then
-                { "${hostName}-keys".rekeyFile = rekeyFile; }
+                {
+                  "${hostName}-keys" = {
+                    rekeyFile = rekeyFile;
+                    generator.script = "passphrase";
+                  };
+                }
               else
                 { }
             )

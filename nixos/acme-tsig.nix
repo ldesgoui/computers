@@ -19,14 +19,15 @@
         generator = {
           dependencies = { inherit (config.age.secrets) acme-tsig; };
           script = { decrypt, deps, lib, pkgs, ... }: ''
-            ${pkgs.yq-go}/bin/yq eval -o=shell '
+            ${decrypt} ${lib.escapeShellArg deps.acme-tsig.file} \
+            | ${pkgs.yq-go}/bin/yq eval -o=shell '
               .key[0] | {
                 "DNSUPDATE_NAMESERVER": "${nameserver /* would this break on knot-primary? */}",
                 "DNSUPDATE_TSIG_KEY": .id,
                 "DNSUPDATE_TSIG_ALGORITHM": .algorithm,
                 "DNSUPDATE_TSIG_SECRET": .secret
               }
-            ' $(${decrypt} ${lib.escapeShellArg deps.acme-tsig})
+            '
           '';
         };
       };
