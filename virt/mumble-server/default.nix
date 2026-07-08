@@ -13,7 +13,7 @@
       self.nixosModules.microvm-vlan100
       self.nixosModules.microvm-vsock-cid
       self.nixosModules.microvm-zfs-shares-guest
-      # self.nixosModules.acme-tsig
+      self.nixosModules.acme-tsig
 
       ({ config, ... }: {
         networking.hostName = "mumble-server";

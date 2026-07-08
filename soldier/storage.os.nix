@@ -16,7 +16,11 @@ _:
   boot.zfs.requestEncryptionCredentials = [ "main/enc" "big/enc" ];
 
   zfsSharesFor = {
-    main = [ "mumble-server" ];
+    main = [
+      "tf2-spot"
+      "mumble-server"
+      "knot-primary"
+    ];
   };
 
   zfs.pools = {

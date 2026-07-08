@@ -5,6 +5,8 @@ let
     # host = 2;
     "tf2-spot" = 3;
     "mumble-server" = 10;
+    "knot-primary" = 11;
+    "knot-secondary" = 12;
   };
 in
 {

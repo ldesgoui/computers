@@ -8,6 +8,7 @@
       inputs.microvm.nixosModules.microvm
       self.nixosModules.microvm-nix-store-ro
       self.nixosModules.microvm-ssh
+      self.nixosModules.microvm-users
       self.nixosModules.microvm-vlan100 # TODO: force ipv6 ::53
       self.nixosModules.microvm-vsock-cid
       self.nixosModules.microvm-zfs-shares-guest
@@ -23,13 +24,16 @@
         in
         {
           networking.hostName = "knot-primary";
+          system.stateVersion = "26.05";
 
           microvm = {
-            machineId = "c1049c6a-835e-4676-b95c-27cfc86b9d77";
+            machineId = "00000053-835e-4676-b95c-27cfc86b9d77";
             registerWithMachined = true;
             systemSymlink = true;
 
             zfs = {
+              root.encryption-passphrase-age-rekeyFile = ./zfs-encryption-passphrase.age;
+
               datasets = {
                 var = { mountPoint = "/var"; }; # Just in case
                 nixos = { mountPoint = "/var/lib/nixos"; };
@@ -41,8 +45,6 @@
             };
           };
 
-          system.stateVersion = "26.05";
-
           age.rekey = {
             # hostPubkey = "";
           };
@@ -53,13 +55,13 @@
               dependencies = [
                 self.nixosConfigurations.knot-secondary.config.age.secrets.xfr-tsig
               ]
-              ++ builtins.genList
+              ++ map
                 (hostName: self.nixosConfigurations.${hostName}.config.age.secrets.acme-tsig)
                 acmeTsigs;
 
               script = { decrypt, deps, lib, pkgs, ... }:
                 let
-                  args = lib.concatMapStringsSep " " (s: "$(${decrypt} ${lib.escapeShellArg s.file})") deps;
+                  args = lib.concatMapStringsSep " " (s: "<(${decrypt} ${lib.escapeShellArg s.file})") deps;
                 in
                 ''
                   ${pkgs.yq-go}/bin/yq eval-all '[.key[0]] | { "key": . }' ${args}

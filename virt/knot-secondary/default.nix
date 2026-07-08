@@ -9,19 +9,23 @@
       inputs.microvm.nixosModules.microvm
       self.nixosModules.microvm-nix-store-ro
       self.nixosModules.microvm-ssh
+      self.nixosModules.microvm-users
       self.nixosModules.microvm-vlan100 # TODO: force ipv6 ::2:53
       self.nixosModules.microvm-vsock-cid
       self.nixosModules.microvm-zfs-shares-guest
 
       ({ config, ... }: {
         networking.hostName = "knot-secondary";
+        system.stateVersion = "26.05";
 
         microvm = {
-          machineId = "7f4b06cc-4b9c-486f-aa2f-e3adc65dfef4";
+          machineId = "00000253-4b9c-486f-aa2f-e3adc65dfef4";
           registerWithMachined = true;
           systemSymlink = true;
 
           zfs = {
+            root.encryption-passphrase-age-rekeyFile = ./zfs-encryption-passphrase.age;
+
             datasets = {
               var = { mountPoint = "/var"; }; # Just in case
               nixos = { mountPoint = "/var/lib/nixos"; };
@@ -31,8 +35,6 @@
             };
           };
         };
-
-        system.stateVersion = "26.05";
 
         age.rekey = {
           # hostPubkey = "";
