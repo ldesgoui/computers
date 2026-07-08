@@ -16,5 +16,7 @@
         type = "ed25519";
       }];
     };
+
+    systemd.services.agenix-install-secrets.after = [ "etc-ssh-host\\x2dkeys.mount" ];
   };
 }

@@ -9,6 +9,7 @@
       inputs.microvm.nixosModules.microvm
       self.nixosModules.microvm-nix-store-ro
       self.nixosModules.microvm-ssh
+      self.nixosModules.microvm-users
       self.nixosModules.microvm-vlan100
       self.nixosModules.microvm-vsock-cid
       self.nixosModules.microvm-zfs-shares-guest
@@ -16,6 +17,7 @@
 
       ({ config, ... }: {
         networking.hostName = "mumble-server";
+        system.stateVersion = "26.05";
 
         microvm = {
           machineId = "c246757b-18a3-436e-adb2-475c5dde0923";
@@ -36,19 +38,6 @@
             };
           };
         };
-
-        system.stateVersion = "26.05";
-
-        users.mutableUsers = false;
-        users.users.root = {
-          initialPassword = "toor";
-          openssh.authorizedKeys.keys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEKTIdCTmYMk+5MxwWLhH4YNDwY2zXIuEvnyzIrXikOe ldesgoui@soldier"
-          ];
-        };
-
-        systemd.sysusers.enable = true;
-        systemd.services.agenix-install-secrets.after = [ "etc-ssh-host\\x2dkeys.mount" ];
 
         age.rekey = {
           hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA/ZEvhGwHQ1pfDMeNYZ4vm0A6QJfKW+s27STqlvuc6Z";
