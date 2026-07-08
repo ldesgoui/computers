@@ -27,7 +27,7 @@
           system.stateVersion = "26.05";
 
           microvm = {
-            machineId = "00000053-835e-4676-b95c-27cfc86b9d77";
+            machineId = "00005310-835e-4676-b95c-27cfc86b9d77";
             registerWithMachined = true;
             systemSymlink = true;
 
