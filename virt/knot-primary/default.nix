@@ -85,8 +85,8 @@
             settings = {
               server = {
                 listen = [
-                  "0.0.0.0"
-                  "::"
+                  "0.0.0.0%enp0s9"
+                  "::%enp0s9"
                 ];
 
                 automatic-acl = "on"; # This gives remotes that we notify the permission to XFR
