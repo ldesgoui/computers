@@ -85,7 +85,7 @@
             settings = {
               server = {
                 listen = [
-                  "enp0s9@53"
+                  "10.100.0.53@53"
                   "::%enp0s9@53"
                 ];
 
