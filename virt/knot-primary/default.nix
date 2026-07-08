@@ -51,6 +51,9 @@
 
           age.secrets.tsig-keys = {
             rekeyFile = ./tsig-keys.age;
+
+            group = "knot";
+
             generator = {
               dependencies = [
                 self.nixosConfigurations.knot-secondary.config.age.secrets.xfr-tsig
