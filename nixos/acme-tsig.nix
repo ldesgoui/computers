@@ -11,7 +11,7 @@
       age.secrets.acme-tsig = {
         rekeyFile = "${self}/${dir}/${hostName}/acme-tsig.age";
         generator.script = "knot-tsig";
-        settings.id = "${hostName}.acme";
+        settings.id = "${hostName}.acme.";
       };
 
       age.secrets.acme-tsig-env = {
