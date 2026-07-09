@@ -160,6 +160,8 @@
                   dnssec-signing = "on";
                   dnssec-policy = "sign-ed25519";
                   serial-policy = "dateserial";
+                  catalog-role = "member";
+                  catalog-zone = "catalog.";
 
                   global-module = [
                     "mod-cookies"
@@ -186,6 +188,8 @@
                   zonefile-load = "difference-no-serial";
                   journal-content = "all";
                   serial-policy = "dateserial";
+                  catalog-role = "member";
+                  catalog-zone = "catalog.";
                 }
 
                 {
