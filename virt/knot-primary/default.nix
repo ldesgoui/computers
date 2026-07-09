@@ -112,11 +112,11 @@
                   id = "acme-update-txt";
                   action = "update";
                   key = map (hostName: "${hostName}.acme.") acmeTsigs;
-                  # address = [
-                  #   "2001:41d0:fc14:cafe::/64"
-                  #   "2001:41d0:fc14:ca00::/64" # TMP: soldier lives here
-                  #   # TODO: sniper can't do that
-                  # ];
+                  address = [
+                    "2001:41d0:fc14:cafe::/64"
+                    "2001:41d0:fc14:ca00::/64" # TMP: soldier lives here
+                    # TODO: sniper can't do that
+                  ];
                   update-type = [ "TXT" ];
                   # update-owner = "name";
                   # update-owner-match = "pattern";
@@ -153,7 +153,9 @@
                   # ];
 
                   semantic-checks = "on";
+                  zonefile-sync = -1;
                   zonefile-load = "difference-no-serial";
+                  zonefile-skip = [ "dnssec" ];
                   journal-content = "all";
                   dnssec-signing = "on";
                   dnssec-policy = "sign-ed25519";
@@ -180,6 +182,7 @@
                   # ];
 
                   semantic-checks = "on";
+                  zonefile-sync = -1;
                   zonefile-load = "difference-no-serial";
                   journal-content = "all";
                   serial-policy = "dateserial";
