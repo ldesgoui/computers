@@ -94,12 +94,12 @@
 
               log = [{ target = "syslog"; any = "info"; }];
 
-              remote = [{
-                id = "knot-secondary";
-                address = [ "2001:41d0:fc14:cafe::ff:fe02:53" ];
-                via = [ "2001:41d0:fc14:cafe::ff:fe00:53" ];
-                key = "knot-secondary.xfr";
-              }];
+              # remote = [{
+              #   id = "knot-secondary";
+              #   address = [ "2001:41d0:fc14:cafe::ff:fe02:53" ];
+              #   via = [ "2001:41d0:fc14:cafe::ff:fe00:53" ];
+              #   key = "knot-secondary.xfr.";
+              # }];
 
               acl = [
                 {
@@ -111,7 +111,7 @@
                 {
                   id = "acme-update-txt";
                   action = "update";
-                  key = map (hostName: "${hostName}.acme") acmeTsigs;
+                  key = map (hostName: "${hostName}.acme.") acmeTsigs;
                   address = [
                     "2001:41d0:fc14:cafe::/64"
                     "2001:41d0:fc14:ca00::/64" # TMP: soldier lives here
@@ -147,10 +147,10 @@
                     "axfr-local"
                     "acme-update-txt"
                   ];
-                  notify = [
-                    "knot-secondary"
-                    # "hurricane-electric"
-                  ];
+                  # notify = [
+                  #   "knot-secondary"
+                  #   # "hurricane-electric"
+                  # ];
 
                   semantic-checks = "on";
                   zonefile-load = "difference-no-serial";
@@ -174,10 +174,10 @@
                     "axfr-local"
                     "acme-update-txt"
                   ];
-                  notify = [
-                    "knot-secondary"
-                    # "hurricane-electric"
-                  ];
+                  # notify = [
+                  #   "knot-secondary"
+                  #   # "hurricane-electric"
+                  # ];
 
                   semantic-checks = "on";
                   zonefile-load = "difference-no-serial";
@@ -190,9 +190,9 @@
                   acl = [
                     "axfr-local"
                   ];
-                  notify = [
-                    "knot-secondary"
-                  ];
+                  # notify = [
+                  #   "knot-secondary"
+                  # ];
                   catalog-role = "generate";
                 }
               ];

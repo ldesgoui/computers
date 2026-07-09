@@ -43,7 +43,7 @@
         age.secrets.xfr-tsig = {
           rekeyFile = ./xfr-tsig.age;
           generator.script = "knot-tsig";
-          settings.id = "knot-secondary.xfr";
+          settings.id = "knot-secondary.xfr.";
         };
 
         networking.firewall = {
@@ -65,7 +65,7 @@
               id = "knot-primary";
               address = [ "2001:41d0:fc14:cafe::ff:fe00:53" ];
               via = [ "2001:41d0:fc14:cafe::ff:fe02:53" ];
-              key = "knot-secondary.xfr";
+              key = "knot-secondary.xfr.";
             }];
 
             template = [{
@@ -74,7 +74,7 @@
             }];
 
             zone = [{
-              domain = "catalog";
+              domain = "catalog.";
               template = "secondary";
               catalog-role = "interpret";
               catalog-template = "secondary";
