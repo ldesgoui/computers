@@ -35,7 +35,7 @@
         };
 
         age.rekey = {
-          # hostPubkey = "";
+          hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOVvCA6Jcxb4Q3Vo+DD7tD1/s8jYrnUvrti7n8FhxII0";
         };
 
         environment.etc."haproxy/allowed-domains".text = ''
