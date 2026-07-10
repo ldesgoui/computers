@@ -38,6 +38,13 @@
           # hostPubkey = "";
         };
 
+        environment.etc."haproxy/allowed-domains".text = ''
+          lde.sg.
+          ldesgoui.xyz.
+          piss-your.se.
+          tf2.spot.
+        '';
+
         services.haproxy = {
           enable = true;
           config = ''
@@ -56,6 +63,10 @@
             frontend http
                 bind *:80
                 mode http
+
+                acl allowed_host hdr(host),field(1,:) -i -m dom -f /etc/haproxy/allowed-domains
+                http-request deny deny_status 400 if !allowed_host
+
                 http-request do-resolve(txn.dst,dns,ipv6) hdr(host),field(1,:)
                 use_backend be_http if { var(txn.dst) -m found }
                 http-request deny deny_status 400
@@ -70,6 +81,9 @@
                 mode tcp
                 tcp-request inspect-delay 5s
                 tcp-request content accept if { req.ssl_hello_type 1 }
+
+                acl allowed_sni req.ssl_sni -i -m dom -f /etc/haproxy/allowed-domains
+                tcp-request content reject if !allowed_sni
 
                 tcp-request content do-resolve(txn.dst,dns,ipv6) req.ssl_sni
                 use_backend be_https if { var(txn.dst) -m found }
