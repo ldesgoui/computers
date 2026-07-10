@@ -7,6 +7,7 @@ let
     "mumble-server" = 10;
     "knot-primary" = 11;
     "knot-secondary" = 12;
+    "http-proxy" = 13;
   };
 in
 {

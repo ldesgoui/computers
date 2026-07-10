@@ -20,6 +20,7 @@ _:
       "tf2-spot"
       "mumble-server"
       "knot-primary"
+      "http-proxy"
     ];
   };
 
