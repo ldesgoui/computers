@@ -79,7 +79,7 @@
             servers {
               listener_wrappers {
                 proxy_protocol {
-                  allow 2001:41d0:fc14:cafe/64
+                  allow 2001:41d0:fc14:cafe::1/64
                 }
                 tls
               }
