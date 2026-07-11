@@ -59,6 +59,12 @@
       inputs.flake-parts.follows = "flake-parts";
       inputs.disko.follows = "disko";
     };
+
+    tf2-spot = {
+      url = "github:tf2-spot/tf2.spot/fantasy";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.flake-parts.follows = "flake-parts";
+    };
   };
 
   outputs = inputs @ { flake-parts, ... }:

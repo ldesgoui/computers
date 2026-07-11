@@ -233,6 +233,28 @@
         "type": "github"
       }
     },
+    "flakelight": {
+      "inputs": {
+        "nixpkgs": [
+          "tf2-spot",
+          "spire",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1783352529,
+        "narHash": "sha256-FZDPaZdAAjFbJWR/BoWCCVYB16WV0b472vhUPlQawh0=",
+        "owner": "nix-community",
+        "repo": "flakelight",
+        "rev": "da36ab2f725feb14b287ff1d6d56f6fc8ce6be5a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "flakelight",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -441,7 +463,8 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",
-        "systems": "systems_2"
+        "systems": "systems_2",
+        "tf2-spot": "tf2-spot"
       }
     },
     "spectrum": {
@@ -458,6 +481,51 @@
       "original": {
         "type": "git",
         "url": "https://spectrum-os.org/git/spectrum"
+      }
+    },
+    "spire": {
+      "inputs": {
+        "flakelight": "flakelight",
+        "nixpkgs": [
+          "tf2-spot",
+          "nixpkgs"
+        ],
+        "steam-fetcher": "steam-fetcher"
+      },
+      "locked": {
+        "lastModified": 1783695318,
+        "narHash": "sha256-b4R1j9o3+g56pI9bd/oN1B4QhppMiezntSTYYbrwStE=",
+        "ref": "refs/heads/main",
+        "rev": "e8b2232d59653266708dfd14b77392b6cfde6f76",
+        "revCount": 87,
+        "type": "git",
+        "url": "https://codeberg.org/spire/nix"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/spire/nix"
+      }
+    },
+    "steam-fetcher": {
+      "inputs": {
+        "nixpkgs": [
+          "tf2-spot",
+          "spire",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1758622040,
+        "narHash": "sha256-BRUZZoQDCD1qByJjHm4YKipQlB2PburWLG9Iaggr8XQ=",
+        "owner": "nix-community",
+        "repo": "steam-fetcher",
+        "rev": "ab5e3a0828b4b179feb548c57be584ce812956a8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "steam-fetcher",
+        "type": "github"
       }
     },
     "systems": {
@@ -487,6 +555,31 @@
       "original": {
         "owner": "nix-systems",
         "repo": "x86_64-linux",
+        "type": "github"
+      }
+    },
+    "tf2-spot": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "spire": "spire"
+      },
+      "locked": {
+        "lastModified": 1783809285,
+        "narHash": "sha256-pWu+242WCfIAzVZcZi3c9CCj4VwrPbsIZLt9A8LCrf8=",
+        "owner": "tf2-spot",
+        "repo": "tf2.spot",
+        "rev": "3e66fb4f793ffbd16e9f3e72a0435f7d34b8249f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tf2-spot",
+        "ref": "fantasy",
+        "repo": "tf2.spot",
         "type": "github"
       }
     },
