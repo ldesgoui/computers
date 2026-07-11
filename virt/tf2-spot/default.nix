@@ -85,8 +85,9 @@
               }
             }
           '';
-
         };
+
+        users.users.mathesar.linger = lib.mkForce false;
 
         tf2-spot = {
           toplevel = {
