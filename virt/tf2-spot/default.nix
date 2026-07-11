@@ -17,7 +17,7 @@
 
       inputs.tf2-spot.nixosModules.websites
 
-      ({ config, ... }: {
+      ({ lib, config, ... }: {
         networking.hostName = "tf2-spot";
         system.stateVersion = "26.05";
 
