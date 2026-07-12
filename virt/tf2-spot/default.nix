@@ -144,6 +144,8 @@
         };
 
         systemd.services.sqitch.script = lib.mkForce ''
+          env
+          ls $CREDENTIALS_DIRECTORY
           sqitch --chdir ${inputs.tf2-spot}/sqitch/meta config -l
         '';
 
