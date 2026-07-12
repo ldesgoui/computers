@@ -94,8 +94,6 @@
           autoSubUidGidRange = true;
         };
 
-        systemd.sysusers.enable = lib.mkForce false;
-
         tf2-spot = {
           toplevel = {
             enable = true;

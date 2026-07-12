@@ -1,5 +1,7 @@
 {
   flake.nixosModules.microvm-ssh = {
+    fileSystems."/etc/ssh/host-keys".neededForBoot = true; # Needed early for agenix
+
     microvm = {
       zfs = {
         datasets = {
@@ -16,7 +18,5 @@
         type = "ed25519";
       }];
     };
-
-    systemd.services.agenix-install-secrets.after = [ "etc-ssh-host\\x2dkeys.mount" ];
   };
 }

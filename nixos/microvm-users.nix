@@ -8,7 +8,5 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEKTIdCTmYMk+5MxwWLhH4YNDwY2zXIuEvnyzIrXikOe ldesgoui@soldier"
       ];
     };
-
-    systemd.sysusers.enable = true;
   };
 }
