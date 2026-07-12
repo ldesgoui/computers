@@ -86,7 +86,7 @@
           rekeyFile = ./sqitch-env.age;
           generator = {
             dependencies = {
-              FANTASY_ADMIN_PASSWORD = config.age.secrets.fantasy-admin-password;
+              PASSWORD_FANTASY_ADMIN = config.age.secrets.fantasy-admin-password;
             };
             script = "deps-to-env";
           };
@@ -158,7 +158,7 @@
               [target "prod"]
                 uri = db:pg://sqitch@/postgres
               [target "prod.variables"]
-                fantasy_admin_password = "$FANTASY_ADMIN_PASSWORD"
+                password_fantasy_admin = '$PASSWORD_FANTASY_ADMIN'
             '';
 
             envFile = config.age.secrets.sqitch-env.path;
