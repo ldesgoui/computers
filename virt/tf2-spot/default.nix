@@ -26,22 +26,22 @@
           registerWithMachined = true;
           systemSymlink = true;
 
-          root.options = {
-            recordsize = "1M";
-
-            compression = "zstd-3"; # lil harder than lz4
-
-            acltype = "posix";
-            atime = "off"; # don't care about access times
-            dnodesize = "auto"; # more efficient than legacy
-            xattr = "sa"; # enhances perf for acltype=posix and dnodesize=auto
-
-            utf8only = "on";
-            normalization = "formD";
-          };
-
           zfs = {
             root.encryption-passphrase-age-rekeyFile = ./zfs-encryption-passphrase.age;
+
+            root.options = {
+              recordsize = "1M";
+
+              compression = "zstd-3"; # lil harder than lz4
+
+              acltype = "posix";
+              atime = "off"; # don't care about access times
+              dnodesize = "auto"; # more efficient than legacy
+              xattr = "sa"; # enhances perf for acltype=posix and dnodesize=auto
+
+              utf8only = "on";
+              normalization = "formD";
+            };
 
             datasets = {
               var = { mountPoint = "/var"; }; # Just in case
@@ -66,6 +66,7 @@
           };
 
           volumes = [{
+            # virtiofs is not good enough to do funny container stuff on I guess
             image = "var-lib-podman-mathesar.img";
             mountPoint = "/var/lib/podman-mathesar";
             size = 8 * 1024;
@@ -74,6 +75,28 @@
 
         age.rekey = {
           hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEFsth5ox8QM1wCt1HMUg0Ba34BguJlgryKUko5HRYY1";
+        };
+
+        age.secrets.fantasy-admin-password = {
+          rekeyFile = ./fantasy-admin-password.age;
+          generator.script = "passphrase";
+        };
+
+        age.secrets.sqitch-user-config = {
+          rekeyFile = ./sqitch-user-config.age;
+          generator = {
+            dependencies = {
+              password_fantasy_admin = config.age.secrets.fantasy-admin-password;
+            };
+            script = { pkgs, deps, decrypt, ... }: ''
+              echo '[target "prod"]'
+              echo 'uri = db:pg://sqitch@/postgres'
+              echo '[target "prod.variables"]'
+              ${lib.concatMapAttrsStringSep "\n" (name: secret: ''
+                printf "%s = '%s'\n" ${lib.escapeShellArg name} "$(${decrypt} ${lib.escapeShellArg secret.file})"
+              '') deps}
+            '';
+          };
         };
 
         age.secrets.postgrest-jwt-secret = {
@@ -120,13 +143,6 @@
           };
         };
 
-        users.users.mathesar = {
-          linger = lib.mkForce false;
-          home = "/var/lib/podman-mathesar";
-          createHome = true;
-          autoSubUidGidRange = true;
-        };
-
         tf2-spot = {
           toplevel = {
             enable = true;
@@ -142,6 +158,7 @@
 
           sqitch = {
             enable = true;
+            userConfigFile = config.age.secrets.sqitch-user-config.path;
           };
 
           postgrest = {
