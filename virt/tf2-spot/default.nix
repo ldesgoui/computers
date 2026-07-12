@@ -101,6 +101,7 @@
         services.caddy = {
           # TODO: Harden by only allowing the specific IPv6 of virt/http-proxy
           globalConfig = ''
+            auto_https disable_redirects
             servers {
               listener_wrappers {
                 proxy_protocol {
