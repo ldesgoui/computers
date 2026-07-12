@@ -91,9 +91,10 @@
           linger = lib.mkForce false;
           home = "/var/lib/podman-mathesar";
           createHome = true;
-          subUidRanges = [{ startUid = 120000; count = 65536; }];
-          subGidRanges = [{ startGid = 120000; count = 65536; }];
+          autoSubUidGidRange = true;
         };
+
+        systemd.sysusers.enable = lib.mkForce false;
 
         tf2-spot = {
           toplevel = {
