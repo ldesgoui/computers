@@ -26,6 +26,20 @@
           registerWithMachined = true;
           systemSymlink = true;
 
+          root.options = {
+            recordsize = "1M";
+
+            compression = "zstd-3"; # lil harder than lz4
+
+            acltype = "posix";
+            atime = "off"; # don't care about access times
+            dnodesize = "auto"; # more efficient than legacy
+            xattr = "sa"; # enhances perf for acltype=posix and dnodesize=auto
+
+            utf8only = "on";
+            normalization = "formD";
+          };
+
           zfs = {
             root.encryption-passphrase-age-rekeyFile = ./zfs-encryption-passphrase.age;
 
@@ -39,7 +53,11 @@
               # fantasy doesn't write files
               postgresql = {
                 mountPoint = "/var/lib/postgresql";
-                # TODO: postgresql tweaks
+                options = {
+                  # https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#postgresql
+                  recordsize = "32K"; # This would be 8K to match PG's record size, but compression is enabled
+                  primarycache = "metadata"; # We probably have enough memory, but let's just trust PG's cache
+                };
               };
               # sqitch doesn't write files
               # postgrest doesn't write files
@@ -92,6 +110,13 @@
               }
             }
           '';
+        };
+
+        services.postgresql = {
+          settings = {
+            # https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#postgresql
+            full_page_writes = "off";
+          };
         };
 
         users.users.mathesar = {

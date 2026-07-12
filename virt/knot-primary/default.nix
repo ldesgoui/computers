@@ -34,6 +34,20 @@
             zfs = {
               root.encryption-passphrase-age-rekeyFile = ./zfs-encryption-passphrase.age;
 
+              root.options = {
+                recordsize = "1M";
+
+                compression = "zstd-3"; # lil harder than lz4
+
+                acltype = "posix";
+                atime = "off"; # don't care about access times
+                dnodesize = "auto"; # more efficient than legacy
+                xattr = "sa"; # enhances perf for acltype=posix and dnodesize=auto
+
+                utf8only = "on";
+                normalization = "formD";
+              };
+
               datasets = {
                 var = { mountPoint = "/var"; }; # Just in case
                 nixos = { mountPoint = "/var/lib/nixos"; };
@@ -118,17 +132,6 @@
                     # TODO: sniper can't do that
                   ];
                   update-type = [ "TXT" ];
-                  # update-owner = "name";
-                  # update-owner-match = "pattern";
-                  # # My domains + up to 4 subdomains deep
-                  # update-owner-name = (builtins.foldl'
-                  #   (acc: _: rec {
-                  #     last = acc.last + ".*";
-                  #     out = acc.out ++ [ last ];
-                  #   })
-                  #   { last = "_acme-challenge.*"; out = [ ]; }
-                  #   (builtins.genList (n: n) 5)
-                  # ).out;
                 }
               ];
 

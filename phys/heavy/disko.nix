@@ -130,6 +130,14 @@ in
           };
         };
 
+        "heavy/nix-db" = {
+          type = "zfs_fs";
+          mountpoint = "/nix/var/nix/db";
+          options = {
+            recordsize = "64K";
+          };
+        };
+
         # Just in case
         "heavy/var" = {
           type = "zfs_fs";

@@ -26,6 +26,20 @@
           zfs = {
             root.encryption-passphrase-age-rekeyFile = ./zfs-encryption-passphrase.age;
 
+            root.options = {
+              recordsize = "1M";
+
+              compression = "zstd-3"; # lil harder than lz4
+
+              acltype = "posix";
+              atime = "off"; # don't care about access times
+              dnodesize = "auto"; # more efficient than legacy
+              xattr = "sa"; # enhances perf for acltype=posix and dnodesize=auto
+
+              utf8only = "on";
+              normalization = "formD";
+            };
+
             datasets = {
               var = { mountPoint = "/var"; }; # Just in case
               nixos = { mountPoint = "/var/lib/nixos"; };
