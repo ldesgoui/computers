@@ -222,6 +222,8 @@
               }];
             };
           };
+
+          time.timeZone = "Europe/Paris";
         })
     ];
   };

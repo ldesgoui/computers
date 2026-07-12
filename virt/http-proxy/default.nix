@@ -118,6 +118,8 @@
                 server dynamic 0.0.0.0:443 send-proxy-v2
           '';
         };
+
+        time.timeZone = "Europe/Paris";
       })
     ];
   };

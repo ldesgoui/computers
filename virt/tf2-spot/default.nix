@@ -175,6 +175,8 @@
             envFile = config.age.secrets.mathesar-env.path;
           };
         };
+
+        time.timeZone = "Europe/Paris";
       })
     ];
   };

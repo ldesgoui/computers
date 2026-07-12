@@ -95,6 +95,8 @@
             }];
           };
         };
+
+        time.timeZone = "Europe/Paris";
       })
     ];
   };

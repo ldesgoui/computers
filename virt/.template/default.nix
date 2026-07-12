@@ -51,6 +51,8 @@
         age.rekey = {
           # hostPubkey = "";
         };
+
+        time.timeZone = "Europe/Paris";
       })
     ];
   };

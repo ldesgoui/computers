@@ -106,6 +106,8 @@
         };
 
         systemd.services.murmur.reload = "kill -USR1 $MAINPID";
+
+        time.timeZone = "Europe/Paris";
       })
     ];
   };
