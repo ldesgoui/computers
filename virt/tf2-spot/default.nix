@@ -48,8 +48,8 @@
           };
 
           volumes = [{
-            image = "var-lib-containers.img";
-            mountPoint = "/var/lib/containers";
+            image = "var-lib-podman-mathesar.img";
+            mountPoint = "/var/lib/podman-mathesar";
             size = 8 * 1024;
           }];
         };
@@ -76,6 +76,8 @@
             };
             script = "deps-to-env";
           };
+
+          owner = "mathesar";
         };
 
         services.caddy = {
@@ -98,8 +100,6 @@
           createHome = true;
           autoSubUidGidRange = true;
         };
-
-        environment.systemPackages = [ pkgs.fuse-overlayfs ];
 
         tf2-spot = {
           toplevel = {
