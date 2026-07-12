@@ -87,7 +87,11 @@
           '';
         };
 
-        users.users.mathesar.linger = lib.mkForce false;
+        users.users.mathesar = {
+          linger = lib.mkForce false;
+          home = "/var/lib/podman-mathesar";
+          createHome = true;
+        };
 
         tf2-spot = {
           toplevel = {
