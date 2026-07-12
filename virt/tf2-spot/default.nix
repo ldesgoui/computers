@@ -117,8 +117,6 @@
         services.caddy = {
           # TODO: Harden by only allowing the specific IPv6 of virt/http-proxy
           globalConfig = ''
-            auto_https disable_redirects
-
             servers {
               listener_wrappers {
                 proxy_protocol {
@@ -128,13 +126,6 @@
               }
             }
           '';
-
-          virtualHosts = {
-            "tf2.spot".serverAliases = [ "http://tf2.spot" ];
-            "fantasy.tf2.spot".serverAliases = [ "http://fantasy.tf2.spot" ];
-            "postgrest.tf2.spot".serverAliases = [ "http://postgrest.tf2.spot" ];
-            "mathesar.tf2.spot".serverAliases = [ "http://mathesar.tf2.spot" ];
-          };
         };
 
         services.postgresql = {
@@ -145,6 +136,8 @@
         };
 
         tf2-spot = {
+          tls = false;
+
           toplevel = {
             enable = true;
           };
