@@ -143,6 +143,10 @@
           };
         };
 
+        systemd.services.sqitch.script = lib.mkForce ''
+          sqitch --chdir ${inputs.tf2-spot}/sqitch/meta config -l
+        '';
+
         tf2-spot = {
           toplevel = {
             enable = true;
