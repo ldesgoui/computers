@@ -17,7 +17,7 @@
 
       inputs.tf2-spot.nixosModules.websites
 
-      ({ lib, config, ... }: {
+      ({ lib, pkgs, config, ... }: {
         networking.hostName = "tf2-spot";
         system.stateVersion = "26.05";
 
@@ -93,6 +93,8 @@
           createHome = true;
           autoSubUidGidRange = true;
         };
+
+        environment.systemPackages = [ pkgs.fuse-overlayfs ];
 
         tf2-spot = {
           toplevel = {
