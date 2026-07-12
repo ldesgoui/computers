@@ -82,20 +82,13 @@
           generator.script = "passphrase";
         };
 
-        age.secrets.sqitch-user-config = {
-          rekeyFile = ./sqitch-user-config.age;
+        age.secrets.sqitch-env = {
+          rekeyFile = ./sqitch-env.age;
           generator = {
             dependencies = {
-              password_fantasy_admin = config.age.secrets.fantasy-admin-password;
+              FANTASY_ADMIN_PASSWORD = config.age.secrets.fantasy-admin-password;
             };
-            script = { pkgs, deps, decrypt, ... }: ''
-              echo '[target "prod"]'
-              echo 'uri = db:pg://sqitch@/postgres'
-              echo '[target "prod.variables"]'
-              ${lib.concatMapAttrsStringSep "\n" (name: secret: ''
-                printf "%s = '%s'\n" ${lib.escapeShellArg name} "$(${decrypt} ${lib.escapeShellArg secret.file})"
-              '') deps}
-            '';
+            script = "deps-to-env";
           };
         };
 
@@ -143,12 +136,6 @@
           };
         };
 
-        systemd.services.sqitch.script = lib.mkForce ''
-          env
-          ls $CREDENTIALS_DIRECTORY
-          sqitch --chdir ${inputs.tf2-spot}/sqitch/meta config -l
-        '';
-
         tf2-spot = {
           toplevel = {
             enable = true;
@@ -164,8 +151,17 @@
 
           sqitch = {
             enable = true;
+
             target = "prod";
-            userConfigFile = config.age.secrets.sqitch-user-config.path;
+
+            userConfig = ''
+              [target "prod"]
+                uri = db:pg://sqitch@/postgres
+              [target "prod.variables"]
+                fantasy_admin_password = "$FANTASY_ADMIN_PASSWORD"
+            '';
+
+            envFile = config.age.secrets.sqitch-env.path;
           };
 
           postgrest = {
