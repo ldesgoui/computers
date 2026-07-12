@@ -44,9 +44,14 @@
               # sqitch doesn't write files
               # postgrest doesn't write files
               # TODO: mathesar writes media i guess
-              # TODO: podman writes images that we don't care about
             };
           };
+
+          volumes = [{
+            image = "var-lib-containers.img";
+            mountPoint = "/var/lib/containers";
+            size = 8 * 1024;
+          }];
         };
 
         age.rekey = {
