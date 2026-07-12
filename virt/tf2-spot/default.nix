@@ -158,6 +158,7 @@
 
           sqitch = {
             enable = true;
+            target = "prod";
             userConfigFile = config.age.secrets.sqitch-user-config.path;
           };
 
