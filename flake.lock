@@ -529,11 +529,11 @@
         "spire": "spire"
       },
       "locked": {
-        "lastModified": 1783888356,
-        "narHash": "sha256-fuTgmeQpXDEYhec5ipGEOwcjGrV+phm+gctUMM1VWRo=",
+        "lastModified": 1783901604,
+        "narHash": "sha256-p6nDDQ3nVNrfd4jUjW2WDmHTuC1EfC8D2YyTQEUXQBs=",
         "owner": "tf2-spot",
         "repo": "tf2.spot",
-        "rev": "6ee0e0c82cc4f9394da72ba38224816f8a263031",
+        "rev": "96bcc1c4e848534d818c9dda95516051a1b61dba",
         "type": "github"
       },
       "original": {
