@@ -152,14 +152,17 @@
         };
 
         tf2-spot = {
-          tls = false;
-
           toplevel = {
             enable = true;
+
+            tls = false;
           };
 
           fantasy = {
             enable = true;
+
+            domain = "fantasy.localhost";
+            tls = false;
 
             envFile = config.age.secrets.fantasy-env.path;
           };
@@ -185,6 +188,10 @@
 
           postgrest = {
             enable = true;
+
+            domain = "postgrest.localhost";
+            tls = false;
+
             jwtSecretFile = config.age.secrets.postgrest-jwt-secret.path;
           };
 
@@ -192,6 +199,8 @@
             enable = true;
             version = "0.12.0";
             envFile = config.age.secrets.mathesar-env.path;
+
+            tls = false;
           };
         };
 
