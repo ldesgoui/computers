@@ -13,7 +13,6 @@
       self.nixosModules.microvm-vlan100
       self.nixosModules.microvm-vsock-cid
       self.nixosModules.microvm-zfs-shares-guest
-      self.nixosModules.acme-tsig
 
       inputs.tf2-spot.nixosModules.websites
 
@@ -148,6 +147,15 @@
           settings = {
             # https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#postgresql
             full_page_writes = "off";
+          };
+        };
+
+        security.acme = {
+          # TODO
+          acceptTerms = true;
+          defaults = {
+            email = "ldesgoui@gmail.com";
+            webroot = "/var/lib/acme/acme-challenge/";
           };
         };
 

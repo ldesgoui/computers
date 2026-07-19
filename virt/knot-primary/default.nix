@@ -19,7 +19,6 @@
 
           acmeTsigs = [
             "mumble-server"
-            "tf2-spot"
           ];
         in
         {
