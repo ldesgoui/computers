@@ -10,7 +10,7 @@
         pkgs.nil
         pkgs.nixpkgs-fmt
 
-        pkgs.nodePackages.bash-language-server
+        pkgs.bash-language-server
         pkgs.shellcheck
 
         pkgs.taplo
