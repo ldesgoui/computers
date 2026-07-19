@@ -82,6 +82,22 @@
           generator.script = "passphrase";
         };
 
+        age.secrets.fantasy-secret-key = {
+          rekeyFile = ./fantasy-secret-key.age;
+          generator.script = "alnum";
+        };
+
+        age.secrets.fantasy-env = {
+          rekeyFile = ./fantasy-env.age;
+          generator = {
+            dependencies = {
+              FLASK_SECRET_KEY = config.age.secrets.fantasy-secret-key;
+              FLASK_JWT_SECRET = config.age.secrets.postgrest-jwt-secret;
+            };
+            script = "deps-to-env";
+          };
+        };
+
         age.secrets.sqitch-env = {
           rekeyFile = ./sqitch-env.age;
           generator = {
@@ -144,6 +160,8 @@
 
           fantasy = {
             enable = true;
+
+            envFile = config.age.secrets.fantasy-env.path;
           };
 
           postgresql = {
