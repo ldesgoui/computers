@@ -1,6 +1,6 @@
 { lib, self, inputs, ... }: {
   flake.nixosConfigurations.soldier =
-    inputs.nixpkgs.lib.nixosSystem {
+    inputs.nixpkgs-old.lib.nixosSystem {
       system = "x86_64-linux";
 
       modules = [

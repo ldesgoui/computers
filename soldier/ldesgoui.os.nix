@@ -1,7 +1,7 @@
 { self, inputs, ... }:
 { lib, ... }: {
   imports = [
-    inputs.home-manager.nixosModules.home-manager
+    inputs.home-manager-old.nixosModules.home-manager
     self.nixosModules.ldesgoui-user
   ];
 
