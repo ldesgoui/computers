@@ -76,11 +76,6 @@
           hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEFsth5ox8QM1wCt1HMUg0Ba34BguJlgryKUko5HRYY1";
         };
 
-        age.secrets.fantasy-admin-password = {
-          rekeyFile = ./fantasy-admin-password.age;
-          generator.script = "passphrase";
-        };
-
         age.secrets.fantasy-secret-key = {
           rekeyFile = ./fantasy-secret-key.age;
           generator.script = "alnum";
@@ -92,16 +87,6 @@
             dependencies = {
               FLASK_SECRET_KEY = config.age.secrets.fantasy-secret-key;
               FLASK_JWT_SECRET = config.age.secrets.postgrest-jwt-secret;
-            };
-            script = "deps-to-env";
-          };
-        };
-
-        age.secrets.sqitch-env = {
-          rekeyFile = ./sqitch-env.age;
-          generator = {
-            dependencies = {
-              PASSWORD_FANTASY_ADMIN = config.age.secrets.fantasy-admin-password;
             };
             script = "deps-to-env";
           };
@@ -181,17 +166,6 @@
 
           sqitch = {
             enable = true;
-
-            target = "prod";
-
-            userConfig = ''
-              [target "prod"]
-                uri = db:pg://sqitch@/postgres
-              [target "prod.variables"]
-                password_fantasy_admin = '$PASSWORD_FANTASY_ADMIN'
-            '';
-
-            envFile = config.age.secrets.sqitch-env.path;
           };
 
           postgrest = {
