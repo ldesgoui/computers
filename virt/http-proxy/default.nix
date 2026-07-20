@@ -66,6 +66,10 @@
           tf2.spot.
         '';
 
+        environment.etc."haproxy/ip-rewrite".text = ''
+          2001:41d0:fc14:ca00:3e7c:3fff:fe22:bb0d fd4c:a29e:23d9::1
+        '';
+
         services.haproxy = {
           enable = true;
           config = ''
@@ -97,6 +101,8 @@
                 http-request do-resolve(txn.dst,dns,ipv6) hdr(host),field(1,:)
                 http-request deny deny_status 400 unless { var(txn.dst) -m found }
 
+                http-request set-var(txn.dst) var(txn.dst),map(/etc/haproxy/ip-rewrite,var(txn.dst))
+
                 use_backend be_http
 
             backend be_http
@@ -116,6 +122,8 @@
 
                 tcp-request content do-resolve(txn.dst,dns,ipv6) req.ssl_sni
                 tcp-request content reject unless { var(txn.dst) -m found }
+
+                tcp-request set-var(txn.dst) var(txn.dst),map(/etc/haproxy/ip-rewrite,var(txn.dst))
 
                 use_backend be_https
 
