@@ -23,6 +23,13 @@
           registerWithMachined = true;
           systemSymlink = true;
 
+          interfaces = [{
+            type = "bridge";
+            id = "vm-mgmt-http-proxy";
+            mac = "02:00:00:33:69:7a";
+            bridge = "br-mgmt";
+          }];
+
           zfs = {
             root.encryption-passphrase-age-rekeyFile = ./zfs-encryption-passphrase.age;
 
