@@ -107,7 +107,7 @@
 
             backend be_soldier_http
                 mode http
-                server [fd4c:a29e:23d9::1]:9080 send-proxy-v2
+                server soldier [fd4c:a29e:23d9::1]:9080 send-proxy-v2
 
             frontend https
                 bind :::443 v4v6
@@ -132,7 +132,7 @@
 
             backend be_soldier_https
                 mode tcp
-                server [fd4c:a29e:23d9::1]:9443 send-proxy-v2
+                server soldier [fd4c:a29e:23d9::1]:9443 send-proxy-v2
           '';
         };
 
