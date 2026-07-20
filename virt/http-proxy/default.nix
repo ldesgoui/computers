@@ -66,6 +66,10 @@
           tf2.spot.
         '';
 
+        networking.firewall = {
+          allowedTCPPorts = [ 80 443 ];
+        };
+
         services.haproxy = {
           enable = true;
           config = ''
