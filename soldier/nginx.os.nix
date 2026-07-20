@@ -2,6 +2,10 @@
 {
   imports = [ self.nixosModules.profiles-nginx ];
 
+  networking.firewall = {
+    allowedTCPPorts = [ 9080 9443 ];
+  };
+
   services.nginx = {
     enable = true;
     defaultListenAddresses = [
