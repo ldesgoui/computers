@@ -25,7 +25,7 @@
 
           interfaces = [{
             type = "bridge";
-            id = "vm-mgmt-http-pr";
+            id = "mgmt-http-proxy";
             mac = "02:00:00:33:69:7a";
             bridge = "br-mgmt";
           }];
@@ -66,19 +66,15 @@
           tf2.spot.
         '';
 
-        environment.etc."haproxy/ip-rewrite".text = ''
-          2001:41d0:fc14:ca00:3e7c:3fff:fe22:bb0d fd4c:a29e:23d9::1
-        '';
-
         services.haproxy = {
           enable = true;
           config = ''
-            global
-              log /dev/log local0
-              daemon
+            # global
+              log /dev/log local0 debug
               maxconn 2048
 
             defaults
+                log global
                 timeout connect 5s
                 timeout client 30s
                 timeout server 30s
@@ -92,17 +88,16 @@
                 hold valid 10s
 
             frontend http
-                bind *:80
+                bind :::80 v4v6
                 mode http
 
                 acl allowed_host hdr(host),field(1,:) -i -m dom -f /etc/haproxy/allowed-domains
-                http-request deny deny_status 400 unless allowed_host
+                http-request deny unless allowed_host
 
                 http-request do-resolve(txn.dst,dns,ipv6) hdr(host),field(1,:)
-                http-request deny deny_status 400 unless { var(txn.dst) -m found }
+                http-request deny unless { var(txn.dst) -m found }
 
-                http-request set-var(txn.dst) var(txn.dst),map(/etc/haproxy/ip-rewrite,var(txn.dst))
-
+                use_backend be_soldier_http if { var(txn.dst) -m str "2001:41d0:fc14:ca00:3e7c:3fff:fe22:bb0d" }
                 use_backend be_http
 
             backend be_http
@@ -110,8 +105,12 @@
                 http-request set-dst var(txn.dst)
                 server dynamic 0.0.0.0:80 send-proxy-v2
 
+            backend be_soldier_http
+                mode http
+                server [fd4c:a29e:23d9::1]:9080 send-proxy-v2
+
             frontend https
-                bind *:443
+                bind :::443 v4v6
                 mode tcp
 
                 tcp-request inspect-delay 5s
@@ -123,14 +122,17 @@
                 tcp-request content do-resolve(txn.dst,dns,ipv6) req.ssl_sni
                 tcp-request content reject unless { var(txn.dst) -m found }
 
-                tcp-request set-var(txn.dst) var(txn.dst),map(/etc/haproxy/ip-rewrite,var(txn.dst))
-
+                use_backend be_soldier_https if { var(txn.dst) -m str "2001:41d0:fc14:ca00:3e7c:3fff:fe22:bb0d" }
                 use_backend be_https
 
             backend be_https
                 mode tcp
                 tcp-request content set-dst var(txn.dst)
                 server dynamic 0.0.0.0:443 send-proxy-v2
+
+            backend be_soldier_https
+                mode tcp
+                server [fd4c:a29e:23d9::1]:9443 send-proxy-v2
           '';
         };
 
