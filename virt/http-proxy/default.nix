@@ -25,7 +25,7 @@
 
           interfaces = [{
             type = "bridge";
-            id = "vm-mgmt-http-proxy";
+            id = "vm-mgmt-http-pr";
             mac = "02:00:00:33:69:7a";
             bridge = "br-mgmt";
           }];
