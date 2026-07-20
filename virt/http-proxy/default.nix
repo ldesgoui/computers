@@ -97,7 +97,7 @@
                 http-request do-resolve(txn.dst,dns,ipv6) hdr(host),field(1,:)
                 http-request deny unless { var(txn.dst) -m found }
 
-                use_backend be_soldier_http if { var(txn.dst) -m str "2001:41d0:fc14:ca00:3e7c:3fff:fe22:bb0d" }
+                use_backend be_soldier_http if { var(txn.dst) -m ip 2001:41d0:fc14:ca00:3e7c:3fff:fe22:bb0d }
                 use_backend be_http
 
             backend be_http
@@ -114,7 +114,7 @@
                 mode tcp
 
                 tcp-request inspect-delay 5s
-                tcp-request content accept if { req.ssl_hello_type 1 }
+                tcp-request content reject unless { req.ssl_hello_type 1 }
 
                 acl allowed_sni req.ssl_sni -i -m dom -f /etc/haproxy/allowed-domains
                 tcp-request content reject unless allowed_sni
@@ -122,7 +122,7 @@
                 tcp-request content do-resolve(txn.dst,dns,ipv6) req.ssl_sni
                 tcp-request content reject unless { var(txn.dst) -m found }
 
-                use_backend be_soldier_https if { var(txn.dst) -m str "2001:41d0:fc14:ca00:3e7c:3fff:fe22:bb0d" }
+                use_backend be_soldier_https if { var(txn.dst) -m ip 2001:41d0:fc14:ca00:3e7c:3fff:fe22:bb0d }
                 use_backend be_https
 
             backend be_https
