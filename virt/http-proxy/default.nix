@@ -107,7 +107,7 @@
 
             backend be_http
                 mode http
-                http-request content set-dst var(txn.dst)
+                http-request set-dst var(txn.dst)
                 server dynamic 0.0.0.0:80 send-proxy-v2
 
             frontend https
