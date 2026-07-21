@@ -175,10 +175,6 @@
 
           fantasy = {
             enable = true;
-
-            domain = "fantasy.localhost";
-            tls = false;
-
             envFile = config.age.secrets.fantasy-env.path;
           };
 

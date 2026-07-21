@@ -635,11 +635,11 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1784653312,
-        "narHash": "sha256-eXN2XfZZybfUznjWVJwOsn/0xgSMnA+PmpvssgMxVd0=",
+        "lastModified": 1784656186,
+        "narHash": "sha256-GjM1eVoiBTYpiSn54xHjJst7XgaSPpc58eBx64JeoRA=",
         "owner": "tf2-spot",
         "repo": "tf2.spot",
-        "rev": "6fbcbb64237a4b5388292edb9e61ed2755f349a8",
+        "rev": "fdd05586096a856cd4f97f80e8bc80b6bd66d258",
         "type": "github"
       },
       "original": {
