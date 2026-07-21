@@ -637,11 +637,10 @@
       "locked": {
         "lastModified": 1784653312,
         "narHash": "sha256-eXN2XfZZybfUznjWVJwOsn/0xgSMnA+PmpvssgMxVd0=",
-        "ref": "refs/heads/main",
+        "owner": "tf2-spot",
+        "repo": "tf2.spot",
         "rev": "6fbcbb64237a4b5388292edb9e61ed2755f349a8",
-        "revCount": 34,
-        "type": "git",
-        "url": "file:///home/ldesgoui/Code/spot"
+        "type": "github"
       },
       "original": {
         "owner": "tf2-spot",
