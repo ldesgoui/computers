@@ -25,6 +25,9 @@
           registerWithMachined = true;
           systemSymlink = true;
 
+          vcpu = 4;
+          mem = 12885; # 12GiB
+
           zfs = {
             root.encryption-passphrase-age-rekeyFile = ./zfs-encryption-passphrase.age;
 
