@@ -115,7 +115,7 @@
         };
 
         services.caddy = {
-          # TODO: Harden by only allowing the specific IPv6 of virt/http-proxy
+          # TODO: Harden by only allowing the specific IPv6 of virt/http-proxy?
           globalConfig = ''
             servers {
               listener_wrappers {
@@ -126,6 +126,28 @@
               }
             }
           '';
+
+          # For ACME
+          virtualHosts = {
+            "http://tf2.spot" = {
+              serverAliases = [
+                "http://fantasy.tf2.spot"
+                "http://postgrest.tf2.spot"
+                "http://mathesar.tf2.spot"
+              ];
+
+              extraConfig = ''
+                handle /.well-known/acme-challenge/* {
+                  root * /var/lib/acme/acme-challenge/
+                  file_server
+                }
+
+                handle {
+                  redir https://{host}{uri}
+                }
+              '';
+            };
+          };
         };
 
         services.postgresql = {
@@ -136,7 +158,6 @@
         };
 
         security.acme = {
-          # TODO
           acceptTerms = true;
           defaults = {
             email = "ldesgoui@gmail.com";
