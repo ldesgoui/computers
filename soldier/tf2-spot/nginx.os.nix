@@ -6,7 +6,12 @@ _: {
     acmeRoot = null;
     forceSSL = true;
     locations."/" = {
-      proxyPass = "http://127.0.0.1:4242";
+      proxyPass = "https://[fd4c:a29e:23d9:0:c4e8:b0b9:b2e9:2d68]";
+      extraConfig = ''
+        proxy_ssl_verify on;
+        proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
+        proxy_ssl_name fantasy.tf2.spot;
+      '';
     };
   };
 }
