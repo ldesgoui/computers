@@ -3,6 +3,11 @@ let
   inherit (inputs) dns;
 
   wi = config.dns.zones."lde.sg".subdomains.wi.subdomains;
+
+  to-vm = {
+    inherit (wi.soldier) A;
+    AAAA = [ "2001:41d0:fc14:cafe:0:ff:fea8:21c1" ];
+  };
 in
 {
   dns.zones."tf2.spot" = {
@@ -19,7 +24,7 @@ in
 
     CAA = dns.lib.letsEncrypt "ldesgoui@gmail.com";
 
-    inherit (wi.soldier) A AAAA;
+    inherit (to-vm) A AAAA;
 
     MX = [{ exchange = "mx1.lde.sg."; preference = 10; }];
 
@@ -52,7 +57,9 @@ in
       _tls.subdomains._smpt.TXT = [{ data = "v=TLSRPTv1; rua=mailto:postmaster@lde.sg"; }];
 
       fantasy.CNAME = [ "soldier.wi.lde.sg." ];
-      mathesar.CNAME = [ "soldier.wi.lde.sg." ];
+
+      mathesar = to-vm;
+      # postgrest = to-vm; # TODO: make postgrest public
     };
   };
 }

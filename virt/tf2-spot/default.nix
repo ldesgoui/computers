@@ -147,8 +147,6 @@
         tf2-spot = {
           toplevel = {
             enable = true;
-
-            tls = false;
           };
 
           fantasy = {
@@ -181,8 +179,6 @@
             enable = true;
             version = "0.12.0";
             envFile = config.age.secrets.mathesar-env.path;
-
-            tls = false;
           };
         };
 
