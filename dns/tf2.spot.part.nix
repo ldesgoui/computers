@@ -56,10 +56,9 @@ in
 
       _tls.subdomains._smpt.TXT = [{ data = "v=TLSRPTv1; rua=mailto:postmaster@lde.sg"; }];
 
-      fantasy.CNAME = [{ cname = "soldier.wi.lde.sg."; ttl = 60 * 60; }];
-
-      mathesar = to-vm;
+      fantasy = to-vm;
       # postgrest = to-vm; # TODO: make postgrest public
+      mathesar = to-vm;
     };
   };
 }
