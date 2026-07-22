@@ -6,5 +6,6 @@
     ./mumble-server
     ./tf2-spot
     ./websites
+    ./vaultwarden
   ];
 }

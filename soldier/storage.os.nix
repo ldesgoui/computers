@@ -22,6 +22,7 @@ _:
       "knot-primary"
       "http-proxy"
       "websites"
+      "vaultwarden"
     ];
   };
 
