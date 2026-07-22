@@ -47,7 +47,9 @@ in
     }];
 
     subdomains = {
-      ns1 = wi.soldier; # Must be glue
+      ns1 = {
+        inherit (wi.soldier) A; # Must be glue
+      };
       ns2 = wi.sniper; # Must be glue
 
       autoconfig.CNAME = [ "mx1.lde.sg." ];
