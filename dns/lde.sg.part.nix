@@ -78,7 +78,7 @@ in
 
       passwords = {
         inherit (wi.soldier) A;
-        AAAA = [ "2001:41d0:fc14:ca00:::ff:feca:5885" ];
+        AAAA = [ "2001:41d0:fc14:ca00::ff:feca:5885" ];
       };
 
       int.subdomains = {
