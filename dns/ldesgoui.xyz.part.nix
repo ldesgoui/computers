@@ -52,10 +52,10 @@ in
 
       _tls.subdomains._smpt.TXT = [{ data = "v=TLSRPTv1; rua=mailto:postmaster@lde.sg"; }];
 
-      jf.CNAME = [ "soldier.wi.lde.sg." ];
-      js.CNAME = [ "soldier.wi.lde.sg." ];
+      jf.CNAME = [{ cname = "soldier.wi.lde.sg."; ttl = 600; }];
+      js.CNAME = [{ cname = "soldier.wi.lde.sg."; ttl = 600; }];
 
-      mumble.CNAME = [ "soldier.wi.lde.sg." ];
+      mumble.CNAME = [{ cname = "soldier.wi.lde.sg."; ttl = 600; }];
     };
   };
 }

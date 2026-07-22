@@ -15,6 +15,8 @@ let
 in
 {
   dns.zones."lde.sg" = {
+    TTL = 600;
+
     SOA = {
       nameServer = "ns1.piss-your.se.";
       adminEmail = "ldesgoui@gmail.com";
