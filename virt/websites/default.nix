@@ -53,8 +53,11 @@
         };
 
         services.caddy = {
+          enable = true;
+
           # TODO: Harden by only allowing the specific IPv6 of virt/http-proxy?
           globalConfig = ''
+            email ldesgoui@gmail.com
             servers {
               listener_wrappers {
                 proxy_protocol {
