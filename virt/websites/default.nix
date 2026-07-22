@@ -54,6 +54,7 @@
 
         services.caddy = {
           enable = true;
+          openFirewall = true;
 
           # TODO: Harden by only allowing the specific IPv6 of virt/http-proxy?
           globalConfig = ''
