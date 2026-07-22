@@ -127,7 +127,7 @@
             ROCKET_ADDRESS = "::1";
             ROCKET_PORT = 8222;
 
-            DATABASE_URL = "sqlite:///var/lib/vaultwarden/db/vaultwarden.sqlite3";
+            DATABASE_URL = "/var/lib/vaultwarden/db/vaultwarden.sqlite3";
             ICON_CACHE_FOLDER = "/var/cache/vaultwarden/icon-cache";
             TMP_FOLDER = "/tmp/vaultwarden"; # PrivateTmp is already set
 
