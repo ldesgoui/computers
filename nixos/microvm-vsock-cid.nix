@@ -9,7 +9,7 @@ let
     "knot-secondary" = 12;
     "http-proxy" = 13;
     "websites" = 14;
-    "vaultwarden" = "15";
+    "vaultwarden" = 15;
   };
 in
 {
