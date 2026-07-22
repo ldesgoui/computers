@@ -21,6 +21,7 @@ _:
       "mumble-server"
       "knot-primary"
       "http-proxy"
+      "websites"
     ];
   };
 

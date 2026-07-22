@@ -19,7 +19,8 @@ in
 
     CAA = dns.lib.letsEncrypt "ldesgoui@gmail.com";
 
-    inherit (wi.soldier) A AAAA;
+    inherit (wi.soldier) A;
+    AAAA = [ "2001:41d0:fc14:cafe::ff:fe07:ebe9" ];
 
     MX = [{ exchange = "mx1.lde.sg."; preference = 10; }];
 

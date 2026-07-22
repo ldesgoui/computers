@@ -54,7 +54,7 @@ in
     subdomains = {
       autoconfig.CNAME = [ "mx1.lde.sg." ];
 
-      _tls.subdomains._smpt.TXT = [{ data = "v=TLSRPTv1; rua=mailto:postmaster@lde.sg"; }];
+      _tls.subdomains._smpt.TXT = [{ data = "v=TLSRPTv1; rua=mailto:postmaster@tf2.spot"; }];
 
       fantasy = to-vm;
       # postgrest = to-vm; # TODO: make postgrest public

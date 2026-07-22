@@ -8,6 +8,7 @@ let
     "knot-primary" = 11;
     "knot-secondary" = 12;
     "http-proxy" = 13;
+    "websites" = 14;
   };
 in
 {
