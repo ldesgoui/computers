@@ -95,6 +95,20 @@
           };
         };
 
+        age.secrets.steam-api-key = {
+          rekeyFile = ./steam-api-key.age;
+        };
+
+        age.secrets.fantasy-jobs-env = {
+          rekeyFile = ./fantasy-jobs-env.age;
+          generator = {
+            dependencies = {
+              STEAM_API_KEY = config.age.secrets.steam-api-key;
+            };
+            script = "deps-to-env";
+          };
+        };
+
         age.secrets.postgrest-jwt-secret = {
           rekeyFile = ./postgrest-jwt-secret.age;
           generator.script = "alnum";
@@ -176,6 +190,11 @@
           fantasy = {
             enable = true;
             envFile = config.age.secrets.fantasy-env.path;
+          };
+
+          fantasy-jobs = {
+            enable = true;
+            envFile = config.age.secrets.fantasy-jobs-env.path;
           };
 
           postgresql = {
