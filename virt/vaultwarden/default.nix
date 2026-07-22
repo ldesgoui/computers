@@ -63,7 +63,7 @@
         };
 
         age.rekey = {
-          # hostPubkey = "";
+          hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIoEC34X3M6zZol+67RZYBd6ckl8247DgcEHQfFcNxhX";
         };
 
         age.secrets.vaultwarden-oidc-secret = {
