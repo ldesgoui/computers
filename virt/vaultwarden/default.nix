@@ -148,10 +148,10 @@
             SMTP_FROM = "vaultwarden@lde.sg";
             SMTP_USERNAME = "vaultwarden";
 
-            # PUSH_ENABLED = true;
-            # PUSH_INSTALLATION_ID = "04108ee1-9978-4e67-b5f4-b27100e87777";
-            # PUSH_RELAY_URI = "https://api.bitwarden.eu";
-            # PUSH_IDENTITY_URI = "https://identity.bitwarden.eu";
+            PUSH_ENABLED = true;
+            PUSH_INSTALLATION_ID = "04108ee1-9978-4e67-b5f4-b27100e87777";
+            PUSH_RELAY_URI = "https://api.bitwarden.eu";
+            PUSH_IDENTITY_URI = "https://identity.bitwarden.eu";
 
             SENDS_ALLOWED = false;
           };
