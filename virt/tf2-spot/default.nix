@@ -131,6 +131,14 @@
           owner = "mathesar";
         };
 
+        security.acme = {
+          acceptTerms = true;
+          defaults = {
+            email = "ldesgoui@gmail.com";
+            webroot = "/var/lib/acme/acme-challenge/";
+          };
+        };
+
         services.caddy = {
           # TODO: Harden by only allowing the specific IPv6 of virt/http-proxy?
           globalConfig = ''
@@ -171,14 +179,6 @@
           settings = {
             # https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#postgresql
             full_page_writes = "off";
-          };
-        };
-
-        security.acme = {
-          acceptTerms = true;
-          defaults = {
-            email = "ldesgoui@gmail.com";
-            webroot = "/var/lib/acme/acme-challenge/";
           };
         };
 
