@@ -78,6 +78,10 @@
           allowedTCPPorts = [ 80 443 ];
         };
 
+        networking.hosts = {
+          "[::1]" = "auth.lde.sg";
+        };
+
         security.acme = {
           acceptTerms = true;
           defaults = {
@@ -128,8 +132,7 @@
           client = {
             enable = true;
             settings = {
-              uri = "https://[::1]:443";
-              verify_hostnames = false;
+              uri = "https://auth.lde.sg";
             };
           };
 
