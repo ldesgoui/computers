@@ -98,7 +98,7 @@
             servers {
               listener_wrappers {
                 proxy_protocol {
-                  allow 2001:41d0:fc14:cafe:0:ff:fe81:4a0/128 # http-proxy
+                  allow 2001:41d0:fc14:cafe::/64
                 }
                 tls
               }
@@ -128,7 +128,8 @@
           client = {
             enable = true;
             settings = {
-              uri = "https://auth.lde.sg";
+              uri = "https://[::1]:443";
+              verify_hostnames = false;
             };
           };
 
@@ -150,7 +151,7 @@
                 db_fs_type = "zfs";
 
                 http_client_address_info.proxy-v2 = [
-                  "2001:41d0:fc14:cafe:0:ff:fe81:4a0" # http-proxy
+                  "2001:41d0:fc14:cafe::/64"
                 ];
               };
           };
