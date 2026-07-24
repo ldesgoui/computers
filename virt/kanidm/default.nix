@@ -98,7 +98,7 @@
             servers {
               listener_wrappers {
                 proxy_protocol {
-                  allow 2001:41d0:fc14:cafe:0:ff:fe81:4a0 # http-proxy
+                  allow 2001:41d0:fc14:cafe:0:ff:fe81:4a0/128 # http-proxy
                 }
                 tls
               }
