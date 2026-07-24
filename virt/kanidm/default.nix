@@ -134,7 +134,7 @@
 
                 db_fs_type = "zfs";
 
-                http_client_address_info.proxy-v2 = [ "2001:k1d0:fc14:cafe::/64" ];
+                http_client_address_info.proxy-v2 = [ "2001:41d0:fc14:cafe::/64" ];
               };
           };
 
