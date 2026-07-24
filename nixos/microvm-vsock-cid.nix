@@ -10,6 +10,7 @@ let
     "http-proxy" = 13;
     "websites" = 14;
     "vaultwarden" = 15;
+    "kanidm" = 16;
   };
 in
 {

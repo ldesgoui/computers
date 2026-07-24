@@ -23,6 +23,7 @@ _:
       "http-proxy"
       "websites"
       "vaultwarden"
+      "kanidm"
     ];
   };
 
