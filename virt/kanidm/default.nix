@@ -63,11 +63,13 @@
         age.secrets = {
           kanidm-admin-password = {
             rekeyFile = ./kanidm-admin-password.age;
+            owner = "kanidm";
             generator.script = "passphrase";
           };
 
           kanidm-idm-admin-password = {
             rekeyFile = ./kanidm-idm-admin-password.age;
+            owner = "kanidm";
             generator.script = "passphrase";
           };
         };
@@ -81,6 +83,7 @@
         };
 
         security.acme.certs."auth.lde.sg" = {
+          group = "kanidm";
           reloadServices = [ "kanidm" ];
         };
 
