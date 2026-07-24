@@ -57,7 +57,7 @@
         };
 
         age.rekey = {
-          # hostPubkey = "";
+          hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINzHK/cBnO6kTN/ALUmn28xSDu47/tkS+r7RarjkxDqC";
         };
 
         age.secrets = {
