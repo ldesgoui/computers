@@ -79,7 +79,7 @@
         };
 
         networking.hosts = {
-          "[::1]" = "auth.lde.sg";
+          "::1" = [ "auth.lde.sg" ];
         };
 
         security.acme = {
