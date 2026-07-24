@@ -68,7 +68,11 @@ in
 
       autoconfig.CNAME = [ "mx1" ];
 
-      auth.CNAME = [ "soldier.wi" ];
+      auth = {
+        inherit (wi.soldier) A;
+        AAAA = [ "2001:41d0:fc14:cafe::ff:feac:f436" ];
+      };
+
       headscale.CNAME = [ "soldier.wi" ];
 
       cool-zone.SRV = [{
