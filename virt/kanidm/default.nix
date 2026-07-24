@@ -94,12 +94,11 @@
         services.caddy = {
           enable = true;
 
-          # TODO: Harden by only allowing the specific IPv6 of virt/http-proxy?
           globalConfig = ''
             servers {
               listener_wrappers {
                 proxy_protocol {
-                  allow 2001:41d0:fc14:cafe::1/64
+                  allow 2001:41d0:fc14:cafe:0:ff:fe81:4a0 # http-proxy
                 }
                 tls
               }
@@ -126,6 +125,13 @@
         services.kanidm = {
           package = pkgs.kanidmWithSecretProvisioning_1_10;
 
+          client = {
+            enable = true;
+            settings = {
+              uri = "https://auth.lde.sg";
+            };
+          };
+
           server = {
             enable = true;
             settings =
@@ -143,7 +149,9 @@
 
                 db_fs_type = "zfs";
 
-                http_client_address_info.proxy-v2 = [ "2001:41d0:fc14:cafe::/64" ];
+                http_client_address_info.proxy-v2 = [
+                  "2001:41d0:fc14:cafe:0:ff:fe81:4a0" # http-proxy
+                ];
               };
           };
 
