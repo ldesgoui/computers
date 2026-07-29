@@ -167,7 +167,7 @@
 
                   global-module = [
                     "mod-cookies"
-                    "mod-rrl"
+                    "mod-rrl/default"
                     "mod-stats/default"
                   ];
                 }
@@ -213,6 +213,11 @@
                 { domain = "piss-your.se."; }
                 { domain = "tf2.spot."; }
               ];
+
+              mod-rrl = [{
+                id = "default";
+                rate-limit = 200;
+              }];
 
               mod-stats = [{
                 id = "default";

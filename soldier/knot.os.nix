@@ -66,7 +66,16 @@ in
         serial-policy = "dateserial";
         journal-content = "all";
         zonefile-load = "difference-no-serial";
-        global-module = [ "mod-stats/default" ];
+        global-module = [
+          "mod-cookies"
+          "mod-rrl/default"
+          "mod-stats/default"
+        ];
+      }];
+
+      mod-rrl = [{
+        id = "default";
+        rate-limit = 200;
       }];
 
       mod-stats = [{
