@@ -7,11 +7,11 @@ _:
       group = "headscale";
     };
 
-    kanidm-headscale-oidc-secret = {
-      rekeyFile = ./headscale-oidc-secret.age;
-      owner = "kanidm";
-      group = "kanidm";
-    };
+    # kanidm-headscale-oidc-secret = {
+    #   rekeyFile = ./headscale-oidc-secret.age;
+    #   owner = "kanidm";
+    #   group = "kanidm";
+    # };
   };
 
   environment.systemPackages = [ config.services.headscale.package ];
