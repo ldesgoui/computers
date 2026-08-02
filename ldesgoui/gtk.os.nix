@@ -3,23 +3,28 @@ _:
   programs.dconf.enable = true;
 
   home-manager.users.ldesgoui = {
-    gtk = {
-      enable = true;
+    gtk =
+      let
+        theme = {
+          package = pkgs.stilo-themes;
+          name = "Stilo-dark";
+        };
+      in
+      {
+        enable = true;
 
-      font = {
-        name = "Fira Sans";
-        size = 11;
-      };
+        font = {
+          name = "Fira Sans";
+          size = 11;
+        };
 
-      iconTheme = {
-        package = pkgs.tela-icon-theme;
-        name = "Tela";
-      };
+        iconTheme = {
+          package = pkgs.tela-icon-theme;
+          name = "Tela";
+        };
 
-      theme = {
-        package = pkgs.stilo-themes;
-        name = "Stilo-dark";
+        theme = theme;
+        gtk4.theme = theme;
       };
-    };
   };
 }

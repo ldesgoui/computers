@@ -7,7 +7,9 @@ _:
     pkgs.nil
     pkgs.nixpkgs-fmt
 
-    pkgs.nodePackages.bash-language-server
+    pkgs.nls
+
+    pkgs.bash-language-server
     pkgs.shellcheck
 
     pkgs.devenv

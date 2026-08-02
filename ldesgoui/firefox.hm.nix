@@ -1,7 +1,10 @@
 { inputs, ... }:
 { pkgs, ... }:
 let
-  pkgs-unstable = import inputs.nixpkgs-unstable { inherit (pkgs) config system; };
+  pkgs-unstable = import inputs.nixpkgs-unstable {
+    inherit (pkgs) config;
+    inherit (pkgs.stdenv.hostPlatform) system;
+  };
 in
 {
   programs.firefox = {

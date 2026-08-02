@@ -42,6 +42,11 @@ _:
       }
 
       {
+        name = "nickel";
+        auto-format = true;
+      }
+
+      {
         name = "toml";
         auto-format = true;
       }

@@ -1,7 +1,6 @@
 _:
 { pkgs, ... }: {
   environment.systemPackages = [
-    pkgs.helvum
     pkgs.pwvucontrol
   ];
 
