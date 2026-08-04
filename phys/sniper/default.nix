@@ -1,5 +1,5 @@
 { lib, self, inputs, ... }: {
-  flake.nixosConfigurations.heavy =
+  flake.nixosConfigurations.sniper =
     let
       facter = lib.importJSON ./facter.json;
     in
@@ -41,7 +41,7 @@
             # We don't want to try unlocking everything on boot
             # as some of the keys are read from agenix secrets,
             # those are not available.
-            requestEncryptionCredentials = [ "harvest/heavy" ];
+            requestEncryptionCredentials = [ "harvest/sniper" ];
 
             # This is the new recommended default
             forceImportRoot = false;
