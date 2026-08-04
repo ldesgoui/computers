@@ -90,7 +90,7 @@ in
 
           preCreateHook = ''
             mkdir -p /tmp/oh-god-dont-leak
-            ${pkgs.xkcdpass}/bin/xkcdpass -n 10 > /tmp/oh-god-dont-leak/sniper.passprase
+            ${pkgs.xkcdpass}/bin/xkcdpass -n 10 > /tmp/oh-god-dont-leak/sniper.passphrase
           '';
         };
 
