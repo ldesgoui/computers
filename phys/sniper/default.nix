@@ -1,30 +1,124 @@
 { lib, self, inputs, ... }: {
-  flake.nixosConfigurations.sniper =
-    inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+  flake.nixosConfigurations.heavy =
+    let
+      facter = lib.importJSON ./facter.json;
+    in
+    inputs.nixpkgs-unstable.lib.nixosSystem {
+      inherit (facter) system;
 
       modules = [
-        { networking.hostName = "sniper"; }
+        inputs.disko.nixosModules.default
+        inputs.disko-zfs.nixosModules.default
+        ./disko.nix
+
         inputs.agenix.nixosModules.default
         inputs.agenix-rekey.nixosModules.default
-      ]
-      ++ lib.mapAttrsToList
-        (name: module: if lib.hasPrefix "sniper-" name then module else { })
-        self.nixosModules
-      ++ builtins.attrValues {
-        inherit (self.nixosModules)
-          nixos-zfs
+        self.nixosModules.age-rekey-settings
 
-          profiles-acme
-          profiles-defaults
-          profiles-headless
-          profiles-networkd
-          profiles-nix
-          profiles-ssh
-          profiles-zfs-datasets
+        ./initrd.nix
 
-          age-rekey-settings
-          ;
-      };
+        {
+          networking.hostName = "sniper";
+
+          age.rekey = {
+            # hostPubkey = "";
+          };
+
+          boot.loader = {
+            systemd-boot = {
+              enable = true;
+
+              # Automatically drop the oldest configs,
+              # mostly so that the ESP doesn't fill up too much
+              configurationLimit = 10;
+            };
+
+            # There won't be another OS touching it so this is fine
+            efi.canTouchEfiVariables = true;
+          };
+
+          boot.zfs = {
+            # We don't want to try unlocking everything on boot
+            # as some of the keys are read from agenix secrets,
+            # those are not available.
+            requestEncryptionCredentials = [ "harvest/heavy" ];
+
+            # This is the new recommended default
+            forceImportRoot = false;
+          };
+
+          documentation = {
+            enable = false;
+            doc.enable = false;
+            info.enable = false;
+            man.enable = false;
+            nixos.enable = false;
+          };
+
+          environment = {
+            stub-ld.enable = false; # I don't need warnings about out-of-nix binaries
+          };
+
+          hardware.facter.report = facter;
+
+          networking = {
+            # Use the same default hostID as the NixOS install ISO and nixos-anywhere.
+            # This allows us to import zfs pool without using a force import.
+            # ZFS has this as a safety mechanism for networked block storage (ISCSI), but
+            # in practice we found it causes more breakages like unbootable machines,
+            # while people using ZFS on ISCSI is quite rare.
+            hostId = "8425e349";
+
+            useNetworkd = true;
+          };
+
+          nix = {
+            channel.enable = false; # We never use nix channels
+
+            nixPath = lib.mkForce [
+              # In the rare cases where we evaluate <nixpkgs> or <nixos>
+              "nixpkgs=${inputs.nixpkgs-unstable}"
+              "nixos=${inputs.nixpkgs-unstable}"
+            ];
+
+            optimise.automatic = true; # Run dedup once a day
+
+            registry = {
+              # This is to speed up `nix <action> nixos#<whatever>`
+              # If I want something fresher, I usually go for nixpkgs#<whatever>
+              nixos.flake = inputs.nixpkgs-unstable;
+            };
+
+            settings = {
+              experimental-features = [ "nix-command" "flakes" ];
+              trusted-users = [ "@wheel" ];
+            };
+          };
+
+          services.openssh = {
+            enable = true;
+
+            hostKeys = [{
+              path = "/etc/ssh/host-keys/host_id25519";
+              type = "ed25519";
+            }];
+          };
+
+          system.stateVersion = "26.05"; # No touchie
+
+          time.timeZone = "Europe/Paris";
+
+          users = {
+            mutableUsers = false; # Stateless users, but gotta provision passwords
+
+            users.root = {
+              initialPassword = "toor";
+              openssh.authorizedKeys.keys = [
+                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK25ea20daUVvmTPmUL1nF/0DXEz/7tPBXOSerQNTf6+"
+              ];
+            };
+          };
+        }
+      ];
     };
 }
