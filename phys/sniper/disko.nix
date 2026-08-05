@@ -84,7 +84,8 @@ in
           type = "zfs_fs";
           options = {
             encryption = "on";
-            keylocation = "file:///tmp/oh-god-dont-leak/sniper.passphrase"; # Don't forget to unset after installation
+            # keylocation = "file:///tmp/oh-god-dont-leak/sniper.passphrase";
+            keylocation = "prompt";
             keyformat = "passphrase";
           };
 
