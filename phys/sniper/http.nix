@@ -82,12 +82,12 @@
 
       backend be_kanidm
           mode tcp
-          server kanidm ${config.services.kanidm.settings.bindaddress} send-proxy-v2
+          server kanidm ${config.services.kanidm.server.settings.bindaddress} send-proxy-v2
 
       backend be_caddy
           mode tcp
           tcp-request content set-dst var(txn.dst)
-          server caddy [::1]:${config.services.caddy.httpsPort} send-proxy-v2
+          server caddy [::1]:${toString config.services.caddy.httpsPort} send-proxy-v2
     '';
   };
 }
