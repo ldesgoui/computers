@@ -47,9 +47,9 @@
   systemd.services.murmur.reload = "kill -USR1 $MAINPID";
 
   disko.devices.zpool.harvest.datasets = {
-    "harvest/sniper/mumble-server" = {
+    "sniper/mumble-server" = {
       type = "zfs_fs";
-      mountpoint = "/var/lib/mumble-server";
+      mountpoint = "/var/lib/murmur";
       options = {
         recordsize = "64K";
       };

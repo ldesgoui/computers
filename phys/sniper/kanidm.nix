@@ -85,4 +85,13 @@
     };
   };
 
+  disko.devices.zpool.harvest.datasets = {
+    "sniper/kanidm" = {
+      type = "zfs_fs";
+      mountpoint = "/var/lib/kanidm";
+      options = {
+        recordsize = "64K";
+      };
+    };
+  };
 }
