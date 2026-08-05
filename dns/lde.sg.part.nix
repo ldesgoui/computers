@@ -5,7 +5,7 @@ let
 
   wi = {
     soldier = host "109.190.105.250" "2001:41d0:fc14:ca00:3e7c:3fff:fe22:bb0d";
-    sniper = host "212.47.233.201" "2001:bc8:710:7dfc:dc00:1ff:fe29:9e3";
+    sniper = host "212.47.233.201" "2001:bc8:710:7dfc::1";
   };
 
   ts = {
@@ -30,8 +30,14 @@ in
 
     CAA = dns.lib.letsEncrypt "ldesgoui@gmail.com";
 
-    inherit (wi.soldier) A;
-    AAAA = [ "2001:41d0:fc14:cafe::ff:fe07:ebe9" ];
+    A = [
+      "212.47.233.201"
+      # "109.190.105.250"
+    ];
+    AAAA = [
+      "2001:bc8:710:7dfc::1"
+      # "2001:41d0:fc14:cafe::ff:fe07:ebe9"
+    ];
 
     MX = [{ exchange = "mx1"; preference = 10; }];
 
@@ -69,8 +75,14 @@ in
       autoconfig.CNAME = [ "mx1" ];
 
       auth = {
-        inherit (wi.soldier) A;
-        AAAA = [ "2001:41d0:fc14:cafe::ff:feac:f436" ];
+        A = [
+          "212.47.233.201"
+          # "109.190.105.250"
+        ];
+        AAAA = [
+          "2001:bc8:710:7dfc::1"
+          # "2001:41d0:fc14:cafe::ff:feac:f436"
+        ];
       };
 
       auth-repl.subdomains = {
@@ -93,11 +105,8 @@ in
       };
 
       int.subdomains = {
-        vaultwarden = ts.soldier;
         stalwart = ts.soldier;
 
-        jellyfin = ts.soldier;
-        jellyseerr = ts.soldier;
         radarr = ts.soldier;
         sonarr = ts.soldier;
         lidarr = ts.soldier;
