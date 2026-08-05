@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.nixosConfigurations.kanidm = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.kanidm = inputs.nixpkgs-unstable.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
       inputs.agenix.nixosModules.default
@@ -72,18 +72,11 @@
             owner = "kanidm";
             generator.script = "passphrase";
           };
-
-          wg20-privkey = {
-            rekeyFile = ./wg20.age;
-            owner = "systemd-network";
-            group = "systemd-network";
-            mode = "640";
-            generator.script = "wg-pair";
-          };
         };
 
         networking.firewall = {
-          allowedTCPPorts = [ 80 443 ];
+          allowedTCPPorts = [ 80 443 8444 ];
+          allowedUDPPorts = [ 443 ];
         };
 
         networking.hosts = {
@@ -135,7 +128,7 @@
         };
 
         services.kanidm = {
-          package = pkgs.kanidmWithSecretProvisioning_1_10;
+          package = pkgs.kanidmWithSecretProvisioning_1_11;
 
           client = {
             enable = true;
@@ -166,10 +159,10 @@
                 ];
 
                 replication = {
-                  origin = "repl://[fd20::1]:20444";
-                  bindaddress = "[fd20::1]:20444";
+                  origin = "repl://vm.auth-repl.lde.sg:8444";
+                  bindaddress = "[::]:8444";
 
-                  # "repl://[fd20::2]:20444" = {
+                  # "repl://sniper.auth-repl.lde.sg:8444" = {
                   #   type = "mutual-pull";
                   #   partner_cert = "";
                   # };
@@ -183,32 +176,6 @@
 
             adminPasswordFile = config.age.secrets.kanidm-admin-password.path;
             idmAdminPasswordFile = config.age.secrets.kanidm-idm-admin-password.path;
-          };
-        };
-
-        systemd.network = {
-          networks."50-wg20" = {
-            matchConfig.Name = "wg20";
-            address = [ "fd20::1/128" ];
-          };
-
-          netdevs."50-wg20" = {
-            netdevConfig = {
-              Kind = "wireguard";
-              Name = "wg20";
-            };
-
-            wireguardConfig = {
-              ListenPort = 51820;
-              PrivateKeyFile = config.age.secrets.wg20-privkey.path;
-              RouteTable = "main";
-            };
-
-            wireguardPeers = [{
-              PublicKey = builtins.readFile ./../../phys/sniper/wg20.pub;
-              AllowedIPs = [ "fd20::2/128" ];
-              Endpoint = "[2001:bc8:710:7dfc::1]:51820";
-            }];
           };
         };
 

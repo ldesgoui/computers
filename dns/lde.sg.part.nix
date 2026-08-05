@@ -73,6 +73,11 @@ in
         AAAA = [ "2001:41d0:fc14:cafe::ff:feac:f436" ];
       };
 
+      auth-repl.subdomains = {
+        sniper.AAAA = [ "2001:bc8:710:7dfc::1" ];
+        vm.AAAA = [ "2001:41d0:fc14:cafe::ff:feac:f436" ];
+      };
+
       headscale.CNAME = [ "soldier.wi" ];
 
       cool-zone.SRV = [{

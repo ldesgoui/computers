@@ -1,14 +1,6 @@
 { config, pkgs, ... }: {
-  age.secrets.wg20-privkey = {
-    rekeyFile = ./wg20.age;
-    owner = "systemd-network";
-    group = "systemd-network";
-    mode = "640";
-    generator.script = "wg-pair";
-  };
-
   networking.firewall = {
-    allowedUDPPorts = [ 51820 ];
+    allowedTCPPorts = [ 8444 ];
   };
 
   networking.hosts = {
@@ -21,7 +13,7 @@
   };
 
   services.kanidm = {
-    package = pkgs.kanidmWithSecretProvisioning_1_10;
+    package = pkgs.kanidmWithSecretProvisioning_1_11;
 
     client = {
       enable = true;
@@ -52,40 +44,15 @@
           ];
 
           replication = {
-            origin = "repl://[fd20::2]:20444";
-            bindaddress = "[fd20::2]:20444";
+            origin = "repl://sniper.auth-repl.lde.sg:8444";
+            bindaddress = "[::]:8444";
 
-            # "repl://[fd20::1]:20444" = {
+            # "repl://vm.auth-repl.lde.sg:8444" = {
             #   type = "mutual-pull";
             #   partner_cert = "";
             # };
           };
         };
-    };
-  };
-
-  systemd.network = {
-    networks."50-wg20" = {
-      matchConfig.Name = "wg20";
-      address = [ "fd20::2/128" ];
-    };
-
-    netdevs."50-wg20" = {
-      netdevConfig = {
-        Kind = "wireguard";
-        Name = "wg20";
-      };
-
-      wireguardConfig = {
-        ListenPort = 51820;
-        PrivateKeyFile = config.age.secrets.wg20-privkey.path;
-        RouteTable = "main";
-      };
-
-      wireguardPeers = [{
-        PublicKey = builtins.readFile ./../../virt/kanidm/wg20.pub;
-        AllowedIPs = [ "fd20::1/128" ];
-      }];
     };
   };
 
