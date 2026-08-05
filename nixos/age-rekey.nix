@@ -22,6 +22,12 @@
           ''
             ${env} ${pkgs.yq-go}/bin/yq -n -o=shell ${lib.escapeShellArg query}
           '';
+
+        wg-pair = { lib, pkgs, file, ... }: ''
+          priv=$(${pkgs.wireguard-tools}/bin/wg genkey)
+          ${pkgs.wireguard-tools}/bin/wg pubkey <<< "$priv" > ${lib.escapeShellArg (lib.removeSuffix ".age" file + ".pub")}
+          echo "$priv"
+        '';
       };
 
       age.rekey = {

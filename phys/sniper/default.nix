@@ -17,6 +17,7 @@
 
         ./initrd.nix
         ./mumble-server.nix
+        ./kanidm.nix
 
         {
           networking.hostName = "sniper";

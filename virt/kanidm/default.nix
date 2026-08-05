@@ -72,6 +72,14 @@
             owner = "kanidm";
             generator.script = "passphrase";
           };
+
+          wg20-privkey = {
+            rekeyFile = ./wg20.age;
+            owner = "systemd-network";
+            group = "systemd-network";
+            mode = "640";
+            generator.script = "wg-pair";
+          };
         };
 
         networking.firewall = {
@@ -156,6 +164,16 @@
                 http_client_address_info.proxy-v2 = [
                   "2001:41d0:fc14:cafe::/64"
                 ];
+
+                replication = {
+                  origin = "repl://[fd20::1]:20444";
+                  bindaddress = "[fd20::1]:20444";
+
+                  # "repl://[fd20::2]:20444" = {
+                  #   type = "mutual-pull";
+                  #   partner_cert = "";
+                  # };
+                };
               };
           };
 
@@ -165,6 +183,32 @@
 
             adminPasswordFile = config.age.secrets.kanidm-admin-password.path;
             idmAdminPasswordFile = config.age.secrets.kanidm-idm-admin-password.path;
+          };
+        };
+
+        systemd.network = {
+          networks."50-wg20" = {
+            matchConfig.Name = "wg20";
+            address = [ "fd20::1/128" ];
+          };
+
+          netdevs."50-wg20" = {
+            netdevConfig = {
+              Kind = "wireguard";
+              Name = "wg20";
+            };
+
+            wireguardConfig = {
+              ListenPort = 51820;
+              PrivateKeyFile = config.age.secrets.wg20-privkey.path;
+              RouteTable = "main";
+            };
+
+            wireguardPeers = [{
+              PublicKey = builtins.readFile ./../../phys/sniper/wg20.pub;
+              AllowedIPs = [ "fd20::2/128" ];
+              Endpoint = "[2001:bc8:710:7dfc::1]:51820";
+            }];
           };
         };
 
