@@ -7,6 +7,10 @@
     generator.script = "wg-pair";
   };
 
+  networking.firewall = {
+    allowedUDPPorts = [ 51820 ];
+  };
+
   networking.hosts = {
     "::1" = [ "auth.lde.sg" ]; # This is for the client
   };
