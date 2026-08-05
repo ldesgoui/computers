@@ -121,7 +121,7 @@
               };
               ipv6AcceptRAConfig = {
                 UseDNS = true;
-                Token = "::1";
+                Token = "::8";
               };
             };
           };

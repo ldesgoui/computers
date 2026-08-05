@@ -21,7 +21,7 @@
           DHCP = "ipv4";
         };
         ipv6AcceptRAConfig = {
-          Token = "::1:1";
+          Token = "::8";
         };
       };
 

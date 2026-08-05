@@ -5,7 +5,7 @@ let
 
   wi = {
     soldier = host "109.190.105.250" "2001:41d0:fc14:ca00:3e7c:3fff:fe22:bb0d";
-    sniper = host "212.47.233.201" "2001:bc8:710:7dfc::1";
+    sniper = host "212.47.233.201" "2001:bc8:710:7dfc::8";
   };
 
   ts = {
@@ -35,7 +35,7 @@ in
       # "109.190.105.250"
     ];
     AAAA = [
-      "2001:bc8:710:7dfc::1"
+      "2001:bc8:710:7dfc::8"
       # "2001:41d0:fc14:cafe::ff:fe07:ebe9"
     ];
 
@@ -80,13 +80,13 @@ in
           # "109.190.105.250"
         ];
         AAAA = [
-          "2001:bc8:710:7dfc::1"
+          "2001:bc8:710:7dfc::8"
           # "2001:41d0:fc14:cafe::ff:feac:f436"
         ];
       };
 
       auth-repl.subdomains = {
-        sniper.AAAA = [ "2001:bc8:710:7dfc::1" ];
+        sniper.AAAA = [ "2001:bc8:710:7dfc::8" ];
         vm.AAAA = [ "2001:41d0:fc14:cafe::ff:feac:f436" ];
       };
 
