@@ -24,6 +24,8 @@
             # hostPubkey = "";
           };
 
+          boot.kernelParams = [ "console=ttyS0" ];
+
           boot.loader = {
             systemd-boot = {
               enable = true;
