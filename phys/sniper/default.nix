@@ -40,6 +40,8 @@
           };
 
           boot.zfs = {
+            devNodes = "/dev/disks/by-uuid"; # Scaleway didn't set serial number of virtio disks :(
+
             # We don't want to try unlocking everything on boot
             # as some of the keys are read from agenix secrets,
             # those are not available.
