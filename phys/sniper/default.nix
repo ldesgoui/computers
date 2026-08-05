@@ -16,6 +16,7 @@
         self.nixosModules.age-rekey-settings
 
         ./initrd.nix
+        ./mumble-server.nix
 
         {
           networking.hostName = "sniper";
