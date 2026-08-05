@@ -1,44 +1,19 @@
 { config, pkgs, ... }: {
-
-  networking.firewall = {
-    allowedTCPPorts = [ 80 443 ];
+  age.secrets.wg20-privkey = {
+    rekeyFile = ./wg20.age;
+    owner = "systemd-network";
+    group = "systemd-network";
+    mode = "640";
+    generator.script = "wg-pair";
   };
 
   networking.hosts = {
-    "::1" = [ "auth.lde.sg" ];
-  };
-
-  security.acme = {
-    acceptTerms = true;
-    defaults = {
-      email = "ldesgoui@gmail.com";
-      webroot = "/var/lib/acme/acme-challenge/";
-    };
+    "::1" = [ "auth.lde.sg" ]; # This is for the client
   };
 
   security.acme.certs."auth.lde.sg" = {
     group = "kanidm";
     reloadServices = [ "kanidm" ];
-  };
-
-  services.caddy = {
-    enable = true;
-
-    # For ACME
-    virtualHosts = {
-      "http://auth.lde.sg" = {
-        extraConfig = ''
-          handle /.well-known/acme-challenge/* {
-            root * /var/lib/acme/acme-challenge/
-            file_server
-          }
-
-          handle {
-            redir https://{host}{uri}
-          }
-        '';
-      };
-    };
   };
 
   services.kanidm = {
@@ -70,7 +45,6 @@
 
           http_client_address_info.proxy-v2 = [
             "::1/128"
-            "2001:41d0:fc14:cafe::/64"
           ];
 
           replication = {
@@ -84,14 +58,6 @@
           };
         };
     };
-  };
-
-  age.secrets.wg20-privkey = {
-    rekeyFile = ./wg20.age;
-    owner = "systemd-network";
-    group = "systemd-network";
-    mode = "640";
-    generator.script = "wg-pair";
   };
 
   systemd.network = {
