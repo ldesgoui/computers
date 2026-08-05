@@ -110,6 +110,19 @@
 
           system.stateVersion = "26.05"; # No touchie
 
+          systemd.network = {
+            networks."10-ens2" = {
+              matchConfig.Name = "ens2";
+              networkConfig = {
+                DHCP = "ipv4";
+              };
+              ipv6AcceptRAConfig = {
+                UseDNS = true;
+                Token = "::1";
+              };
+            };
+          };
+
           time.timeZone = "Europe/Paris";
 
           users = {
