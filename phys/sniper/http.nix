@@ -19,7 +19,7 @@
 
     # For ACME
     virtualHosts = {
-      "http://*" = {
+      "http://" = {
         extraConfig = ''
           handle /.well-known/acme-challenge/* {
             root * /var/lib/acme/acme-challenge/
@@ -29,6 +29,29 @@
           handle {
             redir https://{host}{uri}
           }
+        '';
+      };
+
+      "https://lde.sg" = {
+        extraConfig = ''
+          file_server {
+            root ${../../src/lde.sg}
+          }
+        '';
+      };
+
+      "https://ldesgoui.xyz" = {
+        extraConfig = ''
+          redir https://lde.sg{uri}
+        '';
+      };
+
+      "piss-your.se" = {
+        extraConfig = ''
+          file_server {
+            root ${../../src/piss-your.se}
+          }
+          redir / /f 301
         '';
       };
     };
