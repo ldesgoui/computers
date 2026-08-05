@@ -32,7 +32,7 @@
 
               # Automatically drop the oldest configs,
               # mostly so that the ESP doesn't fill up too much
-              configurationLimit = 10;
+              configurationLimit = 3;
             };
 
             # There won't be another OS touching it so this is fine
