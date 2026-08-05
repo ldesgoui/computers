@@ -21,7 +21,7 @@
           networking.hostName = "sniper";
 
           age.rekey = {
-            # hostPubkey = "";
+            hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvEJEu+uIurhLqOHdAguHN4yj7A+sADcTcWJ10HJsWI";
           };
 
           boot.kernelParams = [ "console=ttyS0" ];
