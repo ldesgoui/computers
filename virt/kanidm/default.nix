@@ -162,10 +162,10 @@
                   origin = "repl://vm.auth-repl.lde.sg:8444";
                   bindaddress = "[::]:8444";
 
-                  # "repl://sniper.auth-repl.lde.sg:8444" = {
-                  #   type = "mutual-pull";
-                  #   partner_cert = "";
-                  # };
+                  "repl://sniper.auth-repl.lde.sg:8444" = {
+                    type = "mutual-pull";
+                    partner_cert = "MIIB3zCCAYWgAwIBAgIRARu_RiGef0e0ntsSBbGnrBswCgYIKoZIzj0EAwIwTDEtMCsGA1UEAwwkMWJiZjQ2MjEtOWU3Zi00N2I0LTllZGItMTIwNWIxYTdhYzFiMRswGQYDVQQKDBJLYW5pZG0gUmVwbGljYXRpb24wHhcNMjYwODA1MTcwNTM5WhcNMzAwODA1MTcwNTM5WjBMMS0wKwYDVQQDDCQxYmJmNDYyMS05ZTdmLTQ3YjQtOWVkYi0xMjA1YjFhN2FjMWIxGzAZBgNVBAoMEkthbmlkbSBSZXBsaWNhdGlvbjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABH13YgaLuob7xpnOiAVWCIdNxkLB9fjDGSdpCofucSKLisPrrw_SrCXfWoe-6bDJmhKt5ygjxSI8gNxQMRwknzOjSDBGMCAGA1UdJQEB_wQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAiBgNVHREEGzAZghdzbmlwZXIuYXV0aC1yZXBsLmxkZS5zZzAKBggqhkjOPQQDAgNIADBFAiAgNgHnDFIYHAQQloq6-WsQhODtjqx2I811nwUVueT4ugIhAKVljTNQoA3CV78uFHv2rPP98-SXnufXw6qdVTbaM6W3";
+                  };
                 };
               };
           };
