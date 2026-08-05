@@ -17,6 +17,18 @@
 
     httpsPort = 10443;
 
+    globalConfig = ''
+      email ldesgoui@gmail.com
+      servers {
+        listener_wrappers {
+          proxy_protocol {
+            allow ::1/128
+          }
+          tls
+        }
+      }
+    '';
+
     # For ACME
     virtualHosts = {
       "http://" = {
@@ -32,7 +44,7 @@
         '';
       };
 
-      "https://lde.sg" = {
+      "lde.sg" = {
         extraConfig = ''
           file_server {
             root ${../../src/lde.sg}
@@ -40,7 +52,7 @@
         '';
       };
 
-      "https://ldesgoui.xyz" = {
+      "ldesgoui.xyz" = {
         extraConfig = ''
           redir https://lde.sg{uri}
         '';
@@ -75,9 +87,10 @@
       frontend https
           bind :::443 v4v6
           mode tcp
+          option tcplog
           tcp-request inspect-delay 5s
           tcp-request content reject unless { req.ssl_hello_type 1 }
-          use_backend be_kanidm if { var(req.ssl_sni) -m dom auth.lde.sg. }
+          use_backend be_kanidm if { req.ssl_sni -i -m dom auth.lde.sg }
           use_backend be_caddy
 
       backend be_kanidm
@@ -86,7 +99,6 @@
 
       backend be_caddy
           mode tcp
-          tcp-request content set-dst var(txn.dst)
           server caddy [::1]:${toString config.services.caddy.httpsPort} send-proxy-v2
     '';
   };
