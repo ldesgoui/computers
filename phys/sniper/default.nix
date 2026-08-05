@@ -17,7 +17,7 @@
 
         ./initrd.nix
 
-        ({ pkgs, ... }: {
+        {
           networking.hostName = "sniper";
 
           age.rekey = {
@@ -76,9 +76,6 @@
             useNetworkd = true;
           };
 
-          networking.nftables = {
-            enable = true;
-          };
           nix = {
             channel.enable = false; # We never use nix channels
 
@@ -138,13 +135,7 @@
               ];
             };
           };
-
-          virtualisation.incus = {
-            enable = true;
-
-            package = pkgs.incus;
-          };
-        })
+        }
       ];
     };
 }

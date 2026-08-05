@@ -155,15 +155,6 @@ in
           type = "zfs_fs";
           mountpoint = "/var/log";
         };
-
-        "sniper/incus" = {
-          type = "zfs_fs";
-          mountpoint = "/var/lib/incus";
-        };
-
-        "sniper/incus/default" = {
-          type = "zfs_fs";
-        };
       };
     };
   };
