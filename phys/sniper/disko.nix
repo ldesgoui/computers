@@ -18,7 +18,7 @@ in
 
     devices.disk.nvme = {
       type = "disk";
-      device = "/dev/vda"; # Scaleway didn't set serial number of virtio disks :(
+      device = "/dev/disk/by-path/virtio-pci-0000:00:05.0"; # Scaleway didn't set serial number of virtio disks :(
       content = {
         type = "gpt";
         partitions = {
