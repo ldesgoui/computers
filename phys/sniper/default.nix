@@ -109,6 +109,16 @@
               path = "/etc/ssh/host-keys/host_id25519";
               type = "ed25519";
             }];
+
+            listenAddresses = [{
+              addr = "[::]";
+              port = 22;
+            }];
+
+            settings = {
+              KbdInteractiveAuthentication = false;
+              PasswordAuthentication = false;
+            };
           };
 
           system.stateVersion = "26.05"; # No touchie
