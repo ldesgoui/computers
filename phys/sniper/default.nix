@@ -18,6 +18,7 @@
         ./initrd.nix
         ./http.nix
         ./kanidm.nix
+        ./knot-dns.nix
         ./mumble-server.nix
 
         {
