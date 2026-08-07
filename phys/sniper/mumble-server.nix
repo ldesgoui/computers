@@ -18,6 +18,7 @@
     ];
 
     group = "murmur";
+    reloadServices = [ "murmur" ];
   };
 
   services.murmur = {
