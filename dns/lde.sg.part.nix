@@ -96,7 +96,7 @@ in
         service = "mumble";
         proto = "tcp";
         port = 64738;
-        target = "soldier.wi";
+        target = "sniper.wi";
       }];
 
       passwords = {

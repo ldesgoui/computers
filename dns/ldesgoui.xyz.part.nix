@@ -61,7 +61,7 @@ in
       jf.CNAME = [{ cname = "soldier.wi.lde.sg."; ttl = 600; }];
       js.CNAME = [{ cname = "soldier.wi.lde.sg."; ttl = 600; }];
 
-      mumble.CNAME = [{ cname = "soldier.wi.lde.sg."; ttl = 600; }];
+      mumble.CNAME = [{ cname = "sniper.wi.lde.sg."; ttl = 600; }];
     };
   };
 }
