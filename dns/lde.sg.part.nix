@@ -92,12 +92,13 @@ in
 
       headscale.CNAME = [ "soldier.wi" ];
 
-      cool-zone.SRV = [{
-        service = "mumble";
-        proto = "tcp";
-        port = 64738;
-        target = "sniper.wi";
-      }];
+      cool-zone.CNAME = [ "sniper.wi" ];
+      # cool-zone.SRV = [{
+      #   service = "mumble";
+      #   proto = "tcp";
+      #   port = 64738;
+      #   target = "sniper.wi";
+      # }];
 
       passwords = {
         inherit (wi.soldier) A;

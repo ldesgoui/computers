@@ -13,7 +13,7 @@
 
   security.acme.certs."cool-zone.lde.sg" = {
     extraDomainNames = [
-      "soldier.wi.lde.sg"
+      "sniper.wi.lde.sg"
       "mumble.ldesgoui.xyz"
     ];
 
