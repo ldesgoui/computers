@@ -1,6 +1,7 @@
 { config, ... }: {
   age.secrets.xfr-tsig = {
     rekeyFile = ./xfr-tsig.age;
+    owner = "knot";
     generator.script = "knot-tsig";
     settings.id = "sniper.xfr.";
   };
