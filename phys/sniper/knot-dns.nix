@@ -24,7 +24,6 @@
           "127.0.0.1"
           "::"
         ];
-        automatic-acl = "on";
       };
 
       remote = [{
@@ -33,9 +32,23 @@
         key = "sniper.xfr.";
       }];
 
+      acl = [
+        {
+          id = "axfr-local";
+          address = [ "127.0.0.1" "::1" ];
+          action = "transfer";
+        }
+        {
+          id = "notify-primary";
+          key = [ "sniper.xfr." ];
+          action = "notify";
+        }
+      ];
+
       template = [{
         id = "secondary";
         master = "primary";
+        acl = [ "axfr-local" "notify-primary" ];
       }];
 
       zone = [{
