@@ -47,8 +47,6 @@ in
           "100.101.0.5@53"
           "fd7a:115c:a1e0::ced8@53"
         ];
-
-        automatic-acl = "on"; # This gives remotes that we notify the permission to XFR
       };
 
       remote = [{
@@ -66,6 +64,11 @@ in
             "100.101.0.0/24"
             "fd7a:115c:a1e0::/112"
           ];
+          action = "transfer";
+        }
+        {
+          id = "axfr-secondary";
+          key = [ "sniper.xfr." ];
           action = "transfer";
         }
         {
@@ -91,7 +94,7 @@ in
         {
           id = "default";
           file = "${zones}/%s.zone";
-          acl = [ "axfr-local" "update-txt-only" ];
+          acl = [ "axfr-local" "axfr-secondary" "update-txt-only" ];
           notify = [ "sniper" ];
           dnssec-signing = "on";
           dnssec-policy = "sign-ed25519";
@@ -110,7 +113,7 @@ in
 
         {
           id = "catalog";
-          acl = [ "axfr-local" ];
+          acl = [ "axfr-local" "axfr-secondary" ];
           notify = [ "sniper" ];
           catalog-role = "generate";
         }
