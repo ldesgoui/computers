@@ -45,10 +45,31 @@
         }
       ];
 
-      template = [{
-        id = "secondary";
-        master = "primary";
-        acl = [ "axfr-local" "notify-primary" ];
+      template = [
+        {
+          id = "default";
+          global-module = [
+            "mod-cookies"
+            "mod-rrl/default"
+            "mod-stats/default"
+          ];
+        }
+        {
+          id = "secondary";
+          master = "primary";
+          acl = [ "axfr-local" "notify-primary" ];
+        }
+      ];
+
+      mod-rrl = [{
+        id = "default";
+        rate-limit = 200;
+      }];
+
+      mod-stats = [{
+        id = "default";
+        query-size = "on";
+        reply-size = "on";
       }];
 
       zone = [{
