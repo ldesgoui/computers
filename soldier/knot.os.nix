@@ -53,7 +53,7 @@ in
 
       remote = [{
         id = "sniper";
-        address = [ "ns2.piss-your.se." ];
+        address = [ "2001:bc8:710:7dfc::8" ];
         key = "sniper.xfr.";
       }];
 
