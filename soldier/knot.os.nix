@@ -1,9 +1,29 @@
 { self, ... }:
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   zones = self.packages.${pkgs.stdenv.hostPlatform.system}.dns-zones;
 in
 {
+  age.secrets.tsig-keys = {
+    rekeyFile = ./tsig-keys.age;
+
+    owner = "knot";
+
+    generator = {
+      dependencies = [
+        self.nixosConfigurations.sniper.config.age.secrets.xfr-tsig
+      ];
+
+      script = { decrypt, deps, lib, pkgs, ... }:
+        let
+          args = lib.concatMapStringsSep " " (s: "<(${decrypt} ${lib.escapeShellArg s.file})") deps;
+        in
+        ''
+          ${pkgs.yq-go}/bin/yq eval-all '[.key[0]] | { "key": . }' ${args}
+        '';
+    };
+  };
+
   networking.firewall = {
     allowedTCPPorts = [ 53 ];
     allowedUDPPorts = [ 53 ];
@@ -11,6 +31,9 @@ in
 
   services.knot = {
     enable = true;
+
+    keyFiles = [ config.age.secrets.tsig-keys.path ];
+
     settings = {
       log = [{ target = "syslog"; any = "info"; }];
 
@@ -24,7 +47,15 @@ in
           "100.101.0.5@53"
           "fd7a:115c:a1e0::ced8@53"
         ];
+
+        automatic-acl = "on"; # This gives remotes that we notify the permission to XFR
       };
+
+      remote = [{
+        id = "sniper";
+        address = [ "ns2.piss-your.se." ];
+        key = "sniper.xfr.";
+      }];
 
       acl = [
         {
@@ -56,22 +87,34 @@ in
         ksk-shared = "on";
       }];
 
-      template = [{
-        id = "default";
-        file = "${zones}/%s.zone";
-        acl = [ "axfr-local" "update-txt-only" ];
-        dnssec-signing = "on";
-        dnssec-policy = "sign-ed25519";
-        semantic-checks = "on";
-        serial-policy = "dateserial";
-        journal-content = "all";
-        zonefile-load = "difference-no-serial";
-        global-module = [
-          "mod-cookies"
-          "mod-rrl/default"
-          "mod-stats/default"
-        ];
-      }];
+      template = [
+        {
+          id = "default";
+          file = "${zones}/%s.zone";
+          acl = [ "axfr-local" "update-txt-only" ];
+          notify = [ "sniper" ];
+          dnssec-signing = "on";
+          dnssec-policy = "sign-ed25519";
+          semantic-checks = "on";
+          serial-policy = "dateserial";
+          journal-content = "all";
+          zonefile-load = "difference-no-serial";
+          catalog-role = "member";
+          catalog-zone = "catalog.";
+          global-module = [
+            "mod-cookies"
+            "mod-rrl/default"
+            "mod-stats/default"
+          ];
+        }
+
+        {
+          id = "catalog";
+          acl = [ "axfr-local" ];
+          notify = [ "sniper" ];
+          catalog-role = "generate";
+        }
+      ];
 
       mod-rrl = [{
         id = "default";
@@ -85,6 +128,7 @@ in
       }];
 
       zone = [
+        { domain = "catalog."; template = "catalog"; }
         {
           domain = "lde.sg";
           dnssec-signing = "off"; # XXX: netim please
