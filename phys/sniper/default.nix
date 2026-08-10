@@ -20,7 +20,7 @@
         ./kanidm.nix
         ./knot-dns.nix
         ./mumble-server.nix
-        ./vautlwarden.nix
+        ./vaultwarden.nix
 
         {
           networking.hostName = "sniper";
