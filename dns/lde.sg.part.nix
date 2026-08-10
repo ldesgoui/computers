@@ -101,8 +101,7 @@ in
       # }];
 
       passwords = {
-        inherit (wi.soldier) A;
-        AAAA = [ "2001:41d0:fc14:cafe::ff:feca:5885" ];
+        inherit (wi.sniper) A AAAA;
       };
 
       int.subdomains = {
