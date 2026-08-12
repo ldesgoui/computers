@@ -28,7 +28,10 @@ in
 
     CAA = dns.lib.letsEncrypt "ldesgoui@gmail.com";
 
-    TXT = [ "google-site-verification=-h0RxVQR92neweHzfovyw2i_cqsXwhXIj3pggjTUdZ0" ];
+    TXT = [
+      "google-site-verification=-h0RxVQR92neweHzfovyw2i_cqsXwhXIj3pggjTUdZ0"
+      "v=spf1 mx -all"
+    ];
 
     subdomains = {
       jf.CNAME = [{ cname = "soldier.wi.lde.sg."; ttl = 600; }];

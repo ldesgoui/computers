@@ -24,7 +24,10 @@ in
 
     CAA = dns.lib.letsEncrypt "ldesgoui@gmail.com";
 
-    TXT = [ "google-site-verification=XN3UAuS1Qf5gJP_L-HqtZK3GM5qtwhKcCQfjHmGfQtY" ];
+    TXT = [
+      "google-site-verification=XN3UAuS1Qf5gJP_L-HqtZK3GM5qtwhKcCQfjHmGfQtY"
+      "v=spf1 mx -all"
+    ];
 
     inherit (to-vm) A AAAA;
     subdomains = {

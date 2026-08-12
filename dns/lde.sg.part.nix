@@ -39,7 +39,10 @@ in
 
     CAA = dns.lib.letsEncrypt "ldesgoui@gmail.com";
 
-    TXT = [ "google-site-verification=wCOy8UJz86vPJgDZdNl9K_ZI4TmSPCcrQ-PSLZhB7Xc" ];
+    TXT = [
+      "google-site-verification=wCOy8UJz86vPJgDZdNl9K_ZI4TmSPCcrQ-PSLZhB7Xc"
+      "v=spf1 mx -all"
+    ];
 
     subdomains = {
       wi.subdomains = wi;

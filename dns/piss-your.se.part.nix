@@ -27,7 +27,10 @@ in
       # "2001:41d0:fc14:cafe::ff:fe07:ebe9"
     ];
 
-    TXT = [ "google-site-verification=Y7qpmPxEX2RMdW6Brq0yLOq_Eu5ZP8fZLY_fJYVFjaA" ];
+    TXT = [
+      "google-site-verification=Y7qpmPxEX2RMdW6Brq0yLOq_Eu5ZP8fZLY_fJYVFjaA"
+      "v=spf1 mx -all"
+    ];
 
     subdomains = {
       ns1 = {
@@ -35,7 +38,7 @@ in
       };
       ns2 = wi.sniper; # Must be glue
 
-      mx1 = wi.sniper;
+      mx1 = wi.sniper // { TXT = [ "v=spf1 a -all" ]; };
 
       hosts.subdomains = {
         sniper = wi.sniper;
