@@ -58,6 +58,9 @@
           id = "secondary";
           master = "primary";
           acl = [ "axfr-local" "notify-primary" ];
+          zonefile-sync = -1;
+          zonefile-load = "none";
+          journal-content = "all";
         }
       ];
 
