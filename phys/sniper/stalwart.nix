@@ -24,6 +24,14 @@
     pkgs.stalwart-cli
   ];
 
+  networking.firewall = {
+    allowedTCPPorts = [
+      25 # SMTP
+      465 # SMTPS
+      993 # IMAPS
+    ];
+  };
+
   systemd.services.stalwart = {
     wantedBy = [ "multi-user.target" ];
 
