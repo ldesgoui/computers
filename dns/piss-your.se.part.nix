@@ -27,6 +27,8 @@ in
       # "2001:41d0:fc14:cafe::ff:fe07:ebe9"
     ];
 
+    TXT = [ "google-site-verification=Y7qpmPxEX2RMdW6Brq0yLOq_Eu5ZP8fZLY_fJYVFjaA" ];
+
     subdomains = {
       ns1 = {
         inherit (wi.soldier) A; # Must be glue
