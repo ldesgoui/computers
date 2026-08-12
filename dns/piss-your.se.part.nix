@@ -59,6 +59,8 @@ in
       };
       ns2 = wi.sniper; # Must be glue
 
+      mx1 = wi.sniper;
+
       hosts.subdomains = {
         sniper = wi.sniper;
       };
