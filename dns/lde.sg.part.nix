@@ -78,8 +78,6 @@ in
       };
 
       int.subdomains = {
-        stalwart = ts.soldier;
-
         radarr = ts.soldier;
         sonarr = ts.soldier;
         lidarr = ts.soldier;
