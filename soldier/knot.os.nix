@@ -100,7 +100,7 @@ in
         {
           id = "default";
           file = "${zones}/%s.zone";
-          acl = [ "axfr-local" "axfr-secondary" "update-txt-only" ];
+          acl = [ "axfr-local" "axfr-secondary" "update-mx" "update-txt-only" ];
           notify = [ "sniper" ];
           dnssec-signing = "on";
           dnssec-policy = "sign-ed25519";
