@@ -1,8 +1,5 @@
 { self, ... }:
 { config, lib, pkgs, ... }:
-let
-  zones = self.packages.${pkgs.stdenv.hostPlatform.system}.dns-zones;
-in
 {
   age.secrets.tsig-keys = {
     rekeyFile = ./tsig-keys.age;
@@ -99,17 +96,28 @@ in
       template = [
         {
           id = "default";
-          file = "${zones}/%s.zone";
-          acl = [ "axfr-local" "axfr-secondary" "update-mx" "update-txt-only" ];
+          acl = [
+            "axfr-local"
+            "axfr-secondary"
+            "update-mx"
+            "update-txt-only"
+          ];
+
           notify = [ "sniper" ];
+
           dnssec-signing = "on";
           dnssec-policy = "sign-ed25519";
+
           semantic-checks = "on";
+
           serial-policy = "dateserial";
-          journal-content = "all";
+
           zonefile-load = "difference-no-serial";
+          journal-content = "all";
+
           catalog-role = "member";
           catalog-zone = "catalog.";
+
           global-module = [
             "mod-cookies"
             "mod-rrl/default"
@@ -119,7 +127,10 @@ in
 
         {
           id = "catalog";
-          acl = [ "axfr-local" "axfr-secondary" ];
+          acl = [
+            "axfr-local"
+            "axfr-secondary"
+          ];
           notify = [ "sniper" ];
           catalog-role = "generate";
         }

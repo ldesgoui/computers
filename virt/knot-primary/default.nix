@@ -15,7 +15,7 @@
 
       ({ config, lib, pkgs, ... }:
         let
-          zones = self.packages.${pkgs.stdenv.hostPlatform.system}.dns-zones;
+          # zones = self.packages.${pkgs.stdenv.hostPlatform.system}.dns-zones;
 
           acmeTsigs = [
             "mumble-server"
@@ -143,7 +143,7 @@
               template = [
                 {
                   id = "default";
-                  file = "${zones}/%s.zone";
+                  # file = "${zones}/%s.zone";
 
                   acl = [
                     "axfr-local"
@@ -174,7 +174,7 @@
 
                 {
                   id = "unsigned";
-                  file = "${zones}/%s.zone";
+                  # file = "${zones}/%s.zone";
 
                   acl = [
                     "axfr-local"

@@ -40,11 +40,6 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
-    dns = {
-      url = "github:nix-community/dns.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
