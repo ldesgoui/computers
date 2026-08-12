@@ -1,12 +1,4 @@
-{ config, pkgs, ... }:
-let
-  by-caddy = pkgs.writeText "by-caddy.txt" ''
-    lde.sg.
-    passwords.lde.sg.
-    ldesgoui.xyz.
-    piss-your.se.
-  '';
-in
+{ config, lib, ... }:
 {
   networking.firewall = {
     allowedTCPPorts = [ 80 443 ];
@@ -99,8 +91,13 @@ in
           option tcplog
           tcp-request inspect-delay 5s
           tcp-request content reject unless { req.ssl_hello_type 1 }
-          use_backend be_kanidm if { req.ssl_sni -i -m dom auth.lde.sg }
-          use_backend be_caddy if { req.ssl_sni -i -m dom -f ${by-caddy} }
+          use_backend be_kanidm if { req.ssl_sni -i -m str auth.lde.sg }
+      ${lib.concatMapAttrsStringSep "\n" (site: _:
+        if lib.hasPrefix "http://" site then
+          "    # ignored: ${site}"
+        else
+          "    use_backend be_caddy if { req.ssl_sni -i -m str ${lib.removePrefix "https://" site} }"
+      ) config.services.caddy.virtualHosts}
           use_backend be_stalwart
 
       backend be_kanidm
