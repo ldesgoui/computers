@@ -20,6 +20,7 @@
         ./kanidm.nix
         ./knot-dns.nix
         ./mumble-server.nix
+        ./stalwart.nix
         ./vaultwarden.nix
 
         {

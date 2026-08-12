@@ -1,4 +1,13 @@
-{ config, ... }: {
+{ config, pkgs, ... }:
+let
+  by-caddy = pkgs.writeText "by-caddy.txt" ''
+    lde.sg.
+    passwords.lde.sg.
+    ldesgoui.xyz.
+    piss-your.se.
+  '';
+in
+{
   networking.firewall = {
     allowedTCPPorts = [ 80 443 ];
     allowedUDPPorts = [ 443 ];
@@ -91,7 +100,8 @@
           tcp-request inspect-delay 5s
           tcp-request content reject unless { req.ssl_hello_type 1 }
           use_backend be_kanidm if { req.ssl_sni -i -m dom auth.lde.sg }
-          use_backend be_caddy
+          use_backend be_caddy if { req.ssl_sni -i -m dom -f ${by-caddy} }
+          use_backend be_stalwart
 
       backend be_kanidm
           mode tcp
@@ -100,6 +110,10 @@
       backend be_caddy
           mode tcp
           server caddy [::1]:${toString config.services.caddy.httpsPort} send-proxy-v2
+
+      backend be_stalwart
+          mode tcp
+          server stalwart [::1]:14443 send-proxy-v2
     '';
   };
 }

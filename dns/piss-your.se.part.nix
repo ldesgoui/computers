@@ -59,6 +59,10 @@ in
       };
       ns2 = wi.sniper; # Must be glue
 
+      hosts.subdomains = {
+        sniper = wi.sniper;
+      };
+
       autoconfig.CNAME = [ "mx1.lde.sg." ];
 
       _tls.subdomains._smpt.TXT = [{ data = "v=TLSRPTv1; rua=mailto:postmaster@lde.sg"; }];

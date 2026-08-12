@@ -11,6 +11,7 @@ in
 
     generator = {
       dependencies = [
+        self.nixosConfigurations.sniper.config.age.secrets.mx-tsig
         self.nixosConfigurations.sniper.config.age.secrets.xfr-tsig
       ];
 
@@ -70,6 +71,11 @@ in
           id = "axfr-secondary";
           key = [ "sniper.xfr." ];
           action = "transfer";
+        }
+        {
+          id = "update-mx";
+          key = [ "sniper.mx." ];
+          action = "update";
         }
         {
           id = "update-txt-only";
