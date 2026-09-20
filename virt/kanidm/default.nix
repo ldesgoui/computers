@@ -103,7 +103,7 @@
             servers {
               listener_wrappers {
                 proxy_protocol {
-                  allow 2001:41d0:fc14:cafe::/64
+                  allow 2001:41d0:fc22:e010::/64
                 }
                 tls
               }
@@ -155,7 +155,7 @@
                 db_fs_type = "zfs";
 
                 http_client_address_info.proxy-v2 = [
-                  "2001:41d0:fc14:cafe::/64"
+                  "2001:41d0:fc22:e010::/64"
                 ];
 
                 replication = {

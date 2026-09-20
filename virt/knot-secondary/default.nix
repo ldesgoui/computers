@@ -77,8 +77,8 @@
 
             remote = [{
               id = "knot-primary";
-              address = [ "2001:41d0:fc14:cafe::ff:fe00:53" ];
-              via = [ "2001:41d0:fc14:cafe::ff:fe02:53" ];
+              address = [ "2001:41d0:fc22:e010::ff:fe00:53" ];
+              via = [ "2001:41d0:fc22:e010::ff:fe02:53" ];
               key = "knot-secondary.xfr.";
             }];
 

@@ -28,7 +28,7 @@
 
       remote = [{
         id = "primary";
-        address = [ "2001:41d0:fc14:ca00:3e7c:3fff:fe22:bb0d" ];
+        address = [ "2001:41d0:fc22:e000:3e7c:3fff:fe22:bb0d" ];
         key = "sniper.xfr.";
       }];
 
